@@ -10,15 +10,18 @@ def main():
 
     # Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['outcome3', 'outcome4'])
-    sm.userdata.sm_direction = 0
+    sm.userdata.sm_direction = 1
+    sm.userdata.sm_distance = 5
 
     # Open the container
     with sm:
         # Add states to the container
         smach.StateMachine.add('MOVE', Move(),
-                               transitions={'outcome1':'outcome3',
-                                            'outcome2':'outcome4'},
-                               remapping={'direction': 'sm_direction'})
+                               transitions={'outcome1': 'MOVE',
+                                            'outcome2': 'outcome3'},
+                               remapping={'direction': 'sm_direction',
+                                          'distance_in': 'sm_distance',
+                                          'distance_out': 'sm_distance'})
 
     # Execute SMACH plan
     outcome = sm.execute()

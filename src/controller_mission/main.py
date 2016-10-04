@@ -10,7 +10,7 @@ def main():
 
     # Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['outcome3', 'outcome4'])
-    sm.userdata.sm_direction = 1
+    sm.userdata.sm_direction = 'Surge'
     sm.userdata.sm_distance = 5
 
     # Open the container

@@ -25,11 +25,9 @@ def main():
                                             'not_reach': 'MOVE',
                                             'aborted': 'aborted'},
                                remapping={'direction': 'sm_direction',
-                                          'distance': 'sm_distance'})
+                                          'distance_in': 'sm_distance',
+                                          'distance_out': 'sm_distance'})
 
     # Execute SMACH plan
     outcome = sm.execute()
 
-
-# if __name__ == '__main__':
-#     main()

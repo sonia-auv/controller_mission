@@ -8,7 +8,6 @@ __author__ = 'Francis Masse'
 class TestMainExample(unittest.TestCase):
 
     def test_bow(self):
-        move = Move()
         test_sm = smach.StateMachine(outcomes=['succeeded', 'aborted'])
         test_sm.userdata.direction = 'Bow'
         test_sm.userdata.distance = 3
@@ -23,7 +22,6 @@ class TestMainExample(unittest.TestCase):
         self.assertEqual('succeeded', outcome)
 
     def test_stern(self):
-        move = Move()
         test_sm = smach.StateMachine(outcomes=['succeeded', 'aborted'])
         test_sm.userdata.direction = 'Stern'
         test_sm.userdata.distance = 3

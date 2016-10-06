@@ -1,6 +1,7 @@
 import unittest
 import smach
 from controller_mission.state.move import Move
+from geometry_msgs.msg import Pose
 
 __author__ = 'Francis Masse'
 
@@ -9,15 +10,12 @@ class TestMainExample(unittest.TestCase):
 
     def test_bow(self):
         test_sm = smach.StateMachine(outcomes=['succeeded', 'aborted'])
-        test_sm.userdata.direction = 'Bow'
-        test_sm.userdata.distance = 3
+        position = Pose()
+        position.position.x = 3
         with test_sm:
-            smach.StateMachine.add('MOVE', Move(),
+            smach.StateMachine.add('MOVE', Move(position),
                                    transitions={'succeeded': 'succeeded',
-                                                'not_reach': 'MOVE'},
-                                   remapping={'direction': 'direction',
-                                              'distance_in': 'distance',
-                                              'distance_out': 'distance'})
+                                                'aborted': 'aborted'})
         outcome = test_sm.execute()
         self.assertEqual('succeeded', outcome)
 

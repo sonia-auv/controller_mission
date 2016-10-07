@@ -1,6 +1,6 @@
 import rospy
 import smach
-from Position.srv import *
+from controller_mission.srv  import Position
 
 _author_ = 'Francis Masse'
 

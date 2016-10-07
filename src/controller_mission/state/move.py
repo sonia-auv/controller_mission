@@ -1,6 +1,6 @@
 import rospy
 import smach
-from geometry_msgs.msg import Pose
+from Position.srv import *
 
 _author_ = 'Francis Masse'
 

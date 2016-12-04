@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   message_generation
   geometry_msgs
+  dynamic_reconfigure
 )
 
 catkin_python_setup()
@@ -25,11 +26,16 @@ generate_messages(
   DEPENDENCIES std_msgs geometry_msgs
 )
 
+generate_dynamic_reconfigure_options(
+    cfg/SquareTest.cfg
+)
+
 catkin_package(
   CATKIN_DEPENDS roscpp
                  rospy
                  geometry_msgs
                  message_runtime
+                 dynamic_reconfigure
 )
 
 #===============================================================================

@@ -10,12 +10,16 @@ class TestMainExample(unittest.TestCase):
 
     def test_bow(self):
         test_sm = smach.StateMachine(outcomes=['succeeded', 'aborted'])
+        test_sm.userdata.direction = 'Bow'
         position = Pose()
         position.position.x = 3
         with test_sm:
             smach.StateMachine.add('MOVE', Move(position),
                                    transitions={'succeeded': 'succeeded',
-                                                'aborted': 'aborted'})
+                                                'aborted': 'aborted'},
+                                   remapping={'direction': 'direction',
+                                              'distance_in': 'distance',
+                                              'distance_out': 'distance'})
         outcome = test_sm.execute()
         self.assertEqual('succeeded', outcome)
 

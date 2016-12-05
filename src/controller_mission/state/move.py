@@ -39,7 +39,7 @@ class Move(smach.State):
                                             0.0,
                                             0.0)
             elif self.direction == 'port':
-                response = set_local_target(0.0,
+                response = set_local_target(1.0,
                                             config.set_position_port,
                                             0.0,
                                             0.0,
@@ -47,13 +47,13 @@ class Move(smach.State):
                                             0.0)
             elif self.direction == 'stern':
                 response = set_local_target(config.set_position_stern,
-                                            0.0,
+                                            -1.0,
                                             0.0,
                                             0.0,
                                             0.0,
                                             0.0)
             elif self.direction == 'starboard':
-                response = set_local_target(0.0,
+                response = set_local_target(-1.0,
                                             config.set_position_starboard,
                                             0.0,
                                             0.0,

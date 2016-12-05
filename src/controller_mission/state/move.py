@@ -7,11 +7,13 @@ _author_ = 'Francis Masse'
 
 
 class Move(smach.State):
-    def __init__(self, config):
+    def __init__(self, config, direction):
         smach.State.__init__(self,
                              outcomes=['succeeded', 'position_not_reach', 'aborted'])
 
         target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
+        self.direction = direction
         self.target_reached = 0
         self.server = config
 
@@ -29,19 +31,42 @@ class Move(smach.State):
         rospy.loginfo('Executing state MOVE')
 
         try:
-            response = set_local_target(config.set_position_x,
-                                        config.set_position_y,
-                                        config.set_position_z,
-                                        0.0,
-                                        0.0,
-                                        0.0)
+            if self.direction == 'bow':
+                response = set_local_target(config.set_position_bow,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0)
+            elif self.direction == 'port':
+                response = set_local_target(0.0,
+                                            config.set_position_port,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0)
+            elif self.direction == 'stern':
+                response = set_local_target(config.set_position_stern,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0)
+            elif self.direction == 'starboard':
+                response = set_local_target(0.0,
+                                            config.set_position_starboard,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0)
 
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position x = %f' % config.set_position_x)
-        rospy.loginfo('Set position y = %f' % config.set_position_y)
-        rospy.loginfo('Set position z = %f' % config.set_position_z)
+        rospy.loginfo('Set position x = %f' % config.set_position_bow)
+        rospy.loginfo('Set position y = %f' % config.set_position_port)
+        rospy.loginfo('Set position z = %f' % config.set_position_stern)
+        rospy.loginfo('Set position z = %f' % config.set_position_starboard)
 
         rate.sleep()
 

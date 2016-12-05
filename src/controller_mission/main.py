@@ -12,8 +12,8 @@ __author__ = 'Francis Masse'
 
 
 def square_test_cb(config, level):
-    rospy.loginfo("""Reconfigure Request: {set_position_x}, {set_position_y}, {set_position_z}, \
-                  """.format(**config))
+    rospy.loginfo("""Reconfigure Request: {set_position_bow}, {set_position_port}, {set_position_starboard}, \
+                  {set_position_stern}""".format(**config))
     return config
 
 
@@ -29,14 +29,24 @@ def main():
 
         # Add states to the container
         smach.StateMachine.add('MOVE_FORWARD',
-                               Move(dynamic_reconf_server),
-                               transitions={'succeeded': 'MOVE_BACKWARD',
+                               Move(dynamic_reconf_server, 'bow'),
+                               transitions={'succeeded': 'MOVE_PORT',
                                             'position_not_reach': 'MOVE_FORWARD',
                                             'aborted': 'aborted'})
+        smach.StateMachine.add('MOVE_PORT',
+                               Move(dynamic_reconf_server, 'port'),
+                               transitions={'succeeded': 'MOVE_BACKWARD',
+                                            'position_not_reach': 'MOVE_PORT',
+                                            'aborted': 'aborted'})
         smach.StateMachine.add('MOVE_BACKWARD',
-                               Move(dynamic_reconf_server),
-                               transitions={'succeeded': 'MOVE_FORWARD',
+                               Move(dynamic_reconf_server, 'stern'),
+                               transitions={'succeeded': 'MOVE_STARBOARD',
                                             'position_not_reach': 'MOVE_BACKWARD',
+                                            'aborted': 'aborted'})
+        smach.StateMachine.add('MOVE_STARBOARD',
+                               Move(dynamic_reconf_server, 'starboard'),
+                               transitions={'succeeded': 'succeeded',
+                                            'position_not_reach': 'MOVE_STARBOARD',
                                             'aborted': 'aborted'})
 
     sis = smach_ros.IntrospectionServer('controller_mission_server', main_sm, '/controller_mission')

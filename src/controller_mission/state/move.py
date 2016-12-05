@@ -25,8 +25,8 @@ class Move(smach.State):
 
         config = self.server.config
 
-        rospy.wait_for_service('/proc_control/set_local_target')
-        set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_global_target')
+        set_local_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
         rospy.loginfo('Executing state MOVE')
 

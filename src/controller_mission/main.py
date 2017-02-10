@@ -18,7 +18,7 @@ def square_test_cb(config, level):
 
 
 def main():
-    rospy.init_node('controller_mission')
+    rospy.init_node('mission_executor')
     dynamic_reconf_server = Server(SquareTestConfig, square_test_cb)
 
     # Create a SMACH state machine

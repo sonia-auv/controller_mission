@@ -1,0 +1,175 @@
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 192
+  - 126
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: move.Move
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Front'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: '''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: '''Distance to travel'''
+      value: 1.2
+      variable_name: param_distance_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: '''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: '''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_w
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: '''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_t
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Right'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Right'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 575
+      - 130
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: move.Move
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Right'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: '''Distance to travel'''
+          value: 1.2
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: '''Distance to travel'''
+          value: 3.0
+          variable_name: param_distance_y
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: '''Distance to travel'''
+          value: 2.0
+          variable_name: param_distance_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: '''Distance to travel'''
+          value: 4.0
+          variable_name: param_distance_w
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: '''Distance to travel'''
+          value: 5.0
+          variable_name: param_distance_t
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Back'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 575
+          - 415
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: move.Move
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Back'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: '''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: '''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_y
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: '''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_z
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: '''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_w
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: '''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_t
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Left'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 193
+              - 421
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: move.Move
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Left'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: '''Distance to travel'''
+                  value: 2.0
+                  variable_name: param_distance_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: '''Distance to travel'''
+                  value: 2.0
+                  variable_name: param_distance_y
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: '''Distance to travel'''
+                  value: 2.0
+                  variable_name: param_distance_z
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: '''Distance to travel'''
+                  value: 2.0
+                  variable_name: param_distance_w
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: '''Distance to travel'''
+                  value: 2.0
+                  variable_name: param_distance_t
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Front'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: *id001
+- *id004
+- *id002
+- *id003

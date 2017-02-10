@@ -19,7 +19,12 @@ catkin_python_setup()
 
 add_service_files(DIRECTORY srv
   FILES
-  Position.srv
+  ListMissions.srv
+  LoadMission.srv
+  StartMission.srv
+  StopMission.srv
+  CurrentMission.srv
+  ReceivedMission.srv
 )
 
 generate_messages(
@@ -48,7 +53,7 @@ include_directories(
 #===============================================================================
 # I N S T A L L
 
-catkin_install_python(PROGRAMS bin/controller_mission
+catkin_install_python(PROGRAMS bin/controller_mission bin/missionExecutor
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -56,4 +61,4 @@ catkin_install_python(PROGRAMS bin/controller_mission
 # U N I T   T E S T S
 
 # Add folders to be run by python nosetests
-catkin_add_nosetests(test)
+#catkin_add_nosetests(test)

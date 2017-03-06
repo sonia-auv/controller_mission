@@ -46,7 +46,7 @@ class MissionExecutor:
         try:
             if self.smach_executor_thread:
                 print 'request STOP'
-                self.main_sm.request_preempt()
+                self.current_stateMachine.request_preempt()
                 self.smach_executor_thread.join()
                 self.smach_executor_thread = None
             return StopMissionResponse()
@@ -64,7 +64,11 @@ class MissionExecutor:
 
     def _handle_start_mission(self, req):
         try:
-            self.smach_executor_thread = threading.Thread(target=self.main_sm.execute)
+            if self.smach_executor_thread:
+                self._handle_stop_mission(None)
+
+            self.current_stateMachine = self.main_sm;
+            self.smach_executor_thread = threading.Thread(target=self.current_stateMachine.execute)
             self.smach_executor_thread.start()
             return StartMissionResponse()
         except Exception:

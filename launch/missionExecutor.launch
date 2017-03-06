@@ -1,0 +1,6 @@
+<launch>
+	<node name="missionExecutor"
+	    pkg="controller_mission"
+	    type="missionExecutor"
+	    output="screen" />
+</launch>

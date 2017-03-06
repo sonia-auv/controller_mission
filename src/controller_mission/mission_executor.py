@@ -5,8 +5,9 @@ import os
 import rospkg
 import yaml
 import threading
+import time
+# this from state import * is very import !!!
 from state import *
-from collections import defaultdict
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, StartMission, \
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse
@@ -70,12 +71,23 @@ class MissionExecutor:
                 self._handle_stop_mission(None)
 
             self.current_stateMachine = self.main_sm;
-            rospy.loginfo('Mission Starting ..')
-            self.smach_executor_thread = threading.Thread(target=self.current_stateMachine.execute)
+            rospy.loginfo('Starting mission : {}..'.format(self.current_mission))
+            self.smach_executor_thread = threading.Thread(target=self._run_start_mission)
             self.smach_executor_thread.start()
             return StartMissionResponse()
         except Exception:
             return Exception('Mission is not loaded')
+
+    def _run_start_mission(self):
+        rospy.loginfo('Mission start in 3 ...')
+        time.sleep(1)
+        rospy.loginfo('Mission start in 2 ...')
+        time.sleep(1)
+        rospy.loginfo('Mission start in 1 ...')
+        time.sleep(1)
+        rospy.loginfo('Mission started')
+        self.current_stateMachine.execute()
+        self.smach_executor_thread = None
 
     def _handle_load_missions(self, req):
         mission = req.mission
@@ -194,7 +206,7 @@ class MissionExecutor:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
 
         # For debug purposes
-        rospy.loginfo('Add single state {} with transitions={})'.format(stateui.state.name,transitions))
+        rospy.loginfo('Add single state {} with transitions={})'.format(stateui.state.name, transitions))
         exec (
             'smach.StateMachine.add(\'{}\',s,transitions={})'.format(stateui.state.name,
                                                                      transitions))

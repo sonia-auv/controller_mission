@@ -3,7 +3,7 @@
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: move.Move
     is_root: true
-    outcome_states: [succeeded, aborted]
+    outcome_states: [succeeded, aborted,preemted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
       value: !!python/unicode 'Begin', variable_name: state_name}

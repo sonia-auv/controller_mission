@@ -6,6 +6,7 @@ import rospkg
 import yaml
 import threading
 import time
+import copy
 # this from state import * is very important !!!
 from state import *
 from std_msgs.msg import String
@@ -23,6 +24,7 @@ class MissionExecutor:
     current_mission = None
     smach_executor_thread = None
     CONTAINER_NAME = "container"
+    machine_state_has_run = False
 
     def __init__(self):
         rospy.init_node('mission_executor')
@@ -60,7 +62,7 @@ class MissionExecutor:
 
         rospy.spin()
 
-    def _handle_current_mission(self,req):
+    def _handle_current_mission(self, req):
         return CurrentMissionResponse(self.current_mission)
 
     def _handle_mission_switch_activated(self, msg):
@@ -72,7 +74,7 @@ class MissionExecutor:
 
     def _handle_stop_mission(self, req):
         try:
-            if self.smach_executor_thread:
+            if self.smach_executor_thread and self.current_stateMachine.is_running():
                 self.sis.stop()
                 self.current_stateMachine.request_preempt()
                 self.smach_executor_thread.join()
@@ -100,22 +102,26 @@ class MissionExecutor:
         return response
 
     def _handle_start_mission(self, req):
-        try:
-            if self.smach_executor_thread:
-                self._handle_stop_mission(None)
+        if self.smach_executor_thread:
+            self._handle_stop_mission(None)
+        if self.machine_state_has_run:
+            self.machine_state_has_run = False
+            self.main_sm = self.reload_state_machine()
+        self.current_stateMachine = self.main_sm
+        rospy.loginfo('Starting mission : {}..'.format(self.current_mission))
+        self.started_mission_name.publish(self.current_mission)
 
-            self.current_stateMachine = self.main_sm;
-            rospy.loginfo('Starting mission : {}..'.format(self.current_mission))
-            self.started_mission_name.publish(self.current_mission)
+        self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.current_stateMachine,
+                                                 '/mission_executor')
+        self.sis.start()
+        self.smach_executor_thread = threading.Thread(target=self._run_start_mission)
+        self.smach_executor_thread.start()
+        self.machine_state_has_run = True
+        return StartMissionResponse()
 
-            self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.current_stateMachine,
-                                                     '/mission_executor')
-            self.sis.start()
-            self.smach_executor_thread = threading.Thread(target=self._run_start_mission)
-            self.smach_executor_thread.start()
-            return StartMissionResponse()
-        except Exception:
-            return Exception('Mission is not loaded')
+    def reload_state_machine(self):
+        mission = self.missions_directory + '/' + self.current_mission
+        return self.create_state_machine(mission, 'main')
 
     def _run_start_mission(self):
         rospy.loginfo('Mission start in 3 ...')
@@ -154,7 +160,8 @@ class MissionExecutor:
                 for k, v in transitions.items():
                     if len(v) > 1:
                         self._add_concurrent_state_machine(k, v, state_to_ignore, transitions,
-                                                           self.CONTAINER_NAME + '|' + str(container_counter), sub_mission_name)
+                                                           self.CONTAINER_NAME + '|' + str(container_counter),
+                                                           sub_mission_name)
                         container_counter += 1
 
             # Create all single state machine
@@ -170,7 +177,8 @@ class MissionExecutor:
                 for k, v in transitions.items():
                     if len(v) > 1:
                         self._replace_transition_with_concurrent_transition(k, transitions,
-                                                                            self.CONTAINER_NAME + '|' + str(container_counter), sub_mission_name)
+                                                                            self.CONTAINER_NAME + '|' + str(
+                                                                                container_counter), sub_mission_name)
                         container_counter += 1
 
                 if stateui.state.is_submission:
@@ -178,11 +186,11 @@ class MissionExecutor:
                                                       sub_mission_name)
                     submission_counter += 1
                 else:
-                    self.instanciate_single_state(stateui, transitions,sub_mission_name)
+                    self.instanciate_single_state(stateui, transitions, sub_mission_name)
 
                 # set Root state
                 if stateui.state.is_root:
-                    main_sm.set_initial_state([ sub_mission_name+ '|'+stateui.state.name])
+                    main_sm.set_initial_state([sub_mission_name + '|' + stateui.state.name])
         return main_sm
 
     def _is_state_ignored(self, state_to_ignore, stateui):
@@ -199,8 +207,9 @@ class MissionExecutor:
         # Get all outcome state
         for state_ui in v:
             for tran in state_ui.state.transitions:
-                all_concurrent_transition_dict[sub_mission_name + '|' +state_ui.state.name + '|' + tran.outcome] = sub_mission_name + '|' + tran.state
-                all_concurrent_transition.append(sub_mission_name + '|' +state_ui.state.name + '|' + tran.outcome)
+                all_concurrent_transition_dict[
+                    sub_mission_name + '|' + state_ui.state.name + '|' + tran.outcome] = sub_mission_name + '|' + tran.state
+                all_concurrent_transition.append(sub_mission_name + '|' + state_ui.state.name + '|' + tran.outcome)
 
         sm_con = smach.Concurrence(outcomes=all_concurrent_transition,
                                    default_outcome=all_concurrent_transition[0],
@@ -222,7 +231,8 @@ class MissionExecutor:
         smach.StateMachine.add(sub_mission_name + '|' + container_name, sm_con,
                                transitions=all_concurrent_transition_dict)
 
-        self._replace_transition_with_concurrent_transition(k, transitions, sub_mission_name + '|' + container_name,sub_mission_name)
+        self._replace_transition_with_concurrent_transition(k, transitions, sub_mission_name + '|' + container_name,
+                                                            sub_mission_name)
         for transition_state in v:
             state_to_ignore.append(sub_mission_name + '|' + transition_state.state.name)
 
@@ -230,7 +240,7 @@ class MissionExecutor:
         # Remove from dic
         transitions.pop(k)
         transitions[k] = []
-        transitions[k].append(sub_mission_name + '|' +container_name)
+        transitions[k].append(sub_mission_name + '|' + container_name)
 
     def _create_transition_multimap(self, stateui, transitions):
         for transition_ui in stateui.transitions:
@@ -238,7 +248,7 @@ class MissionExecutor:
                 transitions[transition_ui.name] = []
             transitions[transition_ui.name].append(transition_ui.state2)
 
-    def instanciate_single_state(self, stateui, transition_dict,sub_mission_name):
+    def instanciate_single_state(self, stateui, transition_dict, sub_mission_name):
         transitions = {}
         for key, val in transition_dict.items():
             if isinstance(val[0], basestring):
@@ -253,7 +263,8 @@ class MissionExecutor:
             else:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
 
-        rospy.loginfo('Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
+        rospy.loginfo(
+            'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
 
         exec (
             'smach.StateMachine.add(\'{}\',s,transitions={})'.format(sub_mission_name + '|' + stateui.state.name,
@@ -265,13 +276,14 @@ class MissionExecutor:
             if isinstance(val[0], basestring):
                 transitions[key] = val[0]
             else:
-                transitions[key] =  sub_mission_name + '|'+val[0].state.name
+                transitions[key] = sub_mission_name + '|' + val[0].state.name
 
         rospy.loginfo('Add submission state {} with transitions={})'.format(stateui.state.name, transitions))
 
         state_machine = self.create_state_machine(
-            os.path.join(self.missions_directory, stateui.state._name + '.yml'), sub_mission_name + '|' + stateui.state.name)
-        smach.StateMachine.add(sub_mission_name + '|'+stateui.state.name, state_machine, transitions)
+            os.path.join(self.missions_directory, stateui.state.submission_file),
+            sub_mission_name + '|' + stateui.state.name)
+        smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions)
 
     def child_term_cb(self, outcome_map):
         return True

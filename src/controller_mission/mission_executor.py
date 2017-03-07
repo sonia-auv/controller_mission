@@ -50,6 +50,7 @@ class MissionExecutor:
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
+        rospy.Service('mission_executor/current_mission', CurrentMission, self._handle_current_mission)
         rospy.Service('mission_executor/stop_mission', StopMission, self._handle_stop_mission)
 
         # Download mission content
@@ -58,6 +59,9 @@ class MissionExecutor:
         rospy.Service('mission_executor/get_mission_content', SendMission, self._handle_send_mission)
 
         rospy.spin()
+
+    def _handle_current_mission(self,req):
+        return CurrentMissionResponse(self.current_mission)
 
     def _handle_mission_switch_activated(self, msg):
         if self.current_mission:

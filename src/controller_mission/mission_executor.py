@@ -9,6 +9,8 @@ import time
 # this from state import * is very import !!!
 from state import *
 from std_msgs.msg import String
+
+from provider_kill_mission.msg import MissionSwitchMsg
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
@@ -39,6 +41,9 @@ class MissionExecutor:
         # Service get current missions
         self.mission_loaded_changed_publisher = rospy.Publisher('/mission_executor/mission_loaded_name', String, queue_size=5)
         self.started_mission_name = rospy.Publisher('/mission_executor/started_mission_name', String, queue_size=5)
+        self.end_mission = rospy.Publisher('/mission_executor/mission_ended', String, queue_size=5)
+
+        self._mission_switch_sub = rospy.Subscriber('/provider_kill_mission/mission_switch_msg',MissionSwitchMsg,self._handle_mission_switch_activated)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
@@ -50,6 +55,13 @@ class MissionExecutor:
         rospy.Service('mission_executor/get_mission_content', SendMission, self._handle_send_mission)
 
         rospy.spin()
+
+    def _handle_mission_switch_activated(self,msg):
+        if self.current_mission:
+            if msg.state:
+                self._handle_start_mission(None)
+            else:
+                self._handle_stop_mission(None)
 
     def _handle_stop_mission(self, req):
         try:
@@ -106,6 +118,8 @@ class MissionExecutor:
         rospy.loginfo('Mission started')
         self.current_stateMachine.execute()
         self.smach_executor_thread = None
+        self.sis.stop()
+        self.end_mission.publish(self.current_mission)
 
     def _handle_load_missions(self, req):
         self.current_mission = req.mission

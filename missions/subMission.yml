@@ -1,0 +1,48 @@
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [362, 38]
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: concurrence
+    is_root: true
+    is_submission: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: concurrence, variable_name: state_name}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: concurrence_variation}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [188, 250]
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: concurrence_variation
+        is_root: false
+        is_submission: true
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: concurrence_variation, variable_name: state_name}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: concurrence_variation_2}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [509, 381]
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: concurrence_variation_2
+            is_root: false
+            is_submission: true
+            outcome_states: [succeeded, aborted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: concurrence_variation_2, variable_name: state_name}
+            transitions: []
+          transitions: []
+- *id002
+- *id003

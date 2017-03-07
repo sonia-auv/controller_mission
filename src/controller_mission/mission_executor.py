@@ -6,7 +6,7 @@ import rospkg
 import yaml
 import threading
 import time
-# this from state import * is very import !!!
+# this from state import * is very important !!!
 from state import *
 from std_msgs.msg import String
 
@@ -20,8 +20,9 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
 
 class MissionExecutor:
     missions = []
+    current_mission = None
     smach_executor_thread = None
-    CONTAINER_NAME = "container_"
+    CONTAINER_NAME = "container"
 
     def __init__(self):
         rospy.init_node('mission_executor')
@@ -39,11 +40,13 @@ class MissionExecutor:
         rospy.Service('mission_executor/load_mission', LoadMission, self._handle_load_missions)
 
         # Service get current missions
-        self.mission_loaded_changed_publisher = rospy.Publisher('/mission_executor/mission_loaded_name', String, queue_size=5)
+        self.mission_loaded_changed_publisher = rospy.Publisher('/mission_executor/mission_loaded_name', String,
+                                                                queue_size=5)
         self.started_mission_name = rospy.Publisher('/mission_executor/started_mission_name', String, queue_size=5)
         self.end_mission = rospy.Publisher('/mission_executor/mission_ended', String, queue_size=5)
 
-        self._mission_switch_sub = rospy.Subscriber('/provider_kill_mission/mission_switch_msg',MissionSwitchMsg,self._handle_mission_switch_activated)
+        self._mission_switch_sub = rospy.Subscriber('/provider_kill_mission/mission_switch_msg', MissionSwitchMsg,
+                                                    self._handle_mission_switch_activated)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
@@ -56,7 +59,7 @@ class MissionExecutor:
 
         rospy.spin()
 
-    def _handle_mission_switch_activated(self,msg):
+    def _handle_mission_switch_activated(self, msg):
         if self.current_mission:
             if msg.state:
                 self._handle_start_mission(None)
@@ -80,8 +83,9 @@ class MissionExecutor:
         with open(os.path.join(self.missions_directory, req.name), 'w') as missionfile:
             missionfile.write(req.content)
 
-        if self.current_mission == req.name:
-            self._handle_load_missions(LoadMissionRequest(req.name))
+        if self.current_mission:
+            if self.current_mission == req.name:
+                self._handle_load_missions(LoadMissionRequest(req.name))
 
         return ReceivedMissionResponse()
 
@@ -100,7 +104,8 @@ class MissionExecutor:
             rospy.loginfo('Starting mission : {}..'.format(self.current_mission))
             self.started_mission_name.publish(self.current_mission)
 
-            self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.current_stateMachine, '/mission_executor')
+            self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.current_stateMachine,
+                                                     '/mission_executor')
             self.sis.start()
             self.smach_executor_thread = threading.Thread(target=self._run_start_mission)
             self.smach_executor_thread.start()
@@ -125,23 +130,32 @@ class MissionExecutor:
         self.current_mission = req.mission
         self.mission_loaded_changed_publisher.publish(self.current_mission)
         mission = self.missions_directory + '/' + req.mission
+        self.main_sm = self.create_state_machine(mission, 'main')
+
+        return LoadMissionResponse()
+
+    def create_state_machine(self, mission, sub_mission_name):
         states = []
         with open(mission, 'r') as missionfile:
             states = yaml.load(missionfile)
-        self.main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'])
-
+        main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'])
         # Open the container
-        with self.main_sm:
+        with main_sm:
             state_to_ignore = []
             container_counter = 1
             # Replace single state with concurrent transitions by concurrent state
             for stateui in states:
                 transitions = {}
                 self._create_transition_multimap(stateui, transitions)
-                self._add_concurrent_state_machine(state_to_ignore, transitions, container_counter)
+                for k, v in transitions.items():
+                    if len(v) > 1:
+                        self._add_concurrent_state_machine(k, v, state_to_ignore, transitions,
+                                                           self.CONTAINER_NAME + '|' + str(container_counter), sub_mission_name)
+                        container_counter += 1
 
             # Create all single state machine
             container_counter = 1
+            submission_counter = 1
             for stateui in states:
                 if self._is_state_ignored(state_to_ignore, stateui):
                     continue
@@ -151,15 +165,21 @@ class MissionExecutor:
                 # Remove concurrent state
                 for k, v in transitions.items():
                     if len(v) > 1:
-                        self._replace_transition_with_concurrent_transition(k, transitions, container_counter)
+                        self._replace_transition_with_concurrent_transition(k, transitions,
+                                                                            self.CONTAINER_NAME + '|' + str(container_counter), sub_mission_name)
+                        container_counter += 1
 
-                self.instanciate_single_state(stateui, transitions)
+                if stateui.state.is_submission:
+                    self.instanciate_submission_state(stateui, transitions,
+                                                      sub_mission_name)
+                    submission_counter += 1
+                else:
+                    self.instanciate_single_state(stateui, transitions,sub_mission_name)
 
                 # set Root state
                 if stateui.state.is_root:
-                    self.main_sm.set_initial_state([stateui.state.name])
-
-        return LoadMissionResponse()
+                    main_sm.set_initial_state([ sub_mission_name+ '|'+stateui.state.name])
+        return main_sm
 
     def _is_state_ignored(self, state_to_ignore, stateui):
         for ignored_state in state_to_ignore:
@@ -167,49 +187,46 @@ class MissionExecutor:
                 return True
         return False
 
-    def _add_concurrent_state_machine(self, state_to_ignore, transitions, container_counter):
-        for k, v in transitions.items():
-            if len(v) > 1:
-                all_concurrent_transition_dict = {}
-                all_concurrent_transition = []
+    def _add_concurrent_state_machine(self, k, v, state_to_ignore, transitions, container_name, sub_mission_name):
 
-                # Get all outcome state
-                for state_ui in v:
-                    for tran in state_ui.state.transitions:
-                        all_concurrent_transition_dict[state_ui.state.name + '_' + tran.outcome] = tran.state
-                        all_concurrent_transition.append(state_ui.state.name + '_' + tran.outcome)
+        all_concurrent_transition_dict = {}
+        all_concurrent_transition = []
 
-                sm_con = smach.Concurrence(outcomes=all_concurrent_transition,
-                                           default_outcome=all_concurrent_transition[0],
-                                           child_termination_cb=self.child_term_cb,
-                                           outcome_cb=self.out_cb)
-                # Open the container
-                with sm_con:
-                    for state_ui in v:
-                        exec ('my_state = {}()'.format(state_ui.state._name))
-                        for param in state_ui.state.parameters:
-                            if isinstance(param.value, basestring):
-                                exec ('my_state.{} = \'{}\''.format(param.variable_name, param.value))
-                            else:
-                                exec ('my_state.{} = {}'.format(param.variable_name, param.value))
-                        exec ('smach.Concurrence.add(\'{}\',my_state)'.format(state_ui.state.name))
+        # Get all outcome state
+        for state_ui in v:
+            for tran in state_ui.state.transitions:
+                all_concurrent_transition_dict[sub_mission_name + '|' +state_ui.state.name + '|' + tran.outcome] = sub_mission_name + '|' + tran.state
+                all_concurrent_transition.append(sub_mission_name + '|' +state_ui.state.name + '|' + tran.outcome)
 
-                rospy.loginfo('Add concurrent state container {}_{} with transitions = {}'.format(self.CONTAINER_NAME,
-                                                                                                  container_counter,
-                                                                                                  all_concurrent_transition_dict))
-                smach.StateMachine.add('{}_{}'.format(self.CONTAINER_NAME, container_counter), sm_con,
-                                       transitions=all_concurrent_transition_dict)
+        sm_con = smach.Concurrence(outcomes=all_concurrent_transition,
+                                   default_outcome=all_concurrent_transition[0],
+                                   child_termination_cb=self.child_term_cb,
+                                   outcome_cb=self.out_cb)
+        # Open the container
+        with sm_con:
+            for state_ui in v:
+                exec ('my_state = {}()'.format(state_ui.state._name))
+                for param in state_ui.state.parameters:
+                    if isinstance(param.value, basestring):
+                        exec ('my_state.{} = \'{}\''.format(param.variable_name, param.value))
+                    else:
+                        exec ('my_state.{} = {}'.format(param.variable_name, param.value))
+                exec ('smach.Concurrence.add(\'{}\',my_state)'.format(sub_mission_name + '|' + state_ui.state.name))
 
-                self._replace_transition_with_concurrent_transition(k, transitions, container_counter)
-                for transition_state in v:
-                    state_to_ignore.append(transition_state.state.name)
+        rospy.loginfo('Add concurrent state container {} with transitions = {}'.format(container_name,
+                                                                                       all_concurrent_transition_dict))
+        smach.StateMachine.add(sub_mission_name + '|' + container_name, sm_con,
+                               transitions=all_concurrent_transition_dict)
 
-    def _replace_transition_with_concurrent_transition(self, k, transitions, container_counter):
+        self._replace_transition_with_concurrent_transition(k, transitions, sub_mission_name + '|' + container_name,sub_mission_name)
+        for transition_state in v:
+            state_to_ignore.append(sub_mission_name + '|' + transition_state.state.name)
+
+    def _replace_transition_with_concurrent_transition(self, k, transitions, container_name, sub_mission_name):
         # Remove from dic
         transitions.pop(k)
         transitions[k] = []
-        transitions[k].append('{}_{}'.format(self.CONTAINER_NAME, container_counter))
-        container_counter += 1
+        transitions[k].append(sub_mission_name + '|' +container_name)
 
     def _create_transition_multimap(self, stateui, transitions):
         for transition_ui in stateui.transitions:
@@ -217,17 +234,13 @@ class MissionExecutor:
                 transitions[transition_ui.name] = []
             transitions[transition_ui.name].append(transition_ui.state2)
 
-    def instanciate_concurent_state(self, stateui, states, state_names):
-
-        pass
-
-    def instanciate_single_state(self, stateui, transition_dict):
+    def instanciate_single_state(self, stateui, transition_dict,sub_mission_name):
         transitions = {}
         for key, val in transition_dict.items():
             if isinstance(val[0], basestring):
                 transitions[key] = val[0]
             else:
-                transitions[key] = val[0].state.name
+                transitions[key] = sub_mission_name + '|' + val[0].state.name
         # Instanciate state and set parameter value.
         exec ('s = {}()'.format(stateui.state._name))
         for param in stateui.state.parameters:
@@ -236,11 +249,25 @@ class MissionExecutor:
             else:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
 
-        # For debug purposes
-        rospy.loginfo('Add single state {} with transitions={})'.format(stateui.state.name, transitions))
+        rospy.loginfo('Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
+
         exec (
-            'smach.StateMachine.add(\'{}\',s,transitions={})'.format(stateui.state.name,
+            'smach.StateMachine.add(\'{}\',s,transitions={})'.format(sub_mission_name + '|' + stateui.state.name,
                                                                      transitions))
+
+    def instanciate_submission_state(self, stateui, transition_dict, sub_mission_name):
+        transitions = {}
+        for key, val in transition_dict.items():
+            if isinstance(val[0], basestring):
+                transitions[key] = val[0]
+            else:
+                transitions[key] =  sub_mission_name + '|'+val[0].state.name
+
+        rospy.loginfo('Add submission state {} with transitions={})'.format(stateui.state.name, transitions))
+
+        state_machine = self.create_state_machine(
+            os.path.join(self.missions_directory, stateui.state._name + '.yml'), sub_mission_name + '|' + stateui.state.name)
+        smach.StateMachine.add(sub_mission_name + '|'+stateui.state.name, state_machine, transitions)
 
     def child_term_cb(self, outcome_map):
         return True
@@ -249,7 +276,7 @@ class MissionExecutor:
         # Return the first result
         for k, v in outcome_map.items():
             if v != 'preempted':
-                return k + '_' + v
+                return k + '|' + v
 
         return 'preempted'
 

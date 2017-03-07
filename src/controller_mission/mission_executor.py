@@ -8,6 +8,7 @@ import threading
 import time
 # this from state import * is very import !!!
 from state import *
+from std_msgs.msg import String
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
@@ -36,7 +37,8 @@ class MissionExecutor:
         rospy.Service('mission_executor/load_mission', LoadMission, self._handle_load_missions)
 
         # Service get current missions
-        rospy.Service('mission_executor/current_mission', CurrentMission, self._handle_current_mission)
+        self.mission_loaded_changed_publisher = rospy.Publisher('/mission_executor/mission_loaded_name', String, queue_size=5)
+        self.started_mission_name = rospy.Publisher('/mission_executor/started_mission_name', String, queue_size=5)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
@@ -52,6 +54,7 @@ class MissionExecutor:
     def _handle_stop_mission(self, req):
         try:
             if self.smach_executor_thread:
+                self.sis.stop()
                 self.current_stateMachine.request_preempt()
                 self.smach_executor_thread.join()
                 self.smach_executor_thread = None
@@ -76,9 +79,6 @@ class MissionExecutor:
             response.content = missionfile.read()
         return response
 
-    def _handle_current_mission(self, req):
-        return CurrentMissionResponse(self.current_mission)
-
     def _handle_start_mission(self, req):
         try:
             if self.smach_executor_thread:
@@ -86,6 +86,10 @@ class MissionExecutor:
 
             self.current_stateMachine = self.main_sm;
             rospy.loginfo('Starting mission : {}..'.format(self.current_mission))
+            self.started_mission_name.publish(self.current_mission)
+
+            self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.current_stateMachine, '/mission_executor')
+            self.sis.start()
             self.smach_executor_thread = threading.Thread(target=self._run_start_mission)
             self.smach_executor_thread.start()
             return StartMissionResponse()
@@ -105,6 +109,7 @@ class MissionExecutor:
 
     def _handle_load_missions(self, req):
         self.current_mission = req.mission
+        self.mission_loaded_changed_publisher.publish(self.current_mission)
         mission = self.missions_directory + '/' + req.mission
         states = []
         with open(mission, 'r') as missionfile:
@@ -140,8 +145,6 @@ class MissionExecutor:
                 if stateui.state.is_root:
                     self.main_sm.set_initial_state([stateui.state.name])
 
-        self.sis = smach_ros.IntrospectionServer('mission_executor_server', self.main_sm, '/mission_executor')
-        self.sis.start()
         return LoadMissionResponse()
 
     def _is_state_ignored(self, state_to_ignore, stateui):

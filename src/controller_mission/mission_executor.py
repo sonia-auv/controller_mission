@@ -8,9 +8,11 @@ import threading
 import time
 # this from state import * is very import !!!
 from state import *
-from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, StartMission, \
+from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \
+    LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
-    CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse
+    CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
+    SendMissionResponse
 
 
 class MissionExecutor:
@@ -40,8 +42,10 @@ class MissionExecutor:
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
         rospy.Service('mission_executor/stop_mission', StopMission, self._handle_stop_mission)
 
+        # Download mission content
+        rospy.Service('mission_executor/set_mission_content', ReceivedMission, self._handle_received_mission)
         # Receive mission content
-        rospy.Service('mission_executor/download_mission', ReceivedMission, self._handle_received_mission)
+        rospy.Service('mission_executor/get_mission_content', SendMission, self._handle_send_mission)
 
         rospy.spin()
 
@@ -60,7 +64,17 @@ class MissionExecutor:
 
         with open(os.path.join(self.missions_directory, req.name), 'w') as missionfile:
             missionfile.write(req.content)
+
+        if self.current_mission == req.name:
+            self._handle_load_missions(LoadMissionRequest(req.name))
+
         return ReceivedMissionResponse()
+
+    def _handle_send_mission(self, req):
+        response = SendMissionResponse()
+        with open(os.path.join(self.missions_directory, req.name), 'r') as missionfile:
+            response.content = missionfile.read()
+        return response
 
     def _handle_current_mission(self, req):
         return CurrentMissionResponse(self.current_mission)
@@ -90,12 +104,12 @@ class MissionExecutor:
         self.smach_executor_thread = None
 
     def _handle_load_missions(self, req):
-        mission = req.mission
+        self.current_mission = req.mission
+        mission = self.missions_directory + '/' + req.mission
         states = []
         with open(mission, 'r') as missionfile:
             states = yaml.load(missionfile)
         self.main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'])
-        self.current_mission = mission
 
         # Open the container
         with self.main_sm:
@@ -228,9 +242,11 @@ class MissionExecutor:
             if not os.path.isfile(file_path):
                 self.load_missions_file(file_path)
                 continue
-            self.missions.append(file_path)
+            self.missions.append(file_path.replace(self.missions_directory + '/', ''))
 
     def _handle_list_missions(self, req):
+        self.missions = []
+        self.load_missions_file(self.missions_directory)
         missions_list = None
         for mission in self.missions:
             if not missions_list:

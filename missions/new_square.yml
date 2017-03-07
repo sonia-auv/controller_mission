@@ -30,7 +30,7 @@
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
           value: !!python/unicode 'Front', variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '''Distance
-            to travel''', value: 4.0, variable_name: param_distance_x}
+            to travel''', value: 3.0, variable_name: param_distance_x}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '''Distance
             to travel''', value: 0.0, variable_name: param_distance_y}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '''Heading

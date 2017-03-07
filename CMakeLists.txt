@@ -25,6 +25,7 @@ add_service_files(DIRECTORY srv
   StopMission.srv
   CurrentMission.srv
   ReceivedMission.srv
+  SendMission.srv
 )
 
 generate_messages(

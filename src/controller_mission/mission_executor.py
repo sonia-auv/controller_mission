@@ -16,7 +16,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
-    SendMissionResponse
+    SendMissionResponse, ReceivedState, ReceivedStateResponse
 
 
 class MissionExecutor:
@@ -32,6 +32,7 @@ class MissionExecutor:
         # Load all missions
         rospy.loginfo('Loading missions list ...')
         self.missions_directory = os.path.join(rp.get_path('controller_mission'), 'missions')
+        self.controller_mission_directory = os.path.join(rp.get_path('controller_mission'))
         self.load_missions_file(self.missions_directory)
         rospy.loginfo('Done loading missions list.')
 
@@ -55,12 +56,20 @@ class MissionExecutor:
         rospy.Service('mission_executor/current_mission', CurrentMission, self._handle_current_mission)
         rospy.Service('mission_executor/stop_mission', StopMission, self._handle_stop_mission)
 
+        # Download state content
+        rospy.Service('mission_executor/push_state_content', ReceivedState, self._handle_state_received)
         # Download mission content
         rospy.Service('mission_executor/set_mission_content', ReceivedMission, self._handle_received_mission)
         # Receive mission content
         rospy.Service('mission_executor/get_mission_content', SendMission, self._handle_send_mission)
 
         rospy.spin()
+
+    def _handle_state_received(self,req):
+        with open(self.controller_mission_directory + req.name, 'w') as myfile:
+            myfile.write(req.content)
+        return ReceivedStateResponse()
+
 
     def _handle_current_mission(self, req):
         return CurrentMissionResponse(self.current_mission)

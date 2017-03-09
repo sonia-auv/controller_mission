@@ -219,21 +219,28 @@ class MissionExecutor:
                 all_concurrent_transition_dict[
                     sub_mission_name + '|' + state_ui.state.name + '|' + tran.outcome] = sub_mission_name + '|' + tran.state
                 all_concurrent_transition.append(sub_mission_name + '|' + state_ui.state.name + '|' + tran.outcome)
-
+        default_outcome = 'succeeded'
+        if len(all_concurrent_transition) > 0:
+            default_outcome = all_concurrent_transition[0]
         sm_con = smach.Concurrence(outcomes=all_concurrent_transition,
-                                   default_outcome=all_concurrent_transition[0],
+                                   default_outcome=default_outcome,
                                    child_termination_cb=self.child_term_cb,
                                    outcome_cb=self.out_cb)
         # Open the container
         with sm_con:
             for state_ui in v:
-                exec ('my_state = {}()'.format(state_ui.state._name))
-                for param in state_ui.state.parameters:
-                    if isinstance(param.value, basestring):
-                        exec ('my_state.{} = \'{}\''.format(param.variable_name, param.value))
-                    else:
-                        exec ('my_state.{} = {}'.format(param.variable_name, param.value))
-                exec ('smach.Concurrence.add(\'{}\',my_state)'.format(sub_mission_name + '|' + state_ui.state.name))
+                if state_ui.state.is_submission:
+                    sub_state = self.create_state_machine(os.path.join(self.missions_directory, state_ui.state.submission_file),
+                                                            sub_mission_name + '|' + state_ui.state.name)
+                    smach.Concurrence.add(sub_mission_name + '|' + state_ui.state.name, sub_state)
+                else:
+                    exec ('my_state = {}()'.format(state_ui.state._name))
+                    for param in state_ui.state.parameters:
+                        if isinstance(param.value, basestring):
+                            exec ('my_state.{} = \'{}\''.format(param.variable_name, param.value))
+                        else:
+                            exec ('my_state.{} = {}'.format(param.variable_name, param.value))
+                    exec ('smach.Concurrence.add(\'{}\',my_state)'.format(sub_mission_name + '|' + state_ui.state.name))
 
         rospy.loginfo('Add concurrent state container {} with transitions = {}'.format(container_name,
                                                                                        all_concurrent_transition_dict))

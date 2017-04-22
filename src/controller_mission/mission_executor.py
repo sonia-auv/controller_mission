@@ -1,3 +1,5 @@
+#! /usr/bin/env python2
+
 import rospy
 import smach
 import smach_ros
@@ -6,18 +8,17 @@ import rospkg
 import yaml
 import threading
 import time
-import copy
 # this from state import * is very important !!!
 from state import *
-from std_msgs.msg import String
 
-from provider_kill_mission.msg import MissionSwitchMsg
+from std_msgs.msg import String
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
     SendMissionResponse, ReceivedState, ReceivedStateResponse
 
+from provider_kill_mission.msg import MissionSwitchMsg
 
 class MissionExecutor:
     missions = []

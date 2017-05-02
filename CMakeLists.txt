@@ -12,8 +12,6 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
 )
 
-catkin_python_setup()
-
 #===============================================================================
 # G E N E R A T E   M E S S A G E S   &   S E R V I C E S
 
@@ -29,6 +27,7 @@ add_service_files(DIRECTORY srv
   SendMission.srv
 )
 
+catkin_python_setup()
 generate_messages(
   DEPENDENCIES std_msgs geometry_msgs
 )
@@ -36,7 +35,6 @@ generate_messages(
 generate_dynamic_reconfigure_options(
     cfg/SquareTest.cfg
 )
-
 catkin_package(
   CATKIN_DEPENDS roscpp
                  rospy
@@ -54,9 +52,8 @@ include_directories(
 
 #===============================================================================
 # I N S T A L L
-
-catkin_install_python(PROGRAMS bin/controller_mission bin/missionExecutor
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+catkin_install_python(PROGRAMS bin/missionExecutor
+ DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 #===============================================================================

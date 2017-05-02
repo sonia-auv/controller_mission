@@ -10,7 +10,6 @@ _author_ = 'Kevin Coombs'
 
 
 class MoveWithHeading(MissionState):
-
     def __init__(self):
         MissionState.__init__(self)
 
@@ -31,18 +30,17 @@ class MoveWithHeading(MissionState):
 
         try:
             response = set_global_target(self.param_distance_x,
-                                        self.param_distance_y,
-                                        1.0,
-                                        0.0,
-                                        0.0,
-                                        self.param_heading)
+                                         self.param_distance_y,
+                                         1.0,
+                                         0.0,
+                                         0.0,
+                                         self.param_heading)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set position = %f' % self.param_distance_x)
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
-
 
     def run(self, ud):
         if self.target_reached > 0:

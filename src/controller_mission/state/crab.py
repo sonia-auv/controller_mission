@@ -44,9 +44,6 @@ class Crab(MissionState):
         param_x = distance * math.sin(math.radians(phi))
         param_y = distance * math.cos(math.radians(phi))
 
-        print param_x
-        print param_y
-
         absolute_position_x = x_absolute + param_x
         absolute_position_y = y_absolute + param_y
 

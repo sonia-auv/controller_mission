@@ -10,11 +10,9 @@ import threading
 import time
 # this from state import * is very important !!!
 from state import *
-<<<<<<< HEAD
+
 from std_msgs.msg import String
 # from controller_mission.src.controller_mission import param_submission
-=======
->>>>>>> 5ee618b0c114bf743bc4ed323780eec90bfe547f
 
 from std_msgs.msg import String
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \

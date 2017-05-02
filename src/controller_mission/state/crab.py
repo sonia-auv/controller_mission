@@ -167,10 +167,5 @@ class Crab(MissionState):
                 else:
                     self.one_more_target_reached = 0
 
-
-
-
-
-
     def end(self):
         pass

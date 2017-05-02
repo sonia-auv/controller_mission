@@ -5,6 +5,7 @@ from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
 from proc_control.srv import SetPositionTarget
 
+
 _author_ = 'Kevin Coombs'
 
 
@@ -14,9 +15,9 @@ class MoveWithHeading(MissionState):
         MissionState.__init__(self)
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x',1.0,'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_y',1.0,'Distance to travel'))
-        self.parameters.append(Parameter('param_heading',1.0,'Heading for sub'))
+        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_heading', 1.0, 'Heading for sub'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -27,6 +28,7 @@ class MoveWithHeading(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_global_target')
         set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+
         try:
             response = set_global_target(self.param_distance_x,
                                         self.param_distance_y,

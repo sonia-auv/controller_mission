@@ -10,6 +10,7 @@ import copy
 # this from state import * is very important !!!
 from state import *
 from std_msgs.msg import String
+# from controller_mission.src.controller_mission import param_submission
 
 from provider_kill_mission.msg import MissionSwitchMsg
 from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMission, LoadMissionResponse, \
@@ -130,7 +131,7 @@ class MissionExecutor:
 
     def reload_state_machine(self):
         mission = self.missions_directory + '/' + self.current_mission
-        return self.create_state_machine(mission, 'main')
+        return self.create_state_machine(mission, 'main',None)
 
     def _run_start_mission(self):
         rospy.loginfo('Mission start in 3 ...')
@@ -149,23 +150,27 @@ class MissionExecutor:
         self.current_mission = req.mission
         self.mission_loaded_changed_publisher.publish(self.current_mission)
         mission = self.missions_directory + '/' + req.mission
-        self.main_sm = self.create_state_machine(mission, 'main')
+        self.main_sm = self.create_state_machine(mission, 'main',None)
 
         return LoadMissionResponse()
 
-    def create_state_machine(self, mission, sub_mission_name):
-        states = []
+    def create_state_machine(self, mission, sub_mission_name, global_params):
         with open(mission, 'r') as missionfile:
-            states = yaml.load(missionfile)
+            mission_container = yaml.load(missionfile)
         main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'])
         # Open the container
         with main_sm:
             state_to_ignore = []
             container_counter = 1
+
+            for globalparm in mission_container.globalparams:
+                exec ('self.{}_{} = {}'.format('main', globalparm.variable_name, globalparm.value))
+
             # Replace single state with concurrent transitions by concurrent state
-            for stateui in states:
+            for stateui in mission_container.statesui:
                 transitions = {}
                 self._create_transition_multimap(stateui, transitions)
+
                 for k, v in transitions.items():
                     if len(v) > 1:
                         self._add_concurrent_state_machine(k, v, state_to_ignore, transitions,
@@ -174,9 +179,13 @@ class MissionExecutor:
                         container_counter += 1
 
             # Create all single state machine
+            if global_params:
+                for global_param in global_params:
+                    print '{}_{} = {}'.format(sub_mission_name.replace('|','_'),global_param.variable_name,global_param.value)
+                    exec('self.{}_{} = {}'.format(sub_mission_name.replace('|','_'),global_param.variable_name,global_param.value))
             container_counter = 1
             submission_counter = 1
-            for stateui in states:
+            for stateui in mission_container.statesui:
                 if self._is_state_ignored(state_to_ignore, stateui):
                     continue
                 transitions = {}
@@ -195,7 +204,7 @@ class MissionExecutor:
                                                       sub_mission_name)
                     submission_counter += 1
                 else:
-                    self.instanciate_single_state(stateui, transitions, sub_mission_name)
+                    self.instanciate_single_state(stateui, transitions, sub_mission_name, mission_container)
 
                 # set Root state
                 if stateui.state.is_root:
@@ -230,8 +239,9 @@ class MissionExecutor:
         with sm_con:
             for state_ui in v:
                 if state_ui.state.is_submission:
+
                     sub_state = self.create_state_machine(os.path.join(self.missions_directory, state_ui.state.submission_file),
-                                                            sub_mission_name + '|' + state_ui.state.name)
+                                                            sub_mission_name + '|' + state_ui.state.name, state_ui.state.global_params)
                     smach.Concurrence.add(sub_mission_name + '|' + state_ui.state.name, sub_state)
                 else:
                     exec ('my_state = {}()'.format(state_ui.state._name))
@@ -264,19 +274,29 @@ class MissionExecutor:
                 transitions[transition_ui.name] = []
             transitions[transition_ui.name].append(transition_ui.state2)
 
-    def instanciate_single_state(self, stateui, transition_dict, sub_mission_name):
+    def instanciate_single_state(self, stateui, transition_dict, sub_mission_name, mission_container):
         transitions = {}
         for key, val in transition_dict.items():
             if isinstance(val[0], basestring):
                 transitions[key] = val[0]
             else:
                 transitions[key] = sub_mission_name + '|' + val[0].state.name
+        #print stateui.state._name
         # Instanciate state and set parameter value.
         exec ('s = {}()'.format(stateui.state._name))
+        print s
         for param in stateui.state.parameters:
-            if isinstance(param.value, basestring):
+            value_is_param = False
+            for global_param in mission_container.globalparams:
+                if isinstance(param.value, basestring):
+                    if param.value == global_param.variable_name:
+                        value_is_param = True
+                        print sub_mission_name
+                        exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|','_'), param.value))
+
+            if isinstance(param.value, basestring) and not value_is_param:
                 exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
-            else:
+            elif not value_is_param:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
 
         rospy.loginfo(
@@ -298,7 +318,8 @@ class MissionExecutor:
 
         state_machine = self.create_state_machine(
             os.path.join(self.missions_directory, stateui.state.submission_file),
-            sub_mission_name + '|' + stateui.state.name)
+            sub_mission_name + '|' + stateui.state.name,stateui.state.global_params
+        )
         smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions)
 
     def child_term_cb(self, outcome_map):

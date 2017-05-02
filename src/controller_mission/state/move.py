@@ -13,8 +13,8 @@ class Move(MissionState):
         MissionState.__init__(self)
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x',1.0,'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_y',1.0,'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -39,7 +39,6 @@ class Move(MissionState):
 
         rospy.loginfo('Set position = %f' % self.param_distance_x)
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
-
 
     def run(self, ud):
         if self.target_reached > 0:

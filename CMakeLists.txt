@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(DIRECTORY srv
   FILES
   ListMissions.srv
+  GetPositionObject.srv
+  TrustingPositionObject.srv
   LoadMission.srv
   StartMission.srv
   StopMission.srv

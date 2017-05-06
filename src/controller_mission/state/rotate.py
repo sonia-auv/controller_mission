@@ -2,10 +2,10 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, GetPositionTarget
 
 
-class GotoRelativeWithHeading(MissionState):
+class Rotate(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -15,11 +15,7 @@ class GotoRelativeWithHeading(MissionState):
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_t', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_heading', 1.0, 'Heading for sub'))
+        self.parameters.append(Parameter('param_heading', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -28,25 +24,29 @@ class GotoRelativeWithHeading(MissionState):
         self.target_reached = data.target_is_reached
 
     def initialize(self):
-
-        rospy.wait_for_service('/proc_control/set_local_target')
+        rospy.wait_for_service('/proc_control/set_global_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
+        rospy.wait_for_service('/proc_control/get_target')
+        self.get_target_position = rospy.ServiceProxy('/proc_control/get_target', GetPositionTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
+        target_position = self.get_target_position()
+
+        print target_position
+
         try:
-            self.set_local_target(self.param_distance_x,
-                                  self.param_distance_y,
-                                  self.param_distance_z,
+            self.set_local_target(0.0,
+                                  0.0,
+                                  0.0,
                                   0.0,
                                   0.0,
                                   self.param_heading)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position x = %f' % self.param_distance_x)
-        rospy.loginfo('Set position y = %f' % self.param_distance_y)
-        rospy.loginfo('Set position z = %f' % self.param_distance_z)
+        rospy.loginfo('Set relative position x = %f' % self.param_heading)
 
     def run(self, ud):
         if self.target_reached > 0:

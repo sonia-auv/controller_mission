@@ -2,17 +2,17 @@
 globalparams: []
 statesui:
 - !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [422, 98]
+  position: !!python/tuple [501, 176]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: timeOut.TimesOut
-    base_file: /src/controller_mission/state/timeOut.py
+    _name: rotate.Rotate
+    base_file: /src/controller_mission/state/rotate.py
     is_root: true
     outcome_states: [succeeded, aborted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: TimesOut, variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '''Times
-        Out''', value: 3.0, variable_name: time}
+      value: Rotate, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 30.0, variable_name: param_heading}
     transitions: []
   transitions: []

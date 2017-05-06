@@ -37,18 +37,9 @@ class GotoObject(MissionState):
         param_x = next_pos_x - pos_act_x
         param_y = next_pos_y - pos_act_y
 
-        heading = abs(math.degrees(math.atan(param_x / param_y)))
+        heading = math.degrees(math.atan2(param_x / param_y))
 
-        if param_x >= 0.0:
-            if param_y >= 0.0:
-                heading = 90.0 - heading
-            else:
-                heading += 270.0
-        else:
-            if param_x >= 0.0:
-                heading += 90.0
-            else:
-                heading = (90 - heading) + 180
+        heading = (360.0 + heading) % 360.0
 
         return heading
 

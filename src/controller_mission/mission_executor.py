@@ -166,8 +166,8 @@ class MissionExecutor:
             state_to_ignore = []
             container_counter = 1
 
-            for globalparm in mission_container.globalparams:
-                exec ('self.{}_{} = {}'.format('main', globalparm.variable_name, globalparm.value))
+            for globalparam in mission_container.globalparams:
+                exec ('self.{}_{} = {}'.format('main', globalparam.variable_name, globalparam.value))
 
             # Replace single state with concurrent transitions by concurrent state
             for stateui in mission_container.statesui:

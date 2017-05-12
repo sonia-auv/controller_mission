@@ -25,7 +25,7 @@ class GotoRelative(MissionState):
         self.target_reached = data.target_is_reached
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_global_target')
+        rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)

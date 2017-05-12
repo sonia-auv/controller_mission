@@ -40,13 +40,10 @@ class AlignToVision(MissionState):
         self.vision_position_y = (position.y / pixel_to_meter) - (300 / pixel_to_meter)
         self.vision_position_z = (position.x / pixel_to_meter) - (250 / pixel_to_meter)
 
-        print self.vision_position_y
-        print self.vision_position_z
-
-        if abs(self.vision_position_y) <= 0.3:
+        if abs(self.vision_position_y) <= self.param_target:
             self.buoy_is_reach_y = True
 
-        if abs(self.vision_position_z) <= 0.5:
+        if abs(self.vision_position_z) <= self.param_target:
             self.buoy_is_reach_z = True
 
     def position_callback(self, position):
@@ -65,7 +62,6 @@ class AlignToVision(MissionState):
     def align_submarine(self):
         posy = self.vision_position_y
         posz = self.vision_position_z
-
         sub_posz = self.position_x
 
         posz = self.set_z_position(posz, sub_posz)
@@ -75,7 +71,7 @@ class AlignToVision(MissionState):
         if self.buoy_is_reach_z:
             pass
 
-        self.set_target(posy/3, posz/3)
+        self.set_target(posy, posz)
 
         if self.buoy_is_reach_y and self.buoy_is_reach_z:
             self.buoy_is_reach = True

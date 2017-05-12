@@ -1,47 +1,20 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [656, 234]
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [400, 187]
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: alignToVision.AlignToVision
     base_file: /src/controller_mission/state/alignToVision.py
-    is_root: false
+    is_root: true
     outcome_states: [succeeded, aborted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
       value: AlignToVision, variable_name: state_name}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
-      value: 0.5, variable_name: param_target}
+      value: 0.01, variable_name: param_target}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
       value: ' green', variable_name: param_color}
     transitions: []
   transitions: []
-- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [324, 161]
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: gotoRelativeWithHeading.GotoRelativeWithHeading
-    base_file: /src/controller_mission/state/gotoRelativeWithHeading.py
-    is_root: true
-    outcome_states: [succeeded, aborted]
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'hallo', variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 0.0, variable_name: param_distance_x}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 0.0, variable_name: param_distance_y}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 1.0, variable_name: param_distance_z}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Heading
-        for sub''', value: 0.0, variable_name: param_heading}
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: AlignToVision}
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: *id002

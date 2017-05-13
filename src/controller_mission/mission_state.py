@@ -34,7 +34,7 @@ class MissionState(smach.State):
 
     def execute(self, ud):
         self.initialize()
-        rate = rospy.Rate(10)
+        rate = rospy.Rate(50)
         while not rospy.is_shutdown():
             if self.preempt_requested():
                 self.service_preempt()

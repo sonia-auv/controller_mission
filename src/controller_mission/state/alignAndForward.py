@@ -6,44 +6,53 @@ from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
 
 
-class AlignToVision(MissionState):
+class AlignToVisionAndForward(MissionState):
 
     buoy_diameter = 0.23
+    image_y = 300
+    image_x = 250
 
     def __init__(self):
         MissionState.__init__(self)
         self.position_x = 0.0
         self.position_y = 0.0
+        self.vision_position_x = 0
         self.vision_position_y = 0
         self.vision_position_z = 0
         self.vision_width = 0
         self.vision_height = 0
-        self.target_reached = False
-        self.keep_calm = 1
         self.count = 0
+
+        self.buoy_position_z_is_reach = 0
+        self.buoy = False
 
         self.buoy_is_reach_y = False
         self.buoy_is_reach_z = False
         self.buoy_is_reach = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_target', 1.0, 'target'))
+        self.parameters.append(Parameter('param_target_zy', 1.0, 'target'))
+        self.parameters.append(Parameter('param_target_x', 1.0, 'target'))
+        self.parameters.append(Parameter('param_distance_x', 1.0, 'target'))
         self.parameters.append(Parameter('param_color', 'green', 'target'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
 
     def vision_callback(self, position):
-        pixel_to_meter = self.vision_scaling(position.width, position.height)
+        if self.param_color == position.desc_1:
+            pixel_to_meter = self.vision_scaling(position.width, position.height)
 
-        self.vision_position_y = (position.y / pixel_to_meter) - (300 / pixel_to_meter)
-        self.vision_position_z = (position.x / pixel_to_meter) - (250 / pixel_to_meter)
+            self.vision_position_y = (position.y / pixel_to_meter) - (self.image_y / pixel_to_meter)
+            self.vision_position_z = (position.x / pixel_to_meter) - (self.image_x / pixel_to_meter)
 
-        if abs(self.vision_position_y) <= self.param_target:
-            self.buoy_is_reach_y = True
+            if abs(self.vision_position_y) <= self.param_target_zy and abs(pixel_to_meter) >= self.param_target_x:
+                self.buoy_is_reach_y = True
 
-        if abs(self.vision_position_z) <= self.param_target:
-            self.buoy_is_reach_z = True
+            if abs(self.vision_position_z) <= self.param_target_zy and abs(pixel_to_meter) >= self.param_target_x:
+                self.buoy_is_reach_z = True
+                if self.buoy:
+                    self.vision_position_z = self.buoy_position_z_is_reach
 
     def position_callback(self, position):
         self.position_x = position.pose.pose.position.z
@@ -63,12 +72,13 @@ class AlignToVision(MissionState):
         posz = self.vision_position_z
         sub_posz = self.position_x
 
-        posz = self.set_z_position(posz, sub_posz)
-
         if self.buoy_is_reach_y:
             posy = 0.0
         if self.buoy_is_reach_z:
-            pass
+            self.buoy = True
+            posz = self.buoy_position_z_is_reach
+
+        posz = self.set_z_position(posz, sub_posz)
 
         self.set_target(posy, posz)
 
@@ -77,7 +87,7 @@ class AlignToVision(MissionState):
 
     def set_target(self, position_y, position_z):
         try:
-            self.set_local_target(0.0,
+            self.set_local_target(self.param_distance_x,
                                   position_y,
                                   position_z,
                                   0.0,

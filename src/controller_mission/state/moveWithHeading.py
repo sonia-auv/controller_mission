@@ -1,5 +1,4 @@
 import rospy
-import math
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached

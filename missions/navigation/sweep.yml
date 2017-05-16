@@ -1,0 +1,52 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 1.0, variable_name: distance}
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [428, 32]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: gotoRelative.GotoRelative
+    base_file: /src/controller_mission/state/gotoRelative.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: GotoRelative, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: !!python/unicode 'distance', variable_name: param_distance_x}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.0, variable_name: param_distance_y}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 1.0, variable_name: param_distance_z}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: sweepRotation}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: sweepRotate}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [419, 201]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: sweepRotate
+        base_file: /missions/sweepRotate.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+          value: 270.0, variable_name: heading_left}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+          value: 45.0, variable_name: heading_right}
+        is_submission: true
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: sweepRotate, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+          value: sweepRotate.yml, variable_name: SubMission_file}
+        transitions: []
+      transitions: []
+- *id002

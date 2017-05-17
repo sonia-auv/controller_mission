@@ -8,8 +8,6 @@ from nav_msgs.msg import Odometry
 
 class AlignToVision(MissionState):
 
-    buoy_diameter = 0.23
-
     def __init__(self):
         MissionState.__init__(self)
         self.position_x = 0.0
@@ -26,31 +24,32 @@ class AlignToVision(MissionState):
         self.buoy_is_reach_z = False
         self.buoy_is_reach = False
 
-        self.rotate = False
+        self.is_align_with_heading_active = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_target', 1.0, 'target'))
+        self.parameters.append(Parameter('param_bounding_box', 1.0, 'target'))
         self.parameters.append(Parameter('param_color', 'green', 'target'))
-        self.parameters.append(Parameter('param_min_width', 1.0, 'target'))
-        self.parameters.append(Parameter('param_heading', 1.0, 'target'))
+        self.parameters.append(Parameter('param_threshold_width', 1.0, 'target'))
+        self.parameters.append(Parameter('param_param_heading', 1.0, 'target'))
+        self.parameters.append(Parameter('param_vision_target_width_in_meter', 1.0, 'target'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
 
     def vision_callback(self, position):
         if self.param_color == position.desc_1:
-            pixel_to_meter = position.width / self.buoy_diameter
+            pixel_to_meter = position.width / self.param_vision_target_width_in_meter
 
-            self.vision_position_y = (position.y / pixel_to_meter) - (300 / pixel_to_meter)
-            self.vision_position_z = (position.x / pixel_to_meter) - (250 / pixel_to_meter)
+            self.vision_position_y = position.x / pixel_to_meter
+            self.vision_position_z = position.y / pixel_to_meter
 
-            if position.width <= self.param_min_width:
-                self.rotate = True
+            if position.width <= self.param_threshold_width:
+                self.is_align_with_heading_active = True
 
-            if abs(self.vision_position_y) <= self.param_target:
+            if abs(self.vision_position_y) <= self.param_bounding_box:
                 self.buoy_is_reach_y = True
 
-            if abs(self.vision_position_z) <= self.param_target:
+            if abs(self.vision_position_z) <= self.param_bounding_box:
                 self.buoy_is_reach_z = True
 
     def position_callback(self, position):
@@ -64,7 +63,7 @@ class AlignToVision(MissionState):
             return actual_pos_z + pos_z
 
     def align_submarine(self):
-        align_type = self.rotate
+        align_type = self.is_align_with_heading_active
 
         posy = self.vision_position_y
         posz = self.vision_position_z
@@ -72,9 +71,9 @@ class AlignToVision(MissionState):
 
         if align_type:
             if posy < 0:
-                posyaw = -40.0
+                posyaw = -self.param_heading
             else:
-                posyaw = 40.0
+                posyaw = self.param_heading
             posy = 0.0
         else:
             posyaw = 0.0

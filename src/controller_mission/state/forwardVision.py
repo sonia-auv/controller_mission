@@ -3,7 +3,6 @@ import rospy
 from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 from proc_image_processing.msg import VisionTarget
-from nav_msgs.msg import Odometry
 
 
 class ForwardVision(MissionState):
@@ -25,17 +24,12 @@ class ForwardVision(MissionState):
 
         bounding_box = self.param_bounding_box * pixel_to_meter
 
-        if abs(data.x) <= bounding_box or abs(data.y) <= bounding_box:
+        if abs(data.x) >= bounding_box or abs(data.y) >= bounding_box:
             self.buoy_is_unreach = True
 
-    def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
-
-        self.buoy_position = rospy.Subscriber('/proc_image_processing/data', VisionTarget, self.vision_callback)
-
+    def set_target(self, posx):
         try:
-            self.set_local_target(self.param_distance_x,
+            self.set_local_target(posx,
                                   0.0,
                                   0.0,
                                   0.0,
@@ -44,10 +38,19 @@ class ForwardVision(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % self.param_distance_x)
+        rospy.loginfo('Set relative position y = %f' % posx)
+
+    def initialize(self):
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
+        self.buoy_position = rospy.Subscriber('/proc_image_processing/data', VisionTarget, self.vision_callback)
+
+        self.set_target(self.param_distance_x)
 
     def run(self, ud):
         if self.buoy_is_unreach:
+            self.set_target(0.0)
             return 'succeeded'
 
     def end(self):

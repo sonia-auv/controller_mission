@@ -63,13 +63,13 @@ class AlignToVision(MissionState):
             return actual_pos_z + pos_z
 
     def align_submarine(self):
-        align_type = self.is_align_with_heading_active
+        alignment_type = self.is_align_with_heading_active
 
         posy = self.vision_position_y
         posz = self.vision_position_z
         sub_posz = self.position_x
 
-        if align_type:
+        if alignment_type:
             if posy < 0:
                 posyaw = -self.param_heading
             else:

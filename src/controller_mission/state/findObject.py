@@ -1,44 +1,44 @@
 import rospy
-import math
 
 from ..mission_state import MissionState, Parameter
-from controller_mission.srv import TrustingPositionObject
+from proc_mapping.msg import MappingRequest, MappingResponse
+from geometry_msgs.msg import Pose
 
 
 class FindObject(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.actual_position_x = 0.0
-        self.actual_position_y = 0.0
-        self.actual_heading = 0.0
-        self.target_reached = None
-        self.object = {' buoys': 1, ' fence': 2, ' hydro': 3}
+        self.param_to_object = {' buoys': MappingRequest.BUOY, ' fence': MappingRequest.FENCE, ' hydro': MappingRequest.PINGER}
+        self.object_to_param = {MappingRequest.BUOY: ' buoys', MappingRequest.FENCE: ' fence', MappingRequest.PINGER: ' hydro'}
+        self.object_is_found = False
 
-        self.found_object = None
-        self.trusting_position = None
+        self.last_marker_position = Pose.position()
+        self.count = 0
 
     def define_parameters(self):
-        self.parameters.append(Parameter('object_to_found', 'buoys', 'Aligned to object'))
-        self.parameters.append(Parameter('trusting_param', 50, 'Aligned to object'))
+        self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
+        self.parameters.append(Parameter('param_redundancy', 3, 'object to find'))
+        self.parameters.append(Parameter('param_bounding_box', 0.1, 'object to find'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
 
-    def initialize(self):
-        rospy.wait_for_service('/controller_mission/find_object')
-        self.to_know_the_trusting = rospy.ServiceProxy('/controller_mission/find_object', TrustingPositionObject)
+    def get_position_object(self, data):
+        if self.object_to_param[self.param_object_to_found] == data.mapping_request.object_type:
 
-        self.found_object = self.object_to_found
-        self.trusting_position = self.trusting_param
+            if self.last_marker_position - data.data <= self.param_bounding_box:
+                self.count += 1
+                self.object_is_found = True
+
+    def initialize(self):
+        rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_position_object)
+        self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
 
     def run(self, ud):
-
-        trust = self.to_know_the_trusting(self.object[self.found_object])
-
-        rospy.sleep(1)
-
-        print trust.trust
-
-        if trust.trust >= int(self.trusting_position):
+        self.found_object.publish(self.param_to_object[self.param_object_to_found])
+        if self.count == self.param_redundancy:
             return 'succeeded'
+
+    def end(self):
+        self.found_object.unregister()

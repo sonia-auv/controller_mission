@@ -18,7 +18,6 @@ class GotoRelativeWithHeading(MissionState):
         self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_t', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_heading', 1.0, 'Heading for sub'))
 
     def get_outcomes(self):
@@ -44,9 +43,9 @@ class GotoRelativeWithHeading(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position x = %f' % self.param_distance_x)
-        rospy.loginfo('Set position y = %f' % self.param_distance_y)
-        rospy.loginfo('Set position z = %f' % self.param_distance_z)
+        rospy.loginfo('Set relative position x = %f' % self.param_distance_x)
+        rospy.loginfo('Set relative position y = %f' % self.param_distance_y)
+        rospy.loginfo('Set relative position z = %f' % self.param_distance_z)
 
     def run(self, ud):
         if self.target_reached > 0:

@@ -1,0 +1,26 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [473, 217]
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: alignToVision.AlignToVision
+    base_file: /src/controller_mission/state/alignToVision.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: AlignToVision, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
+      value: 0.1, variable_name: param_bounding_box}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
+      value: ' green', variable_name: param_color}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
+      value: 5.0, variable_name: param_threshold_width}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
+      value: 40.0, variable_name: param_param_heading}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''target''',
+      value: 0.23, variable_name: param_vision_target_width_in_meter}
+    transitions: []
+  transitions: []

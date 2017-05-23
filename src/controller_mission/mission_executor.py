@@ -278,7 +278,7 @@ class MissionExecutor:
         rospy.loginfo('Add concurrent state container {} with transitions = {}'.format(container_name,
                                                                                        all_concurrent_transition_dict))
         smach.StateMachine.add(sub_mission_name + '|' + container_name, sm_con,
-                               transitions=all_concurrent_transition_dict)
+                               transitions=all_concurrent_transition_dict,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3','generic_data_field_4':'generic_data_field_4','generic_data_field_5':'generic_data_field_5','generic_data_field_6':'generic_data_field_6'})
 
         self._replace_transition_with_concurrent_transition(k, transitions, sub_mission_name + '|' + container_name,
                                                             sub_mission_name)

@@ -327,8 +327,9 @@ class MissionExecutor:
             'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
 
         exec (
-            'smach.StateMachine.add(\'{}\',s,transitions={})'.format(sub_mission_name + '|' + stateui.state.name,
-                                                                     transitions))
+            'smach.StateMachine.add(\'{}\',s,transitions={}, remapping={\'generic_data_field_1\':\'generic_data_field_1\',\'generic_data_field_2\':\'generic_data_field_2\',\'generic_data_field_3\':\'generic_data_field_3\',\'generic_data_field_4\':\'generic_data_field_4\',\'generic_data_field_5\':\'generic_data_field_5\',\'generic_data_field_6\':\'generic_data_field_6\'})'.format(
+                sub_mission_name + '|' + stateui.state.name,
+                transitions))
 
     def instanciate_submission_state(self, stateui, transition_dict, sub_mission_name):
         transitions = {}
@@ -344,7 +345,7 @@ class MissionExecutor:
             os.path.join(self.missions_directory, stateui.state.submission_file),
             sub_mission_name + '|' + stateui.state.name, stateui.state.global_params
         )
-        smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions)
+        smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3','generic_data_field_4':'generic_data_field_4','generic_data_field_5':'generic_data_field_5','generic_data_field_6':'generic_data_field_6'})
 
     def child_term_cb(self, outcome_map):
         return True

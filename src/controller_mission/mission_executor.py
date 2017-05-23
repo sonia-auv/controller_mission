@@ -23,6 +23,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
 
 from provider_kill_mission.msg import MissionSwitchMsg
 
+
 class MissionExecutor:
     missions = []
     current_mission = None
@@ -69,11 +70,10 @@ class MissionExecutor:
 
         rospy.spin()
 
-    def _handle_state_received(self,req):
+    def _handle_state_received(self, req):
         with open(self.controller_mission_directory + req.name, 'w') as myfile:
             myfile.write(req.content)
         return ReceivedStateResponse()
-
 
     def _handle_current_mission(self, req):
         return CurrentMissionResponse(self.current_mission)
@@ -134,7 +134,7 @@ class MissionExecutor:
 
     def reload_state_machine(self):
         mission = self.missions_directory + '/' + self.current_mission
-        return self.create_state_machine(mission, 'main',None)
+        return self.create_state_machine(mission, 'main', None)
 
     def _run_start_mission(self):
         rospy.loginfo('Mission start in 3 ...')
@@ -153,14 +153,27 @@ class MissionExecutor:
         self.current_mission = req.mission
         self.mission_loaded_changed_publisher.publish(self.current_mission)
         mission = self.missions_directory + '/' + req.mission
-        self.main_sm = self.create_state_machine(mission, 'main',None)
+        self.main_sm = self.create_state_machine(mission, 'main', None)
 
         return LoadMissionResponse()
 
     def create_state_machine(self, mission, sub_mission_name, global_params):
         with open(mission, 'r') as missionfile:
             mission_container = yaml.load(missionfile)
-        main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'])
+        main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'],
+                                     input_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
+                                                 'generic_data_field_4', 'generic_data_field_5',
+                                                 'generic_data_field_6'],
+                                     output_keys=['generic_data_field_1', 'generic_data_field_2',
+                                                  'generic_data_field_3',
+                                                  'generic_data_field_4', 'generic_data_field_5',
+                                                  'generic_data_field_6'])
+        main_sm.userdata.generic_data_field_1 = ""
+        main_sm.userdata.generic_data_field_2 = ""
+        main_sm.userdata.generic_data_field_3 = ""
+        main_sm.userdata.generic_data_field_4 = ""
+        main_sm.userdata.generic_data_field_5 = ""
+        main_sm.userdata.generic_data_field_6 = ""
         # Open the container
         with main_sm:
             state_to_ignore = []
@@ -184,8 +197,10 @@ class MissionExecutor:
             # Create all single state machine
             if global_params:
                 for global_param in global_params:
-                    print '{}_{} = {}'.format(sub_mission_name.replace('|','_'),global_param.variable_name,global_param.value)
-                    exec('self.{}_{} = {}'.format(sub_mission_name.replace('|','_'),global_param.variable_name,global_param.value))
+                    print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                              global_param.value)
+                    exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                   global_param.value))
             container_counter = 1
             submission_counter = 1
             for stateui in mission_container.statesui:
@@ -237,14 +252,19 @@ class MissionExecutor:
         sm_con = smach.Concurrence(outcomes=all_concurrent_transition,
                                    default_outcome=default_outcome,
                                    child_termination_cb=self.child_term_cb,
-                                   outcome_cb=self.out_cb)
+                                   outcome_cb=self.out_cb,
+                                   input_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
+                                               'generic_data_field_4', 'generic_data_field_5', 'generic_data_field_6'],
+                                   output_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
+                                                'generic_data_field_4', 'generic_data_field_5', 'generic_data_field_6'])
         # Open the container
         with sm_con:
             for state_ui in v:
                 if state_ui.state.is_submission:
 
-                    sub_state = self.create_state_machine(os.path.join(self.missions_directory, state_ui.state.submission_file),
-                                                            sub_mission_name + '|' + state_ui.state.name, state_ui.state.global_params)
+                    sub_state = self.create_state_machine(
+                        os.path.join(self.missions_directory, state_ui.state.submission_file),
+                        sub_mission_name + '|' + state_ui.state.name, state_ui.state.global_params)
                     smach.Concurrence.add(sub_mission_name + '|' + state_ui.state.name, sub_state)
                 else:
                     exec ('my_state = {}()'.format(state_ui.state._name))
@@ -284,7 +304,7 @@ class MissionExecutor:
                 transitions[key] = val[0]
             else:
                 transitions[key] = sub_mission_name + '|' + val[0].state.name
-        #print stateui.state._name
+        # print stateui.state._name
         # Instanciate state and set parameter value.
         exec ('s = {}()'.format(stateui.state._name))
         print s
@@ -295,7 +315,8 @@ class MissionExecutor:
                     if param.value == global_param.variable_name:
                         value_is_param = True
                         print sub_mission_name
-                        exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|','_'), param.value))
+                        exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'),
+                                                         param.value))
 
             if isinstance(param.value, basestring) and not value_is_param:
                 exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
@@ -321,7 +342,7 @@ class MissionExecutor:
 
         state_machine = self.create_state_machine(
             os.path.join(self.missions_directory, stateui.state.submission_file),
-            sub_mission_name + '|' + stateui.state.name,stateui.state.global_params
+            sub_mission_name + '|' + stateui.state.name, stateui.state.global_params
         )
         smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions)
 

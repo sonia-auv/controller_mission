@@ -18,8 +18,7 @@ class MissionState(smach.State):
     name = ''
 
     def __init__(self):
-        smach.State.__init__(self,
-                             outcomes=self.get_outcomes())
+        smach.State.__init__(self, outcomes=self.get_outcomes(), input_keys=['input_data'], output_keys=['output_data'])
 
         self.define_parameters()
         self.declare_parameters()

@@ -11,7 +11,6 @@ class AlignToVision(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.position_x = 0.0
-        self.position_y = 0.0
         self.vision_position_y = 0
         self.vision_position_z = 0
         self.vision_width = 0
@@ -26,15 +25,21 @@ class AlignToVision(MissionState):
 
         self.is_align_with_heading_active = False
 
+        self.victory = False
+
+        self.count = 0
+
     def define_parameters(self):
-        self.parameters.append(Parameter('param_bounding_box', 1.0, 'target'))
-        self.parameters.append(Parameter('param_color', 'green', 'target'))
-        self.parameters.append(Parameter('param_threshold_width', 1.0, 'target'))
-        self.parameters.append(Parameter('param_param_heading', 1.0, 'target'))
-        self.parameters.append(Parameter('param_vision_target_width_in_meter', 1.0, 'target'))
+        self.parameters.append(Parameter('param_bounding_box', 1.0, 'bounding box'))
+        self.parameters.append(Parameter('param_color', 'green', 'color of object to align'))
+        self.parameters.append(Parameter('param_threshold_width', 1.0, 'maximum nb of pixel to align with heading'))
+        self.parameters.append(Parameter('param_heading', 1.0, 'Yaw rotation to align vision'))
+        self.parameters.append(Parameter('param_vision_target_width_in_meter', 1.0, 'transform pixel to meter'))
+        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'name of topic to listen'))
+        self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'minimal nb of pixel to ram'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'forward']
 
     def vision_callback(self, position):
         if self.param_color == position.desc_1:
@@ -42,6 +47,9 @@ class AlignToVision(MissionState):
 
             self.vision_position_y = position.x / pixel_to_meter
             self.vision_position_z = position.y / pixel_to_meter
+
+            if position.width >= self.param_nb_pixel_to_victory:
+                self.victory = True
 
             if position.width <= self.param_threshold_width:
                 self.is_align_with_heading_active = True
@@ -54,7 +62,6 @@ class AlignToVision(MissionState):
 
     def position_callback(self, position):
         self.position_x = position.pose.pose.position.z
-        self.position_y = position.pose.pose.position.y
 
     def set_z_position(self, pos_z, actual_pos_z):
         if pos_z < 0:
@@ -103,8 +110,8 @@ class AlignToVision(MissionState):
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
         rospy.loginfo('Set global position z = %f' % position_z)
+        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
@@ -116,8 +123,10 @@ class AlignToVision(MissionState):
 
     def run(self, ud):
         self.align_submarine()
-        if self.buoy_is_reach:
+        if self.buoy_is_reach and not self.victory:
+            return 'forward'
+        if self.victory and self.buoy_is_reach:
             return 'succeeded'
 
     def end(self):
-        pass
+        self.buoy_position.unregister()

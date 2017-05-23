@@ -18,6 +18,7 @@ class MissionState(smach.State):
     name = ''
 
     def __init__(self):
+
         smach.State.__init__(self,
                              outcomes=self.get_outcomes(),
                              input_keys=['generic_data_field_1','generic_data_field_2','generic_data_field_3','generic_data_field_4','generic_data_field_5','generic_data_field_6'],

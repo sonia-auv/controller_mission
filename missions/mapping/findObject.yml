@@ -1,0 +1,42 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [299, 133]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: findObject.FindObject
+    base_file: /src/controller_mission/state/findObject.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: FindObject, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
+        to find''', value: ' buoys', variable_name: param_object_to_found}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
+        to find''', value: 3.0, variable_name: param_nb_of_marker_to_compute}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
+        to find''', value: 44.0, variable_name: param_object_ID}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: Rotate}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [100, 222]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: rotate.Rotate
+        base_file: /src/controller_mission/state/rotate.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: Rotate, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: 1.0, variable_name: param_heading}
+        transitions: []
+      transitions: []
+- *id002

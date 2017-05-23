@@ -1,7 +1,7 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple [372, 172]
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -13,8 +13,30 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
       value: ForwardVision, variable_name: state_name}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Target''',
-      value: 1.0, variable_name: param_bounding_box}
+      value: 0.2, variable_name: param_bounding_box}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Target''',
       value: 0.23, variable_name: param_vision_target_width_in_meter}
-    transitions: []
-  transitions: []
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Target''',
+      value: 3.0, variable_name: param_distance_x}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: TimesOut}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [370, 344]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: TimesOut, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: 0.0, variable_name: time}
+        transitions: []
+      transitions: []
+- *id002

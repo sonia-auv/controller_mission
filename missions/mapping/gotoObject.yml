@@ -1,0 +1,18 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [462, 193]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: gotoObject.GotoObject
+    base_file: /src/controller_mission/state/gotoObject.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: GotoObject, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Aligned
+        to object''', value: ' buoys', variable_name: param_go_to_object}
+    transitions: []
+  transitions: []

@@ -1,0 +1,46 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [383, 116]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: gotoRelative.GotoRelative
+    base_file: /src/controller_mission/state/gotoRelative.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'ram', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.5, variable_name: param_distance_x}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.0, variable_name: param_distance_y}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.0, variable_name: param_distance_z}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'goBack'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [502, 335]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: gotoRelative.GotoRelative
+        base_file: /src/controller_mission/state/gotoRelative.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'goBack', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: -1.0, variable_name: param_distance_x}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: 0.0, variable_name: param_distance_y}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: 0.0, variable_name: param_distance_z}
+        transitions: []
+      transitions: []
+- *id002

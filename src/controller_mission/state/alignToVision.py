@@ -121,6 +121,10 @@ class AlignToVision(MissionState):
 
         self.sub_position = rospy.Subscriber('/proc_navigation/odom', Odometry, self.position_callback)
 
+        self.buoy_is_reach_y = False
+        self.buoy_is_reach_z = False
+        self.buoy_is_reach = False
+
     def run(self, ud):
         self.align_submarine()
         if self.buoy_is_reach and not self.victory:

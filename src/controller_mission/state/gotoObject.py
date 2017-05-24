@@ -1,23 +1,24 @@
 import rospy
 import math
+import numpy as np
+from numpy.linalg import norm
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
 from proc_control.srv import SetPositionTarget
-from proc_mapping.msg import MappingRequest, MappingResponse
+from proc_mapping.msg import MappingRequest
 from nav_msgs.msg import Odometry
 
 
-class GotoObject(MissionState):
+class GoToObject(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.actual_position_x = 0.0
-        self.actual_position_y = 0.0
-        self.actual_position_yaw = 0.0
-        self.actual_heading = 0.0
-        self.target_reached = None
-        self.object = {' buoys': MappingRequest.BUOY, ' fence': MappingRequest.FENCE, ' hydro': MappingRequest.PINGER}
+        self.target_reached = False
+        self.target_is_set = False
+
+        self.current_pose_x = 0.0
+        self.current_pose_y = 0.0
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_go_to_object', 'buoys', 'Aligned to object'))
@@ -28,66 +29,69 @@ class GotoObject(MissionState):
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
 
-    def get_actual_position(self, data):
-        if self.just_one_time == 0:
-            self.actual_position_x = data.pose.pose.position.x
-            self.actual_position_y = data.pose.pose.position.y
-            self.actual_position_yaw = data.twist.twist.angular.z
-            self.just_one_time = 1
+    def get_current_position(self, data):
+        self.current_pose_x = data.pose.pose.position.x
+        self.current_pose_y = data.pose.pose.position.y
 
-    def get_heading(self, pos_act_x, pos_act_y, next_pos_x, next_pos_y, act_heading):
-        param_x = next_pos_x - pos_act_x
-        param_y = next_pos_y - pos_act_y
+    def go_to_object(self, good_object_position):
+        reference = np.array([1.0, 0.0])
+        pos_act_x = self.current_pose_x
+        pos_act_y = self.current_pose_y
 
-        heading = math.degrees(math.atan2(param_x / param_y)) + act_heading
+        pos_next_x = good_object_position[0]
+        pos_next_y = good_object_position[1]
 
-        heading = (360.0 + heading) % 360.0
+        vector_direction = np.array([pos_next_x, pos_next_y]) - np.array([pos_act_x, pos_act_y])
 
-        return heading
+        heading = math.degrees(math.acos(np.dot(reference, vector_direction) / (norm(reference) * norm(vector_direction))))
 
-    def initialize(self):
-        rospy.wait_for_service('/proc_control/set_global_target')
-        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+        if not((vector_direction[0] >= 0 and vector_direction[1] >= 0) or
+                   (vector_direction[0] < 0 and vector_direction[1] >= 0)):
+            heading = 360.0 - heading
 
-        self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
-        self.getter = rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_marker)
+        self.set_target(good_object_position, heading)
 
-        rospy.wait_for_message('/proc_navigation/odom', Odometry)
-        self.actual_position_sub = rospy.Subscriber('/proc_navigation/odom', Odometry, self.get_actual_position)
-
-        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
-
-        self.just_one_time = 0
-
-        while self.just_one_time < 2:
-            if self.just_one_time == 1:
-                act_pos_x = self.actual_position_x
-                act_pos_y = self.actual_position_y
-                act_pos_yaw = self.actual_position_yaw
-                self.just_one_time = 2
-
-        object_position = self.get_object_position(str(self.object[self.param_go_to_object]))
-
-        pos_x = object_position.position.x
-        pos_y = object_position.position.y
-        pos_z = object_position.position.z
-
-        heading = self.get_heading(act_pos_x, act_pos_y, pos_x, pos_y, act_pos_yaw)
-
+    def set_target(self, position, heading):
         try:
-            self.set_global_target(pos_x,
-                                   pos_y,
-                                   pos_z,
+            self.set_global_target(position[0],
+                                   position[1],
+                                   position[2],
                                    0.0,
                                    0.0,
                                    heading)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
+        self.target_is_set = True
+
+        rospy.loginfo('Set global position x = %f' % position[0])
+        rospy.loginfo('Set global position y = %f' % position[1])
+        rospy.loginfo('Set global position z = %f' % position[2])
+        rospy.loginfo('Set global position yaw = %f' % heading)
+
+    def initialize(self):
+        rospy.wait_for_service('/proc_control/set_global_target')
+        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+
+        self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
+
+        self.getting_current_position = rospy.Subscriber('/proc_navigation/odom', Odometry,
+                                                         self.get_current_position)
+
+        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
+        self.current_pose_x = 0.0
+        self.current_pose_y = 0.0
+
+        self.target_is_set = False
+
     def run(self, ud):
+        if not self.target_is_set:
+
+            self.go_to_object(ud.generic_data_field_1)
+
         if self.target_reached > 0:
             return 'succeeded'
 
     def end(self):
         self.target_reach_sub.unregister()
-        self.actual_position_sub.unregister()

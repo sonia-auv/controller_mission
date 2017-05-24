@@ -24,7 +24,6 @@ class FindObject(MissionState):
     def define_parameters(self):
         self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
         self.parameters.append(Parameter('param_nb_of_marker_to_compute', 10, 'object to find'))
-        self.parameters.append(Parameter('param_object_ID', 44, 'object to find'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -35,9 +34,9 @@ class FindObject(MissionState):
             self.found_object.publish(self.param_to_object[self.param_object_to_found])
             rate.sleep()
 
-    def get_marker(self, msg):
-        if self.param_to_object[self.param_object_to_found] == msg.mapping_request.object_type:
-            self.get_object_position(msg.data.markers)
+    def get_markers(self, markers):
+        if self.param_to_object[self.param_object_to_found] == markers.mapping_request.object_type:
+            self.get_object_position(markers.data.markers)
 
     def get_object_position(self, position):
         if len(position) >= self.param_nb_of_marker_to_compute and self.just_one_time:
@@ -59,7 +58,7 @@ class FindObject(MissionState):
         rospy.wait_for_service('/proc_control/set_global_target')
         self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
-        self.getting_marker = rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_marker)
+        self.getting_marker = rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_markers)
         self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
 
         self.thread_request = threading.Thread(target=self.request())
@@ -72,7 +71,7 @@ class FindObject(MissionState):
 
     def run(self, ud):
         if self.object_is_found:
-            ud.output_data = self.good_object_position
+            ud.generic_data_field_1 = self.good_object_position
             return 'succeeded'
 
     def end(self):

@@ -44,8 +44,6 @@ class GotoRelative(MissionState):
         rospy.loginfo('Set relative position x = %f' % self.param_distance_x)
         rospy.loginfo('Set relative position y = %f' % self.param_distance_y)
 
-
-
     def run(self, ud):
         if self.target_reached > 0:
             return 'succeeded'

@@ -12,7 +12,6 @@ class ObjectConfirmation(MissionState):
         self.param_to_object = {' buoys': MappingRequest.BUOY, ' fence': MappingRequest.FENCE, ' hydro': MappingRequest.PINGER}
         self.object_is_confirm = False
 
-
     def define_parameters(self):
         self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
 
@@ -26,8 +25,8 @@ class ObjectConfirmation(MissionState):
             rate.sleep()
 
     def get_markers(self, markers):
-
-
+        if markers:
+            self.object_is_confirm = True
 
     def initialize(self):
         self.mapping_response = rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_markers)
@@ -38,7 +37,9 @@ class ObjectConfirmation(MissionState):
         self.thread_request.setDaemon(1)
         self.thread_request.start()
 
-
     def run(self, ud):
+        if self.object_is_confirm:
+            return 'succeeded'
 
     def end(self):
+        self.mapping_response.unregister()

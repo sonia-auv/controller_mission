@@ -160,20 +160,17 @@ class MissionExecutor:
     def create_state_machine(self, mission, sub_mission_name, global_params):
         with open(mission, 'r') as missionfile:
             mission_container = yaml.load(missionfile)
+        input_keys_array = []
+        if sub_mission_name != 'main':
+            input_keys_array=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3']
+
         main_sm = smach.StateMachine(['succeeded', 'aborted', 'preempted'],
-                                     input_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
-                                                 'generic_data_field_4', 'generic_data_field_5',
-                                                 'generic_data_field_6'],
+                                     input_keys=input_keys_array,
                                      output_keys=['generic_data_field_1', 'generic_data_field_2',
-                                                  'generic_data_field_3',
-                                                  'generic_data_field_4', 'generic_data_field_5',
-                                                  'generic_data_field_6'])
+                                                  'generic_data_field_3'])
         main_sm.userdata.generic_data_field_1 = ""
         main_sm.userdata.generic_data_field_2 = ""
         main_sm.userdata.generic_data_field_3 = ""
-        main_sm.userdata.generic_data_field_4 = ""
-        main_sm.userdata.generic_data_field_5 = ""
-        main_sm.userdata.generic_data_field_6 = ""
         # Open the container
         with main_sm:
             state_to_ignore = []
@@ -253,10 +250,8 @@ class MissionExecutor:
                                    default_outcome=default_outcome,
                                    child_termination_cb=self.child_term_cb,
                                    outcome_cb=self.out_cb,
-                                   input_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
-                                               'generic_data_field_4', 'generic_data_field_5', 'generic_data_field_6'],
-                                   output_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3',
-                                                'generic_data_field_4', 'generic_data_field_5', 'generic_data_field_6'])
+                                   input_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3'],
+                                   output_keys=['generic_data_field_1', 'generic_data_field_2', 'generic_data_field_3'])
         # Open the container
         with sm_con:
             for state_ui in v:
@@ -278,7 +273,7 @@ class MissionExecutor:
         rospy.loginfo('Add concurrent state container {} with transitions = {}'.format(container_name,
                                                                                        all_concurrent_transition_dict))
         smach.StateMachine.add(sub_mission_name + '|' + container_name, sm_con,
-                               transitions=all_concurrent_transition_dict,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3','generic_data_field_4':'generic_data_field_4','generic_data_field_5':'generic_data_field_5','generic_data_field_6':'generic_data_field_6'})
+                               transitions=all_concurrent_transition_dict,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3'})
 
         self._replace_transition_with_concurrent_transition(k, transitions, sub_mission_name + '|' + container_name,
                                                             sub_mission_name)
@@ -307,7 +302,6 @@ class MissionExecutor:
         # print stateui.state._name
         # Instanciate state and set parameter value.
         exec ('s = {}()'.format(stateui.state._name))
-        print s
         for param in stateui.state.parameters:
             value_is_param = False
             for global_param in mission_container.globalparams:
@@ -330,7 +324,7 @@ class MissionExecutor:
             'smach.StateMachine.add(\'{}\',s,transitions={}, remapping={})'.format(
                 sub_mission_name + '|' + stateui.state.name,
                 transitions,
-                "{'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3','generic_data_field_4':'generic_data_field_4','generic_data_field_5':'generic_data_field_5','generic_data_field_6':'generic_data_field_6'}"))
+                "{'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3'}"))
 
     def instanciate_submission_state(self, stateui, transition_dict, sub_mission_name):
         transitions = {}
@@ -346,7 +340,7 @@ class MissionExecutor:
             os.path.join(self.missions_directory, stateui.state.submission_file),
             sub_mission_name + '|' + stateui.state.name, stateui.state.global_params
         )
-        smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3','generic_data_field_4':'generic_data_field_4','generic_data_field_5':'generic_data_field_5','generic_data_field_6':'generic_data_field_6'})
+        smach.StateMachine.add(sub_mission_name + '|' + stateui.state.name, state_machine, transitions,remapping={'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3'})
 
     def child_term_cb(self, outcome_map):
         return True

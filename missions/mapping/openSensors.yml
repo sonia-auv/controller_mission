@@ -1,0 +1,22 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [450, 140]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: openSensors.OpenSensors
+    base_file: /src/controller_mission/state/openSensors.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: OpenSensors, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Open
+        camera''', value: ' True', variable_name: param_camera_on}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Open
+        sonar''', value: ' True', variable_name: param_sonar_on}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Open
+        hydrophone''', value: !!python/unicode 'False', variable_name: param_hydro_on}
+    transitions: []
+  transitions: []

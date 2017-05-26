@@ -1,0 +1,18 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [429, 188]
+  radius: 128
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: saveSafePosition.SaveSafePosition
+    base_file: /src/controller_mission/state/saveSafePosition.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: SaveSafePosition, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: ' 1', variable_name: param_position_id}
+    transitions: []
+  transitions: []

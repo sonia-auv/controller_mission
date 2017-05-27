@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_mapping.srv import Activation
+from proc_mapping.srv import ProviderActivation
 
 
 class OpenSensors(MissionState):
@@ -22,7 +22,7 @@ class OpenSensors(MissionState):
 
     def initialize(self):
         rospy.wait_for_service('/proc_mapping/provider_activation_request')
-        self.open_sensor = rospy.ServiceProxy("/proc_mapping/provider_activation_request", Activation)
+        self.open_sensor = rospy.ServiceProxy("/proc_mapping/provider_activation_request", ProviderActivation)
 
         self.sensor_state = []
         self.sensor_type = []
@@ -37,7 +37,7 @@ class OpenSensors(MissionState):
 
         for i in self.sensor_type:
             provider = i
-            active = self.sensor_state[i]
+            active = bool(self.sensor_state[i])
             self.open_sensor(provider, active)
 
         self.msg_is_publish = True

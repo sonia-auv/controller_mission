@@ -1,10 +1,10 @@
 import rospy
-import numpy as np
 import threading
 
 from ..mission_state import MissionState, Parameter
 from proc_mapping.msg import MappingRequest, MappingResponse
 from proc_control.srv import SetPositionTarget
+from geometry_msgs.msg import Point
 
 
 class FindObject(MissionState):
@@ -16,10 +16,10 @@ class FindObject(MissionState):
         self.just_one_time = True
         self.object_is_found = False
 
-        self.good_object_position = np.array([0.0, 0.0, 0.0])
-
         self.target_reached = False
         self.target_is_set = False
+
+        self.position = Point()
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
@@ -30,7 +30,7 @@ class FindObject(MissionState):
 
     def request(self):
         rate = rospy.Rate(5)
-        while self.object_is_found:
+        while not self.object_is_found:
             self.found_object.publish(self.param_to_object[self.param_object_to_found])
             rate.sleep()
 
@@ -38,20 +38,20 @@ class FindObject(MissionState):
         if self.param_to_object[self.param_object_to_found] == markers.mapping_request.object_type:
             self.get_object_position(markers.data.markers)
 
-    def get_object_position(self, position):
-        if len(position) >= self.param_nb_of_marker_to_compute and self.just_one_time:
-            for marker in position:
-                self.marker_position.append(np.array(
-                    [marker.pose.position.x, marker.pose.position.y, marker.pose.position.z]))
+    def get_object_position(self, markers):
+        if len(markers) >= self.param_nb_of_marker_to_compute and self.just_one_time:
+            for marker in markers:
+                self.marker_position.append(marker.pose.position)
             self.just_one_time = False
             self.parse_object_position(self.marker_position)
 
     def parse_object_position(self, objects_position):
-        sum_position = np.array([0.0, 0.0, 0.0])
+        sum_position = Point
         for position in objects_position:
             sum_position += position
 
         self.good_object_position = sum_position / len(objects_position)
+        print self.good_object_position
         self.object_is_found = True
 
     def initialize(self):
@@ -61,7 +61,7 @@ class FindObject(MissionState):
         self.getting_marker = rospy.Subscriber('/proc_mapping/mapping_response', MappingResponse, self.get_markers)
         self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
 
-        self.thread_request = threading.Thread(target=self.request())
+        self.thread_request = threading.Thread(target=self.request)
         self.thread_request.setDaemon(1)
         self.thread_request.start()
 

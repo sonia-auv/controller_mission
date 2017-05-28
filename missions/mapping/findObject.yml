@@ -6,7 +6,7 @@ statesui:
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: findObject.FindObject
-    base_file: /src/controller_mission/state/findObject.py
+    base_file: /src/controller_mission/state/getObject.py
     is_root: true
     outcome_states: [succeeded, aborted]
     parameters:

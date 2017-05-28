@@ -29,25 +29,29 @@ class GoToObject(MissionState):
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
 
-    def get_current_position(self, data):
+    def get_current_position_cb(self, data):
         self.current_pose_x = data.pose.pose.position.x
         self.current_pose_y = data.pose.pose.position.y
 
-    def go_to_object(self, object_position):
-        reference = np.array([1.0, 0.0])
-        pos_act_x = self.current_pose_x
-        pos_act_y = self.current_pose_y
+    def go_to_object(self, object_position, displacement_type):
+        if displacement_type == 'global':
+            reference = np.array([1.0, 0.0])
+            pos_act_x = self.current_pose_x
+            pos_act_y = self.current_pose_y
 
-        pos_next_x = object_position.x
-        pos_next_y = object_position.y
+            pos_next_x = object_position.position.x
+            pos_next_y = object_position.position.y
 
-        vector_direction = np.array([pos_next_x, pos_next_y]) - np.array([pos_act_x, pos_act_y])
+            vector_direction = np.array([pos_next_x, pos_next_y]) - np.array([pos_act_x, pos_act_y])
 
-        heading = math.degrees(math.acos(np.dot(reference, vector_direction) / (norm(reference) * norm(vector_direction))))
+            heading = math.degrees(math.acos(np.dot(reference, vector_direction) / (norm(reference) * norm(vector_direction))))
 
-        if not((vector_direction[0] >= 0 and vector_direction[1] >= 0) or
-                   (vector_direction[0] < 0 and vector_direction[1] >= 0)):
-            heading = 360.0 - heading
+            if not((vector_direction[0] >= 0 and vector_direction[1] >= 0) or
+                       (vector_direction[0] < 0 and vector_direction[1] >= 0)):
+                heading = 360.0 - heading
+
+        else:
+            heading = object_position.orientation.z
 
         self.set_target(object_position, heading)
 
@@ -76,7 +80,7 @@ class GoToObject(MissionState):
         self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
 
         self.getting_current_position = rospy.Subscriber('/proc_navigation/odom', Odometry,
-                                                         self.get_current_position)
+                                                         self.get_current_position_cb)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
@@ -88,7 +92,7 @@ class GoToObject(MissionState):
     def run(self, ud):
         if not self.target_is_set:
 
-            self.go_to_object(ud.generic_data_field_1)
+            self.go_to_object(ud.generic_data_field_1, ud.generic_data_field_2)
 
         if self.target_reached > 0:
             return 'succeeded'

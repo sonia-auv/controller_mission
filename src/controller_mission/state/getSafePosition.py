@@ -26,12 +26,11 @@ class GetSafePosition(MissionState):
     def request_pose(self):
         rate = rospy.Rate(1)
         while self.pose_is_not_get:
-            print 'salut3'
             self.pub_request_position.publish(uint8(self.param_position_id))
             rate.sleep()
 
     def get_pose_callback(self, data):
-        self.pose = data.pose.position
+        self.pose = data
 
     def initialize(self):
         self.pub_request_position = rospy.Publisher('/proc_mapping/GetSavedPoseRequest', PoseSavedRequest, queue_size=100)
@@ -39,19 +38,16 @@ class GetSafePosition(MissionState):
         self.sub_get_pose = rospy.Subscriber('/proc_mapping/GetSavedPoseResponse', KeyValueIdPose, self.get_pose_callback)
 
         self.pose_is_not_get = True
-
-        print 'salut1'
         self.thread_request_pose = threading.Thread(target=self.request_pose)
         self.thread_request_pose.setDaemon(1)
         self.thread_request_pose.start()
-        print 'salut2'
 
     def run(self, ud):
         position = self.pose
         if position is not None:
             self.pose_is_not_get = False
-            ud.generic_data_field_1 = position
-            print 'salut'
+            ud.generic_data_field_1 = position  # Pose
+            ud.generic_data_field_2 = 'local'
             return 'succeeded'
 
     def end(self):

@@ -6,11 +6,10 @@ from numpy.linalg import norm
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
 from proc_control.srv import SetPositionTarget
-from proc_mapping.msg import MappingRequest
 from nav_msgs.msg import Odometry
 
 
-class GoToObject(MissionState):
+class GoToObjective(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -19,6 +18,10 @@ class GoToObject(MissionState):
 
         self.current_pose_x = 0.0
         self.current_pose_y = 0.0
+
+        self.set_global_target = None
+        self.getting_current_position = None
+        self.target_reach_sub = None
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_go_to_object', 'buoys', 'Aligned to object'))
@@ -76,8 +79,6 @@ class GoToObject(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_global_target')
         self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
-
-        self.found_object = rospy.Publisher('/proc_mapping/mapping_request', MappingRequest, queue_size=10)
 
         self.getting_current_position = rospy.Subscriber('/proc_navigation/odom', Odometry,
                                                          self.get_current_position_cb)

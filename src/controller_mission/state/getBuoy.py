@@ -2,7 +2,7 @@ import rospy
 import threading
 
 from ..mission_state import MissionState, Parameter
-from proc_mapping.msg import MappingRequest
+from proc_mapping.msg import LocalMappingRequest, LocalMappingResponse
 from proc_control.srv import SetPositionTarget
 
 
@@ -10,24 +10,42 @@ class GetBuoy(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.param_to_object = {' buoys': MappingRequest.BUOY, ' fence': MappingRequest.FENCE, ' hydro': MappingRequest.PINGER}
-        self.buoy_is_not_found = True
+
         self.pose = None
+        self.set_global_target = None
+        self.pub_buoy_request = None
+        self.sub_buoy_response = None
+        self.thread_request = None
+
+        self.target_is_set = False
+        self.buoy_is_not_found = True
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_buoy_color', 'green', 'Buoy color'))
+        self.parameters.append(Parameter('param_pixel_strength_red', 255, 'Buoy color'))
+        self.parameters.append(Parameter('param_pixel_strength_green', 255, 'Buoy color'))
+        self.parameters.append(Parameter('param_pixel_strength_blue', 255, 'Buoy color'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
 
     def request(self):
         rate = rospy.Rate(5)
+        msg = LocalMappingRequest()
+        msg.color.r = self.param_pixel_strength_red
+        msg.color.g = self.param_pixel_strength_green
+        msg.color.b = self.param_pixel_strength_blue
+        msg.object_type = LocalMappingRequest.BUOY
         while self.buoy_is_not_found:
-            self.pub_buoy_request.publish()
+            self.pub_buoy_request.publish(msg)
             rate.sleep()
 
-    def response(self, data):
-        self.pose = data.posotion
+    def response_cb(self, data):
+        if data.request.color.r >= self.param_pixel_strength_red and \
+           data.request.color.g >= self.param_pixel_strength_green and \
+           data.request.color.b >= self.param_pixel_strength_blue:
+
+            self.pose = data.posotion
+            self.buoy_is_not_found = True
 
     def set_target(self, position):
         try:
@@ -50,16 +68,17 @@ class GetBuoy(MissionState):
         rospy.wait_for_service('/proc_control/set_global_target')
         self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
-        self.pub_buoy_request = rospy.Publisher('/proc_mapping/buoy_request', MappingRequest, queue_size=100)
+        self.pub_buoy_request = rospy.Publisher('/proc_mapping/buoy_request', LocalMappingRequest, queue_size=100)
 
-        self.sub_buoy_response = rospy.Service('/proc_mapping/buoy_response', self.response)
+        self.sub_buoy_response = rospy.Subscriber('/proc_mapping/buoy_response', LocalMappingResponse, self.response_cb)
 
         self.buoy_is_not_found = True
+        self.target_is_set = False
+        self.pose = None
+
         self.thread_request = threading.Thread(target=self.request)
         self.thread_request.setDaemon(1)
         self.thread_request.start()
-
-        self.pose = None
 
     def run(self, ud):
         position = self.pose
@@ -68,4 +87,5 @@ class GetBuoy(MissionState):
             return 'succeeded'
 
     def end(self):
-        pass
+        self.sub_buoy_response.unregister()
+        del self.thread_request

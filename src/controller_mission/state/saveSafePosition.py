@@ -31,8 +31,6 @@ class SaveSafePosition(MissionState):
 
         self.sub_act_pose = rospy.Subscriber('/proc_navigation/odom', Odometry, self.pose_callback)
 
-        self.count = 0
-
     def run(self, ud):
         self.msg.id = uint8(self.param_position_id)
         self.msg.pose = self.act_pose

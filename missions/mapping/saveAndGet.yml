@@ -46,7 +46,7 @@ statesui:
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: gotoObject.GoToObject
-            base_file: /src/controller_mission/state/gotoObject.py
+            base_file: /src/controller_mission/state/gotoObjective.py
             outcome_states: [succeeded, aborted]
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {

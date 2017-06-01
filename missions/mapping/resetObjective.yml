@@ -1,0 +1,24 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [238, 141]
+  radius: 112
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: resetObjective.ResetObjective
+    base_file: /src/controller_mission/state/resetObjective.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: ResetObjective, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Reset
+        Buoys''', value: 1.0, variable_name: param_reset_buoys}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Reset
+        Fence''', value: 1.0, variable_name: param_reset_fence}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Reset
+        Ping''', value: 0.0, variable_name: param_reset_ping}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Reset
+        All''', value: 0.0, variable_name: param_reset_all}
+    transitions: []
+  transitions: []

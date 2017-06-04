@@ -68,9 +68,9 @@ class GetBuoy(MissionState):
         rospy.wait_for_service('/proc_control/set_global_target')
         self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
-        self.pub_buoy_request = rospy.Publisher('/proc_mapping/buoy_request', LocalMappingRequest, queue_size=100)
+        self.pub_buoy_request = rospy.Publisher('/proc_mapping/local_mapping_request', LocalMappingRequest, queue_size=100)
 
-        self.sub_buoy_response = rospy.Subscriber('/proc_mapping/buoy_response', LocalMappingResponse, self.response_cb)
+        self.sub_buoy_response = rospy.Subscriber('/proc_mapping/local_mapping_response', LocalMappingResponse, self.response_cb)
 
         self.buoy_is_not_found = True
         self.target_is_set = False

@@ -3,45 +3,43 @@ import rospy
 from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 from proc_image_processing.msg import VisionTarget
-from nav_msgs.msg import Odometry
 
 
 class AlignToVision(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.position_x = 0.0
+        self.position_z = 0.0
         self.vision_position_y = 0
         self.vision_position_z = 0
         self.vision_width = 0
         self.vision_height = 0
         self.target_reached = False
-        self.keep_calm = 1
-        self.count = 0
 
-        self.buoy_is_reach_y = False
-        self.buoy_is_reach_z = False
-        self.buoy_is_reach = False
+        self.vision_is_reach_y = False
+        self.vision_is_reach_z = False
+        self.vision_is_reach = False
 
         self.is_align_with_heading_active = False
-
         self.victory = False
 
-        self.count = 0
+        self.set_local_target = None
+        self.buoy_position = None
+        self.sub_position = None
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_bounding_box', 1.0, 'bounding box'))
         self.parameters.append(Parameter('param_color', 'green', 'color of object to align'))
         self.parameters.append(Parameter('param_threshold_width', 1.0, 'maximum nb of pixel to align with heading'))
         self.parameters.append(Parameter('param_heading', 1.0, 'Yaw rotation to align vision'))
-        self.parameters.append(Parameter('param_vision_target_width_in_meter', 1.0, 'transform pixel to meter'))
-        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'name of topic to listen'))
-        self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'minimal nb of pixel to ram'))
+        self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'transform pixel to meter'))
+        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'Name of topic to listen'))
+        self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward']
 
-    def vision_callback(self, position):
+    def vision_cb(self, position):
         if self.param_color == position.desc_1:
             pixel_to_meter = position.width / self.param_vision_target_width_in_meter
 
@@ -55,48 +53,36 @@ class AlignToVision(MissionState):
                 self.is_align_with_heading_active = True
 
             if abs(self.vision_position_y) <= self.param_bounding_box:
-                self.buoy_is_reach_y = True
+                self.vision_is_reach_y = True
 
             if abs(self.vision_position_z) <= self.param_bounding_box:
-                self.buoy_is_reach_z = True
-
-    def position_callback(self, position):
-        self.position_x = position.pose.pose.position.z
-
-    def set_z_position(self, pos_z, actual_pos_z):
-        if pos_z < 0:
-            return actual_pos_z - abs(pos_z)
-        else:
-            return actual_pos_z + pos_z
+                self.vision_is_reach_z = True
 
     def align_submarine(self):
         alignment_type = self.is_align_with_heading_active
 
-        posy = self.vision_position_y
-        posz = self.vision_position_z
-        sub_posz = self.position_x
+        stare_pos_y = self.vision_position_y
+        stare_pos_z = self.vision_position_z
 
-        if alignment_type:
-            if posy < 0:
-                posyaw = -self.param_heading
-            else:
-                posyaw = self.param_heading
-            posy = 0.0
+        if alignment_type and stare_pos_y < 0:
+            pos_yaw = -self.param_heading
+            stare_pos_y = 0.0
+        elif alignment_type:
+            pos_yaw = self.param_heading
+            stare_pos_y = 0.0
         else:
-            posyaw = 0.0
+            pos_yaw = 0.0
 
-        posz = self.set_z_position(posz, sub_posz)
+        if self.vision_is_reach_y:
+            pos_yaw = 0.0
+            stare_pos_y = 0.0
+        if self.vision_is_reach_z:
+            stare_pos_z = 0.0
 
-        if self.buoy_is_reach_y:
-            posyaw = 0.0
-            posy = 0.0
-        if self.buoy_is_reach_z:
-            pass
+        self.set_target(stare_pos_y, stare_pos_z, pos_yaw)
 
-        self.set_target(posy, posz, posyaw)
-
-        if self.buoy_is_reach_y and self.buoy_is_reach_z:
-            self.buoy_is_reach = True
+        if self.vision_is_reach_y and self.vision_is_reach_z:
+            self.vision_is_reach = True
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
@@ -117,20 +103,19 @@ class AlignToVision(MissionState):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
-        self.buoy_position = rospy.Subscriber('/proc_image_processing/data', VisionTarget, self.vision_callback)
+        self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen[1:]), VisionTarget, self.vision_cb)
 
-        self.sub_position = rospy.Subscriber('/proc_navigation/odom', Odometry, self.position_callback)
-
-        self.buoy_is_reach_y = False
-        self.buoy_is_reach_z = False
-        self.buoy_is_reach = False
+        self.vision_is_reach_y = False
+        self.vision_is_reach_z = False
+        self.vision_is_reach = False
 
     def run(self, ud):
         self.align_submarine()
-        if self.buoy_is_reach and not self.victory:
+        if self.vision_is_reach and not self.victory:
             return 'forward'
-        if self.victory and self.buoy_is_reach:
+        if self.victory and self.vision_is_reach:
             return 'succeeded'
 
     def end(self):
         self.buoy_position.unregister()
+        self.sub_position.unregister()

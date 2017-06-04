@@ -10,7 +10,8 @@ class TimesOut(MissionState):
         self.start_time = None
 
     def define_parameters(self):
-        self.parameters.append(Parameter('time', '1', 'Times Out'))
+        self.parameters.append(Parameter('param_time', '1', 'Times Out'))
+        self.parameters.append(Parameter('param_to_return', 'succeeded', 'Times Out'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -19,8 +20,8 @@ class TimesOut(MissionState):
         self.start_time = rospy.get_time()
 
     def run(self, ud):
-        if (rospy.get_time() - self.start_time) >= self.time:
-            return 'succeeded'
+        if (rospy.get_time() - self.start_time) >= self.param_time:
+            return str(self.param_to_return[1:])
 
     def end(self):
         pass

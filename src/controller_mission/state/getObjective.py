@@ -26,7 +26,6 @@ class GetObjective(MissionState):
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
-        self.parameters.append(Parameter('param_nb_of_marker_to_compute', 10, 'object to find'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -45,8 +44,10 @@ class GetObjective(MissionState):
 
     def initialize(self):
 
-        self.getting_objective_position = rospy.Subscriber('/proc_mapping/mapping_response', GlobalMappingResponse, self.get_objective_cb)
-        self.objective_request = rospy.Publisher('/proc_mapping/mapping_request', GlobalMappingRequest, queue_size=10)
+        self.getting_objective_position = rospy.Subscriber('/proc_mapping/global_mapping_response',
+                                                           GlobalMappingResponse, self.get_objective_cb)
+        self.objective_request = rospy.Publisher('/proc_mapping/global_mapping_request',
+                                                 GlobalMappingRequest, queue_size=10)
 
         self.just_one_time = True
 

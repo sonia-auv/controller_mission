@@ -1,44 +1,39 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 1.0, variable_name: pose_id}
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [299, 133]
-  radius: 100
+  position: !!python/tuple [446, 122]
+  radius: 120
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: findObject.FindObject
-    base_file: /src/controller_mission/state/getObjective.py
+    _name: getSafePosition.GetSafePosition
+    base_file: /src/controller_mission/state/getSafePosition.py
     is_root: true
     outcome_states: [succeeded, aborted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: FindObject, variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
-        to find''', value: ' buoys', variable_name: param_object_to_found}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
-        to find''', value: 3.0, variable_name: param_nb_of_marker_to_compute}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''object
-        to find''', value: 44.0, variable_name: param_object_ID}
+      value: GetSafePosition, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Position
+        ID''', value: !!python/unicode 'pose_id', variable_name: param_position_id}
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: Rotate}
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: GotoObject}
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: GoToObject}
+      state: GoToObjective}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [403, 282]
-      radius: 100
+      position: !!python/tuple [474, 310]
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: gotoObject.GoToObject
+        _name: gotoObjective.GoToObjective
         base_file: /src/controller_mission/state/gotoObjective.py
+        is_root: false
         outcome_states: [succeeded, aborted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: GoToObject, variable_name: state_name}
+          value: GoToObjective, variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Aligned
             to object''', value: ' buoys', variable_name: param_go_to_object}
         transitions: []

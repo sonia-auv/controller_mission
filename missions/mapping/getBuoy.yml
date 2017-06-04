@@ -1,0 +1,117 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 255.0, variable_name: strength_red}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 255.0, variable_name: strength_green}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 255.0, variable_name: strength_blue}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 30.0, variable_name: stop_time}
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [470, 166]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: getBuoy.GetBuoy
+    base_file: /src/controller_mission/state/getBuoy.py
+    is_root: false
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: GetBuoy, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Buoy
+        color''', value: !!python/unicode 'strength_red', variable_name: param_pixel_strength_red}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Buoy
+        color''', value: !!python/unicode 'strength_green', variable_name: param_pixel_strength_green}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Buoy
+        color''', value: !!python/unicode 'strength_blue', variable_name: param_pixel_strength_blue}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'GotoBuoy'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [474, 317]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: gotoObjective.GoToObjective
+        base_file: /src/controller_mission/state/gotoObjective.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'GotoBuoy', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Aligned
+            to object''', value: ' buoys', variable_name: param_go_to_object}
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [319, 9]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'start', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 0.01, variable_name: param_time}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: ' succeeded', variable_name: param_to_return}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: GetBuoy}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'StopGetBuoy'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: *id001
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [148, 156]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'StopGetBuoy', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: !!python/unicode 'stop_time', variable_name: param_time}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: !!python/unicode 'succeeded', variable_name: param_to_return}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'Aborted'}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id003
+        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [152, 301]
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states: [succeeded, aborted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'Aborted', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: 0.01, variable_name: param_time}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: !!python/unicode 'aborted', variable_name: param_to_return}
+            transitions: []
+          transitions: []
+- *id003
+- *id004
+- *id005

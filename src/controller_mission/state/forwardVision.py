@@ -61,7 +61,7 @@ class ForwardVision(MissionState):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
-        self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen[1:]), VisionTarget, self.vision_cb)
+        self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

@@ -28,11 +28,11 @@ class Move(MissionState):
         set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
         try:
             response = set_global_target(self.param_distance_x,
-                                        self.param_distance_y,
-                                        1.0,
-                                        0.0,
-                                        0.0,
-                                        0.0)
+                                         self.param_distance_y,
+                                         1.0,
+                                         0.0,
+                                         0.0,
+                                         0.0)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))

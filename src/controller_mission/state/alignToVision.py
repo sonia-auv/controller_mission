@@ -25,7 +25,8 @@ class AlignToVision(MissionState):
 
         self.set_local_target = None
         self.buoy_position = None
-        self.sub_position = None
+
+        self.count = 0
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_bounding_box', 1.0, 'bounding box'))
@@ -35,12 +36,15 @@ class AlignToVision(MissionState):
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'transform pixel to meter'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
+        self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward']
 
     def vision_cb(self, position):
+        print 'color ', self.param_color
         if self.param_color == position.desc_1:
+
             pixel_to_meter = position.width / self.param_vision_target_width_in_meter
 
             self.vision_position_y = position.x / pixel_to_meter
@@ -61,25 +65,25 @@ class AlignToVision(MissionState):
     def align_submarine(self):
         alignment_type = self.is_align_with_heading_active
 
-        stare_pos_y = self.vision_position_y
-        stare_pos_z = self.vision_position_z
+        stare_pose_y = self.vision_position_y
+        stare_pose_z = self.vision_position_z
 
-        if alignment_type and stare_pos_y < 0:
+        if alignment_type and stare_pose_y < 0:
             pos_yaw = -self.param_heading
-            stare_pos_y = 0.0
+            stare_pose_y = 0.0
         elif alignment_type:
             pos_yaw = self.param_heading
-            stare_pos_y = 0.0
+            stare_pose_y = 0.0
         else:
             pos_yaw = 0.0
 
         if self.vision_is_reach_y:
             pos_yaw = 0.0
-            stare_pos_y = 0.0
+            stare_pose_y = 0.0
         if self.vision_is_reach_z:
-            stare_pos_z = 0.0
+            stare_pose_z = 0.0
 
-        self.set_target(stare_pos_y, stare_pos_z, pos_yaw)
+        self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
 
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
@@ -103,11 +107,18 @@ class AlignToVision(MissionState):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
-        self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen[1:]), VisionTarget, self.vision_cb)
+        self.buoy_position = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
+
+        print "topic to listen :", self.param_topic_to_listen
+        print "bounding box :", self.param_bounding_box
+        print "color :", self.param_color
+        print "heading :", self.param_heading
 
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False
+
+        self.count += 1
 
     def run(self, ud):
         self.align_submarine()
@@ -115,7 +126,8 @@ class AlignToVision(MissionState):
             return 'forward'
         if self.victory and self.vision_is_reach:
             return 'succeeded'
+        if self.count >= self.param_maximum_nb_alignment:
+            return 'aborted'
 
     def end(self):
         self.buoy_position.unregister()
-        self.sub_position.unregister()

@@ -21,7 +21,7 @@ class TimesOut(MissionState):
 
     def run(self, ud):
         if (rospy.get_time() - self.start_time) >= self.param_time:
-            return str(self.param_to_return[1:])
+            return str(self.param_to_return)
 
     def end(self):
         pass

@@ -308,7 +308,8 @@ class MissionExecutor:
                 if isinstance(param.value, basestring):
                     if param.value == global_param.variable_name:
                         value_is_param = True
-                        print sub_mission_name
+                        #print sub_mission_name
+                        print 'global param :', self.main_alignBuoy_topic_to_listen
                         exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'),
                                                          param.value))
 
@@ -316,6 +317,8 @@ class MissionExecutor:
                 exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
             elif not value_is_param:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
+
+            print s.param_topic_to_listen
 
         rospy.loginfo(
             'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))

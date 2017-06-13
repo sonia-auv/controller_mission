@@ -3,7 +3,7 @@ globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
   value: 0.1, variable_name: boundix_box}
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 1.0, variable_name: objective_color}
+  value: !!python/unicode '''red''', variable_name: objective_color}
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
   value: !!python/unicode '''/proc_image_processing/data''', variable_name: topic_to_listen}
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
@@ -20,7 +20,7 @@ globalparams:
   value: 1.0, variable_name: distance_x}
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [377, 174]
+  position: !!python/tuple [523, 159]
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: alignToVision.AlignToVision
@@ -45,25 +45,36 @@ statesui:
         of topic to listen''', value: !!python/unicode 'topic_to_listen', variable_name: param_topic_to_listen}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Minimal
         nb of pixel to ram''', value: !!python/unicode 'victory', variable_name: param_nb_pixel_to_victory}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Maximum
+        number of alignment''', value: 4.0, variable_name: param_maximum_nb_alignment}
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: forward,
       state: ForwardVision}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: forward,
+      state: ForwardVision}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: forward,
+      state: ForwardVision}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: aborted,
+      state: !!python/unicode 'aborted'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'victory'}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: forward
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [383, 315]
+      position: !!python/tuple [454, 432]
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: forwardVision.ForwardVision
         base_file: /src/controller_mission/state/forwardVision.py
+        is_root: false
         outcome_states: [succeeded, aborted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
           value: ForwardVision, variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''color
-            of object to align''', value: ' green', variable_name: param_color}
+            of object to align''', value: !!python/unicode 'objective_color', variable_name: param_color}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Target''',
           value: !!python/unicode 'distance_x', variable_name: param_distance_x}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Target''',
@@ -77,13 +88,59 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: aborted,
           state: AlignToVision}
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'victory'}
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: aborted
         state1: *id002
         state2: *id001
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [257, 19]
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [669, 396]
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states: [succeeded, aborted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'victory', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: 0.0, variable_name: param_time}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: !!python/unicode 'succeeded',
+              variable_name: param_to_return}
+            transitions: []
+          transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: aborted
+    state1: *id001
+    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [732, 222]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'aborted', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: 0.0, variable_name: param_time}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: !!python/unicode 'aborted', variable_name: param_to_return}
+        transitions: []
+      transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: *id003
+- *id002
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [382, 24]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -92,26 +149,26 @@ statesui:
     outcome_states: [succeeded, aborted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'Start', variable_name: state_name}
+      value: !!python/unicode 'start', variable_name: state_name}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-        Out''', value: 0.01, variable_name: param_time}
+        Out''', value: 0.0, variable_name: param_time}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-        Out''', value: ' succeeded', variable_name: param_to_return}
+        Out''', value: !!python/unicode 'succeeded', variable_name: param_to_return}
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
       state: AlignToVision}
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'StopAlign'}
+      state: !!python/unicode 'stop'}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
+    state1: *id004
     state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
-    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [125, 180]
+    state1: *id004
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [297, 165]
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -119,20 +176,20 @@ statesui:
         outcome_states: [succeeded, aborted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: !!python/unicode 'StopAlign', variable_name: state_name}
+          value: !!python/unicode 'stop', variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
             Out''', value: !!python/unicode 'times_out', variable_name: param_time}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-            Out''', value: ' succeeded', variable_name: param_to_return}
+            Out''', value: !!python/unicode 'succeeded', variable_name: param_to_return}
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-          state: !!python/unicode 'Aborted'}
+          state: TimesOut}
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id004
-        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [128, 311]
+        state1: *id005
+        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [293, 298]
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -140,13 +197,14 @@ statesui:
             outcome_states: [succeeded, aborted]
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: state_name, value: !!python/unicode 'Aborted', variable_name: state_name}
+              description: state_name, value: TimesOut, variable_name: state_name}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Times Out''', value: 0.01, variable_name: param_time}
+              description: ' ''Times Out''', value: 0.0, variable_name: param_time}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''Times Out''', value: !!python/unicode 'aborted', variable_name: param_to_return}
             transitions: []
           transitions: []
-- *id004
 - *id005
-- *id002
+- *id006
+- *id007
+- *id003

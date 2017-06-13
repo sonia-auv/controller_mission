@@ -1,0 +1,89 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 30.0, variable_name: stop_time}
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [374, 210]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: vision/alignBuoy
+    base_file: /missions/vision/alignBuoy.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 0.1, variable_name: boundix_box}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: !!python/unicode '''red''', variable_name: objective_color}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: !!python/unicode '''/proc_image_processing/data''', variable_name: topic_to_listen}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 30.0, variable_name: threshold_width_pixel}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 0.23, variable_name: vision_scaling}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 300.0, variable_name: victory}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 30.0, variable_name: heading}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 30.0, variable_name: times_out}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 1.0, variable_name: distance_x}
+    is_root: false
+    is_submission: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: alignBuoy, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+      value: vision/alignBuoy.yml, variable_name: SubMission_file}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'END'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'victory'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [375, 383]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'victory', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: ' 1', variable_name: param_time}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: ' succeeded', variable_name: param_to_return}
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [375, 36]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'Start', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 0.001, variable_name: param_time}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: ' succeeded', variable_name: param_to_return}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: alignBuoy}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'Stop'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: *id001
+- *id003

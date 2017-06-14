@@ -108,11 +108,6 @@ class AlignToVision(MissionState):
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 
-        print "topic to listen :", self.param_topic_to_listen
-        print "bounding box :", self.param_bounding_box
-        print "color :", self.param_color
-        print "heading :", self.param_heading
-
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False

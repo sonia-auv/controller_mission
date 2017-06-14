@@ -179,6 +179,12 @@ class MissionExecutor:
             for globalparam in mission_container.globalparams:
                 exec ('self.{}_{} = {}'.format('main', globalparam.variable_name, globalparam.value))
 
+            if global_params:
+                for global_param in global_params:
+                    print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                              global_param.value)
+                    exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                   global_param.value))
             # Replace single state with concurrent transitions by concurrent state
             for stateui in mission_container.statesui:
                 transitions = {}
@@ -188,16 +194,11 @@ class MissionExecutor:
                     if len(v) > 1:
                         self._add_concurrent_state_machine(k, v, state_to_ignore, transitions,
                                                            self.CONTAINER_NAME + '|' + str(container_counter),
-                                                           sub_mission_name)
+                                                           sub_mission_name, mission_container)
                         container_counter += 1
 
             # Create all single state machine
-            if global_params:
-                for global_param in global_params:
-                    print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
-                                              global_param.value)
-                    exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
-                                                   global_param.value))
+
             container_counter = 1
             submission_counter = 1
             for stateui in mission_container.statesui:
@@ -232,7 +233,7 @@ class MissionExecutor:
                 return True
         return False
 
-    def _add_concurrent_state_machine(self, k, v, state_to_ignore, transitions, container_name, sub_mission_name):
+    def _add_concurrent_state_machine(self, k, v, state_to_ignore, transitions, container_name, sub_mission_name, mission_container):
 
         all_concurrent_transition_dict = {}
         all_concurrent_transition = []
@@ -264,10 +265,18 @@ class MissionExecutor:
                 else:
                     exec ('my_state = {}()'.format(state_ui.state._name))
                     for param in state_ui.state.parameters:
+                        value_is_param = False
                         if isinstance(param.value, basestring):
+                            for global_param in mission_container.globalparams:
+                                if param.value == global_param.variable_name:
+                                    value_is_param = True
+                                    exec ('my_state.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'), param.value))
+
+                        if isinstance(param.value, basestring) and not value_is_param:
                             exec ('my_state.{} = \'{}\''.format(param.variable_name, param.value))
-                        else:
+                        elif not value_is_param:
                             exec ('my_state.{} = {}'.format(param.variable_name, param.value))
+
                     exec ('smach.Concurrence.add(\'{}\',my_state)'.format(sub_mission_name + '|' + state_ui.state.name))
 
         rospy.loginfo('Add concurrent state container {} with transitions = {}'.format(container_name,
@@ -304,12 +313,10 @@ class MissionExecutor:
         exec ('s = {}()'.format(stateui.state._name))
         for param in stateui.state.parameters:
             value_is_param = False
-            for global_param in mission_container.globalparams:
-                if isinstance(param.value, basestring):
+            if isinstance(param.value, basestring):
+                for global_param in mission_container.globalparams:
                     if param.value == global_param.variable_name:
                         value_is_param = True
-                        #print sub_mission_name
-                        print 'global param :', self.main_alignBuoy_topic_to_listen
                         exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'),
                                                          param.value))
 
@@ -317,8 +324,6 @@ class MissionExecutor:
                 exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
             elif not value_is_param:
                 exec ('s.{} = {}'.format(param.variable_name, param.value))
-
-            print s.param_topic_to_listen
 
         rospy.loginfo(
             'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))

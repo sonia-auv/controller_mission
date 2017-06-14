@@ -14,17 +14,16 @@ class AlignToVision(MissionState):
         self.vision_position_z = 0
         self.vision_width = 0
         self.vision_height = 0
-        self.target_reached = False
 
+        self.target_reached = False
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False
-
         self.is_align_with_heading_active = False
         self.victory = False
 
         self.set_local_target = None
-        self.buoy_position = None
+        self.vision_subscriber = None
 
         self.count = 0
 
@@ -107,7 +106,7 @@ class AlignToVision(MissionState):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
-        self.buoy_position = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
+        self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 
         print "topic to listen :", self.param_topic_to_listen
         print "bounding box :", self.param_bounding_box
@@ -130,4 +129,4 @@ class AlignToVision(MissionState):
             return 'aborted'
 
     def end(self):
-        self.buoy_position.unregister()
+        self.vision_subscriber.unregister()

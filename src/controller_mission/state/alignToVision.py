@@ -41,7 +41,6 @@ class AlignToVision(MissionState):
         return ['succeeded', 'aborted', 'forward']
 
     def vision_cb(self, position):
-        print 'color ', self.param_color
         if self.param_color == position.desc_1:
 
             pixel_to_meter = position.width / self.param_vision_target_width_in_meter
@@ -76,16 +75,20 @@ class AlignToVision(MissionState):
         else:
             pos_yaw = 0.0
 
+        print stare_pose_y, stare_pose_z, pos_yaw
+
         if self.vision_is_reach_y:
             pos_yaw = 0.0
             stare_pose_y = 0.0
         if self.vision_is_reach_z:
             stare_pose_z = 0.0
 
-        self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
+        #self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
 
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
+
+        return stare_pose_y, stare_pose_z, pos_yaw
 
     def set_target(self, position_y, position_z, position_yaw):
         try:

@@ -2,7 +2,8 @@
 
 # unit test to test outputs of align_submarine method
 # for the test : go in AlignToVision class and uncomment the return statement in
-# align_submarine method and comment call of set_local_target method
+# align_submarine method or add this (return stare_pose_y, stare_pose_z, pos_yaw)
+# and comment call of set_local_target method
 
 
 PKG = 'test_align_vision'

@@ -28,12 +28,12 @@ class AlignToVision(MissionState):
         self.count = 0
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_bounding_box', 1.0, 'bounding box'))
-        self.parameters.append(Parameter('param_color', 'green', 'color of object to align'))
-        self.parameters.append(Parameter('param_threshold_width', 1.0, 'maximum nb of pixel to align with heading'))
-        self.parameters.append(Parameter('param_heading', 1.0, 'Yaw rotation to align vision'))
+        self.parameters.append(Parameter('param_bounding_box', 0.1, 'bounding box'))
+        self.parameters.append(Parameter('param_color', 'red', 'color of object to align'))
+        self.parameters.append(Parameter('param_threshold_width', 30, 'maximum nb of pixel to align with heading'))
+        self.parameters.append(Parameter('param_heading', 30, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'transform pixel to meter'))
-        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'Name of topic to listen'))
+        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
 
@@ -75,20 +75,16 @@ class AlignToVision(MissionState):
         else:
             pos_yaw = 0.0
 
-        print stare_pose_y, stare_pose_z, pos_yaw
-
         if self.vision_is_reach_y:
             pos_yaw = 0.0
             stare_pose_y = 0.0
         if self.vision_is_reach_z:
             stare_pose_z = 0.0
 
-        #self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
+        self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
 
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
-
-        return stare_pose_y, stare_pose_z, pos_yaw
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
@@ -122,6 +118,7 @@ class AlignToVision(MissionState):
         if self.vision_is_reach and not self.victory:
             return 'forward'
         if self.victory and self.vision_is_reach:
+            self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'

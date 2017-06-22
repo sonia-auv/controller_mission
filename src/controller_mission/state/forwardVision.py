@@ -19,12 +19,12 @@ class ForwardVision(MissionState):
         self.target_reach_sub = None
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_color', 'green', 'color of object to align'))
+        self.parameters.append(Parameter('param_color', 'red', 'color of object to align'))
         self.parameters.append(Parameter('param_distance_x', 1, 'Target'))
-        self.parameters.append(Parameter('param_bounding_box', 1, 'Target'))
+        self.parameters.append(Parameter('param_bounding_box', 0.1, 'Target'))
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'Target'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'minimal nb of pixel to ram'))
-        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/data', 'Name of topic to listen'))
+        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted']
@@ -55,7 +55,7 @@ class ForwardVision(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % pos_x)
+        rospy.loginfo('Set relative position x = %f' % pos_x)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
@@ -64,8 +64,6 @@ class ForwardVision(MissionState):
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
-
-        print self.param_topic_to_listen[1:]
 
         self.buoy_is_unreached = False
         self.target_reached = False
@@ -76,7 +74,7 @@ class ForwardVision(MissionState):
     def run(self, ud):
         if self.buoy_is_unreached or self.target_reached:
             self.set_target(0.0)
-            #return 'aborted'
+            return 'aborted'
         if self.victory:
             return 'succeeded'
 

@@ -17,7 +17,7 @@ class LaunchVision(MissionState):
         self.parameters.append(Parameter('param_cmd', 1, 'Times Out'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
         rospy.wait_for_service('/proc_image_processing/execute_cmd')

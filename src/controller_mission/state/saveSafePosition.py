@@ -21,7 +21,7 @@ class SaveSafePosition(MissionState):
         self.parameters.append(Parameter('param_position_id', 1, 'Position ID'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def pose_callback(self, data):
         self.act_pose = data.pose.pose

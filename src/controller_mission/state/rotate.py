@@ -18,7 +18,7 @@ class Rotate(MissionState):
         self.parameters.append(Parameter('param_heading', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -26,9 +26,6 @@ class Rotate(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
-
-        rospy.wait_for_service('/proc_control/get_target')
-        self.get_target_position = rospy.ServiceProxy('/proc_control/get_target', GetPositionTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
@@ -39,6 +36,7 @@ class Rotate(MissionState):
                                   0.0,
                                   0.0,
                                   self.param_heading)
+            self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

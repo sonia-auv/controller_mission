@@ -27,7 +27,7 @@ class GoToObjective(MissionState):
         self.parameters.append(Parameter('param_go_to_object', 'buoys', 'Aligned to object'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached

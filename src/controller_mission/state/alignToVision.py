@@ -38,7 +38,7 @@ class AlignToVision(MissionState):
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted', 'forward']
+        return ['succeeded', 'aborted', 'forward', 'preempted']
 
     def vision_cb(self, position):
         if self.param_color == position.desc_1:
@@ -53,12 +53,18 @@ class AlignToVision(MissionState):
 
             if position.width <= self.param_threshold_width:
                 self.is_align_with_heading_active = True
+            else:
+                self.is_align_with_heading_active = False
 
             if abs(self.vision_position_y) <= self.param_bounding_box:
                 self.vision_is_reach_y = True
+            else:
+                self.vision_is_reach_y = False
 
             if abs(self.vision_position_z) <= self.param_bounding_box:
                 self.vision_is_reach_z = True
+            else:
+                self.vision_is_reach_z = False
 
     def align_submarine(self):
         alignment_type = self.is_align_with_heading_active

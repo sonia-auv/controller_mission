@@ -32,7 +32,7 @@ class AlignPath(MissionState):
         self.parameters.append(Parameter('param_nb_pixel_depth', 300, 'Minimal nb of pixel to stop'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def vision_subscriber_cb(self, receive):
         pixel_to_meter = (receive.width / self.param_vision_target_width_in_meter +

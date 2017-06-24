@@ -14,7 +14,7 @@ class TimesOut(MissionState):
         self.parameters.append(Parameter('param_to_return', 'succeeded', 'Times Out'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
         self.start_time = rospy.get_time()

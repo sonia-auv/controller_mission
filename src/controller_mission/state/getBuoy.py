@@ -26,7 +26,7 @@ class GetBuoy(MissionState):
         self.parameters.append(Parameter('param_pixel_strength_blue', 255, 'Buoy color'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def request(self):
         rate = rospy.Rate(5)

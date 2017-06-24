@@ -28,7 +28,7 @@ class GetObjective(MissionState):
         self.parameters.append(Parameter('param_object_to_found', 'buoys', 'object to find'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def request(self):
         rate = rospy.Rate(5)

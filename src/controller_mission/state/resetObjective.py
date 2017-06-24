@@ -21,7 +21,7 @@ class ResetObjective(MissionState):
         self.parameters.append(Parameter('param_reset_all', 1, 'Reset All'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def reset_objectives(self):
         self.objective_type.append(ObjectiveResetRequest.BUOY)

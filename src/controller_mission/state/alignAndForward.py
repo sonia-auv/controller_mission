@@ -37,7 +37,7 @@ class AlignToVisionAndForward(MissionState):
         self.parameters.append(Parameter('param_color', 'green', 'target'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def vision_callback(self, position):
         if self.param_color == position.desc_1:

@@ -21,7 +21,7 @@ class ObjectiveConfirmation(MissionState):
         self.parameters.append(Parameter('param_object_to_confirm', 'buoys', 'Object to confirm'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def request(self):
         rate = rospy.Rate(5)

@@ -15,9 +15,10 @@ class Move(MissionState):
     def define_parameters(self):
         self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -29,7 +30,7 @@ class Move(MissionState):
         try:
             response = set_global_target(self.param_distance_x,
                                          self.param_distance_y,
-                                         1.0,
+                                         self.param_distance_z,
                                          0.0,
                                          0.0,
                                          0.0)
@@ -37,7 +38,10 @@ class Move(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position = %f' % self.param_distance_x)
+        rospy.loginfo('Set position x = %f' % self.param_distance_x)
+        rospy.loginfo('Set position y = %f' % self.param_distance_y)
+        rospy.loginfo('Set position z = %f' % self.param_distance_z)
+
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
     def run(self, ud):

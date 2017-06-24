@@ -27,7 +27,7 @@ class ForwardVision(MissionState):
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted']
+        return ['succeeded', 'aborted', 'preempted']
 
     def vision_cb(self, data):
         if self.param_color == data.desc_1:

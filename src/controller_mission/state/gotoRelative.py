@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, EnableControl
 
 
 class GotoRelative(MissionState):
@@ -30,6 +30,10 @@ class GotoRelative(MissionState):
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
+        self.enable_axis = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
+
+        self.enable_axis(X=-1, Y=-1, Z=-1, PITCH=-1, ROLL=-1, YAW=0)
 
         try:
             self.set_local_target(self.param_distance_x,

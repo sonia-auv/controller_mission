@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, EnableControl
 from proc_image_processing.msg import VisionTarget
 
 
@@ -110,6 +110,10 @@ class AlignToVision(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
+        self.enable_axis = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
+
+        self.enable_axis(X=-1, Y=-1, Z=-1, PITCH=-1, ROLL=-1, YAW=0)
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 

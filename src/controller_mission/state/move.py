@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, EnableControl
 
 _author_ = 'Kevin Coombs'
 
@@ -27,6 +27,9 @@ class Move(MissionState):
 
         rospy.wait_for_service('/proc_control/set_global_target')
         set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+        self.enable_axis = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
+
+        self.enable_axis(X=-1, Y=-1, Z=-1, PITCH=-1, ROLL=-1, YAW=0)
         try:
             response = set_global_target(self.param_distance_x,
                                          self.param_distance_y,

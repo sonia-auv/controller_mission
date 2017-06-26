@@ -52,7 +52,7 @@ class AlignToVision(MissionState):
                 self.victory = True
 
             if position.width <= self.param_threshold_width:
-                self.is_align_with_heading_active = True
+                self.is_align_with_heading_active = False
             else:
                 self.is_align_with_heading_active = False
 
@@ -67,39 +67,43 @@ class AlignToVision(MissionState):
                 self.vision_is_reach_z = False
 
     def align_submarine(self):
-        alignment_type = self.is_align_with_heading_active
-
-        stare_pose_y = self.vision_position_y
-        stare_pose_z = self.vision_position_z
-
-        if alignment_type and stare_pose_y < 0:
-            pos_yaw = -self.param_heading
-            stare_pose_y = 0.0
-        elif alignment_type:
-            pos_yaw = self.param_heading
-            stare_pose_y = 0.0
-        else:
-            pos_yaw = 0.0
-
-        if self.vision_is_reach_y:
-            pos_yaw = 0.0
-            stare_pose_y = 0.0
-        if self.vision_is_reach_z:
-            stare_pose_z = 0.0
-
-        self.set_target(stare_pose_y, stare_pose_z, pos_yaw)
 
         if self.vision_is_reach_y and self.vision_is_reach_z:
+            stare_pose_z = 0.0
+            stare_pose_y = 0.0
             self.vision_is_reach = True
+        elif not self.vision_is_reach_y:
+            stare_pose_y = self.vision_position_y
+            stare_pose_z = 0.0
+        elif not self.vision_is_reach_z and self.vision_position_y:
+            stare_pose_y = 0.0
+            stare_pose_z = self.vision_position_z
 
-    def set_target(self, position_y, position_z, position_yaw):
+        self.set_target(stare_pose_y, stare_pose_z)
+
+    def set_target(self, position_y, position_z):
         try:
             self.set_local_target(0.0,
                                   position_y,
                                   position_z,
                                   0.0,
                                   0.0,
-                                  position_yaw)
+                                  0.0)
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
+
+        rospy.loginfo('Set relative position y = %f' % position_y)
+        rospy.loginfo('Set global position z = %f' % position_z)
+        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
+
+    def set_target_y(self, position_y, position_z, position_yaw):
+        try:
+            self.set_local_target(0.0,
+                                  position_y,
+                                  position_z,
+                                  0.0,
+                                  0.0,
+                                  0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -110,10 +114,6 @@ class AlignToVision(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
-
-        self.enable_axis = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
-
-        self.enable_axis(X=-1, Y=-1, Z=-1, PITCH=-1, ROLL=-1, YAW=0)
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 

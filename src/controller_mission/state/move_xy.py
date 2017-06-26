@@ -44,6 +44,8 @@ class MoveXY(MissionState):
         self.position = None
         self.orientation = None
         self.wait_until_position_is_get()
+        self.target_reached = False
+        print 'salut2'
 
         try:
             response = set_global_target(self.param_distance_x,

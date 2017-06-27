@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetXYTarget
 from proc_control.msg import TargetReached
 from proc_image_processing.msg import VisionTarget
 
@@ -14,7 +14,7 @@ class ForwardVision(MissionState):
         self.target_reached = False
         self.victory = False
 
-        self.set_local_target = None
+        self.set_xy_local_target = None
         self.buoy_position = None
         self.target_reach_sub = None
 
@@ -46,20 +46,15 @@ class ForwardVision(MissionState):
 
     def set_target(self, pos_x):
         try:
-            self.set_local_target(pos_x,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_xy_local_target(pos_x, 0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position x = %f' % pos_x)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_xy_local_target')
+        self.set_xy_local_target = rospy.ServiceProxy('/proc_control/set_xy_local_target', SetXYTarget)
 
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 

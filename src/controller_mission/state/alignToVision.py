@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget, EnableControl
+from proc_control.srv import SetXYTarget, SetZTarget
 from proc_image_processing.msg import VisionTarget
 
 
@@ -22,7 +22,8 @@ class AlignToVision(MissionState):
         self.is_align_with_heading_active = False
         self.victory = False
 
-        self.set_local_target = None
+        self.set_xy_local_target = None
+        self.set_z_local_target = None
         self.vision_subscriber = None
 
         self.count = 0
@@ -69,51 +70,34 @@ class AlignToVision(MissionState):
     def align_submarine(self):
 
         if self.vision_is_reach_y and self.vision_is_reach_z:
-            stare_pose_z = 0.0
-            stare_pose_y = 0.0
             self.vision_is_reach = True
         elif not self.vision_is_reach_y:
-            stare_pose_y = self.vision_position_y
-            stare_pose_z = 0.0
+            self.set_xy_local_target(self.vision_position_y)
         elif not self.vision_is_reach_z and self.vision_position_y:
-            stare_pose_y = 0.0
-            stare_pose_z = self.vision_position_z
+            self.set_z_local_target(self.vision_position_z)
 
-        self.set_target(stare_pose_y, stare_pose_z)
-
-    def set_target(self, position_y, position_z):
+    def set_xy_target(self, position_y):
         try:
-            self.set_local_target(0.0,
-                                  position_y,
-                                  position_z,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_xy_local_target(position_y)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
-        rospy.loginfo('Set global position z = %f' % position_z)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
-    def set_target_y(self, position_y, position_z, position_yaw):
+    def set_z_target(self, position_z):
         try:
-            self.set_local_target(0.0,
-                                  position_y,
-                                  position_z,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_z_local_target(position_z)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % position_y)
         rospy.loginfo('Set global position z = %f' % position_z)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_xy_local_target')
+        self.set_xy_local_target = rospy.ServiceProxy('/proc_control/set_xy_local_target', SetXYTarget)
+
+        rospy.wait_for_service('/proc_control/set_z_local_target')
+        self.set_z_local_target = rospy.ServiceProxy('/proc_control/set_z_local_target', SetZTarget)
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 

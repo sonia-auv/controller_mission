@@ -2,16 +2,14 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget, GetPositionTarget
+from proc_control.srv import SetYawTarget
 
 
-class Rotate(MissionState):
+class MoveRelativeYaw(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.actual_position_x = 0.0
-        self.actual_position_y = 0.0
-        self.just_one_time = 0
+
         self.target_reached = False
 
     def define_parameters(self):
@@ -24,23 +22,19 @@ class Rotate(MissionState):
         self.target_reached = data.target_is_reached
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
-        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+        rospy.wait_for_service('/proc_control/set_yaw_local_target')
+        set_yaw_local_target = rospy.ServiceProxy('/proc_control/set_yaw_local_target', SetYawTarget)
 
         try:
-            self.set_local_target(0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  self.param_heading)
+            response = set_yaw_local_target(self.param_heading)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative rotation Yaw = %f' % self.param_heading)
+        rospy.loginfo('Set position Yaw = %f' % self.param_heading)
+
+        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
     def run(self, ud):
         if self.target_reached > 0:

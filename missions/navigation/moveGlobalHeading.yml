@@ -31,7 +31,7 @@ statesui:
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: move_z.MoveZ
-    base_file: /src/controller_mission/state/move_z.py
+    base_file: /src/controller_mission/state/moveZ.py
     is_root: true
     outcome_states: [succeeded, aborted, preempted]
     parameters:
@@ -51,7 +51,7 @@ statesui:
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: move_yaw.MoveYaw
-        base_file: /src/controller_mission/state/move_yaw.py
+        base_file: /src/controller_mission/state/moveYaw.py
         outcome_states: [succeeded, aborted, preempted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,

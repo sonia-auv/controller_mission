@@ -68,17 +68,16 @@ class AlignToVision(MissionState):
                 self.vision_is_reach_z = False
 
     def align_submarine(self):
-
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
         elif not self.vision_is_reach_y:
-            self.set_xy_local_target(self.vision_position_y)
+            self.set_xy_target(self.vision_position_y)
         elif not self.vision_is_reach_z and self.vision_position_y:
-            self.set_z_local_target(self.vision_position_z)
+            self.set_z_target(self.vision_position_z)
 
     def set_xy_target(self, position_y):
         try:
-            self.set_xy_local_target(position_y)
+            self.set_xy_local_target(0.0, position_y)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -112,7 +111,8 @@ class AlignToVision(MissionState):
         if self.vision_is_reach and not self.victory:
             return 'forward'
         if self.victory and self.vision_is_reach:
-            self.set_target(0.0, 0.0, 0.0)
+            self.set_xy_target(0.0)
+            self.set_z_local_target(0.0)
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'

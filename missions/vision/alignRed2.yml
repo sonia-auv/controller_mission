@@ -23,22 +23,24 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
       state: !!python/unicode 'AlignRedBuoy'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: AlignToVision}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [279, 219]
-      radius: 100
+      position: !!python/tuple [225, 200]
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: alignToVision.AlignToVision
         base_file: /src/controller_mission/state/alignToVision.py
-        outcome_states: [succeeded, aborted, forward]
+        outcome_states: [succeeded, aborted, forward, preempted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: !!python/unicode 'AlignRedBuoy', variable_name: state_name}
+          value: AlignToVision, variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''bounding
-            box''', value: 0.07, variable_name: param_bounding_box}
+            box''', value: 0.1, variable_name: param_bounding_box}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''color
             of object to align''', value: red, variable_name: param_color}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''maximum
@@ -53,10 +55,10 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Minimal
             nb of pixel to ram''', value: 300.0, variable_name: param_nb_pixel_to_victory}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Maximum
-            number of alignment''', value: 20.0, variable_name: param_maximum_nb_alignment}
+            number of alignment''', value: 4.0, variable_name: param_maximum_nb_alignment}
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: forward,
-          state: !!python/unicode 'ForwardRedBuoy'}
+          state: ForwardVision}
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
           state: !!python/unicode 'StopVision'}
       transitions:
@@ -64,19 +66,19 @@ statesui:
         name: forward
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [526, 212]
-          radius: 112
+          position: !!python/tuple [564, 194]
+          radius: 104
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: forwardVision.ForwardVision
             base_file: /src/controller_mission/state/forwardVision.py
-            outcome_states: [succeeded, aborted]
+            outcome_states: [succeeded, aborted, preempted]
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: state_name, value: !!python/unicode 'ForwardRedBuoy', variable_name: state_name}
+              description: state_name, value: ForwardVision, variable_name: state_name}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''color of object to align''', value: red, variable_name: param_color}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Target''', value: 0.5, variable_name: param_distance_x}
+              description: ' ''Target''', value: 1.0, variable_name: param_distance_x}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''Target''', value: 0.1, variable_name: param_bounding_box}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -84,11 +86,11 @@ statesui:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''minimal nb of pixel to ram''', value: 300.0, variable_name: param_nb_pixel_to_victory}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Name of topic to listen''', value: !!python/unicode '/proc_image_processing/buoy_red_result',
+              description: ' ''Name of topic to listen''', value: /proc_image_processing/buoy_red,
               variable_name: param_topic_to_listen}
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition {
-              outcome: aborted, state: !!python/unicode 'AlignRedBuoy'}
+              outcome: aborted, state: AlignToVision}
             - !!python/object:rqt_mission_planner.mission_model.state.Transition {
               outcome: succeeded, state: !!python/unicode 'StopVision'}
           transitions:

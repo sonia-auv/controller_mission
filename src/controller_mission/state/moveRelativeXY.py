@@ -5,7 +5,7 @@ from proc_control.msg import TargetReached
 from proc_control.srv import SetPositionTarget, EnableControl
 
 
-class GotoRelative(MissionState):
+class MoveRelativeXY(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

@@ -25,6 +25,9 @@ class AlignToVision(MissionState):
         self.set_local_target = None
         self.vision_subscriber = None
 
+        self.vision_x_pixel = 0.0
+        self.vision_y_pixel = 0.0
+
         self.count = 0
 
     def define_parameters(self):
@@ -45,8 +48,14 @@ class AlignToVision(MissionState):
 
             pixel_to_meter = position.width / self.param_vision_target_width_in_meter
 
-            self.vision_position_y = position.x / pixel_to_meter
-            self.vision_position_z = position.y / pixel_to_meter
+            self.vision_x_pixel += position.x
+            self.vision_y_pixel += position.y
+
+            self.vision_x_pixel /= 2
+            self.vision_y_pixel /= 2
+
+            self.vision_position_y = self.vision_x_pixel / pixel_to_meter
+            self.vision_position_z = self.vision_y_pixel / pixel_to_meter
 
             if position.width >= self.param_nb_pixel_to_victory:
                 self.victory = True
@@ -98,7 +107,7 @@ class AlignToVision(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % position_z)
+        rospy.loginfo('Set relative position z = %f' % position_z)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')

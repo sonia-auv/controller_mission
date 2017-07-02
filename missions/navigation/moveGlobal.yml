@@ -7,8 +7,8 @@ globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
   value: 1.0, variable_name: distance_z}
 statesui:
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [471, 266]
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [465, 464]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: move_xy.MoveXY
@@ -36,12 +36,32 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
       value: MoveZ, variable_name: state_name}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: !!python/unicode 'distance_z', variable_name: param_distance_z}
+        to travel''', value: 0.5, variable_name: param_distance_z}
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: MoveXY}
+      state: !!python/unicode 'MoveZ2'}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: *id002
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [471, 234]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: move_z.MoveZ
+        base_file: /src/controller_mission/state/move_z.py
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'MoveZ2', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: !!python/unicode 'distance_z', variable_name: param_distance_z}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: MoveXY}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id003
+- *id002

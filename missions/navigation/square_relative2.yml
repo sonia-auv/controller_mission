@@ -9,7 +9,7 @@ statesui:
     base_file: /missions/navigation/moveRelative.yml
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 120.0, variable_name: heading}
+      value: 0.0, variable_name: heading}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
       value: 2.0, variable_name: distance_x}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
@@ -37,11 +37,11 @@ statesui:
         base_file: /missions/navigation/moveRelative.yml
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 210.0, variable_name: heading}
+          value: 90.0, variable_name: heading}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 0.0, variable_name: distance_x}
+          value: 2.0, variable_name: distance_x}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 2.0, variable_name: distance_y}
+          value: 0.0, variable_name: distance_y}
         is_root: false
         is_submission: true
         outcome_states: [succeeded, aborted]
@@ -65,9 +65,9 @@ statesui:
             base_file: /missions/navigation/moveRelative.yml
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: 300.0, variable_name: heading}
+              description: '', value: 90.0, variable_name: heading}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: -2.0, variable_name: distance_x}
+              description: '', value: 2.0, variable_name: distance_x}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: '', value: 0.0, variable_name: distance_y}
             is_root: false
@@ -93,11 +93,11 @@ statesui:
                 base_file: /missions/navigation/moveRelative.yml
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: '', value: 30.0, variable_name: heading}
+                  description: '', value: 90.0, variable_name: heading}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: '', value: 0.0, variable_name: distance_x}
+                  description: '', value: 2.0, variable_name: distance_x}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: '', value: -2.0, variable_name: distance_y}
+                  description: '', value: 0.0, variable_name: distance_y}
                 is_root: false
                 is_submission: true
                 outcome_states: [succeeded, aborted]

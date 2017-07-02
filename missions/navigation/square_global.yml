@@ -2,7 +2,7 @@
 globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [172, 18]
+  position: !!python/tuple [51, 79]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: navigation/moveGlobal
@@ -30,7 +30,7 @@ statesui:
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [387, 21]
+      position: !!python/tuple [387, 85]
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: navigation/moveGlobal
@@ -58,7 +58,7 @@ statesui:
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [384, 206]
+          position: !!python/tuple [377, 303]
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: navigation/moveGlobal
@@ -86,7 +86,7 @@ statesui:
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple [173, 202]
+              position: !!python/tuple [67, 304]
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: navigation/moveGlobal
@@ -112,3 +112,43 @@ statesui:
 - *id002
 - *id003
 - *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [43, -180]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalZ.MoveZ
+    base_file: /src/controller_mission/state/moveGlobalZ.py
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'Depth1', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.5, variable_name: param_distance_z}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'Depth2'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id005
+    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [42, -44]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveGlobalZ.MoveZ
+        base_file: /src/controller_mission/state/moveGlobalZ.py
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'Depth2', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: 1.0, variable_name: param_distance_z}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'PushFront'}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id006
+        state2: *id001
+- *id006

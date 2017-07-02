@@ -3,7 +3,7 @@ import threading
 
 from ..mission_state import MissionState, Parameter
 from proc_mapping.msg import LocalMappingRequest, LocalMappingResponse
-from proc_control.srv import SetXYTarget
+from proc_control.srv import SetPositionTarget
 
 
 class GetBuoy(MissionState):

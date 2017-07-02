@@ -5,7 +5,7 @@ from numpy.linalg import norm
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetXYTarget
+from proc_control.srv import SetPositionTarget
 from nav_msgs.msg import Odometry
 
 

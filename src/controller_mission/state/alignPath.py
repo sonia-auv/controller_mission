@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 
-from proc_control.srv import SetXYTarget
+from proc_control.srv import SetPositionTarget
 from proc_image_processing.msg import VisionTarget
 
 
@@ -50,6 +50,7 @@ class AlignPath(MissionState):
 
         if abs(self.vision_yaw) <= self.param_bounding_box:
             self.pose_yaw_is_reached = True
+
 
     def align_path(self):
         stare_pose_x = self.vision_pose_x

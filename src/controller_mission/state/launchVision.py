@@ -11,9 +11,9 @@ class LaunchVision(MissionState):
         self.execute_vision_cmd = None
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_node_name', 'buoy_red', 'Topic of  result'))
-        self.parameters.append(Parameter('param_filterchain_name', 'simple_buoy', 'Times Out'))
-        self.parameters.append(Parameter('param_media_name', '/provider_vision/Front_GigE', 'Times Out'))
+        self.parameters.append(Parameter('param_node_name', '/controller_mission/buoy', 'Topic of  result'))
+        self.parameters.append(Parameter('param_filterchain_name', 'camera_feed', 'Times Out'))
+        self.parameters.append(Parameter('param_media_name', 'FRONT_GIGE', 'Times Out'))
         self.parameters.append(Parameter('param_cmd', 1, 'Times Out'))
 
     def get_outcomes(self):

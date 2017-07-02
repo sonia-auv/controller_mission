@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget, EnableControl
+from proc_control.srv import SetPositionTarget
 
 
 class MoveRelativeXY(MissionState):

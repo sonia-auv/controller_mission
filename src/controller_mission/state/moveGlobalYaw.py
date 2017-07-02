@@ -6,7 +6,7 @@ from proc_control.srv import SetPositionTarget
 from nav_msgs.msg import Odometry
 
 
-class MoveZ(MissionState):
+class MoveYaw(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -16,7 +16,7 @@ class MoveZ(MissionState):
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_heading', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -29,7 +29,6 @@ class MoveZ(MissionState):
         self.orientation = position.pose.pose.orientation
 
     def wait_until_position_is_get(self):
-        print self.position, self.orientation
         while not (self.position and self.orientation):
             pass
         return
@@ -44,20 +43,21 @@ class MoveZ(MissionState):
         self.position = None
         self.orientation = None
         self.wait_until_position_is_get()
-        self.target_reached = False
-        print 'salut'
+
+        print self.position.z
+
         try:
             response = set_global_target(self.position.x,
                                          self.position.y,
-                                         self.param_distance_z,
+                                         self.position.z,
                                          self.orientation.x,
                                          self.orientation.y,
-                                         self.orientation.z)
+                                         self.param_heading)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position z = %f' % self.param_distance_z)
+        rospy.loginfo('Set position Yaw = %f' % self.param_heading)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

@@ -68,23 +68,17 @@ class AlignToVision(MissionState):
 
     def align_submarine(self):
         if self.vision_is_reach_y and self.vision_is_reach_z:
-            stare_pose_z = 0.0
-            stare_pose_y = 0.0
             self.vision_is_reach = True
         elif not self.vision_is_reach_y:
-            stare_pose_y = self.vision_position_y
-            stare_pose_z = 0.0
+            self.set_y_local_target(self.vision_position_y)
         elif not self.vision_is_reach_z and self.vision_position_y:
-            stare_pose_y = 0.0
-            stare_pose_z = self.vision_position_z
+            self.set_z_local_target(self.vision_position_z)
 
-        self.set_target(stare_pose_y, stare_pose_z)
-
-    def set_target(self, position_y, position_z):
+    def set_y_local_target(self, position_y):
         try:
             self.set_local_target(0.0,
                                   position_y,
-                                  position_z,
+                                  0.0,
                                   0.0,
                                   0.0,
                                   0.0)
@@ -92,23 +86,19 @@ class AlignToVision(MissionState):
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
-        rospy.loginfo('Set global position z = %f' % position_z)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
-    def set_target_y(self, position_y, position_z, position_yaw):
+    def set_z_local_target(self, position_z):
         try:
             self.set_local_target(0.0,
-                                  position_y,
                                   position_z,
+                                  0.0,
                                   0.0,
                                   0.0,
                                   0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % position_y)
-        rospy.loginfo('Set global position z = %f' % position_z)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
+        rospy.loginfo('Set relative position y = %f' % position_z)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')

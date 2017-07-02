@@ -1,128 +1,206 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: !!python/unicode '''buoy_red''', variable_name: node_name}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: !!python/unicode '''simple_buoy''', variable_name: filterchain_name}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: !!python/unicode '''/provider_vision/Front_GigE''', variable_name: media_name}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 1.0, variable_name: vision_cmd}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 0.07, variable_name: bounding_box}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: !!python/unicode '''red''', variable_name: color}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 30.0, variable_name: threshold_width}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 30.0, variable_name: heading}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 0.23, variable_name: pixel_to_meter}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: !!python/unicode '''/proc_image_processing/buoy_red_result''', variable_name: topic_to_listen}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 300.0, variable_name: nb_pixel_to_victory}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 20.0, variable_name: maximum_nb_alignment}
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 0.5, variable_name: distance_x}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''aling_buoy'''
+  variable_name: node_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''simple_buoy'''
+  variable_name: filterchain_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/provider_vision/Front_GigE'''
+  variable_name: media_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.0
+  variable_name: vision_cmd
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 0.07
+  variable_name: bounding_box
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''red'''
+  variable_name: color
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 30.0
+  variable_name: threshold_width
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 30.0
+  variable_name: heading
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 0.23
+  variable_name: pixel_to_meter
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/buoy_red_result'''
+  variable_name: topic_to_listen
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 300.0
+  variable_name: nb_pixel_to_victory
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 20.0
+  variable_name: maximum_nb_alignment
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 0.5
+  variable_name: distance_x
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [274, 38]
+  position: !!python/tuple
+  - 274
+  - 38
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
     base_file: /src/controller_mission/state/launchVision.py
     is_root: true
-    outcome_states: [succeeded, aborted]
+    outcome_states:
+    - succeeded
+    - aborted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'StartVision', variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Topic
-        of  result''', value: node_name, variable_name: param_node_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-        Out''', value: filterchain_name, variable_name: param_filterchain_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-        Out''', value: media_name, variable_name: param_media_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-        Out''', value: vision_cmd, variable_name: param_cmd}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'StartVision'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Topic of  result'''
+      value: node_name
+      variable_name: param_node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: filterchain_name
+      variable_name: param_filterchain_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: media_name
+      variable_name: param_media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: vision_cmd
+      variable_name: param_cmd
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: AlignRedBuoy}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: AlignRedBuoy
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [279, 219]
+      position: !!python/tuple
+      - 279
+      - 219
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: alignToVision.AlignToVision
         base_file: /src/controller_mission/state/alignToVision.py
-        outcome_states: [succeeded, aborted, forward]
+        outcome_states:
+        - succeeded
+        - aborted
+        - forward
         parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: !!python/unicode 'AlignRedBuoy', variable_name: state_name}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''bounding
-            box''', value: !!python/unicode 'bounding_box', variable_name: param_bounding_box}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''color
-            of object to align''', value: !!python/unicode 'color', variable_name: param_color}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''maximum
-            nb of pixel to align with heading''', value: !!python/unicode 'threshold_width',
-          variable_name: param_threshold_width}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Yaw
-            rotation to align vision''', value: !!python/unicode 'heading', variable_name: param_heading}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''transform
-            pixel to meter''', value: !!python/unicode 'pixel_to_meter', variable_name: param_vision_target_width_in_meter}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Name
-            of topic to listen''', value: !!python/unicode 'topic_to_listen', variable_name: param_topic_to_listen}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Minimal
-            nb of pixel to ram''', value: !!python/unicode 'nb_pixel_to_victory',
-          variable_name: param_nb_pixel_to_victory}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Maximum
-            number of alignment''', value: !!python/unicode 'maximum_nb_alignment',
-          variable_name: param_maximum_nb_alignment}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'AlignRedBuoy'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''bounding box'''
+          value: !!python/unicode 'bounding_box'
+          variable_name: param_bounding_box
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''color of object to align'''
+          value: !!python/unicode 'color'
+          variable_name: param_color
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''maximum nb of pixel to align with heading'''
+          value: !!python/unicode 'threshold_width'
+          variable_name: param_threshold_width
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Yaw rotation to align vision'''
+          value: !!python/unicode 'heading'
+          variable_name: param_heading
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''transform pixel to meter'''
+          value: !!python/unicode 'pixel_to_meter'
+          variable_name: param_vision_target_width_in_meter
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Name of topic to listen'''
+          value: !!python/unicode 'topic_to_listen'
+          variable_name: param_topic_to_listen
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Minimal nb of pixel to ram'''
+          value: !!python/unicode 'nb_pixel_to_victory'
+          variable_name: param_nb_pixel_to_victory
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum number of alignment'''
+          value: !!python/unicode 'maximum_nb_alignment'
+          variable_name: param_maximum_nb_alignment
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: forward,
-          state: !!python/unicode 'ForwardRedBuoy'}
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-          state: !!python/unicode 'StopVision'}
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: forward
+          state: !!python/unicode 'ForwardRedBuoy'
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'StopVision'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: forward
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [526, 212]
+          position: !!python/tuple
+          - 526
+          - 212
           radius: 112
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: forwardVision.ForwardVision
             base_file: /src/controller_mission/state/forwardVision.py
-            outcome_states: [succeeded, aborted]
+            outcome_states:
+            - succeeded
+            - aborted
             parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: state_name, value: !!python/unicode 'ForwardRedBuoy', variable_name: state_name}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''color of object to align''', value: !!python/unicode 'color',
-              variable_name: param_color}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Target''', value: !!python/unicode 'distance_x', variable_name: param_distance_x}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Target''', value: !!python/unicode 'bounding_box',
-              variable_name: param_bounding_box}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Target''', value: !!python/unicode 'pixel_to_meter',
-              variable_name: param_vision_target_width_in_meter}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''minimal nb of pixel to ram''', value: !!python/unicode 'nb_pixel_to_victory',
-              variable_name: param_nb_pixel_to_victory}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Name of topic to listen''', value: !!python/unicode 'topic_to_listen',
-              variable_name: param_topic_to_listen}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'ForwardRedBuoy'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''color of object to align'''
+              value: !!python/unicode 'color'
+              variable_name: param_color
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Target'''
+              value: !!python/unicode 'distance_x'
+              variable_name: param_distance_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Target'''
+              value: !!python/unicode 'bounding_box'
+              variable_name: param_bounding_box
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Target'''
+              value: !!python/unicode 'pixel_to_meter'
+              variable_name: param_vision_target_width_in_meter
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''minimal nb of pixel to ram'''
+              value: !!python/unicode 'nb_pixel_to_victory'
+              variable_name: param_nb_pixel_to_victory
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Name of topic to listen'''
+              value: !!python/unicode 'topic_to_listen'
+              variable_name: param_topic_to_listen
             transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
-              outcome: aborted, state: !!python/unicode 'AlignRedBuoy'}
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
-              outcome: succeeded, state: !!python/unicode 'StopVision'}
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: aborted
+              state: !!python/unicode 'AlignRedBuoy'
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'StopVision'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: aborted
@@ -132,28 +210,38 @@ statesui:
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple [403, 454]
+              position: !!python/tuple
+              - 403
+              - 454
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: launchVision.LaunchVision
                 base_file: /src/controller_mission/state/launchVision.py
                 is_root: false
-                outcome_states: [succeeded, aborted]
+                outcome_states:
+                - succeeded
+                - aborted
                 parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: state_name, value: !!python/unicode 'StopVision', variable_name: state_name}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Topic of  result''', value: !!python/unicode 'node_name',
-                  variable_name: param_node_name}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Times Out''', value: !!python/unicode 'filterchain_name',
-                  variable_name: param_filterchain_name}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Times Out''', value: !!python/unicode 'media_name',
-                  variable_name: param_media_name}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Times Out''', value: !!python/unicode 'vision_cmd',
-                  variable_name: param_cmd}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'StopVision'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Topic of  result'''
+                  value: !!python/unicode 'node_name'
+                  variable_name: param_node_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: !!python/unicode 'filterchain_name'
+                  variable_name: param_filterchain_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: !!python/unicode 'media_name'
+                  variable_name: param_media_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: !!python/unicode 'vision_cmd'
+                  variable_name: param_cmd
                 transitions: []
               transitions: []
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI

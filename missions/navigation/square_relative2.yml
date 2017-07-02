@@ -9,12 +9,12 @@ statesui:
     base_file: /missions/navigation/moveRelative.yml
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.0, variable_name: heading}
+      value: 120.0, variable_name: heading}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
       value: 2.0, variable_name: distance_x}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
       value: 0.0, variable_name: distance_y}
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states: [succeeded, aborted]
     parameters:
@@ -37,7 +37,7 @@ statesui:
         base_file: /missions/navigation/moveRelative.yml
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 0.0, variable_name: heading}
+          value: 210.0, variable_name: heading}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
           value: 0.0, variable_name: distance_x}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
@@ -65,7 +65,7 @@ statesui:
             base_file: /missions/navigation/moveRelative.yml
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: 0.0, variable_name: heading}
+              description: '', value: 300.0, variable_name: heading}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: '', value: -2.0, variable_name: distance_x}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -93,7 +93,7 @@ statesui:
                 base_file: /missions/navigation/moveRelative.yml
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: '', value: 0.0, variable_name: heading}
+                  description: '', value: 30.0, variable_name: heading}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
                   description: '', value: 0.0, variable_name: distance_x}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -112,3 +112,45 @@ statesui:
 - *id002
 - *id003
 - *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [55, 13]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: move_z.MoveZ
+    base_file: /src/controller_mission/state/move_z.py
+    is_root: true
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: MoveZ, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+        to travel''', value: 0.5, variable_name: param_distance_z}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'MoveZ2'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id005
+    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [52, 130]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: move_z.MoveZ
+        base_file: /src/controller_mission/state/move_z.py
+        is_root: false
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'MoveZ2', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: 1.0, variable_name: param_distance_z}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'PushFront'}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id006
+        state2: *id001
+- *id006

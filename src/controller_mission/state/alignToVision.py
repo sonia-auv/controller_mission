@@ -23,7 +23,7 @@ class AlignToVision(MissionState):
         self.is_align_with_heading_active = False
         self.victory = False
 
-        self.set_local_target = Nonesio
+        self.set_local_target = None
         self.vision_subscriber = None
         self.target_reach_sub = None
 
@@ -60,7 +60,7 @@ class AlignToVision(MissionState):
             self.vision_y_pixel /= 2
 
             self.vision_position_y = self.vision_x_pixel / pixel_to_meter
-            self.vision_position_z = self.vision_y_pixel / pixel_to_meter
+            self.vision_position_z = self.vision_y_pixel / pixel_to_meter * -1
 
             if position.width >= self.param_nb_pixel_to_victory:
                 self.victory = True

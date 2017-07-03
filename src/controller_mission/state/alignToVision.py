@@ -75,6 +75,8 @@ class AlignToVision(MissionState):
             else:
                 self.vision_is_reach_z = False
 
+            self.align_submarine()
+
     def align_submarine(self):
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
@@ -122,7 +124,6 @@ class AlignToVision(MissionState):
         self.count += 1
 
     def run(self, ud):
-        self.align_submarine()
         if self.vision_is_reach and not self.victory:
             return 'forward'
         if self.victory and self.vision_is_reach:

@@ -2,7 +2,7 @@
 globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: !!python/unicode '''aling_buoy'''
+  value: !!python/unicode '''buoy_red'''
   variable_name: node_name
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
@@ -18,7 +18,7 @@ globalparams:
   variable_name: vision_cmd
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 0.1
+  value: 0.2
   variable_name: bounding_box
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
@@ -46,7 +46,7 @@ globalparams:
   variable_name: nb_pixel_to_victory
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 20.0
+  value: 30.0
   variable_name: maximum_nb_alignment
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
@@ -240,7 +240,7 @@ statesui:
                   variable_name: param_media_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
-                  value: !!python/unicode 'vision_cmd'
+                  value: 2.0
                   variable_name: param_cmd
                 transitions: []
               transitions: []

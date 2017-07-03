@@ -23,7 +23,7 @@ class AlignToVision(MissionState):
         self.is_align_with_heading_active = False
         self.victory = False
 
-        self.set_local_target = None
+        self.set_local_target = Nonesio
         self.vision_subscriber = None
         self.target_reach_sub = None
 
@@ -70,12 +70,12 @@ class AlignToVision(MissionState):
             else:
                 self.is_align_with_heading_active = False
 
-            if abs(self.vision_position_y) <= self.param_bounding_box:
+            if abs(self.vision_x_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_y = True
             else:
                 self.vision_is_reach_y = False
 
-            if abs(self.vision_position_z) <= self.param_bounding_box:
+            if abs(self.vision_y_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_z = True
             else:
                 self.vision_is_reach_z = False
@@ -86,29 +86,14 @@ class AlignToVision(MissionState):
     def align_submarine(self):
         if self.vision_is_reach_y and self.vision_is_reach_z:
             self.vision_is_reach = True
-        elif not self.vision_is_reach_y:
-            self.set_y_local_target(self.vision_position_y)
-        elif not self.vision_is_reach_z and self.vision_position_y:
-            self.set_z_local_target(self.vision_position_z)
+        elif not self.vision_is_reach:
+            self.set_yz_local_target(self.vision_position_y, self.vision_position_z)
 
-    def set_y_local_target(self, position_y):
+    def set_yz_local_target(self, position_y, position_z):
         try:
             self.set_local_target(0.0,
                                   position_y,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
-        except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
-
-        rospy.loginfo('Set relative position y = %f' % position_y)
-
-    def set_z_local_target(self, position_z):
-        try:
-            self.set_local_target(0.0,
                                   position_z,
-                                  0.0,
                                   0.0,
                                   0.0,
                                   0.0)
@@ -132,11 +117,11 @@ class AlignToVision(MissionState):
         self.count += 1
 
     def run(self, ud):
-        if self.vision_is_reach and not self.victory:
+        if self.vision_is_reach_y and self.vision_is_reach_z:
+            self.set_yz_local_target(0.0, 0.0)
             return 'forward'
         if self.victory and self.vision_is_reach:
-            self.set_xy_target(0.0)
-            self.set_z_local_target(0.0)
+            self.set_yz_local_target(0.0, 0.0)
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'

@@ -1,7 +1,8 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget, EnableControl
+from proc_control.srv import SetPositionTarget
+from proc_control.msg import TargetReached
 from proc_image_processing.msg import VisionTarget
 
 
@@ -24,6 +25,7 @@ class AlignToVision(MissionState):
 
         self.set_local_target = None
         self.vision_subscriber = None
+        self.target_reach_sub = None
 
         self.vision_x_pixel = 0.0
         self.vision_y_pixel = 0.0
@@ -42,6 +44,9 @@ class AlignToVision(MissionState):
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']
+
+    def target_reach_cb(self, data):
+        self.target_reached = data.target_is_reached
 
     def vision_cb(self, position):
         if self.param_color == position.desc_1:
@@ -75,7 +80,8 @@ class AlignToVision(MissionState):
             else:
                 self.vision_is_reach_z = False
 
-            self.align_submarine()
+            if self.target_reached:
+                self.align_submarine()
 
     def align_submarine(self):
         if self.vision_is_reach_y and self.vision_is_reach_z:
@@ -115,6 +121,8 @@ class AlignToVision(MissionState):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
+        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 
         self.vision_is_reach_y = False
@@ -135,3 +143,4 @@ class AlignToVision(MissionState):
 
     def end(self):
         self.vision_subscriber.unregister()
+        self.target_reach_sub.unregister()

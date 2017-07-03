@@ -41,6 +41,7 @@ class MissionState(smach.State):
         while not rospy.is_shutdown():
             if self.preempt_requested():
                 self.service_preempt()
+                self.end()
                 return 'preempted'
             result = self.run(ud)
             if result:

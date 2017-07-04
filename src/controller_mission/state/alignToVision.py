@@ -11,11 +11,15 @@ class AlignToVision(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
+        self.set_local_target = None
+        self.vision_subscriber = None
+        self.target_reach_sub = None
+
         self.vision_position_y = 0
         self.vision_position_z = 0
-        self.vision_width = 0
-        self.vision_height = 0
+
         self.heading = 0
+
         self.averaging_vision_x_pixel = 0.0
         self.averaging_vision_y_pixel = 0.0
 
@@ -23,12 +27,9 @@ class AlignToVision(MissionState):
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False
+
         self.is_align_with_heading_active = False
         self.victory = False
-
-        self.set_local_target = None
-        self.vision_subscriber = None
-        self.target_reach_sub = None
 
         self.vision_x_pixel = None
         self.vision_y_pixel = None
@@ -70,7 +71,7 @@ class AlignToVision(MissionState):
                 self.averaging_vision_y_pixel += i
 
             self.averaging_vision_x_pixel /= len(self.vision_x_pixel)
-            self.averaging_vision_y_pixel /= len(self.vision_x_pixel)
+            self.averaging_vision_y_pixel /= len(self.vision_y_pixel)
 
             if width >= self.param_nb_pixel_to_victory:
                 self.victory = True
@@ -85,14 +86,14 @@ class AlignToVision(MissionState):
             else:
                 self.vision_is_reach_y = False
 
-            if abs(self.averaging_vision_x_pixel) <= self.param_bounding_box:
+            if abs(self.averaging_vision_y_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_z = True
             else:
                 self.vision_is_reach_z = False
 
             pixel_to_meter = width / self.param_vision_target_width_in_meter
 
-            if self.target_reached and len(self.vision_x_pixel) == self.param_max_queue_size:
+            if self.target_reached:
                 self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
                 self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -0.5
                 self.align_submarine()
@@ -104,7 +105,6 @@ class AlignToVision(MissionState):
         if self.is_align_with_heading_active:
             if not self.vision_is_reach_y:
                 self.heading = self.param_heading * (vision_position_y / abs(vision_position_y))
-                print self.heading
             else:
                 self.heading = 0.0
 

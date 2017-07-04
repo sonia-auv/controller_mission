@@ -18,10 +18,15 @@ class ForwardVision(MissionState):
         self.buoy_position = None
         self.target_reach_sub = None
 
+        self.adjust_bounding_box = 0.0
+        self.initial_bounding_box = 0.0
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_color', 'red', 'color of object to align'))
         self.parameters.append(Parameter('param_distance_x', 1, 'Target'))
-        self.parameters.append(Parameter('param_bounding_box', 0.1, 'Target'))
+        self.parameters.append(Parameter('param_initial_bounding_box', 600, 'Initial bounding Box'))
+        self.parameters.append(Parameter('param_final_bounding_box', 100, 'Final bounding Box'))
+        self.parameters.append(Parameter('param_threshold_width', 100, 'maximum nb of pixel to align with heading'))
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'Target'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'minimal nb of pixel to ram'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
@@ -29,16 +34,15 @@ class ForwardVision(MissionState):
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
 
-    def vision_cb(self, data):
-        if self.param_color == data.desc_1:
-            pixel_to_meter = data.width / self.param_vision_target_width_in_meter
+    def vision_cb(self, vision_data):
+        if self.param_color == vision_data.desc_1:
 
-            bounding_box = self.param_bounding_box * pixel_to_meter
+            bounding_box = self.adjust_bounding_box * vision_data.width + self.initial_bounding_box
 
-            if abs(data.x) >= bounding_box or abs(data.y) >= bounding_box:
+            if abs(vision_data.x) >= bounding_box or abs(vision_data.y) >= bounding_box:
                 self.buoy_is_unreached = True
 
-            if data.width >= self.param_nb_pixel_to_victory:
+            if vision_data.width >= self.param_nb_pixel_to_victory:
                 self.victory = False
 
     def target_reach_cb(self, data):
@@ -64,6 +68,11 @@ class ForwardVision(MissionState):
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
+        self.adjust_bounding_box = (self.param_final_bounding_box - self.param_initial_bounding_box) / (self.victory -
+                                                                                            self.param_threshold_width)
+
+        self.initial_bounding_box = self.param_initial_bounding_box - self.param_threshold_width * self.adjust_bounding_box
 
         self.buoy_is_unreached = False
         self.target_reached = False

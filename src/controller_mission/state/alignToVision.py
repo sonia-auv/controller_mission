@@ -1,5 +1,6 @@
 import rospy
 
+from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 from proc_control.msg import TargetReached
@@ -10,11 +11,13 @@ class AlignToVision(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.position_z = 0.0
         self.vision_position_y = 0
         self.vision_position_z = 0
         self.vision_width = 0
         self.vision_height = 0
+        self.heading = 0
+        self.averaging_vision_x_pixel = 0.0
+        self.averaging_vision_y_pixel = 0.0
 
         self.target_reached = False
         self.vision_is_reach_y = False
@@ -27,20 +30,21 @@ class AlignToVision(MissionState):
         self.vision_subscriber = None
         self.target_reach_sub = None
 
-        self.vision_x_pixel = 0.0
-        self.vision_y_pixel = 0.0
+        self.vision_x_pixel = None
+        self.vision_y_pixel = None
 
         self.count = 0
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_bounding_box', 0.1, 'bounding box'))
+        self.parameters.append(Parameter('param_bounding_box', 200, 'bounding box in pixel'))
         self.parameters.append(Parameter('param_color', 'red', 'color of object to align'))
-        self.parameters.append(Parameter('param_threshold_width', 30, 'maximum nb of pixel to align with heading'))
-        self.parameters.append(Parameter('param_heading', 30, 'Yaw rotation to align vision'))
+        self.parameters.append(Parameter('param_threshold_width', 100, 'maximum nb of pixel to align with heading'))
+        self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'transform pixel to meter'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
+        self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']
@@ -48,59 +52,81 @@ class AlignToVision(MissionState):
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
 
-    def vision_cb(self, position):
-        if self.param_color == position.desc_1:
+    def vision_cb(self, vision_data):
+        if self.param_color == vision_data.desc_1:
 
-            pixel_to_meter = position.width / self.param_vision_target_width_in_meter
+            self.vision_x_pixel.append(vision_data.x)
+            self.vision_y_pixel.append(vision_data.y)
 
-            self.vision_x_pixel += position.x
-            self.vision_y_pixel += position.y
+            if len(self.vision_x_pixel) == self.param_max_queue_size and len(self.vision_y_pixel) == self.param_max_queue_size:
+                self.parse_vision_data(vision_data.width)
 
-            self.vision_x_pixel /= 2
-            self.vision_y_pixel /= 2
+    def parse_vision_data(self, width):
 
-            self.vision_position_y = self.vision_x_pixel / pixel_to_meter
-            self.vision_position_z = self.vision_y_pixel / pixel_to_meter * -1
+            for i in self.vision_x_pixel:
+                self.averaging_vision_x_pixel += i
 
-            if position.width >= self.param_nb_pixel_to_victory:
+            for i in self.vision_y_pixel:
+                self.averaging_vision_y_pixel += i
+
+            self.averaging_vision_x_pixel /= len(self.vision_x_pixel)
+            self.averaging_vision_y_pixel /= len(self.vision_x_pixel)
+
+            if width >= self.param_nb_pixel_to_victory:
                 self.victory = True
 
-            if position.width <= self.param_threshold_width:
-                self.is_align_with_heading_active = False
+            if width <= self.param_threshold_width:
+                self.is_align_with_heading_active = True
             else:
                 self.is_align_with_heading_active = False
 
-            if abs(self.vision_x_pixel) <= self.param_bounding_box:
+            if abs(self.averaging_vision_x_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_y = True
             else:
                 self.vision_is_reach_y = False
 
-            if abs(self.vision_y_pixel) <= self.param_bounding_box:
+            if abs(self.averaging_vision_x_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_z = True
             else:
                 self.vision_is_reach_z = False
 
-            if self.target_reached:
+            pixel_to_meter = width / self.param_vision_target_width_in_meter
+
+            if self.target_reached and len(self.vision_x_pixel) == self.param_max_queue_size:
+                self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
+                self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -1
                 self.align_submarine()
 
     def align_submarine(self):
-        if self.vision_is_reach_y and self.vision_is_reach_z:
-            self.vision_is_reach = True
-        elif not self.vision_is_reach:
-            self.set_yz_local_target(self.vision_position_y, self.vision_position_z)
+        vision_position_y = self.vision_position_y
+        vision_position_z = self.vision_position_z
 
-    def set_yz_local_target(self, position_y, position_z):
+        if self.is_align_with_heading_active:
+            if not self.vision_is_reach_y:
+                self.heading = self.param_heading * (vision_position_y / abs(vision_position_y))
+                print self.heading
+            else:
+                self.heading = 0.0
+
+            self.set_target(0.0, vision_position_z, self.heading)
+
+        elif not self.vision_is_reach:
+            self.set_target(vision_position_y, vision_position_z, 0.0)
+
+    def set_target(self, position_y, position_z, position_yaw):
         try:
             self.set_local_target(0.0,
                                   position_y,
                                   position_z,
                                   0.0,
                                   0.0,
-                                  0.0)
+                                  position_yaw)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
+        rospy.loginfo('Set relative position y = %f' % position_y)
         rospy.loginfo('Set relative position z = %f' % position_z)
+        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
@@ -110,6 +136,14 @@ class AlignToVision(MissionState):
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
 
+        print self.vision_x_pixel
+
+        self.vision_x_pixel = deque([], maxlen=self.param_max_queue_size)
+        self.vision_y_pixel = deque([], maxlen=self.param_max_queue_size)
+
+        self.vision_x_pixel.clear()
+        self.vision_y_pixel.clear()
+
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False
@@ -117,12 +151,16 @@ class AlignToVision(MissionState):
         self.count += 1
 
     def run(self, ud):
-        if self.vision_is_reach_y and self.vision_is_reach_z:
-            self.set_yz_local_target(0.0, 0.0)
+        self.vision_is_reach = self.vision_is_reach_y & self.vision_is_reach_z
+
+        if self.vision_is_reach:
+            self.set_target(0.0, 0.0, 0.0)
             return 'forward'
+
         if self.victory and self.vision_is_reach:
-            self.set_yz_local_target(0.0, 0.0)
+            self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
+
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'
 

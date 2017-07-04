@@ -21,7 +21,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 1.0
+      value: 0.5
       variable_name: param_distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
@@ -55,8 +55,42 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 360.0
+          value: 180.0
           variable_name: param_distance_yaw
-        transitions: []
-      transitions: []
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'FinalMove'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 410
+          - 373
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveRelativeXY.MoveRelativeXY
+            base_file: /src/controller_mission/state/moveRelativeXY.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'FinalMove'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: -1.0
+              variable_name: param_distance_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 0.0
+              variable_name: param_distance_y
+            transitions: []
+          transitions: []
 - *id002
+- *id003

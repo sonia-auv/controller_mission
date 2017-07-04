@@ -36,7 +36,7 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 30.0
+      value: 100.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -52,7 +52,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 300.0
+      value: 450.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -60,7 +60,7 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.5
+      value: 1.0
       variable_name: distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

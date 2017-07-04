@@ -16,7 +16,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 30.0
+      value: 15.0
       variable_name: heading
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -48,7 +48,7 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 30.0
+      value: 100.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

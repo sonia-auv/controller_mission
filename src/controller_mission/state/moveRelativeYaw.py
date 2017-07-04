@@ -9,6 +9,9 @@ class MoveRelativeYAw(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
+        self.set_local_target = None
+        self.target_reach_sub = None
+
         self.actual_position_x = 0.0
         self.actual_position_y = 0.0
         self.just_one_time = 0

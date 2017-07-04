@@ -10,8 +10,8 @@ class GetObjective(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
-        self.param_to_object = {' buoys': GlobalMappingRequest.BUOY, ' fence': GlobalMappingRequest.FENCE,
-                                ' hydro': GlobalMappingRequest.PINGER}
+        self.param_to_object = {'buoys': GlobalMappingRequest.BUOY, 'fence': GlobalMappingRequest.FENCE,
+                                'hydro': GlobalMappingRequest.PINGER}
         self.just_one_time = True
         self.object_is_found = False
 

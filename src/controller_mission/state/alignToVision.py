@@ -94,7 +94,7 @@ class AlignToVision(MissionState):
 
             if self.target_reached and len(self.vision_x_pixel) == self.param_max_queue_size:
                 self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
-                self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -1
+                self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -0.5
                 self.align_submarine()
 
     def align_submarine(self):

@@ -31,12 +31,19 @@ class SetControlBoundingBox(MissionState):
         self.reset_bounding_box = rospy.ServiceProxy('/proc_control/reset_bounding_box', ResetBoundingBox)
 
         if bool(self.param_reset_set_bounding_box):
-            self.reset_bounding_box()
-
+            try:
+                self.set_bounding_box(X=self.param_bounding_box_x, Y=self.param_bounding_box_y,
+                                      Z=self.param_bounding_box_z,
+                                      ROLL=self.param_bounding_box_roll, PITCH=self.param_bounding_box_pitch,
+                                      YAW=self.param_bounding_box_yaw)
+            except rospy.ServiceException as exc:
+                rospy.loginfo('Service did not process request: ' + str(exc))
         else:
-            self.set_bounding_box(X=self.param_bounding_box_x, Y=self.param_bounding_box_y, Z=self.param_bounding_box_z,
-                                  ROLL=self.param_bounding_box_roll, PITCH=self.param_bounding_box_pitch,
-                                  YAW=self.param_bounding_box_yaw)
+            try:
+                self.reset_bounding_box()
+            except rospy.ServiceException as exc:
+                rospy.loginfo('Service did not process request: ' + str(exc))
+
 
     def run(self, ud):
         return 'succeeded'

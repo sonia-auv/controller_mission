@@ -44,7 +44,6 @@ class MoveZ(MissionState):
         self.orientation = None
         self.wait_until_position_is_get()
         self.target_reached = False
-        print 'salut'
         try:
             response = set_global_target(self.position.x,
                                          self.position.y,

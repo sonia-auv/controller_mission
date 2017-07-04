@@ -1,0 +1,108 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 363
+  - 59
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: mission/chargeRed
+    base_file: /missions/mission/chargeRed.yml
+    global_params: []
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: chargeRed
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: mission/chargeRed.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: findNextBuoy
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 367
+      - 215
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: mission/findNextBuoy
+        base_file: /missions/mission/findNextBuoy.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''find_buoy'''
+          variable_name: node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''simple_buoy'''
+          variable_name: filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/provider_vision/Front_GigE'''
+          variable_name: media_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''green'''
+          variable_name: color
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: findNextBuoy
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: mission/findNextBuoy.yml
+          variable_name: SubMission_file
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: chargeGreen
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 371
+          - 380
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: mission/chargeGreen
+            base_file: /missions/mission/chargeGreen.yml
+            global_params: []
+            is_root: false
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: chargeGreen
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: mission/chargeGreen.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
+- *id003
+- *id002

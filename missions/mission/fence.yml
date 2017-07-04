@@ -3,32 +3,20 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 390
-  - 20
+  - 433
+  - 75
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: vision/alignBuoy
-    base_file: /missions/vision/alignBuoy.yml
+    _name: vision/alignFence
+    base_file: /missions/vision/alignFence.yml
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''/proc_image_processing/buoy_red_result'''
-      variable_name: topic_to_listen
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 30.0
-      variable_name: heading
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 1.0
-      variable_name: distance_x
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''buoy_red'''
+      value: !!python/unicode '''fence'''
       variable_name: node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''simple_buoy'''
+      value: !!python/unicode '''simple_fence'''
       variable_name: filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -44,7 +32,7 @@ statesui:
       variable_name: bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''red'''
+      value: !!python/unicode '''yellow'''
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -52,8 +40,16 @@ statesui:
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.23
+      value: 10.0
+      variable_name: heading
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 2.4
       variable_name: pixel_to_meter
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/proc_image_processing/fence_result'''
+      variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: 300.0
@@ -62,6 +58,10 @@ statesui:
       description: ''
       value: 30.0
       variable_name: maximum_nb_alignment
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: 600.0
@@ -90,30 +90,29 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'alignRedBuoy'
+      value: alignFence
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: SubMission_file
-      value: vision/alignBuoy.yml
+      value: vision/alignFence.yml
       variable_name: SubMission_file
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'RamRedBuoy'
+      state: reachFenceWithStyle
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 396
-      - 161
-      radius: 100
+      - 408
+      - 217
+      radius: 152
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: navigation/ram
-        base_file: /missions/navigation/ram.yml
+        _name: navigation/reachFenceWithStyle
+        base_file: /missions/navigation/reachFenceWithStyle.yml
         global_params: []
-        is_root: false
         is_submission: true
         outcome_states:
         - succeeded
@@ -121,11 +120,11 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'RamRedBuoy'
+          value: reachFenceWithStyle
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: navigation/ram.yml
+          value: navigation/reachFenceWithStyle.yml
           variable_name: SubMission_file
         transitions: []
       transitions: []

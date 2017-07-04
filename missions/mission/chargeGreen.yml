@@ -12,7 +12,7 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''/proc_image_processing/buoy_red_result'''
+      value: !!python/unicode '''/proc_image_processing/buoy_green_result'''
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -24,11 +24,11 @@ statesui:
       variable_name: distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''buoy_red'''
+      value: !!python/unicode '''buoy_green'''
       variable_name: node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''simple_buoy'''
+      value: !!python/unicode '''simple_buoy_green'''
       variable_name: filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -44,7 +44,7 @@ statesui:
       variable_name: bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''red'''
+      value: !!python/unicode '''green'''
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -90,7 +90,7 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'alignRedBuoy'
+      value: !!python/unicode 'AlignGreenBuoy'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: SubMission_file
@@ -121,7 +121,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'RamRedBuoy'
+          value: !!python/unicode 'RamGreenBuoy'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file

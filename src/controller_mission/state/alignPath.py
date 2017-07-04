@@ -41,7 +41,6 @@ class AlignPath(MissionState):
         self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.15, 'transform pixel to meter'))
         self.parameters.append(Parameter('param_vision_target_height_in_meter', 1.2, 'transform pixel to meter'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/align_path_result', 'Name of topic to listen'))
-        self.parameters.append(Parameter('param_nb_pixel_depth', 300, 'Minimal nb of pixel to stop'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
 
     def get_outcomes(self):

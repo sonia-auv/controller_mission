@@ -57,7 +57,7 @@ class AlignToVision(MissionState):
 
     def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
         if pos_y <= self.param_control_bounding_box_in_y:
-            return self.param_control_bounding_box_in_y + 0.1
+            return self.param_control_bounding_box_in_y + 0.3
         else:
             return pos_y
 
@@ -131,6 +131,7 @@ class AlignToVision(MissionState):
             pose.position.z = position_z
             pose.orientation.z = position_yaw
             self.set_local_target_topic.publish(pose)
+            self.set_local_target_topic.publish(pose)
         except rospy.ROSException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -158,7 +159,7 @@ class AlignToVision(MissionState):
         self.count += 1
 
     def run(self, ud):
-        self.vision_is_reach = self.vision_is_reach_y & self.vision_is_reach_z
+        self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
         if self.victory and self.vision_is_reach:
             self.set_target(0.0, 0.0, 0.0)

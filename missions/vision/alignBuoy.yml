@@ -168,6 +168,10 @@ statesui:
           description: ' ''Maximum size of queue'''
           value: !!python/unicode 'max_queue_size'
           variable_name: param_max_queue_size
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum size of queue'''
+          value: !!python/unicode 'control_bounding_box'
+          variable_name: param_control_bounding_box_in_y
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: forward

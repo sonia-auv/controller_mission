@@ -56,6 +56,7 @@ class ForwardVision(MissionState):
             pose.position.z = 0.0
             pose.orientation.z = 0.0
             self.set_local_target_topic.publish(pose)
+            self.set_local_target_topic.publish(pose)
         except rospy.ROSException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -80,11 +81,12 @@ class ForwardVision(MissionState):
         self.set_target(self.param_distance_x)
 
     def run(self, ud):
+        if self.victory:
+            return 'succeeded'
+
         if self.buoy_is_unreached or self.target_reached:
             self.set_target(0.0)
             return 'aborted'
-        if self.victory:
-            return 'succeeded'
 
     def end(self):
         self.buoy_position.unregister()

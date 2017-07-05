@@ -16,6 +16,10 @@ globalparams:
   description: ''
   value: !!python/unicode '''green'''
   variable_name: color
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/find_buoy_result'''
+  variable_name: topic_to_listen
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple

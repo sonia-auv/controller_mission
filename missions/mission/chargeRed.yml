@@ -40,7 +40,7 @@ statesui:
       variable_name: vision_cmd
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 200.0
+      value: 350.0
       variable_name: bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -68,7 +68,7 @@ statesui:
       variable_name: initial_bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 100.0
+      value: 350.0
       variable_name: final_bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

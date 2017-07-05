@@ -20,6 +20,8 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
     SendMissionResponse, ReceivedState, ReceivedStateResponse
+from proc_control.srv import EnableControl, EnableControlRequest
+from proc_navigation.srv import SetWorldXYOffset
 
 from provider_kill_mission.msg import MissionSwitchMsg
 
@@ -55,6 +57,8 @@ class MissionExecutor:
 
         self._mission_switch_sub = rospy.Subscriber('/provider_kill_mission/mission_switch_msg', MissionSwitchMsg,
                                                     self._handle_mission_switch_activated)
+        self.enable_control_srv = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
+        self.set_initial_position_srv = rospy.ServiceProxy('/proc_navigation/set_world_x_y_offset', SetWorldXYOffset)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
@@ -137,6 +141,11 @@ class MissionExecutor:
         return self.create_state_machine(mission, 'main', None)
 
     def _run_start_mission(self):
+        try:
+            self.set_initial_position_srv()
+            self.enable_control_srv(X=1, Y=1, Z=1, YAW=1, ROLL=1, PITCH=1)
+        except rospy.ServiceException as e:
+            rospy.logerr('Service request failed :' + str(e.message))
         rospy.loginfo('Mission start in 3 ...')
         time.sleep(1)
         rospy.loginfo('Mission start in 2 ...')

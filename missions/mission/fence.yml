@@ -1,14 +1,39 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 262
+  - 190
+  radius: 152
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: navigation/reachFenceWithStyle
+    base_file: /missions/navigation/reachFenceWithStyle.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: reachFenceWithStyle
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: navigation/reachFenceWithStyle.yml
+      variable_name: SubMission_file
+    transitions: []
+  transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 433
-  - 75
+  - 295
+  - -19
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: vision/alignFence
-    base_file: /missions/vision/alignFence.yml
+    _name: vision/reachVision
+    base_file: /missions/vision/reachVision.yml
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -17,19 +42,15 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: !!python/unicode '''simple_fence'''
-      variable_name: filterchain_name
+      variable_name: filterchaine_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: !!python/unicode '''/provider_vision/Front_GigE'''
       variable_name: media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1.0
-      variable_name: vision_cmd
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
       value: 200.0
-      variable_name: bounding_box
+      variable_name: bounding_box_vision
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: !!python/unicode '''yellow'''
@@ -40,24 +61,32 @@ statesui:
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 10.0
+      value: 15.0
       variable_name: heading
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 2.4
-      variable_name: pixel_to_meter
+      value: 0.23
+      variable_name: target_width_in_meter
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: !!python/unicode '''/proc_image_processing/fence_result'''
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 450.0
+      value: 250.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: 30.0
       variable_name: maximum_nb_alignment
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 10.0
+      variable_name: max_queue_size
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: control_bounding_box_in_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: 1.0
@@ -68,16 +97,16 @@ statesui:
       variable_name: initial_bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 100.0
+      value: 300.0
       variable_name: final_bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 10.0
-      variable_name: max_queue_size
+      value: 0.5
+      variable_name: control_bounding_box_xy
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.5
-      variable_name: control_bounding_box
+      value: 0.3
+      variable_name: control_bounding_box_z
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
       value: 5.0
@@ -90,11 +119,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: alignFence
+      value: !!python/unicode 'AlignFence'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: SubMission_file
-      value: vision/alignFence.yml
+      value: vision/reachVision.yml
       variable_name: SubMission_file
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -104,28 +133,4 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 408
-      - 217
-      radius: 152
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: navigation/reachFenceWithStyle
-        base_file: /missions/navigation/reachFenceWithStyle.yml
-        global_params: []
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: reachFenceWithStyle
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: navigation/reachFenceWithStyle.yml
-          variable_name: SubMission_file
-        transitions: []
-      transitions: []
-- *id002
+    state2: *id002

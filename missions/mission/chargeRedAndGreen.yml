@@ -47,7 +47,7 @@ statesui:
           variable_name: node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''simple_buoy'''
+          value: !!python/unicode '''simple_buoy_green'''
           variable_name: filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -57,6 +57,10 @@ statesui:
           description: ''
           value: !!python/unicode '''green'''
           variable_name: color
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/proc_image_processing/find_buoy_result'''
+          variable_name: topic_to_listen
         is_root: false
         is_submission: true
         outcome_states:

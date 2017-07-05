@@ -4,6 +4,7 @@ from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 from proc_control.msg import TargetReached
+from geometry_msgs.msg import Pose
 from proc_image_processing.msg import VisionTarget
 
 
@@ -14,6 +15,7 @@ class AlignToVision(MissionState):
         self.set_local_target = None
         self.vision_subscriber = None
         self.target_reach_sub = None
+        self.set_local_target_topic = None
 
         self.vision_position_y = 0
         self.vision_position_z = 0
@@ -95,7 +97,7 @@ class AlignToVision(MissionState):
 
             if self.target_reached:
                 self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
-                self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -0.5
+                self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -1
                 self.align_submarine()
 
     def align_submarine(self):
@@ -115,13 +117,19 @@ class AlignToVision(MissionState):
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            self.set_local_target(0.0,
-                                  position_y,
-                                  position_z,
-                                  0.0,
-                                  0.0,
-                                  position_yaw)
-        except rospy.ServiceException as exc:
+            pose = Pose()
+            pose.position.x = 0
+            pose.position.y = position_y
+            pose.position.z = position_z
+            pose.orientation.z = position_yaw
+            self.set_local_target_topic.publish(pose)
+            #self.set_local_target(0.0,
+            #                      position_y,
+            #                      position_z,
+            #                      0.0,
+            #                      0.0,
+            #                      position_yaw)
+        except rospy.ROSException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
@@ -131,6 +139,8 @@ class AlignToVision(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
+        self.set_local_target_topic = rospy.Publisher('/proc_control/set_target',Pose, queue_size=10)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

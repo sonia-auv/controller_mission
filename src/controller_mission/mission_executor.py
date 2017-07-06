@@ -143,6 +143,7 @@ class MissionExecutor:
     def _run_start_mission(self):
         try:
             self.set_initial_position_srv()
+            time.sleep(2)
             self.enable_control_srv(X=1, Y=1, Z=1, YAW=1, ROLL=1, PITCH=1)
         except rospy.ServiceException as e:
             rospy.logerr('Service request failed :' + str(e.message))

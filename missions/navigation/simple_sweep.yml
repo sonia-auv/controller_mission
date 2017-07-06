@@ -1,194 +1,129 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: 2.0
-  variable_name: times_out
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: 45.0
-  variable_name: delta_heading
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 2.0, variable_name: times_out}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: 45.0, variable_name: delta_heading}
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 465
-  - 321
+  position: !!python/tuple [465, 321]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
     base_file: /src/controller_mission/state/timeOut.py
     is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
+    outcome_states: [succeeded, aborted, preempted]
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'WaitFront'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: !!python/unicode 'times_out'
-      variable_name: param_time
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: succeeded
-      variable_name: param_to_return
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'WaitFront', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: !!python/unicode 'times_out', variable_name: param_time}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: succeeded, variable_name: param_to_return}
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'TurnLeft'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'TurnLeft'}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 299
-      - 179
+      position: !!python/tuple [299, 179]
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeYaw.MoveRelativeYAw
         base_file: /src/controller_mission/state/moveRelativeYaw.py
         is_root: false
-        outcome_states:
-        - succeeded
-        - aborted
-        - preempted
+        outcome_states: [succeeded, aborted, preempted]
         parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: !!python/unicode 'TurnLeft'
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Distance to travel'''
-          value: !!python/unicode 'delta_heading * -1'
-          variable_name: param_distance_yaw
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'TurnLeft', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
+            to travel''', value: -45.0, variable_name: param_distance_yaw}
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'WaitLeft'
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'WaitLeft'}
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 165
-          - 76
+          position: !!python/tuple [165, 76]
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
+            outcome_states: [succeeded, aborted, preempted]
             parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'WaitLeft'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: !!python/unicode 'times_out'
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'WaitLeft', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: !!python/unicode 'times_out',
+              variable_name: param_time}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: succeeded, variable_name: param_to_return}
             transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: !!python/unicode 'TurnRight'
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+              outcome: succeeded, state: !!python/unicode 'TurnRight'}
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple
-              - 415
-              - -47
+              position: !!python/tuple [415, -47]
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeYaw.MoveRelativeYAw
                 base_file: /src/controller_mission/state/moveRelativeYaw.py
-                outcome_states:
-                - succeeded
-                - aborted
-                - preempted
+                outcome_states: [succeeded, aborted, preempted]
                 parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: state_name
-                  value: !!python/unicode 'TurnRight'
-                  variable_name: state_name
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: !!python/unicode 'delta_heading * 2'
-                  variable_name: param_distance_yaw
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: state_name, value: !!python/unicode 'TurnRight', variable_name: state_name}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Distance to travel''', value: 90.0, variable_name: param_distance_yaw}
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'WaitRight'
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                  outcome: succeeded, state: !!python/unicode 'WaitRight'}
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-                  position: !!python/tuple
-                  - 572
-                  - -126
+                  position: !!python/tuple [572, -126]
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: timeOut.TimesOut
                     base_file: /src/controller_mission/state/timeOut.py
-                    outcome_states:
-                    - succeeded
-                    - aborted
-                    - preempted
+                    outcome_states: [succeeded, aborted, preempted]
                     parameters:
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: state_name
-                      value: !!python/unicode 'WaitRight'
-                      variable_name: state_name
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: ' ''Times Out'''
-                      value: !!python/unicode 'times_out'
-                      variable_name: param_time
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: ' ''Times Out'''
-                      value: succeeded
-                      variable_name: param_to_return
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: state_name, value: !!python/unicode 'WaitRight',
+                      variable_name: state_name}
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: ' ''Times Out''', value: !!python/unicode 'times_out',
+                      variable_name: param_time}
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: ' ''Times Out''', value: succeeded, variable_name: param_to_return}
                     transitions:
-                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                      outcome: succeeded
-                      state: !!python/unicode 'FinalTurn'
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                      outcome: succeeded, state: !!python/unicode 'FinalTurn'}
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-                      position: !!python/tuple
-                      - 709
-                      - -216
+                      position: !!python/tuple [709, -216]
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeYaw.MoveRelativeYAw
                         base_file: /src/controller_mission/state/moveRelativeYaw.py
-                        outcome_states:
-                        - succeeded
-                        - aborted
-                        - preempted
+                        outcome_states: [succeeded, aborted, preempted]
                         parameters:
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: state_name
-                          value: !!python/unicode 'FinalTurn'
-                          variable_name: state_name
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Distance to travel'''
-                          value: !!python/unicode 'delta_heading * -1'
-                          variable_name: param_distance_yaw
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: state_name, value: !!python/unicode 'FinalTurn',
+                          variable_name: state_name}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Distance to travel''', value: -45.0, variable_name: param_distance_yaw}
                         transitions: []
                       transitions: []
 - *id002

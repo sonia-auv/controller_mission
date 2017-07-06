@@ -38,7 +38,7 @@ class WaitHitCountTarget(MissionState):
 
         if distance <= self.param_max_distance_between_vision_target:
             self.nb_hit_count += 1
-            rospy.logdebug("Hit count =" + self.nb_hit_count)
+            rospy.logdebug("Hit count = WOW")
         else:
             self.nb_hit_count = 0
             rospy.logdebug('Hit count lost !!!')
@@ -73,4 +73,4 @@ class WaitHitCountTarget(MissionState):
 
     def end(self):
         self.vision_subscriber.unregister()
-        self.target_reach_sub.unregister()
+       

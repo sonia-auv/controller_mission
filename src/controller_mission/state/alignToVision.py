@@ -114,7 +114,7 @@ class AlignToVision(MissionState):
 
         if self.is_align_with_heading_active:
             if not self.vision_is_reach_y:
-                self.heading = self.param_heading * (vision_position_y / abs(vision_position_y))
+                self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
             else:
                 self.heading = 0.0
 

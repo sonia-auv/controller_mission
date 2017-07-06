@@ -57,7 +57,7 @@ class AlignToVision(MissionState):
 
     def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
         if pos_y <= self.param_control_bounding_box_in_y:
-            return self.param_control_bounding_box_in_y + 0.3
+            return self.param_control_bounding_box_in_y + 0.1
         else:
             return pos_y
 

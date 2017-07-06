@@ -110,6 +110,8 @@ class AlignToVision(MissionState):
         vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
         vision_position_z = self.vision_position_z
 
+        vision_position_y = vision_position_y * (self.vision_position_y / abs(self.vision_position_y))
+
         target_z = 0.4 * (vision_position_z / abs(vision_position_z))
 
         if self.is_align_with_heading_active:

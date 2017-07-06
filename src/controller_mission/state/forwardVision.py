@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from geometry_msgs.msg import Pose
+from proc_control.srv import SetPositionTarget
 from proc_image_processing.msg import VisionTarget
 
 
@@ -14,7 +14,7 @@ class ForwardVision(MissionState):
         self.target_reached = False
         self.victory = False
 
-        self.set_local_target_topic = None
+        self.set_local_target = None
         self.buoy_position = None
         self.target_reach_sub = None
 
@@ -48,22 +48,23 @@ class ForwardVision(MissionState):
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
 
-    def set_target(self, position_y):
+    def set_target(self, position_x):
         try:
-            pose = Pose()
-            pose.position.x = position_y
-            pose.position.y = 0.0
-            pose.position.z = 0.0
-            pose.orientation.z = 0.0
-            self.set_local_target_topic.publish(pose)
-            self.set_local_target_topic.publish(pose)
-        except rospy.ROSException as exc:
+            self.set_local_target(position_x,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0)
+        except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % position_y)
+        rospy.loginfo('Set relative position x = %f' % position_x)
 
     def initialize(self):
-        self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        #self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
 
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 

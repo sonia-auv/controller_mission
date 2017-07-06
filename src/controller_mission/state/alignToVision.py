@@ -3,7 +3,7 @@ import rospy
 from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from geometry_msgs.msg import Pose
+from proc_control.srv import SetPositionTarget
 from proc_image_processing.msg import VisionTarget
 
 
@@ -125,22 +125,33 @@ class AlignToVision(MissionState):
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            pose = Pose()
-            pose.position.x = 0.0
-            pose.position.y = position_y
-            pose.position.z = position_z
-            pose.orientation.z = position_yaw
-            self.set_local_target_topic.publish(pose)
-            self.set_local_target_topic.publish(pose)
-        except rospy.ROSException as exc:
+            self.set_local_target(0.0,
+                                  position_y,
+                                  position_z,
+                                  0.0,
+                                  0.0,
+                                  position_yaw)
+        except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
         rospy.loginfo('Set relative position z = %f' % position_z)
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
+        #try:
+        #    pose = Pose()
+        #    pose.position.x = 0.0
+        #    pose.position.y = position_y
+        #    pose.position.z = position_z
+        #    pose.orientation.z = position_yaw
+        #    self.set_local_target_topic.publish(pose)
+        #    self.set_local_target_topic.publish(pose)
+        #except rospy.ROSException as exc:
+        #    rospy.loginfo('Service did not process request: ' + str(exc))
 
     def initialize(self):
-        self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        #self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

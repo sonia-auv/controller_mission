@@ -172,7 +172,7 @@ class AlignToVision(MissionState):
     def run(self, ud):
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
-        if self.victory and self.vision_is_reach:
+        if self.victory:
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
 

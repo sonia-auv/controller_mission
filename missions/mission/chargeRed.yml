@@ -110,7 +110,7 @@ statesui:
           variable_name: color
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 100.0
+          value: 80.0
           variable_name: threshold_width
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''

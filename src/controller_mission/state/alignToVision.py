@@ -139,21 +139,10 @@ class AlignToVision(MissionState):
         rospy.loginfo('Set relative position y = %f' % position_y)
         rospy.loginfo('Set relative position z = %f' % position_z)
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
-        #try:
-        #    pose = Pose()
-        #    pose.position.x = 0.0
-        #    pose.position.y = position_y
-        #    pose.position.z = position_z
-        #    pose.orientation.z = position_yaw
-        #    self.set_local_target_topic.publish(pose)
-        #    self.set_local_target_topic.publish(pose)
-        #except rospy.ROSException as exc:
-        #    rospy.loginfo('Service did not process request: ' + str(exc))
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
-        #self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

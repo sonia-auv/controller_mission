@@ -69,7 +69,7 @@ class AlignPath(MissionState):
             self.averaging_vision_y_pixel += i
 
         for i in self.vision_angle:
-            self.averaging_vision_y_pixel += i
+            self.averaging_vision_angle += i
 
         self.averaging_vision_x_pixel /= len(self.vision_x_pixel)
         self.averaging_vision_y_pixel /= len(self.vision_y_pixel)
@@ -146,7 +146,7 @@ class AlignPath(MissionState):
         self.submarine_is_align = False
 
     def run(self, ud):
-        self.submarine_is_align = self.vision_is_reach_x & self.vision_is_reach_y & self.vision_is_reach_yaw
+        self.submarine_is_align = self.vision_is_reach_x and self.vision_is_reach_y and self.vision_is_reach_yaw
         if self.submarine_is_align:
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'

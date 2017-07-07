@@ -19,7 +19,6 @@ class WaitHitCountTarget(MissionState):
 
         self.target_reached = False
 
-
     def define_parameters(self):
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red_result', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_hit_to_victory', 30, 'nb of hit to finish this state'))
@@ -38,7 +37,7 @@ class WaitHitCountTarget(MissionState):
 
         if distance <= self.param_max_distance_between_vision_target:
             self.nb_hit_count += 1
-            rospy.logdebug("Hit count = WOW")
+            rospy.logdebug('Hit count = %f' % self.nb_hit_count)
         else:
             self.nb_hit_count = 0
             rospy.logdebug('Hit count lost !!!')
@@ -73,4 +72,4 @@ class WaitHitCountTarget(MissionState):
 
     def end(self):
         self.vision_subscriber.unregister()
-       
+

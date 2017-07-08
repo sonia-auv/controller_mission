@@ -89,20 +89,19 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'Gate1'
+          state: !!python/unicode 'moveyaw'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 457
-          - 10
+          - 584
+          - -99
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveRelativeXY.MoveRelativeXY
-            base_file: /src/controller_mission/state/moveRelativeXY.py
-            is_root: false
+            _name: moveRelativeYaw.MoveRelativeYAw
+            base_file: /src/controller_mission/state/moveRelativeYaw.py
             outcome_states:
             - succeeded
             - aborted
@@ -110,32 +109,28 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'Gate1'
+              value: !!python/unicode 'moveyaw'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: !!python/unicode 'distance_x'
-              variable_name: param_distance_x
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
               value: 0.0
-              variable_name: param_distance_y
+              variable_name: param_distance_yaw
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'Gate2'
+              state: TimesOut
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 457
-              - 188
+              - 621
+              - 5
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: moveRelativeXY.MoveRelativeXY
-                base_file: /src/controller_mission/state/moveRelativeXY.py
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
                 outcome_states:
                 - succeeded
                 - aborted
@@ -143,32 +138,33 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: !!python/unicode 'Gate2'
+                  value: TimesOut
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: !!python/unicode 'distance_x'
-                  variable_name: param_distance_x
+                  description: ' ''Times Out'''
+                  value: 2.0
+                  variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: -1000.0
-                  variable_name: param_distance_y
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'Gate3'
+                  state: !!python/unicode 'Gate1'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 455
-                  - 365
+                  - 457
+                  - 10
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXY.MoveRelativeXY
                     base_file: /src/controller_mission/state/moveRelativeXY.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -176,7 +172,7 @@ statesui:
                     parameters:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: state_name
-                      value: !!python/unicode 'Gate3'
+                      value: !!python/unicode 'Gate1'
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
@@ -184,20 +180,20 @@ statesui:
                       variable_name: param_distance_x
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
-                      value: -1000.0
+                      value: 0.0
                       variable_name: param_distance_y
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: !!python/unicode 'Gate4'
+                      state: !!python/unicode 'Gate2'
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 467
-                      - 511
+                      - 457
+                      - 188
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeXY.MoveRelativeXY
@@ -209,7 +205,7 @@ statesui:
                         parameters:
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: state_name
-                          value: !!python/unicode 'Gate4'
+                          value: !!python/unicode 'Gate2'
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Distance to travel'''
@@ -222,15 +218,15 @@ statesui:
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                           outcome: succeeded
-                          state: !!python/unicode 'Gate5'
+                          state: !!python/unicode 'Gate3'
                       transitions:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id006
                         state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
-                          - 473
-                          - 642
+                          - 455
+                          - 365
                           radius: 100
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: moveRelativeXY.MoveRelativeXY
@@ -242,7 +238,7 @@ statesui:
                             parameters:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: state_name
-                              value: !!python/unicode 'Gate5'
+                              value: !!python/unicode 'Gate3'
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ' ''Distance to travel'''
@@ -255,19 +251,19 @@ statesui:
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition
                               outcome: succeeded
-                              state: !!python/unicode 'ResetBox'
+                              state: !!python/unicode 'Gate4'
                           transitions:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
                             state1: *id007
                             state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
                               position: !!python/tuple
-                              - 168
-                              - 639
+                              - 467
+                              - 511
                               radius: 100
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                                _name: setControlBoundingBox.SetControlBoundingBox
-                                base_file: /src/controller_mission/state/setControlBoundingBox.py
+                                _name: moveRelativeXY.MoveRelativeXY
+                                base_file: /src/controller_mission/state/moveRelativeXY.py
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -275,42 +271,110 @@ statesui:
                                 parameters:
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: state_name
-                                  value: !!python/unicode 'ResetBox'
+                                  value: !!python/unicode 'Gate4'
                                   variable_name: state_name
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''Set or reset bounding box'''
-                                  value: 0.0
-                                  variable_name: param_reset_set_bounding_box
+                                  description: ' ''Distance to travel'''
+                                  value: !!python/unicode 'distance_x'
+                                  variable_name: param_distance_x
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''Set x bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_x
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''Set y bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_y
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''Set z bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_z
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''set yaw bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_yaw
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''set yaw bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_roll
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: ' ''set yaw bounding box'''
-                                  value: 0.0
-                                  variable_name: param_bounding_box_pitch
-                                transitions: []
-                              transitions: []
-- *id003
-- *id004
+                                  description: ' ''Distance to travel'''
+                                  value: -1000.0
+                                  variable_name: param_distance_y
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'Gate5'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id008
+                                state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - 473
+                                  - 642
+                                  radius: 100
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: moveRelativeXY.MoveRelativeXY
+                                    base_file: /src/controller_mission/state/moveRelativeXY.py
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: !!python/unicode 'Gate5'
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: !!python/unicode 'distance_x'
+                                      variable_name: param_distance_x
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: -1000.0
+                                      variable_name: param_distance_y
+                                    transitions:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                      outcome: succeeded
+                                      state: !!python/unicode 'ResetBox'
+                                  transitions:
+                                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                    name: succeeded
+                                    state1: *id009
+                                    state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                      position: !!python/tuple
+                                      - 168
+                                      - 639
+                                      radius: 100
+                                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                        _name: setControlBoundingBox.SetControlBoundingBox
+                                        base_file: /src/controller_mission/state/setControlBoundingBox.py
+                                        outcome_states:
+                                        - succeeded
+                                        - aborted
+                                        - preempted
+                                        parameters:
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: state_name
+                                          value: !!python/unicode 'ResetBox'
+                                          variable_name: state_name
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Set or reset bounding box'''
+                                          value: 0.0
+                                          variable_name: param_reset_set_bounding_box
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Set x bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_x
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Set y bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_y
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Set z bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_z
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''set yaw bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_yaw
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''set yaw bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_roll
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''set yaw bounding box'''
+                                          value: 0.0
+                                          variable_name: param_bounding_box_pitch
+                                        transitions: []
+                                      transitions: []
 - *id005
 - *id006
 - *id007
-- *id002
 - *id008
+- *id009
+- *id002
+- *id010
+- *id003
+- *id004

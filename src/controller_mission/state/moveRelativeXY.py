@@ -39,7 +39,7 @@ class MoveRelativeXY(MissionState):
                                   -1000.0,
                                   0.0,
                                   0.0,
-                                  0.0)
+                                  -1000.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

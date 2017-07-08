@@ -85,7 +85,7 @@ class AlignPath(MissionState):
         else:
             self.vision_is_reach_y = False
 
-        if abs(self.averaging_vision_yaw_pixel) <= self.param_yaw_bounding_box:
+        if abs(self.averaging_vision_angle) <= self.param_yaw_bounding_box:
             self.vision_is_reach_yaw = True
         else:
             self.vision_is_reach_yaw = False
@@ -96,7 +96,7 @@ class AlignPath(MissionState):
 
             self.vision_position_x = self.averaging_vision_y_pixel / pixel_to_meter
             self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
-            self.vision_position_yaw = self.averaging_vision_yaw_pixel / pixel_to_meter
+            self.vision_position_yaw = self.averaging_vision_angle / pixel_to_meter
 
             self.align_path()
 

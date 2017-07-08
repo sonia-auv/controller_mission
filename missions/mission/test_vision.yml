@@ -124,7 +124,7 @@ statesui:
               variable_name: param_start_bottom
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 1.0
+              value: 2.0
               variable_name: param_cmd
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -255,7 +255,7 @@ statesui:
                           variable_name: param_start_bottom
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Times Out'''
-                          value: 1.0
+                          value: 2.0
                           variable_name: param_cmd
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition

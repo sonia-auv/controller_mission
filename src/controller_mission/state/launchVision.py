@@ -31,8 +31,16 @@ class LaunchVision(MissionState):
         self.start_stop_vision = rospy.ServiceProxy('/provider_vision/start_stop_camera', start_stop_media)
 
         try:
-            self.start_stop_vision('Front_GigE', self.param_start_front)
-            self.start_stop_vision('Bottom_GigE', self.param_start_bottom)
+            if self.param_start_front == 1:
+
+                self.start_stop_vision('Front_GigE', self.param_start_front)
+                self.start_stop_vision('Bottom_GigE', self.param_start_bottom)
+
+            else:
+
+                self.start_stop_vision('Front_GigE', self.param_start_front)
+                self.start_stop_vision('Bottom_GigE', self.param_start_bottom)
+
 
             self.execute_vision_cmd(self.param_node_name,
                                     self.param_filterchain_name,

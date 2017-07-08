@@ -66,7 +66,7 @@ class AlignToVision(MissionState):
         self.vision_y_pixel.append(vision_data.y)
 
         if len(self.vision_x_pixel) == self.param_max_queue_size and len(self.vision_y_pixel) == self.param_max_queue_size:
-            self.parse_vision_data(vision_data.width)
+            self.parse_vision_data(vision_data.height)
 
     def parse_vision_data(self, width):
 

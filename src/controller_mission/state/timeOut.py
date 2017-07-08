@@ -18,11 +18,11 @@ class TimesOut(MissionState):
 
     def initialize(self):
         self.start_time = rospy.get_time()
-        print "start_time :", self.start_time
+        #print "start_time :", self.start_time
 
     def run(self, ud):
         if (rospy.get_time() - self.start_time) >= self.param_time:
-            print "actual time :", rospy.get_time()
+            #print "actual time :", rospy.get_time()
             return str(self.param_to_return)
 
     def end(self):

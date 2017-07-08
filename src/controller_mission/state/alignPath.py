@@ -50,6 +50,7 @@ class AlignPath(MissionState):
         self.target_reached = data.target_is_reached
 
     def vision_subscriber_cb(self, vision_data):
+        print 'enter in vision'
         self.vision_x_pixel.append(vision_data.x)
         self.vision_y_pixel.append(vision_data.y)
         self.vision_angle.append(vision_data.angle)
@@ -61,7 +62,7 @@ class AlignPath(MissionState):
             self.parse_vision_data(vision_data.width, vision_data.height)
 
     def parse_vision_data(self, width, height):
-
+        print 'enter in parse'
         for i in self.vision_x_pixel:
             self.averaging_vision_x_pixel += i
 
@@ -91,6 +92,7 @@ class AlignPath(MissionState):
             self.vision_is_reach_yaw = False
 
         if self.target_reached:
+            print 'push target'
             pixel_to_meter = (width / self.param_vision_target_width_in_meter +
                               height / self.param_vision_target_height_in_meter) / 2
 
@@ -101,11 +103,13 @@ class AlignPath(MissionState):
             self.align_path()
 
     def align_path(self):
+
         vision_position_x = self.vision_position_x
         vision_position_y = self.vision_position_y
         vision_position_yaw = self.vision_position_yaw
 
         if not self.submarine_is_align:
+            print 'setting target'
             self.set_target(vision_position_x, vision_position_y, vision_position_yaw)
 
     def set_target(self, position_x, position_y, position_yaw):

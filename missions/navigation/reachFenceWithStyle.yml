@@ -4,7 +4,7 @@ statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 402
-  - 63
+  - 16
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXY.MoveRelativeXY
@@ -21,7 +21,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 2.0
+      value: 2.5
       variable_name: param_distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
@@ -30,20 +30,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveRelativeYAw
+      state: !!python/unicode 'moveRelative1'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 400
-      - 233
-      radius: 120
+      - 402
+      - 151
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: moveRelativeYaw.MoveRelativeYAw
-        base_file: /src/controller_mission/state/moveRelativeYaw.py
-        is_root: false
+        _name: moveRelativeXY.MoveRelativeXY
+        base_file: /src/controller_mission/state/moveRelativeXY.py
         outcome_states:
         - succeeded
         - aborted
@@ -51,28 +50,33 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: MoveRelativeYAw
+          value: !!python/unicode 'moveRelative1'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
+          value: 3.0
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
           value: 0.0
-          variable_name: param_distance_yaw
+          variable_name: param_distance_y
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'FinalMove'
+          state: MoveRelativeYAw
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 410
-          - 373
-          radius: 100
+          - 400
+          - 282
+          radius: 120
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveRelativeXY.MoveRelativeXY
-            base_file: /src/controller_mission/state/moveRelativeXY.py
+            _name: moveRelativeYaw.MoveRelativeYAw
+            base_file: /src/controller_mission/state/moveRelativeYaw.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -80,17 +84,47 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'FinalMove'
+              value: MoveRelativeYAw
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
               value: 0.0
-              variable_name: param_distance_x
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: 0.0
-              variable_name: param_distance_y
-            transitions: []
-          transitions: []
-- *id002
+              variable_name: param_distance_yaw
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'FinalMove'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 422
+              - 468
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveRelativeXY.MoveRelativeXY
+                base_file: /src/controller_mission/state/moveRelativeXY.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'FinalMove'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_y
+                transitions: []
+              transitions: []
 - *id003
+- *id004
+- *id002

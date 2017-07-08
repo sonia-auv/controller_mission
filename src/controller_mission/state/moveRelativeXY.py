@@ -20,6 +20,7 @@ class MoveRelativeXY(MissionState):
     def define_parameters(self):
         self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_distance_y', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_yaw', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -39,7 +40,7 @@ class MoveRelativeXY(MissionState):
                                   0.0,
                                   0.0,
                                   0.0,
-                                  0.0)
+                                  self.param_distance_yaw)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

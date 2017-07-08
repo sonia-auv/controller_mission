@@ -98,7 +98,7 @@ class AlignPath(MissionState):
 
             self.vision_position_x = self.averaging_vision_y_pixel / pixel_to_meter
             self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
-            self.vision_position_yaw = self.averaging_vision_angle / pixel_to_meter
+            self.vision_position_yaw = self.averaging_vision_angle
 
             self.align_path()
 

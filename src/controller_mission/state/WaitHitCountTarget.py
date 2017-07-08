@@ -2,8 +2,8 @@ import rospy
 import math
 
 from ..mission_state import MissionState, Parameter
-from geometry_msgs.msg import Pose
 from proc_image_processing.msg import VisionTarget
+from proc_control.srv import SetPositionTarget
 
 
 class WaitHitCountTarget(MissionState):
@@ -46,13 +46,13 @@ class WaitHitCountTarget(MissionState):
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            pose = Pose()
-            pose.position.x = 0.0
-            pose.position.y = position_y
-            pose.position.z = position_z
-            pose.orientation.z = position_yaw
-            self.set_local_target_topic.publish(pose)
-        except rospy.ROSException as exc:
+            self.set_local_target(0.0,
+                                  position_y,
+                                  position_z,
+                                  0.0,
+                                  0.0,
+                                  position_yaw)
+        except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_y)
@@ -60,7 +60,9 @@ class WaitHitCountTarget(MissionState):
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
-        self.set_local_target_topic = rospy.Publisher('/proc_control/set_target', Pose, queue_size=10)
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
         self.last_vision_target = None
         self.nb_hit_count = 0

@@ -62,13 +62,11 @@ class AlignToVision(MissionState):
             return pos_y
 
     def vision_cb(self, vision_data):
-        if self.param_color == vision_data.desc_1:
+        self.vision_x_pixel.append(vision_data.x)
+        self.vision_y_pixel.append(vision_data.y)
 
-            self.vision_x_pixel.append(vision_data.x)
-            self.vision_y_pixel.append(vision_data.y)
-
-            if len(self.vision_x_pixel) == self.param_max_queue_size and len(self.vision_y_pixel) == self.param_max_queue_size:
-                self.parse_vision_data(vision_data.width)
+        if len(self.vision_x_pixel) == self.param_max_queue_size and len(self.vision_y_pixel) == self.param_max_queue_size:
+            self.parse_vision_data(vision_data.width)
 
     def parse_vision_data(self, width):
 

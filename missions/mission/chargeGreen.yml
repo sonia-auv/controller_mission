@@ -12,7 +12,7 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 45.0
+      value: 0.0
       variable_name: heading_to_protect_dome
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -20,15 +20,15 @@ statesui:
       variable_name: times_out
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1.2
+      value: 2.5
       variable_name: distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: -1.2
+      value: 0.0
       variable_name: distance_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: -0.4
+      value: -0.2
       variable_name: distance_z
     is_root: false
     is_submission: true
@@ -93,7 +93,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 250.0
+      value: 150.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

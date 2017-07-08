@@ -16,11 +16,15 @@ globalparams:
   description: ''
   value: 3.0
   variable_name: move_translation
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 3.0
+  variable_name: times_out
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 339
-  - 372
+  - 389
+  - 542
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXY.MoveRelativeXY
@@ -53,8 +57,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 131
-      - 372
+      - 111
+      - 543
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeXY.MoveRelativeXY
@@ -81,19 +85,21 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: !!python/unicode 'GoRight2'
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Wait1'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 130
-          - 233
+          - 108
+          - 415
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveRelativeXY.MoveRelativeXY
-            base_file: /src/controller_mission/state/moveRelativeXY.py
-            is_root: false
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
             outcome_states:
             - succeeded
             - aborted
@@ -101,28 +107,28 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'GoRight'
+              value: !!python/unicode 'Wait1'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: 0.0
-              variable_name: param_distance_x
+              description: ' ''Times Out'''
+              value: !!python/unicode 'times_out'
+              variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: !!python/unicode 'move_translation'
-              variable_name: param_distance_y
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'GoFront3'
+              state: !!python/unicode 'GoRight'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 559
-              - 235
+              - 111
+              - 279
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXY.MoveRelativeXY
@@ -135,28 +141,31 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: !!python/unicode 'GoFront3'
+                  value: !!python/unicode 'GoRight'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: !!python/unicode 'move_front'
+                  value: 0.0
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: 0.0
+                  value: !!python/unicode 'move_translation'
                   variable_name: param_distance_y
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'GoLeft2'
+                  state: !!python/unicode 'Wait2'
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'GoFront3'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 559
-                  - 88
+                  - 706
+                  - 280
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXY.MoveRelativeXY
@@ -169,22 +178,91 @@ statesui:
                     parameters:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: state_name
-                      value: !!python/unicode 'GoLeft2'
+                      value: !!python/unicode 'GoFront3'
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
-                      value: 0.0
+                      value: !!python/unicode 'move_front'
                       variable_name: param_distance_x
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
-                      value: !!python/unicode 'frist_last_move_left'
+                      value: 0.0
                       variable_name: param_distance_y
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: !!python/unicode 'GoFront6'
-                  transitions: []
+                      state: !!python/unicode 'Wait2'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id005
+                    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 704
+                      - 149
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: timeOut.TimesOut
+                        base_file: /src/controller_mission/state/timeOut.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'Wait2'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: !!python/unicode 'times_out'
+                          variable_name: param_time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: succeeded
+                          variable_name: param_to_return
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'GoLeft2'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id006
+                        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 704
+                          - 13
+                          radius: 100
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: moveRelativeXY.MoveRelativeXY
+                            base_file: /src/controller_mission/state/moveRelativeXY.py
+                            is_root: false
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'GoLeft2'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: 0.0
+                              variable_name: param_distance_x
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: !!python/unicode 'frist_last_move_left'
+                              variable_name: param_distance_y
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'GoFront6'
+                          transitions: []
 - *id002
-- *id003
 - *id004
 - *id005
+- *id007
+- *id003
+- *id006

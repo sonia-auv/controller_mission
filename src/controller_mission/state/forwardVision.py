@@ -35,15 +35,14 @@ class ForwardVision(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def vision_cb(self, vision_data):
-        if self.param_color == vision_data.desc_1:
 
-            bounding_box = self.adjust_bounding_box * vision_data.width + self.initial_bounding_box
+        bounding_box = self.adjust_bounding_box * vision_data.width + self.initial_bounding_box
 
-            if abs(vision_data.x) >= bounding_box or abs(vision_data.y) >= bounding_box:
-                self.buoy_is_unreached = True
+        if abs(vision_data.x) >= bounding_box or abs(vision_data.y) >= bounding_box:
+            self.buoy_is_unreached = True
 
-            if vision_data.width >= self.param_nb_pixel_to_victory:
-                self.victory = False
+        if vision_data.width >= self.param_nb_pixel_to_victory:
+            self.victory = False
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -66,6 +65,8 @@ class ForwardVision(MissionState):
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
+
+        print self.param_topic_to_listen
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

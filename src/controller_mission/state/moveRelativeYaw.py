@@ -42,7 +42,7 @@ class MoveRelativeYAw(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position x = %f' % self.param_distance_yaw)
+        rospy.loginfo('Set relative position y = %f' % self.param_distance_yaw)
 
     def run(self, ud):
         if self.target_reached > 0:

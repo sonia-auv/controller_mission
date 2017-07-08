@@ -1,30 +1,14 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''find_red_buoy'''
-  variable_name: node_name
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''simple_buoy'''
-  variable_name: filterchain_name
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''/proc_image_processing/find_red_buoy_result'''
-  variable_name: topic_to_listen
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''/provider_vision/Bottom_GigE'''
-  variable_name: media_name
+globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 243
-  - 187
-  radius: 144
+  - 639
+  - 134
+  radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: WaitHitCountTarget.WaitHitCountTarget
-    base_file: /src/controller_mission/state/WaitHitCountTarget.py
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
     is_root: false
     outcome_states:
     - succeeded
@@ -33,36 +17,32 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: WaitHitCountTarget
+      value: !!python/unicode 'Aborted'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Name of topic to listen'''
-      value: !!python/unicode 'topic_to_listen'
-      variable_name: param_topic_to_listen
+      description: ' ''Times Out'''
+      value: 0.0
+      variable_name: param_time
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''nb of hit to finish this state'''
-      value: 30.0
-      variable_name: param_nb_hit_to_victory
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''max distance in pixel to have a consecutive count'''
-      value: 50.0
-      variable_name: param_max_distance_between_vision_target
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'StopVision'
+      state: !!python/unicode 'salut'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 256
-      - 409
+      - 716
+      - 280
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: launchVision.LaunchVision
-        base_file: /src/controller_mission/state/launchVision.py
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
         outcome_states:
         - succeeded
         - aborted
@@ -70,34 +50,26 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'StopVision'
+          value: !!python/unicode 'Finish'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Topic of  result'''
-          value: !!python/unicode 'node_name'
-          variable_name: param_node_name
+          description: ' ''Times Out'''
+          value: 0.0
+          variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: !!python/unicode 'filterchain_name'
-          variable_name: param_filterchain_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: !!python/unicode 'media_name'
-          variable_name: param_media_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: 2.0
-          variable_name: param_cmd
+          value: succeeded
+          variable_name: param_to_return
         transitions: []
       transitions: []
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 391
-  - 27
+  - 123
+  - 3
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: launchVision.LaunchVision
-    base_file: /src/controller_mission/state/launchVision.py
+    _name: moveGlobalZ.MoveZ
+    base_file: /src/controller_mission/state/moveGlobalZ.py
     is_root: true
     outcome_states:
     - succeeded
@@ -106,55 +78,48 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'StartVision'
+      value: MoveZ
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Topic of  result'''
-      value: !!python/unicode 'node_name'
-      variable_name: param_node_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: !!python/unicode 'filterchain_name'
-      variable_name: param_filterchain_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: !!python/unicode 'media_name'
-      variable_name: param_media_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
+      description: ' ''Distance to travel'''
       value: 1.0
-      variable_name: param_cmd
+      variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: WaitHitCountTarget
+      state: findObjectSweep
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: sweep
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: crab_walk
+      state: findObjectCrabWalk
   transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id002
-    state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id002
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 513
-      - 220
-      radius: 100
+      - 308
+      - 41
+      radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: navigation/crab_walk
-        base_file: /missions/navigation/crab_walk.yml
+        _name: vision/findObjectCrabWalk
+        base_file: /missions/vision/findObjectCrabWalk.yml
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.5
-          variable_name: first_last_move_front
+          value: !!python/unicode '''find_red_buoy'''
+          variable_name: node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''simple_buoy'''
+          variable_name: filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/proc_image_processing/find_red_buoy_result'''
+          variable_name: topic_to_listen
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/provider_vision/Front_GigE'''
+          variable_name: media_name
         is_submission: true
         outcome_states:
         - succeeded
@@ -162,65 +127,60 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: crab_walk
+          value: findObjectCrabWalk
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: navigation/crab_walk.yml
+          value: vision/findObjectCrabWalk.yml
           variable_name: SubMission_file
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'Fail'
+          state: TimesOut
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: chargeRedAndGreen
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: aborted
+          state: !!python/unicode 'Aborted'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id003
         state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 518
-          - 407
-          radius: 100
+          - 161
+          - 277
+          radius: 136
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: launchVision.LaunchVision
-            base_file: /src/controller_mission/state/launchVision.py
+            _name: mission/chargeRedAndGreen
+            base_file: /missions/mission/chargeRedAndGreen.yml
+            global_params: []
+            is_submission: true
             outcome_states:
             - succeeded
             - aborted
-            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'Fail'
+              value: chargeRedAndGreen
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Topic of  result'''
-              value: !!python/unicode 'node_name'
-              variable_name: param_node_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: !!python/unicode 'filterchain_name'
-              variable_name: param_filterchain_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: !!python/unicode 'media_name'
-              variable_name: param_media_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 2.0
-              variable_name: param_cmd
+              description: SubMission_file
+              value: mission/chargeRedAndGreen.yml
+              variable_name: SubMission_file
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'aborted'
+              state: !!python/unicode 'bonjou'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id004
             state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 516
-              - 575
+              - 427
+              - 477
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: timeOut.TimesOut
@@ -232,7 +192,7 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: !!python/unicode 'aborted'
+                  value: !!python/unicode 'Victory'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
@@ -240,11 +200,15 @@ statesui:
                   variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
-                  value: !!python/unicode 'aborted'
+                  value: succeeded
                   variable_name: param_to_return
                 transitions: []
               transitions: []
-- *id005
-- *id004
-- *id006
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: aborted
+        state1: *id003
+        state2: *id001
 - *id003
+- *id004
+- *id005
+- *id006

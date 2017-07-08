@@ -37,7 +37,7 @@ class MoveRelativeXY(MissionState):
         try:
             self.set_local_target(self.param_distance_x,
                                   self.param_distance_y,
-                                  0.0,
+                                  -1000.0,
                                   0.0,
                                   0.0,
                                   self.param_distance_yaw)

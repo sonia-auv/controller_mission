@@ -36,10 +36,10 @@ class MoveRelativeXY(MissionState):
         try:
             self.set_local_target(self.param_distance_x,
                                   self.param_distance_y,
-                                  -1000.0,
                                   0.0,
                                   0.0,
-                                  -1000.0)
+                                  0.0,
+                                  0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

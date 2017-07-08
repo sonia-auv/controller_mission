@@ -117,16 +117,16 @@ class AlignToVision(MissionState):
             if not self.vision_is_reach_y:
                 self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
             else:
-                self.heading = -1000.0
+                self.heading = 0.0
 
-            self.set_target(-1000.0, target_z, self.heading)
+            self.set_target(0.0, target_z, self.heading)
 
         elif not self.vision_is_reach:
-            self.set_target(vision_position_y, target_z, -1000.0)
+            self.set_target(vision_position_y, target_z, 0.0)
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            self.set_local_target(-1000.0,
+            self.set_local_target(0.0,
                                   position_y,
                                   position_z,
                                   0.0,

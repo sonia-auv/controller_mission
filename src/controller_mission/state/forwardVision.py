@@ -50,11 +50,11 @@ class ForwardVision(MissionState):
     def set_target(self, position_x):
         try:
             self.set_local_target(position_x,
+                                  -1000.0,
+                                  -1000.0,
                                   0.0,
                                   0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+                                  -1000.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

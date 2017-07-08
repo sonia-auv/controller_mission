@@ -33,9 +33,9 @@ class MoveRelativeYAw(MissionState):
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
         try:
-            self.set_local_target(0.0,
-                                  0.0,
-                                  0.0,
+            self.set_local_target(-1000.0,
+                                  -1000.0,
+                                  -1000.0,
                                   0.0,
                                   0.0,
                                   self.param_distance_yaw)

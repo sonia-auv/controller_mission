@@ -47,7 +47,8 @@ class AlignToVision(MissionState):
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
-        self.parameters.append(Parameter('param_control_bounding_box_in_y', 10, 'Maximum size of queue'))
+        self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.5, 'Control bounding box in y'))
+        self.parameters.append(Parameter('param_check_vision_reach', False, 'Maximum size of queue'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']
@@ -66,7 +67,7 @@ class AlignToVision(MissionState):
         self.vision_y_pixel.append(vision_data.y)
 
         if len(self.vision_x_pixel) == self.param_max_queue_size and len(self.vision_y_pixel) == self.param_max_queue_size:
-            self.parse_vision_data(vision_data.height)
+            self.parse_vision_data(vision_data.width)
 
     def parse_vision_data(self, width):
 
@@ -116,16 +117,16 @@ class AlignToVision(MissionState):
             if not self.vision_is_reach_y:
                 self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
             else:
-                self.heading = 0.0
+                self.heading = -1000.0
 
-            self.set_target(0.0, target_z, self.heading)
+            self.set_target(-1000.0, target_z, self.heading)
 
         elif not self.vision_is_reach:
-            self.set_target(vision_position_y, target_z, 0.0)
+            self.set_target(vision_position_y, target_z, -1000.0)
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            self.set_local_target(0.0,
+            self.set_local_target(-1000.0,
                                   position_y,
                                   position_z,
                                   0.0,
@@ -161,7 +162,7 @@ class AlignToVision(MissionState):
     def run(self, ud):
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
-        if self.victory:
+        if self.victory and (self.param_check_vision_reach or self.vision_is_reach):
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
 

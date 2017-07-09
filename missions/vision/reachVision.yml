@@ -165,6 +165,14 @@ statesui:
           description: ' ''Times Out'''
           value: 1.0
           variable_name: param_cmd
+        - &id005 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 1.0
+          variable_name: param_start_front
+        - &id006 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 2.0
+          variable_name: param_start_bottom
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
@@ -234,6 +242,10 @@ statesui:
               description: ' ''Maximum size of queue'''
               value: !!python/unicode 'control_bounding_box_in_y'
               variable_name: param_control_bounding_box_in_y
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Maximum size of queue'''
+              value: 'False'
+              variable_name: param_check_vision_reach
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
@@ -301,7 +313,7 @@ statesui:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
-                state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 312
                   - 449
@@ -334,12 +346,14 @@ statesui:
                       description: ' ''Times Out'''
                       value: 2.0
                       variable_name: param_cmd
+                    - *id005
+                    - *id006
                     transitions: []
                   transitions: []
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: forward
             state1: *id003
-            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 496
               - 114
@@ -398,14 +412,14 @@ statesui:
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: aborted
-                state1: *id005
+                state1: *id007
                 state2: *id003
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id005
+                state1: *id007
                 state2: *id004
 - *id002
 - *id003
-- *id005
+- *id007
 - *id004
-- *id006
+- *id008

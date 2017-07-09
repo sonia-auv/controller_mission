@@ -42,12 +42,19 @@ class AlignPath(MissionState):
         self.parameters.append(Parameter('param_vision_target_height_in_meter', 1.2, 'transform pixel to meter'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/align_path_result', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
+        self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.5, 'Control bounding box in y'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
+
+    def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
+        if pos_y <= self.param_control_bounding_box_in_y:
+            return self.param_control_bounding_box_in_y + 0.1
+        else:
+            return pos_y
 
     def vision_subscriber_cb(self, vision_data):
         print 'enter in vision'
@@ -101,9 +108,12 @@ class AlignPath(MissionState):
             self.align_path()
 
     def align_path(self):
+        vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
+        vision_position_x = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_x)
 
-        vision_position_x = self.vision_position_x
-        vision_position_y = self.vision_position_y
+        vision_position_y = vision_position_y * (self.vision_position_y / abs(self.vision_position_y))
+        vision_position_x = vision_position_x * (self.vision_position_x / abs(self.vision_position_x))
+
         vision_position_yaw = self.vision_position_yaw
 
         if not self.submarine_is_align:

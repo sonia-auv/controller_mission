@@ -132,27 +132,9 @@ statesui:
                           outcome: succeeded, state: chargeRed}
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition {
                           outcome: aborted, state: findNextBouy}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                          outcome: succeeded, state: chargeRedAndGreen}
                       transitions:
-                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-                        name: succeeded
-                        state1: *id006
-                        state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
-                          position: !!python/tuple [803, 527]
-                          radius: 100
-                          state: !!python/object:rqt_mission_planner.mission_model.state.State
-                            _name: mission/chargeRed
-                            base_file: /missions/mission/chargeRed.yml
-                            global_params: []
-                            is_submission: true
-                            outcome_states: [succeeded, aborted]
-                            parameters:
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                              description: state_name, value: chargeRed, variable_name: state_name}
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                              description: SubMission_file, value: mission/chargeRed.yml,
-                              variable_name: SubMission_file}
-                            transitions: []
-                          transitions: []
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: aborted
                         state1: *id006
@@ -174,15 +156,38 @@ statesui:
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition {
                               outcome: succeeded, state: chargeRed}
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                              outcome: succeeded, state: chargeRedAndGreen}
                           transitions:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
                             state1: *id007
-                            state2: *id008
+                            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple [729, 482]
+                              radius: 136
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: mission/chargeRedAndGreen
+                                base_file: /missions/mission/chargeRedAndGreen.yml
+                                global_params: []
+                                is_submission: true
+                                outcome_states: [succeeded, aborted]
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                                  description: state_name, value: chargeRedAndGreen,
+                                  variable_name: state_name}
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                                  description: SubMission_file, value: mission/chargeRedAndGreen.yml,
+                                  variable_name: SubMission_file}
+                                transitions: []
+                              transitions: []
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id006
+                        state2: *id008
 - *id002
 - *id003
 - *id004
 - *id005
-- *id008
 - *id007
 - *id006
+- *id008

@@ -39,7 +39,7 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
           value: !!python/unicode 'TurnLeft', variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-            to travel''', value: -45.0, variable_name: param_distance_yaw}
+            to travel''', value: -20.0, variable_name: param_distance_yaw}
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
           state: !!python/unicode 'WaitLeft'}
@@ -80,7 +80,7 @@ statesui:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
                   description: state_name, value: !!python/unicode 'TurnRight', variable_name: state_name}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Distance to travel''', value: 90.0, variable_name: param_distance_yaw}
+                  description: ' ''Distance to travel''', value: 40.0, variable_name: param_distance_yaw}
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition {
                   outcome: succeeded, state: !!python/unicode 'WaitRight'}
@@ -123,7 +123,7 @@ statesui:
                           description: state_name, value: !!python/unicode 'FinalTurn',
                           variable_name: state_name}
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                          description: ' ''Distance to travel''', value: -45.0, variable_name: param_distance_yaw}
+                          description: ' ''Distance to travel''', value: -20.0, variable_name: param_distance_yaw}
                         transitions: []
                       transitions: []
 - *id002

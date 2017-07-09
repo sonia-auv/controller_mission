@@ -50,9 +50,9 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
           value: !!python/unicode 'StarVision', variable_name: state_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Topic
-            of  result''', value: !!python/unicode 'align_path', variable_name: param_node_name}
+            of  result''', value: !!python/unicode 'align_bin', variable_name: param_node_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-            Out''', value: !!python/unicode 'simple_pipe', variable_name: param_filterchain_name}
+            Out''', value: !!python/unicode 'simple_bin', variable_name: param_filterchain_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
             Out''', value: !!python/unicode '/provider_vision/Bottom_GigE', variable_name: param_media_name}
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
@@ -80,7 +80,7 @@ statesui:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: state_name, value: AlignPath, variable_name: state_name}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''bounding box in pixel''', value: 150.0, variable_name: param_bounding_box}
+              description: ' ''bounding box in pixel''', value: 100.0, variable_name: param_bounding_box}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''bounding box in pixel''', value: 5.0, variable_name: param_yaw_bounding_box}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -88,7 +88,7 @@ statesui:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''transform pixel to meter''', value: 0.7, variable_name: param_vision_target_height_in_meter}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Name of topic to listen''', value: /proc_image_processing/align_path_result,
+              description: ' ''Name of topic to listen''', value: !!python/unicode '/proc_image_processing/align_bin_result',
               variable_name: param_topic_to_listen}
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
               description: ' ''Maximum size of queue''', value: 10.0, variable_name: param_max_queue_size}
@@ -113,10 +113,10 @@ statesui:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
                   description: state_name, value: !!python/unicode 'StopVision', variable_name: state_name}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Topic of  result''', value: !!python/unicode 'align_path',
+                  description: ' ''Topic of  result''', value: !!python/unicode 'align_bin',
                   variable_name: param_node_name}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Times Out''', value: !!python/unicode 'simple_pipe',
+                  description: ' ''Times Out''', value: !!python/unicode 'simple_bin',
                   variable_name: param_filterchain_name}
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
                   description: ' ''Times Out''', value: !!python/unicode '/provider_vision/Bottom_GigE',

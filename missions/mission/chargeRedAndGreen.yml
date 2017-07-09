@@ -2,9 +2,7 @@
 globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 363
-  - 59
+  position: !!python/tuple [363, 59]
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: mission/chargeRed
@@ -12,101 +10,86 @@ statesui:
     global_params: []
     is_root: true
     is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
+    outcome_states: [succeeded, aborted]
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: chargeRed
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: mission/chargeRed.yml
-      variable_name: SubMission_file
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: chargeRed, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+      value: mission/chargeRed.yml, variable_name: SubMission_file}
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: findNextBuoy
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: findNextBuoy}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: moveRelative}
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 367
-      - 215
+      position: !!python/tuple [368, 208]
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: mission/findNextBuoy
-        base_file: /missions/mission/findNextBuoy.yml
+        _name: navigation/moveRelative
+        base_file: /missions/navigation/moveRelative.yml
         global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''find_buoy'''
-          variable_name: node_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''simple_buoy_green'''
-          variable_name: filterchain_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''/provider_vision/Front_GigE'''
-          variable_name: media_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''green'''
-          variable_name: color
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''/proc_image_processing/find_buoy_result'''
-          variable_name: topic_to_listen
-        is_root: false
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+          value: 0.0, variable_name: distance_x}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+          value: 2.0, variable_name: distance_y}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+          value: 30.0, variable_name: heading}
         is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
+        outcome_states: [succeeded, aborted]
         parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: findNextBuoy
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: mission/findNextBuoy.yml
-          variable_name: SubMission_file
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: moveRelative, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+          value: navigation/moveRelative.yml, variable_name: SubMission_file}
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: chargeGreen
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: findNextGreen}
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 371
-          - 380
-          radius: 100
+          position: !!python/tuple [366, 333]
+          radius: 104
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: mission/chargeGreen
-            base_file: /missions/mission/chargeGreen.yml
+            _name: mission/findNextGreen
+            base_file: /missions/mission/findNextGreen.yml
             global_params: []
-            is_root: false
             is_submission: true
-            outcome_states:
-            - succeeded
-            - aborted
+            outcome_states: [succeeded, aborted]
             parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: chargeGreen
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: mission/chargeGreen.yml
-              variable_name: SubMission_file
-            transitions: []
-          transitions: []
-- *id003
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: findNextGreen, variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: SubMission_file, value: mission/findNextGreen.yml, variable_name: SubMission_file}
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+              outcome: succeeded, state: chargeGreen}
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple [370, 468]
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: mission/chargeGreen
+                base_file: /missions/mission/chargeGreen.yml
+                global_params: []
+                is_root: false
+                is_submission: true
+                outcome_states: [succeeded, aborted]
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: state_name, value: chargeGreen, variable_name: state_name}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: SubMission_file, value: mission/chargeGreen.yml, variable_name: SubMission_file}
+                transitions: []
+              transitions: []
+- *id004
 - *id002
+- *id003

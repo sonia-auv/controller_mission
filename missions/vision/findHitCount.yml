@@ -1,0 +1,94 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''find_buoy_red''', variable_name: node_name}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''simple_buoy''', variable_name: filterchain_name}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''/provider_vision/Front_GigE''', variable_name: media_name}
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [445, -154]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: launchVision.LaunchVision
+    base_file: /src/controller_mission/state/launchVision.py
+    is_root: true
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'StartVision', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Topic
+        of  result''', value: !!python/unicode 'node_name', variable_name: param_node_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Filter
+        chain name''', value: !!python/unicode 'filterchain_name', variable_name: param_filterchain_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: !!python/unicode 'media_name', variable_name: param_media_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: 1.0, variable_name: param_start_front}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: 2.0, variable_name: param_start_bottom}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 1.0, variable_name: param_cmd}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: WaitHitCountTarget}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [434, -7]
+      radius: 144
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: WaitHitCountTarget.WaitHitCountTarget
+        base_file: /src/controller_mission/state/WaitHitCountTarget.py
+        is_root: false
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: WaitHitCountTarget, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Name
+            of topic to listen''', value: !!python/unicode '/proc_image_processing/find_buoy_red_result',
+          variable_name: param_topic_to_listen}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''nb
+            of hit to finish this state''', value: 5.0, variable_name: param_nb_hit_to_victory}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''max
+            distance in pixel to have a consecutive count''', value: 50.0, variable_name: param_max_distance_between_vision_target}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'StopVsion'}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [458, 174]
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: launchVision.LaunchVision
+            base_file: /src/controller_mission/state/launchVision.py
+            is_root: false
+            outcome_states: [succeeded, aborted, preempted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'StopVsion', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Topic of  result''', value: !!python/unicode 'node_name',
+              variable_name: param_node_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Filter chain name''', value: !!python/unicode 'filterchain_name',
+              variable_name: param_filterchain_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Media name''', value: !!python/unicode 'media_name',
+              variable_name: param_media_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Media name''', value: 1.0, variable_name: param_start_front}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Media name''', value: 2.0, variable_name: param_start_bottom}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: 2.0, variable_name: param_cmd}
+            transitions: []
+          transitions: []
+- *id002
+- *id003

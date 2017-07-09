@@ -1,0 +1,64 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [359, 90]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: vision/alignBin
+    base_file: /missions/vision/alignBin.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 2.0, variable_name: distance_z}
+    is_root: true
+    is_submission: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: alignBin, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+      value: vision/alignBin.yml, variable_name: SubMission_file}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'Droppers2'}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [358, 263]
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: dropperState.Droppers
+        base_file: /src/controller_mission/state/dropperState.py
+        is_root: false
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: Droppers, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: 1.0, variable_name: param_id}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'Droppers2'}
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple [367, 418]
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: dropperState.Droppers
+            base_file: /src/controller_mission/state/dropperState.py
+            is_root: false
+            outcome_states: [succeeded, aborted, preempted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'Droppers2', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: 2.0, variable_name: param_id}
+            transitions: []
+          transitions: []
+- *id002
+- *id003

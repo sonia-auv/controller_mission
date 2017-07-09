@@ -1,0 +1,96 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [227, 179]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: mission/gate
+    base_file: /missions/mission/gate.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+      value: 2.0, variable_name: distance_x}
+    is_root: false
+    is_submission: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: gate, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+      value: mission/gate.yml, variable_name: SubMission_file}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: pathToBuoyRedAndGreen}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple [315, 360]
+      radius: 168
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: mission/pathToBuoyRedAndGreen
+        base_file: /missions/mission/pathToBuoyRedAndGreen.yml
+        global_params: []
+        is_submission: true
+        outcome_states: [succeeded, aborted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: pathToBuoyRedAndGreen, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+          value: mission/pathToBuoyRedAndGreen.yml, variable_name: SubMission_file}
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [455, 187]
+  radius: 128
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: vision/WaitHitCountPath
+    base_file: /missions/vision/WaitHitCountPath.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states: [succeeded, aborted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: WaitHitCountPath, variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
+      value: vision/WaitHitCountPath.yml, variable_name: SubMission_file}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: pathToBuoyRedAndGreen}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: *id003
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [356, 9]
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'start', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 0.0, variable_name: param_time}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: succeeded, variable_name: param_to_return}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: gate}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: WaitHitCountPath}
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id004
+    state2: *id001
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id004
+    state2: *id002
+- *id003

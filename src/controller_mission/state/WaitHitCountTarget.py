@@ -29,20 +29,8 @@ class WaitHitCountTarget(MissionState):
 
     def vision_cb(self, vision_data):
 
-        if self.last_vision_target is None:
-            self.last_vision_target = vision_data
-            return
-
-        distance = math.sqrt(((vision_data.x - self.last_vision_target.x) ** 2) + ((vision_data.y - self.last_vision_target.y) ** 2))
-
-        if distance <= self.param_max_distance_between_vision_target:
-            self.nb_hit_count += 1
-            rospy.loginfo('Hit count = %f' % self.nb_hit_count)
-        else:
-            self.nb_hit_count = 0
-            rospy.loginfo('Hit count lost !!!')
-
-        self.last_vision_target = vision_data
+        self.nb_hit_count += 1
+        rospy.loginfo('Hit count = %f' % self.nb_hit_count)
 
     def set_target(self, position_y, position_z, position_yaw):
         try:

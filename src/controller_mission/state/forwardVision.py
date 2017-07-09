@@ -66,8 +66,6 @@ class ForwardVision(MissionState):
 
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 
-        print self.param_topic_to_listen
-
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
         self.adjust_bounding_box = (self.param_final_bounding_box - self.param_initial_bounding_box) / (self.victory -

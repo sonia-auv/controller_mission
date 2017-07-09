@@ -8,7 +8,7 @@ from proc_control.msg import TargetReached
 from proc_image_processing.msg import VisionTarget
 
 
-class AlignPath(MissionState):
+class AlignBin(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -21,6 +21,7 @@ class AlignPath(MissionState):
         self.vision_angle = None
 
         self.target_reached = False
+        self.victory = False
 
         self.averaging_vision_x_pixel = 0.0
         self.averaging_vision_y_pixel = 0.0
@@ -45,7 +46,7 @@ class AlignPath(MissionState):
         self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.5, 'Control bounding box in y'))
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted', 'preempted']
+        return ['succeeded', 'aborted', 'forward', 'preempted']
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -57,6 +58,9 @@ class AlignPath(MissionState):
             return pos_y
 
     def vision_subscriber_cb(self, vision_data):
+        if vision_data.width >= self.param_nb_pixel_to_victory:
+            self.victory = True
+
         self.vision_x_pixel.append(vision_data.x)
         self.vision_y_pixel.append(vision_data.y)
         self.vision_angle.append(vision_data.angle)
@@ -152,12 +156,17 @@ class AlignPath(MissionState):
         self.vision_is_reach_x = False
         self.vision_is_reach_y = False
         self.vision_is_reach_yaw = False
+        self.victory = False
 
         self.submarine_is_align = False
 
     def run(self, ud):
         self.submarine_is_align = self.vision_is_reach_x and self.vision_is_reach_y and self.vision_is_reach_yaw
         if self.submarine_is_align:
+            self.set_target(0.0, 0.0, 0.0)
+            return 'forward'
+
+        if self.victory and self.submarine_is_align:
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
 

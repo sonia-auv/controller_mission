@@ -1,50 +1,65 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.0
+  variable_name: distance_y
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 2.5
+  variable_name: distance_z_global
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.0
+  variable_name: distance_right
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: -2.0
+  variable_name: distance_left
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 295
-  - 17
+  - 359
+  - -100
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: vision/alignPath
-    base_file: /missions/vision/alignPath.yml
-    global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 0.5
-      variable_name: distance_z
+    _name: savePosition.SavePosition
+    base_file: /src/controller_mission/state/savePosition.py
     is_root: true
-    is_submission: true
     outcome_states:
     - succeeded
     - aborted
+    - preempted
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: alignPath
+      value: SavePosition
       variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: vision/alignPath.yml
-      variable_name: SubMission_file
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'PushFront'
+      state: !!python/unicode 'Up'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: MoveRelativeZ
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'moveRight'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'MoveRight'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 295
-      - 163
+      - 359
+      - 48
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeXY.MoveRelativeXY
         base_file: /src/controller_mission/state/moveRelativeXY.py
-        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -52,15 +67,15 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'PushFront'
+          value: !!python/unicode 'MoveRight'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 2.5
+          value: 0.0
           variable_name: param_distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 0.0
+          value: !!python/unicode 'distance_right'
           variable_name: param_distance_y
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
@@ -70,117 +85,99 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: !!python/unicode 'Depth'
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: WaitForHit
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: WaitForHitFence
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 336
-          - 317
-          radius: 120
+          - 355
+          - 195
+          radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: vision/WaitForHitFence
-            base_file: /missions/vision/WaitForHitFence.yml
-            global_params: []
-            is_submission: true
+            _name: moveGlobalZ.MoveZ
+            base_file: /src/controller_mission/state/moveGlobalZ.py
             outcome_states:
             - succeeded
             - aborted
+            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: WaitForHitFence
+              value: !!python/unicode 'Depth'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: vision/WaitForHitFence.yml
-              variable_name: SubMission_file
+              description: ' ''Distance to travel'''
+              value: !!python/unicode 'distance_z_global'
+              variable_name: param_distance_z
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: chargeRedAndGreen
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: aborted
-              state: findNextBuoyRed
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: aborted
-              state: findFence
+              state: !!python/unicode 'MoveLeft'
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: fence
+              state: !!python/unicode 'MoveLeft'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: aborted
+            name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 580
-              - 311
+              - 349
+              - 321
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: mission/findFence
-                base_file: /missions/mission/findFence.yml
-                global_params: []
-                is_submission: true
+                _name: moveRelativeXY.MoveRelativeXY
+                base_file: /src/controller_mission/state/moveRelativeXY.py
                 outcome_states:
                 - succeeded
                 - aborted
+                - preempted
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: findFence
+                  value: !!python/unicode 'MoveLeft'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: SubMission_file
-                  value: mission/findFence.yml
-                  variable_name: SubMission_file
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: !!python/unicode 'distance_left'
+                  variable_name: param_distance_y
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: -1000.0
+                  variable_name: param_distance_yaw
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: chargeRedAndGreen
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: fence
+                  state: !!python/unicode 'MoveToSave'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 500
-                  - 484
+                  - 356
+                  - 457
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
-                    _name: mission/fence
-                    base_file: /missions/mission/fence.yml
-                    global_params: []
-                    is_submission: true
+                    _name: moveToSavePosition.MoveToSavePosition
+                    base_file: /src/controller_mission/state/moveToSavePosition.py
                     outcome_states:
                     - succeeded
                     - aborted
+                    - preempted
                     parameters:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: state_name
-                      value: fence
+                      value: !!python/unicode 'MoveToSave'
                       variable_name: state_name
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: SubMission_file
-                      value: mission/fence.yml
-                      variable_name: SubMission_file
                     transitions: []
                   transitions: []
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id003
-            state2: *id005
-- *id002
 - *id003
-- *id004
 - *id005
+- *id002
+- *id004

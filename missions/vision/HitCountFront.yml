@@ -1,10 +1,34 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''find_buoy_red'''
+  variable_name: node_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''simple_buoy'''
+  variable_name: filterchain_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/provider_vision/Front_GigE'''
+  variable_name: media_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/find_buoy_red_result'''
+  variable_name: topic_to_listen
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 10.0
+  variable_name: nb_hit_to_victory
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 50.0
+  variable_name: distance_between_pixel
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 322
-  - 236
+  - 445
+  - -154
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
@@ -17,20 +41,28 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'StartVsion'
+      value: !!python/unicode 'StartVision'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'buoy_red'
+      value: !!python/unicode 'node_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: simple_buoy
+      description: ' ''Filter chain name'''
+      value: !!python/unicode 'filterchain_name'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: /provider_vision/Front_GigE
+      description: ' ''Media name'''
+      value: !!python/unicode 'media_name'
       variable_name: param_media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Media name'''
+      value: 1.0
+      variable_name: param_start_front
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Media name'''
+      value: 2.0
+      variable_name: param_start_bottom
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
       value: 1.0
@@ -45,8 +77,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 302
-      - 358
+      - 434
+      - -7
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget
@@ -63,28 +95,28 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: /proc_image_processing/buoy_red_result
+          value: !!python/unicode '/proc_image_processing/find_buoy_red_result'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: 10.0
+          value: 5.0
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''
-          value: 20.0
+          value: 50.0
           variable_name: param_max_distance_between_vision_target
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: LaunchVision
+          state: !!python/unicode 'StopVsion'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 336
-          - 535
+          - 458
+          - 174
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: launchVision.LaunchVision
@@ -97,20 +129,28 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: LaunchVision
+              value: !!python/unicode 'StopVsion'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Topic of  result'''
-              value: !!python/unicode 'buoy_red'
+              value: !!python/unicode 'node_name'
               variable_name: param_node_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: simple_buoy
+              description: ' ''Filter chain name'''
+              value: !!python/unicode 'filterchain_name'
               variable_name: param_filterchain_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: /provider_vision/Front_GigE
+              description: ' ''Media name'''
+              value: !!python/unicode 'media_name'
               variable_name: param_media_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Media name'''
+              value: 1.0
+              variable_name: param_start_front
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Media name'''
+              value: 2.0
+              variable_name: param_start_bottom
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
               value: 2.0

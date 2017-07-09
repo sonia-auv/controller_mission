@@ -36,39 +36,41 @@ statesui:
       state: findHitCount
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'wait'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: HitCountFront
+      state: !!python/unicode 'HitCountRedBuoy'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 621
-      - -42
+      - 588
+      - -24
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: timeOut.TimesOut
-        base_file: /src/controller_mission/state/timeOut.py
+        _name: navigation/simple_sweep
+        base_file: /missions/navigation/simple_sweep.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 10.0
+          variable_name: times_out
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 20.0
+          variable_name: delta_heading
+        is_submission: true
         outcome_states:
         - succeeded
         - aborted
-        - preempted
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'wait'
+          value: simple_sweep
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: 10.0
-          variable_name: param_time
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: succeeded
-          variable_name: param_to_return
+          description: SubMission_file
+          value: navigation/simple_sweep.yml
+          variable_name: SubMission_file
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
@@ -79,8 +81,8 @@ statesui:
         state1: *id002
         state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 645
-          - 139
+          - 641
+          - 162
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -100,7 +102,7 @@ statesui:
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: !!python/unicode 'aborted'
+              value: succeeded
               variable_name: param_to_return
             transitions: []
           transitions: []
@@ -109,9 +111,9 @@ statesui:
     state1: *id001
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 351
-      - -54
-      radius: 104
+      - 366
+      - -28
+      radius: 120
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: vision/HitCountFront
         base_file: /missions/vision/HitCountFront.yml
@@ -147,7 +149,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: HitCountFront
+          value: !!python/unicode 'HitCountRedBuoy'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
@@ -164,7 +166,7 @@ statesui:
         state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 331
-          - 135
+          - 150
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -188,7 +190,7 @@ statesui:
               variable_name: param_to_return
             transitions: []
           transitions: []
+- *id002
 - *id004
 - *id005
-- *id002
 - *id003

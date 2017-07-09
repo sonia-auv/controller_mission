@@ -82,6 +82,7 @@ class ForwardVision(MissionState):
         self.set_target(self.param_distance_x)
 
     def run(self, ud):
+
         if self.victory:
             self.set_target(0.0)
             return 'succeeded'

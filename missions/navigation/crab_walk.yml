@@ -1,138 +1,179 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-  value: 1.5, variable_name: first_last_move_front}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.5
+  variable_name: first_last_move_front
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [342, 517]
+  position: !!python/tuple
+  - 342
+  - 517
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXY.MoveRelativeXY
     base_file: /src/controller_mission/state/moveRelativeXY.py
-    is_root: false
-    outcome_states: [succeeded, aborted, preempted]
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'GoFront', variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: !!python/unicode 'first_last_move_front', variable_name: param_distance_x}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 0.0, variable_name: param_distance_y}
-    - &id005 !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: -1000.0, variable_name: param_distance_yaw}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'GoFront'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode 'first_last_move_front'
+      variable_name: param_distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.0
+      variable_name: param_distance_y
+    - &id005 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: -1000.0
+      variable_name: param_distance_yaw
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'GoLeft3'}
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'SimpleCrab1'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'GoLeft3'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'SimpleCrab1'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [339, 351]
+      position: !!python/tuple
+      - 339
+      - 351
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: navigation/simple_crab_walk
         base_file: /missions/navigation/simple_crab_walk.yml
         global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: -1.5, variable_name: frist_last_move_left}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 1.0, variable_name: move_front}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 1.5, variable_name: first_move_front}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-          value: 3.0, variable_name: move_translation}
-        - &id003 !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-          description: '', value: 5.0, variable_name: times_out}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: -1.5
+          variable_name: frist_last_move_left
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 1.0
+          variable_name: move_front
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 1.5
+          variable_name: first_move_front
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 3.0
+          variable_name: move_translation
+        - &id003 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 5.0
+          variable_name: times_out
         is_root: false
         is_submission: true
-        outcome_states: [succeeded, aborted]
+        outcome_states:
+        - succeeded
+        - aborted
         parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: !!python/unicode 'SimpleCrab1', variable_name: state_name}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
-          value: navigation/simple_crab_walk.yml, variable_name: SubMission_file}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'SimpleCrab1'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: navigation/simple_crab_walk.yml
+          variable_name: SubMission_file
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-          state: !!python/unicode 'SimpleCrab1'}
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'SimpleCrab1'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [342, 179]
+          position: !!python/tuple
+          - 342
+          - 179
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: navigation/simple_crab_walk
             base_file: /missions/navigation/simple_crab_walk.yml
             global_params:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: -1.5, variable_name: frist_last_move_left}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: 1.0, variable_name: move_front}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: 1.5, variable_name: first_move_front}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: '', value: 3.0, variable_name: move_translation}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: -1.5
+              variable_name: frist_last_move_left
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.0
+              variable_name: move_front
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.5
+              variable_name: first_move_front
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 3.0
+              variable_name: move_translation
             - *id003
             is_root: false
             is_submission: true
-            outcome_states: [succeeded, aborted]
+            outcome_states:
+            - succeeded
+            - aborted
             parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: state_name, value: !!python/unicode 'SimpleCrab2', variable_name: state_name}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: SubMission_file, value: navigation/simple_crab_walk.yml,
-              variable_name: SubMission_file}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'SimpleCrab2'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: navigation/simple_crab_walk.yml
+              variable_name: SubMission_file
             transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
-              outcome: succeeded, state: !!python/unicode 'GoFront2'}
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'GoFront2'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id004
             state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple [343, 32]
+              position: !!python/tuple
+              - 343
+              - 32
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXY.MoveRelativeXY
                 base_file: /src/controller_mission/state/moveRelativeXY.py
                 is_root: false
-                outcome_states: [succeeded, aborted, preempted]
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
                 parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: state_name, value: !!python/unicode 'GoFront2', variable_name: state_name}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Distance to travel''', value: !!python/unicode 'first_last_move_front',
-                  variable_name: param_distance_x}
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-                  description: ' ''Distance to travel''', value: 0.0, variable_name: param_distance_y}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'GoFront2'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: !!python/unicode 'first_last_move_front'
+                  variable_name: param_distance_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_y
                 - *id005
                 transitions: []
               transitions: []
 - *id002
 - *id004
 - *id006
-- &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [115, 523]
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalZ.MoveZ
-    base_file: /src/controller_mission/state/moveGlobalZ.py
-    is_root: true
-    outcome_states: [succeeded, aborted, preempted]
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: MoveZ, variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 2.0, variable_name: param_distance_z}
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'GoFront'}
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id007
-    state2: *id001

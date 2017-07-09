@@ -164,8 +164,8 @@ class AlignToVision(MissionState):
 
         if self.victory and self.vision_is_reach:
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
-            rospy.loginfo('Pixel Vision in x : %f', str(self.averaging_vision_x_pixel))
-            rospy.loginfo('Pixel Vision in y : %f', str(self.averaging_vision_y_pixel))
+            rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
+            rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
 

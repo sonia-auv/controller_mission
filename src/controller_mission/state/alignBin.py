@@ -44,6 +44,7 @@ class AlignBin(MissionState):
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/align_path_result', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
         self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.5, 'Control bounding box in y'))
+        self.parameters.append(Parameter('param_nb_pixel_to_victory', 375, 'Control bounding box in y'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']

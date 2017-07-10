@@ -135,7 +135,7 @@ class AlignBin(MissionState):
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position y = %f' % position_x)
-        rospy.loginfo('Set relative position z = %f' % position_y)
+        rospy.loginfo('Set relative position x = %f' % position_y)
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
@@ -163,13 +163,14 @@ class AlignBin(MissionState):
 
     def run(self, ud):
         self.submarine_is_align = self.vision_is_reach_x and self.vision_is_reach_y and self.vision_is_reach_yaw
-        if self.submarine_is_align:
-            self.set_target(0.0, 0.0, 0.0)
-            return 'forward'
 
         if self.victory and self.submarine_is_align:
             self.set_target(0.0, 0.0, 0.0)
             return 'succeeded'
+
+        if self.submarine_is_align:
+            self.set_target(0.0, 0.0, 0.0)
+            return 'forward'
 
     def end(self):
         self.vision_subscriber.unregister()

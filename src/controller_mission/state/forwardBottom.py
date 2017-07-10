@@ -57,7 +57,7 @@ class ForwardBottom(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position x = %f' % position_z)
+        rospy.loginfo('Set relative position z = %f' % position_z)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
@@ -82,7 +82,7 @@ class ForwardBottom(MissionState):
             self.set_target(0.0)
             return 'succeeded'
 
-        if self.position_in_z is not None:
+        if self.position_in_z is not None and self.target_reached:
             if self.param_distance_z + self.position_in_z >= self.param_distance_max_z:
                 self.set_target(self.param_distance_max_z - self.position_in_z)
             else:

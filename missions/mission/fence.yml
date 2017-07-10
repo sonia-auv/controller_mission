@@ -49,7 +49,7 @@ statesui:
       variable_name: media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 200.0
+      value: 250.0
       variable_name: bounding_box_vision
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -57,11 +57,11 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 15.0
+      value: 200.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 15.0
+      value: 7.0
       variable_name: heading
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -73,7 +73,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 50.0
+      value: 65.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -81,7 +81,7 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 15.0
+      value: 5.0
       variable_name: max_queue_size
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -111,7 +111,7 @@ statesui:
       description: ''
       value: 5.0
       variable_name: control_bounding_box_yaw
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -134,3 +134,34 @@ statesui:
     name: succeeded
     state1: *id001
     state2: *id002
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 100
+  - 100
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalZ.MoveZ
+    base_file: /src/controller_mission/state/moveGlobalZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: MoveZ
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.5
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'AlignFence'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id003
+    state2: *id001

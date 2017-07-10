@@ -67,7 +67,7 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.0
+      value: 0.4
       variable_name: distance_z
     is_root: true
     is_submission: true
@@ -102,7 +102,7 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 0.7
+          value: 0.2
           variable_name: distance_z_global
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''

@@ -32,7 +32,7 @@ class ForwardBottom(MissionState):
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
 
-    def sub_position(self, position_data):
+    def sub_position_cb(self, position_data):
         self.position_in_z = position_data.pose.pose.position.z
 
     def vision_cb(self, vision_data):

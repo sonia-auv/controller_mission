@@ -75,7 +75,7 @@ statesui:
           variable_name: param_start_front
         - &id006 !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: 2.0
+          value: 1.0
           variable_name: param_start_bottom
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -134,6 +134,10 @@ statesui:
               description: ' ''Control bounding box in y'''
               value: 0.5
               variable_name: param_control_bounding_box_in_y
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Control bounding box in y'''
+              value: 375.0
+              variable_name: param_nb_pixel_to_victory
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: forward
@@ -176,7 +180,7 @@ statesui:
                   variable_name: param_distance_max_z
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''
-                  value: 200.0
+                  value: 375.0
                   variable_name: param_nb_pixel_to_victory
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Name of topic to listen'''

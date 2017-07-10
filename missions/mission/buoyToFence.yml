@@ -3,37 +3,13 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 472
-  - 188
+  - 348
+  - 190
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: vision/HitCountBottom
-    base_file: /missions/vision/HitCountBottom.yml
-    global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''find_path'''
-      variable_name: node_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''simple_pipe'''
-      variable_name: filterchain_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''/provider_vision/Bottom_GigE'''
-      variable_name: media_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''/proc_image_processing/find_path_result'''
-      variable_name: topic_to_listen
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 20.0
-      variable_name: nb_hit_to_victory
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 50.0
-      variable_name: distancd_between_pixel
+    _name: navigation/GotoNextPAth
+    base_file: /missions/navigation/GotoNextPAth.yml
+    global_params: []
     is_root: false
     is_submission: true
     outcome_states:
@@ -42,11 +18,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'HitCountPath'
+      value: GotoNextPAth
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: SubMission_file
-      value: vision/HitCountBottom.yml
+      value: navigation/GotoNextPAth.yml
       variable_name: SubMission_file
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -85,41 +61,6 @@ statesui:
       transitions: []
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 227
-  - 184
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: navigation/GotoNextPAth
-    base_file: /missions/navigation/GotoNextPAth.yml
-    global_params: []
-    is_root: false
-    is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: GotoNextPAth
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: navigation/GotoNextPAth.yml
-      variable_name: SubMission_file
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: pathToBuoyRedAndGreen
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: pathToFence
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id002
-    state2: *id003
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
   - 351
   - 10
   radius: 100
@@ -138,7 +79,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: 1.0
+      value: 0.0
       variable_name: param_time
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -154,10 +95,6 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: *id002
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id004
+    state1: *id002
     state2: *id001
 - *id003

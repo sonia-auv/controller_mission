@@ -116,10 +116,40 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: 1.5
+                  value: 2.0
                   variable_name: param_distance_z
-                transitions: []
-              transitions: []
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'moveYaw'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 596
+                  - 478
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeYaw.MoveRelativeYAw
+                    base_file: /src/controller_mission/state/moveRelativeYaw.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'moveYaw'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: 90.0
+                      variable_name: param_distance_yaw
+                    transitions: []
+                  transitions: []
 - *id003
 - *id002
 - *id004
+- *id005

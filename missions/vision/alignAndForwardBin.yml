@@ -75,7 +75,7 @@ statesui:
           variable_name: param_start_front
         - &id006 !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: 1.0
+          value: 2.0
           variable_name: param_start_bottom
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -172,7 +172,7 @@ statesui:
                   variable_name: param_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''
-                  value: 2.5
+                  value: 0.7
                   variable_name: param_distance_max_z
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''

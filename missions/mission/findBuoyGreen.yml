@@ -37,6 +37,9 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'HitCountRedBuoy'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'HitCountGreen'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -102,7 +105,7 @@ statesui:
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: succeeded
+              value: !!python/unicode 'aborted'
               variable_name: param_to_return
             transitions: []
           transitions: []
@@ -111,20 +114,20 @@ statesui:
     state1: *id001
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 366
-      - -28
-      radius: 120
+      - 349
+      - -30
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: vision/HitCountFront
         base_file: /missions/vision/HitCountFront.yml
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''find_buoy_red'''
+          value: !!python/unicode '''find_buoy_green'''
           variable_name: node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''simple_buoy'''
+          value: !!python/unicode '''simple_buoy_green'''
           variable_name: filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -132,7 +135,7 @@ statesui:
           variable_name: media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''/proc_image_processing/find_buoy_red_result'''
+          value: !!python/unicode '''/proc_image_processing/find_buoy_green_result'''
           variable_name: topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -149,7 +152,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'HitCountRedBuoy'
+          value: !!python/unicode 'HitCountGreen'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file

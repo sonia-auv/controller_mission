@@ -1,5 +1,9 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 4.0
+  variable_name: push_front
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -56,7 +60,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 4.0
+          value: !!python/unicode 'push_front'
           variable_name: param_distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''

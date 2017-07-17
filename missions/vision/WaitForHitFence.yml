@@ -147,7 +147,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: HitCountFront
+          value: !!python/unicode 'HitCountFence'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file

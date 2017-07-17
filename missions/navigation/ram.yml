@@ -2,23 +2,23 @@
 globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 45.0
+  value: 0.0
   variable_name: heading_to_protect_dome
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 3.0
+  value: 10.0
   variable_name: times_out
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 0.707
+  value: 2.5
   variable_name: distance_x
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: -0.707
+  value: 0.0
   variable_name: distance_y
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: -0.2
+  value: -0.4
   variable_name: distance_z
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
@@ -136,6 +136,10 @@ statesui:
                   description: ' ''Distance to travel'''
                   value: !!python/unicode 'distance_y'
                   variable_name: param_distance_y
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: -1000.0
+                  variable_name: param_distance_yaw
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded

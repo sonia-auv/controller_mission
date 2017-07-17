@@ -105,7 +105,7 @@ statesui:
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: succeeded
+              value: !!python/unicode 'aborted'
               variable_name: param_to_return
             transitions: []
           transitions: []
@@ -152,7 +152,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'HitCountGreen'
+          value: !!python/unicode 'HitCountFence'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file

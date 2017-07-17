@@ -3,14 +3,30 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 348
-  - 190
+  - 333
+  - 77
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: navigation/GotoNextPAth
     base_file: /missions/navigation/GotoNextPAth.yml
-    global_params: []
-    is_root: false
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.2
+      variable_name: up
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: -30.0
+      variable_name: heading_to_square_buoy
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 4.0
+      variable_name: push_front
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 2.0
+      variable_name: down
+    is_root: true
     is_submission: true
     outcome_states:
     - succeeded
@@ -35,15 +51,20 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 345
-      - 379
+      - 333
+      - 334
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: mission/pathToFence
-        base_file: /missions/mission/pathToFence.yml
-        global_params: []
+        base_file: /missions/mission/PathFence.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 4.0
+          variable_name: push_front
+        is_root: false
         is_submission: true
         outcome_states:
         - succeeded
@@ -55,46 +76,8 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: mission/pathToFence.yml
+          value: mission/PathFence.yml
           variable_name: SubMission_file
         transitions: []
       transitions: []
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 351
-  - 10
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: timeOut.TimesOut
-    base_file: /src/controller_mission/state/timeOut.py
-    is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'StartFence'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: 0.0
-      variable_name: param_time
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: succeeded
-      variable_name: param_to_return
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: GotoNextPAth
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'HitCountPath'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id002
-    state2: *id001
-- *id003
+- *id002

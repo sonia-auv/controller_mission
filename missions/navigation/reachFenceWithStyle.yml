@@ -1,5 +1,21 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.8
+  variable_name: push_front
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: -0.6
+  variable_name: push_z_relative
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 180.0
+  variable_name: heading_style
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: -2.0
+  variable_name: last_push
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -17,11 +33,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: MoveRelativeXY
+      value: !!python/unicode 'PushFront'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 1.8
+      value: !!python/unicode 'push_front'
       variable_name: param_distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
@@ -58,7 +74,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: -0.6
+          value: !!python/unicode 'push_z_relative'
           variable_name: param_distance_z
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -88,7 +104,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: 180.0
+              value: !!python/unicode 'heading_style'
               variable_name: param_distance_yaw
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -151,7 +167,7 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
-                      value: -2.0
+                      value: !!python/unicode 'last_push'
                       variable_name: param_distance_x
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''

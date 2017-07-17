@@ -241,7 +241,7 @@ statesui:
                           radius: 120
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: mission/findNextBuoyRed
-                            base_file: /missions/mission/findNextBuoyRed.yml
+                            base_file: /missions/mission/findBuoyRed.yml
                             global_params: []
                             is_submission: true
                             outcome_states:
@@ -254,7 +254,7 @@ statesui:
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: SubMission_file
-                              value: mission/findNextBuoyRed.yml
+                              value: mission/findBuoyRed.yml
                               variable_name: SubMission_file
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition

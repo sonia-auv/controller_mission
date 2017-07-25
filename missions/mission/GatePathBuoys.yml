@@ -2,7 +2,7 @@
 globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 1.0
+  value: 1.5
   variable_name: depth_start
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
@@ -16,7 +16,7 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 2.0
+      value: 3.0
       variable_name: distance_x
     is_root: false
     is_submission: true

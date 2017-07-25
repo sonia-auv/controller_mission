@@ -2,88 +2,153 @@
 globalparams: []
 statesui:
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [410, 384]
+  position: !!python/tuple
+  - 410
+  - 384
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: navigation/ram
     base_file: /missions/navigation/ram.yml
     global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.0, variable_name: heading_to_protect_dome}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 10.0, variable_name: times_out}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 2.5, variable_name: distance_x}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.0, variable_name: distance_y}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: -0.4, variable_name: distance_z}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.0
+      variable_name: heading_to_protect_dome
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 10.0
+      variable_name: times_out
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 2.5
+      variable_name: distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.0
+      variable_name: distance_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: -0.4
+      variable_name: distance_z
     is_root: false
     is_submission: true
-    outcome_states: [succeeded, aborted]
+    outcome_states:
+    - succeeded
+    - aborted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'RamRedBuoy', variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
-      value: navigation/ram.yml, variable_name: SubMission_file}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'RamRedBuoy'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: navigation/ram.yml
+      variable_name: SubMission_file
     transitions: []
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [415, 227]
+  position: !!python/tuple
+  - 415
+  - 227
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: vision/reachVision
     base_file: /missions/vision/reachVision.yml
     global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: !!python/unicode '''buoy_red''', variable_name: node_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: !!python/unicode '''simple_buoy''', variable_name: filterchaine_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: !!python/unicode '''/provider_vision/Front_GigE''', variable_name: media_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 190.0, variable_name: bounding_box_vision}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: !!python/unicode '''red''', variable_name: color}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 80.0, variable_name: threshold_width}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 15.0, variable_name: heading}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.23, variable_name: target_width_in_meter}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: !!python/unicode '''/proc_image_processing/buoy_red_result''', variable_name: topic_to_listen}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 200.0, variable_name: nb_pixel_to_victory}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 30.0, variable_name: maximum_nb_alignment}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 10.0, variable_name: max_queue_size}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.5, variable_name: control_bounding_box_in_y}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 1.0, variable_name: distance_x}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 600.0, variable_name: initial_bounding_box}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 400.0, variable_name: final_bounding_box}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.5, variable_name: control_bounding_box_xy}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 0.3, variable_name: control_bounding_box_z}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 5.0, variable_name: control_bounding_box_yaw}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''buoy_red'''
+      variable_name: node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_buoy'''
+      variable_name: filterchaine_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/provider_vision/Front_GigE'''
+      variable_name: media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 190.0
+      variable_name: bounding_box_vision
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''red'''
+      variable_name: color
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 80.0
+      variable_name: threshold_width
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 15.0
+      variable_name: heading
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.23
+      variable_name: target_width_in_meter
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/proc_image_processing/buoy_red_result'''
+      variable_name: topic_to_listen
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 160.0
+      variable_name: nb_pixel_to_victory
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 30.0
+      variable_name: maximum_nb_alignment
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 10.0
+      variable_name: max_queue_size
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: control_bounding_box_in_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.0
+      variable_name: distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 600.0
+      variable_name: initial_bounding_box
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 400.0
+      variable_name: final_bounding_box
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: control_bounding_box_xy
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.3
+      variable_name: control_bounding_box_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 5.0
+      variable_name: control_bounding_box_yaw
     is_root: true
     is_submission: true
-    outcome_states: [succeeded, aborted]
+    outcome_states:
+    - succeeded
+    - aborted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: !!python/unicode 'AlignRedBuoy', variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
-      value: vision/reachVision.yml, variable_name: SubMission_file}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'AlignRedBuoy'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: vision/reachVision.yml
+      variable_name: SubMission_file
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'RamRedBuoy'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'RamRedBuoy'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded

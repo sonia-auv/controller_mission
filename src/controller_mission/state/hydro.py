@@ -29,6 +29,7 @@ class Hydro(MissionState):
     def ping_cb(self, data):
         self.ping_heading.append(data.pose.oriantation.z)
         if len(self.ping_heading) == self.param_queu_size:
+            self.ping.unregister()
             self.parse_ping_data()
 
     def parse_ping_data(self):

@@ -27,7 +27,7 @@ class Hydro(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def ping_cb(self, data):
-        self.ping_heading.append(data.pose.oriantation.z)
+        self.ping_heading.append(data.pose.orientation.z)
         if len(self.ping_heading) == self.param_queu_size:
             self.ping.unregister()
             self.parse_ping_data()
@@ -44,19 +44,19 @@ class Hydro(MissionState):
 
         if len(x) % 2 == 1:
 
-            median_x = x[math.floor(len(x)/2.0)]
+            median_x = x[int(math.floor(len(x)/2.0))]
 
         else:
 
-            median_x = (x[len(x)/2 - 1] / 2) + (x[len(x)/2] / 2)
+            median_x = (x[int(len(x)/2 - 1)] / 2) + (x[int(len(x)/2)] / 2)
 
         if len(y) % 2 == 1:
 
-            median_y = y[math.floor(len(y) / 2.0)]
+            median_y = y[int(math.floor(len(y) / 2.0))]
 
         else:
 
-            median_y = (y[len(y) / 2 - 1] / 2) + (y[len(y) / 2] / 2)
+            median_y = (y[int(len(y) / 2 - 1)] / 2) + (y[int(len(y) / 2)] / 2)
 
         heading = math.degrees(math.atan2(median_y, median_x))
 
@@ -87,7 +87,6 @@ class Hydro(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position Yaw = %f' % self.param_heading)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

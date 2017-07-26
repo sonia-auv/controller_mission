@@ -106,11 +106,11 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.0
+          value: -1.0
           variable_name: distance_right
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: -2.0
+          value: 2.0
           variable_name: distance_left
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''

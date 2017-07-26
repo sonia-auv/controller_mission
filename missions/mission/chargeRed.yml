@@ -16,11 +16,11 @@ statesui:
       variable_name: heading_to_protect_dome
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 10.0
+      value: 14.0
       variable_name: times_out
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 2.5
+      value: 3.5
       variable_name: distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -28,7 +28,7 @@ statesui:
       variable_name: distance_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: -0.4
+      value: -0.5
       variable_name: distance_z
     is_root: false
     is_submission: true

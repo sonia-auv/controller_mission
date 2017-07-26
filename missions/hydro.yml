@@ -1,0 +1,27 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 358
+  - 124
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: hydro.Hydro
+    base_file: /src/controller_mission/state/hydro.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Hydro
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Maximum size of queue'''
+      value: 10.0
+      variable_name: param_queu_size
+    transitions: []
+  transitions: []

@@ -93,11 +93,11 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 20.0
+      value: 7.0
       variable_name: nb_hit_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 50.0
+      value: 30.0
       variable_name: distancd_between_pixel
     is_root: false
     is_submission: true

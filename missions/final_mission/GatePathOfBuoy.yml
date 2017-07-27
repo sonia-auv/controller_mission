@@ -165,7 +165,7 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''find_path_buoy'''
+          value: !!python/unicode '''find_path'''
           variable_name: node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -177,7 +177,7 @@ statesui:
           variable_name: media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''/proc_image_processing/find_path_buoy_result'''
+          value: !!python/unicode '''/proc_image_processing/result'''
           variable_name: topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -221,6 +221,22 @@ statesui:
               description: ''
               value: 2.5
               variable_name: distance_z
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''/provider_vision/Bottom_GigE'''
+              variable_name: media_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''align_path'''
+              variable_name: node_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''simple_path'''
+              variable_name: filterchain_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''/proc_image_processing/result'''
+              variable_name: topic_to_listen
             is_submission: true
             outcome_states:
             - succeeded

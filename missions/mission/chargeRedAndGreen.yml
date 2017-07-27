@@ -37,8 +37,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 368
-      - 208
+      - 369
+      - 198
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: navigation/moveRelative
@@ -50,11 +50,11 @@ statesui:
           variable_name: distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 2.0
+          value: 1.0
           variable_name: distance_y
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 30.0
+          value: 20.0
           variable_name: heading
         is_submission: true
         outcome_states:

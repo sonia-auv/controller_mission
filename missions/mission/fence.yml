@@ -24,7 +24,7 @@ statesui:
       variable_name: heading_style
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: -3.0
+      value: -6.0
       variable_name: last_push
     is_root: false
     is_submission: true

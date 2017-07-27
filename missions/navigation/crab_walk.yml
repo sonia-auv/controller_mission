@@ -57,7 +57,7 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: -1.5
+          value: -2.0
           variable_name: frist_last_move_left
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -65,11 +65,11 @@ statesui:
           variable_name: move_front
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.5
+          value: 2.0
           variable_name: first_move_front
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 3.0
+          value: 4.0
           variable_name: move_translation
         - &id003 !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''

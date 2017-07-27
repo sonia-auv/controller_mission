@@ -177,7 +177,7 @@ statesui:
           variable_name: media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''/proc_image_processing/result'''
+          value: !!python/unicode '''/proc_image_processing/find_path_result'''
           variable_name: topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -235,7 +235,7 @@ statesui:
               variable_name: filterchain_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: !!python/unicode '''/proc_image_processing/result'''
+              value: !!python/unicode '''/proc_image_processing/align_path_result'''
               variable_name: topic_to_listen
             is_submission: true
             outcome_states:

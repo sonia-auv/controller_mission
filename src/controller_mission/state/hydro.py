@@ -1,5 +1,4 @@
 import rospy
-import numpy as np
 import math
 
 from Queue import deque
@@ -86,7 +85,6 @@ class Hydro(MissionState):
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
-
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

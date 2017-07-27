@@ -19,6 +19,8 @@ class Hydro(MissionState):
         self.ping_heading = None
         self.ping = None
 
+        self.nb_ping = 0
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_queu_size', 10, 'Maximum size of queue'))
 
@@ -26,6 +28,8 @@ class Hydro(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def ping_cb(self, data):
+        self.nb_ping += self.nb_ping
+        rospy.loginfo('ping : %i' % int(self.nb_ping))
         self.ping_heading.append(data.pose.orientation.z)
         if len(self.ping_heading) == self.param_queu_size:
             self.ping.unregister()
@@ -57,7 +61,7 @@ class Hydro(MissionState):
 
             median_y = (y[int(len(y) / 2 - 1)] / 2) + (y[int(len(y) / 2)] / 2)
 
-        heading = math.degrees(math.atan2(median_y, median_x))
+        heading = (math.degrees(math.atan2(median_y, median_x)) + 360) % 360
 
         self.set_target(heading)
 
@@ -86,10 +90,12 @@ class Hydro(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
+        rospy.loginfo('global yaw position :%f' % heading)
+
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
     def run(self, ud):
-        if self.target_reached > 0:
+        if self.target_reached > 0 and len(self.ping_heading) == self.param_queu_size:
             return 'succeeded'
 
     def initialize(self):
@@ -102,11 +108,12 @@ class Hydro(MissionState):
         self.orientation = None
         self.wait_until_position_is_get()
 
-        self.ping = rospy.Subscriber('/proc_hydrophone/ping', PingPose, self.ping_cb)
-
         self.ping_heading = deque([], maxlen=self.param_queu_size)
-
         self.ping_heading.clear()
+
+        self.nb_ping = 0
+
+        self.ping = rospy.Subscriber('/proc_hydrophone/ping', PingPose, self.ping_cb)
 
     def end(self):
         pass

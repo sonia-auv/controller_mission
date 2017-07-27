@@ -47,6 +47,10 @@ class PostMissionReport:
         rp = rospkg.RosPack()
         path = os.path.join(rp.get_path('controller_mission'), 'report')
         report_file = path + '/' + mission_name[:-6] + '-mission-report-' + time.strftime("%d-%m-%Y") + '-' + time.strftime("%H-%M-%S") + '.txt'
+
+        if not os.path.exists(os.path.dirname(report_file)):
+            os.makedirs(os.path.dirname(report_file))
+
         self.report = open(str(report_file), 'w')
 
     def close_file(self):

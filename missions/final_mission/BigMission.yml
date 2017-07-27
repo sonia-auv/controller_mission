@@ -1,0 +1,115 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 362
+  - 11
+  radius: 112
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: final_mission/GatePathOfBuoy
+    base_file: /missions/final_mission/GatePathOfBuoy.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.5
+      variable_name: depth_start
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: GatePathOfBuoy
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: final_mission/GatePathOfBuoy.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: Buoys
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: aborted
+      state: findBuoyRed
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 241
+      - 181
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: final_mission/Buoys
+        base_file: /missions/final_mission/Buoys.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 2.0
+          variable_name: first_push
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 2.0
+          variable_name: second_push
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 1.75
+          variable_name: depth_to_start_buoy
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: Buoys
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: final_mission/Buoys.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: aborted
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 525
+      - 160
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: final_mission/findBuoyRed
+        base_file: /missions/final_mission/findBuoyRed.yml
+        global_params: []
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: findBuoyRed
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: final_mission/findBuoyRed.yml
+          variable_name: SubMission_file
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: Buoys
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id003
+- *id003
+- *id002

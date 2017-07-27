@@ -35,7 +35,7 @@ globalparams:
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
   value: 2.0
-  variable_name: push_right_soft
+  variable_name: last_push_right_soft
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -357,7 +357,7 @@ statesui:
                                       variable_name: param_distance_x
                                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                       description: ' ''Distance to travel'''
-                                      value: !!python/unicode 'push_right_soft'
+                                      value: !!python/unicode 'last_push_right_soft'
                                       variable_name: param_distance_y
                                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                       description: ' ''Distance to travel'''

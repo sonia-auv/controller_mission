@@ -7,8 +7,8 @@ globalparams:
 statesui:
 - &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 285
-  - 551
+  - 276
+  - 510
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZ.MoveZ
@@ -79,11 +79,11 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic of  result'''
-          value: !!python/unicode 'align_path'
+          value: !!python/unicode 'align_simple_bin'
           variable_name: param_node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: !!python/unicode 'simple_pipe'
+          value: !!python/unicode 'simple_bin_white'
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -105,17 +105,14 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: AlignPath
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: TimesOut
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 146
-          - 265
+          - 272
+          - 259
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: alignPath.AlignPath
@@ -148,7 +145,7 @@ statesui:
               variable_name: param_vision_target_height_in_meter
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Name of topic to listen'''
-              value: /proc_image_processing/align_path_result
+              value: !!python/unicode '/proc_image_processing/align_simple_bin_result'
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum size of queue'''
@@ -168,8 +165,8 @@ statesui:
             state1: *id003
             state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 287
-              - 422
+              - 275
+              - 384
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: launchVision.LaunchVision
@@ -211,44 +208,6 @@ statesui:
                 name: succeeded
                 state1: *id006
                 state2: *id007
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 433
-          - 268
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: TimesOut
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 90.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: !!python/unicode 'StopVision'
-          transitions:
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id008
-            state2: *id006
 - *id006
 - *id002
 - *id003
-- *id008

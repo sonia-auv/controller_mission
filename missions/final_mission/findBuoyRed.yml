@@ -176,7 +176,7 @@ statesui:
           variable_name: topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 10.0
+          value: 5.0
           variable_name: nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''

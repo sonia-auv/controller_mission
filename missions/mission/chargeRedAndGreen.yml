@@ -50,11 +50,11 @@ statesui:
           variable_name: distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.0
+          value: -1.0
           variable_name: distance_y
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 20.0
+          value: -20.0
           variable_name: heading
         is_submission: true
         outcome_states:

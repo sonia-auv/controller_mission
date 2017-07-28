@@ -86,7 +86,7 @@ statesui:
           variable_name: param_start_front
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: 2.0
+          value: 1.0
           variable_name: param_start_bottom
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -187,11 +187,11 @@ statesui:
                   variable_name: param_media_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''
-                  value: 1.0
+                  value: 2.0
                   variable_name: param_start_front
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''
-                  value: 2.0
+                  value: 1.0
                   variable_name: param_start_bottom
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''

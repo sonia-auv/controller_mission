@@ -18,11 +18,11 @@ globalparams:
   variable_name: topic_to_listen
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 10.0
+  value: 5.0
   variable_name: nb_hit_to_victory
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 50.0
+  value: 250.0
   variable_name: distance_between_pixel
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
@@ -99,11 +99,11 @@ statesui:
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: 5.0
+          value: !!python/unicode 'nb_hit_to_victory'
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''
-          value: 50.0
+          value: !!python/unicode 'distance_between_pixel'
           variable_name: param_max_distance_between_vision_target
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition

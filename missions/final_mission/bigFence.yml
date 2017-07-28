@@ -16,7 +16,7 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 3.0
+      value: 1.5
       variable_name: distance_x
     is_root: false
     is_submission: true
@@ -72,8 +72,8 @@ statesui:
       transitions: []
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 509
-  - 188
+  - 516
+  - 224
   radius: 120
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: vision/WaitForHitFence
@@ -138,7 +138,7 @@ statesui:
         state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 554
-          - 518
+          - 560
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -154,7 +154,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 1.0
+              value: 0.0
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''

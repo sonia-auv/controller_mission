@@ -61,8 +61,8 @@ statesui:
     state1: *id001
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 729
-      - 482
+      - 935
+      - 421
       radius: 136
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: mission/chargeRedAndGreen
@@ -89,8 +89,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 726
-      - 240
+      - 663
+      - 487
       radius: 120
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: mission/findNextBuoyRed
@@ -123,8 +123,8 @@ statesui:
 - *id002
 - &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 231
-  - 425
+  - 330
+  - 207
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: navigation/pushToBuoy
@@ -159,16 +159,65 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: WaitForHit
+      state: !!python/unicode 'StopVision'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id004
-    state2: *id001
-- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 335
+      - 337
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: launchVision.LaunchVision
+        base_file: /src/controller_mission/state/launchVision.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'StopVision'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Topic of  result'''
+          value: !!python/unicode 'find_buoy_red'
+          variable_name: param_node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Filter chain name'''
+          value: simple_buoy
+          variable_name: param_filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: /provider_vision/Front_GigE
+          variable_name: param_media_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 1.0
+          variable_name: param_start_front
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 2.0
+          variable_name: param_start_bottom
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 2.0
+          variable_name: param_cmd
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: WaitForHit
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: *id001
+- &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 332
-  - 82
+  - 522
+  - 80
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -204,15 +253,15 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id005
+    state1: *id006
     state2: *id004
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id005
-    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id006
+    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 554
-      - 101
+      - 729
+      - 192
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: vision/HitCountFront
@@ -262,6 +311,7 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id006
+        state1: *id007
         state2: *id003
-- *id006
+- *id007
+- *id005

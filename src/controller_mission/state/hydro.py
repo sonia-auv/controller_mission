@@ -28,8 +28,9 @@ class Hydro(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def ping_cb(self, data):
-        self.nb_ping += self.nb_ping
+        self.nb_ping += 1
         rospy.loginfo('ping : %i' % int(self.nb_ping))
+        rospy.loginfo('heading : %f' % math.degrees(data.pose.orientation.z))
         self.ping_heading.append(data.pose.orientation.z)
         if len(self.ping_heading) == self.param_queu_size:
             self.ping.unregister()

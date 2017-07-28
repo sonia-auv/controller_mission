@@ -54,7 +54,7 @@ statesui:
           variable_name: first_push
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 2.0
+          value: 1.0
           variable_name: second_push
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -185,9 +185,16 @@ statesui:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: hydro
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: aborted
+                  state: hydro
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
+                state1: *id004
+                state2: *id005
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: aborted
                 state1: *id004
                 state2: *id005
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI

@@ -4,6 +4,10 @@ globalparams:
   description: ''
   value: 5.0
   variable_name: queu_size
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 3.0
+  variable_name: push
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -55,7 +59,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 3.0
+          value: !!python/unicode 'push'
           variable_name: param_distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''

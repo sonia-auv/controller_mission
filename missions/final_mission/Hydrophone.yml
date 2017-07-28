@@ -18,6 +18,10 @@ statesui:
       description: ''
       value: 5.0
       variable_name: queu_size
+    - &id002 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 3.0
+      variable_name: push
     is_root: false
     is_submission: true
     outcome_states:
@@ -40,10 +44,10 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 454
-      - 447
+      - 451
+      - 470
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: final_mission/simple_hydro
@@ -53,6 +57,7 @@ statesui:
           description: ''
           value: 5.0
           variable_name: queu_size
+        - *id002
         is_root: false
         is_submission: true
         outcome_states:
@@ -69,8 +74,8 @@ statesui:
           variable_name: SubMission_file
         transitions: []
       transitions: []
-- *id002
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id003
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 451
   - 84
@@ -83,6 +88,7 @@ statesui:
       description: ''
       value: 5.0
       variable_name: queu_size
+    - *id002
     is_root: false
     is_submission: true
     outcome_states:
@@ -104,9 +110,9 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
+    state1: *id004
     state2: *id001
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 114
   - 79
@@ -135,5 +141,5 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: *id003
+    state1: *id005
+    state2: *id004

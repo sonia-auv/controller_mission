@@ -1,0 +1,6 @@
+<launch>
+	<node name="reportExecuter"
+	    pkg="controller_mission"
+	    type="reportExecuter.py"
+	    output="screen" />
+</launch>

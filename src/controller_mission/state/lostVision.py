@@ -13,6 +13,8 @@ class LostVision(MissionState):
 
         self.last_target_received_time = None
 
+        self.count = 0
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red_result', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_max_time_lost_in_sec', 10, 'Maximum time without target'))

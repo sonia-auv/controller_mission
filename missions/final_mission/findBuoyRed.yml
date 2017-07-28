@@ -40,6 +40,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: launchVision.LaunchVision
         base_file: /src/controller_mission/state/launchVision.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -81,7 +82,7 @@ statesui:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 232
           - 438
@@ -89,6 +90,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -110,12 +112,98 @@ statesui:
           transitions: []
 - &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 373
-  - 15
+  - 494
+  - 176
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: vision/HitCountFront
+    base_file: /missions/vision/HitCountFront.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''find_buoy_red'''
+      variable_name: node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_buoy'''
+      variable_name: filterchain_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/provider_vision/Front_GigE'''
+      variable_name: media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/proc_image_processing/find_buoy_red_result'''
+      variable_name: topic_to_listen
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 5.0
+      variable_name: nb_hit_to_victory
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 250.0
+      variable_name: distance_between_pixel
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: HitCountFront
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: vision/HitCountFront.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'BuoyIsFind'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id003
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 494
+      - 316
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'BuoyIsFind'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 0.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions: []
+      transitions: []
+- *id002
+- *id004
+- *id005
+- &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 375
+  - 58
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: timeOut.TimesOut
-    base_file: /src/controller_mission/state/timeOut.py
+    _name: moveGlobalZ.MoveZ
+    base_file: /src/controller_mission/state/moveGlobalZ.py
     is_root: true
     outcome_states:
     - succeeded
@@ -124,16 +212,12 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'Started'
+      value: !!python/unicode 'depth_start'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: 0.0
-      variable_name: param_time
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: succeeded
-      variable_name: param_to_return
+      description: ' ''Distance to travel'''
+      value: 1.75
+      variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
@@ -144,93 +228,9 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
+    state1: *id006
     state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
-    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 494
-      - 176
-      radius: 104
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: vision/HitCountFront
-        base_file: /missions/vision/HitCountFront.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''find_buoy_red'''
-          variable_name: node_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''simple_buoy'''
-          variable_name: filterchain_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''/provider_vision/Front_GigE'''
-          variable_name: media_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''/proc_image_processing/find_buoy_red_result'''
-          variable_name: topic_to_listen
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 5.0
-          variable_name: nb_hit_to_victory
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 250.0
-          variable_name: distance_between_pixel
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: HitCountFront
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: vision/HitCountFront.yml
-          variable_name: SubMission_file
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'BuoyIsFind'
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id004
-        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 494
-          - 316
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'BuoyIsFind'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 0.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions: []
-          transitions: []
-- *id004
-- *id002
-- *id005
-- *id006
+    state1: *id006
+    state2: *id003

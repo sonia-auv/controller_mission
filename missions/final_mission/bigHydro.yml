@@ -304,7 +304,7 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'Droppers2'
+                  state: !!python/unicode 'Droppers1'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
@@ -334,7 +334,7 @@ statesui:
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: !!python/unicode 'StarTAlignBin'
+                      state: !!python/unicode 'TimesOut1'
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded

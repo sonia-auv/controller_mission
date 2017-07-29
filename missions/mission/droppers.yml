@@ -90,10 +90,68 @@ statesui:
               description: ' ''Times Out'''
               value: 2.0
               variable_name: param_id
-            transitions: []
-          transitions: []
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Droppers21'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 313
+              - 525
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: dropperState.Droppers
+                base_file: /src/controller_mission/state/dropperState.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Droppers21'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 2.0
+                  variable_name: param_id
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Droppers21'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 353
+                  - 672
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: dropperState.Droppers
+                    base_file: /src/controller_mission/state/dropperState.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Droppers22'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: 2.0
+                      variable_name: param_id
+                    transitions: []
+                  transitions: []
 - *id003
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 253
   - 24
@@ -130,8 +188,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id005
+    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 593
       - 193
@@ -163,7 +221,9 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id005
+        state1: *id006
         state2: *id001
-- *id005
+- *id006
 - *id002
+- *id007
+- *id004

@@ -112,6 +112,8 @@ class AlignBin(MissionState):
             self.align_path()
 
     def align_path(self):
+        if self.vision_position_y == 0 or self.vision_position_x == 0:
+            return
         vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
         vision_position_x = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_x)
 

@@ -17,7 +17,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXY.MoveRelativeXY
     base_file: /src/controller_mission/state/moveRelativeXY.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -49,12 +49,13 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 389
-      - 160
+      - 391
+      - 168
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeZ.MoveRelativeZ
         base_file: /src/controller_mission/state/moveRelativeZ.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -84,6 +85,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeYaw.MoveRelativeYAw
             base_file: /src/controller_mission/state/moveRelativeYaw.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -113,6 +115,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXY.MoveRelativeXY
                 base_file: /src/controller_mission/state/moveRelativeXY.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -153,6 +156,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeYaw.MoveRelativeYAw
                     base_file: /src/controller_mission/state/moveRelativeYaw.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -182,6 +186,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: timeOut.TimesOut
                         base_file: /src/controller_mission/state/timeOut.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -215,6 +220,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: timeOut.TimesOut
                             base_file: /src/controller_mission/state/timeOut.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -251,6 +257,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: moveRelativeYaw.MoveRelativeYAw
                                 base_file: /src/controller_mission/state/moveRelativeYaw.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -280,6 +287,7 @@ statesui:
                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                     _name: timeOut.TimesOut
                                     base_file: /src/controller_mission/state/timeOut.py
+                                    is_root: false
                                     outcome_states:
                                     - succeeded
                                     - aborted
@@ -313,6 +321,7 @@ statesui:
                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                         _name: timeOut.TimesOut
                                         base_file: /src/controller_mission/state/timeOut.py
+                                        is_root: false
                                         outcome_states:
                                         - succeeded
                                         - aborted
@@ -349,6 +358,7 @@ statesui:
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: moveRelativeYaw.MoveRelativeYAw
                                             base_file: /src/controller_mission/state/moveRelativeYaw.py
+                                            is_root: false
                                             outcome_states:
                                             - succeeded
                                             - aborted
@@ -378,6 +388,7 @@ statesui:
                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                 _name: timeOut.TimesOut
                                                 base_file: /src/controller_mission/state/timeOut.py
+                                                is_root: false
                                                 outcome_states:
                                                 - succeeded
                                                 - aborted
@@ -411,6 +422,7 @@ statesui:
                                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                     _name: timeOut.TimesOut
                                                     base_file: /src/controller_mission/state/timeOut.py
+                                                    is_root: false
                                                     outcome_states:
                                                     - succeeded
                                                     - aborted
@@ -447,6 +459,7 @@ statesui:
                                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                         _name: moveRelativeYaw.MoveRelativeYAw
                                                         base_file: /src/controller_mission/state/moveRelativeYaw.py
+                                                        is_root: false
                                                         outcome_states:
                                                         - succeeded
                                                         - aborted
@@ -477,6 +490,7 @@ statesui:
                                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                             _name: timeOut.TimesOut
                                                             base_file: /src/controller_mission/state/timeOut.py
+                                                            is_root: false
                                                             outcome_states:
                                                             - succeeded
                                                             - aborted
@@ -512,6 +526,7 @@ statesui:
                                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                 _name: timeOut.TimesOut
                                                                 base_file: /src/controller_mission/state/timeOut.py
+                                                                is_root: false
                                                                 outcome_states:
                                                                 - succeeded
                                                                 - aborted
@@ -553,6 +568,7 @@ statesui:
                                                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                     _name: timeOut.TimesOut
                                                                     base_file: /src/controller_mission/state/timeOut.py
+                                                                    is_root: false
                                                                     outcome_states:
                                                                     - succeeded
                                                                     - aborted
@@ -588,6 +604,7 @@ statesui:
                                                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                         _name: timeOut.TimesOut
                                                                         base_file: /src/controller_mission/state/timeOut.py
+                                                                        is_root: false
                                                                         outcome_states:
                                                                         - succeeded
                                                                         - aborted
@@ -623,6 +640,7 @@ statesui:
                                                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                             _name: timeOut.TimesOut
                                                                             base_file: /src/controller_mission/state/timeOut.py
+                                                                            is_root: false
                                                                             outcome_states:
                                                                             - succeeded
                                                                             - aborted
@@ -661,6 +679,7 @@ statesui:
                                                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                                 _name: moveRelativeYaw.MoveRelativeYAw
                                                                                 base_file: /src/controller_mission/state/moveRelativeYaw.py
+                                                                                is_root: false
                                                                                 outcome_states:
                                                                                 - succeeded
                                                                                 - aborted
@@ -692,6 +711,7 @@ statesui:
                                                                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                                     _name: timeOut.TimesOut
                                                                                     base_file: /src/controller_mission/state/timeOut.py
+                                                                                    is_root: false
                                                                                     outcome_states:
                                                                                     - succeeded
                                                                                     - aborted
@@ -724,6 +744,7 @@ statesui:
                                                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                                 _name: timeOut.TimesOut
                                                                                 base_file: /src/controller_mission/state/timeOut.py
+                                                                                is_root: false
                                                                                 outcome_states:
                                                                                 - succeeded
                                                                                 - aborted
@@ -763,6 +784,7 @@ statesui:
                                                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                                     _name: moveRelativeXY.MoveRelativeXY
                                                                     base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                                    is_root: false
                                                                     outcome_states:
                                                                     - succeeded
                                                                     - aborted
@@ -807,6 +829,7 @@ statesui:
                                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                         _name: timeOut.TimesOut
                                                         base_file: /src/controller_mission/state/timeOut.py
+                                                        is_root: false
                                                         outcome_states:
                                                         - succeeded
                                                         - aborted
@@ -844,6 +867,7 @@ statesui:
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: timeOut.TimesOut
                                             base_file: /src/controller_mission/state/timeOut.py
+                                            is_root: false
                                             outcome_states:
                                             - succeeded
                                             - aborted
@@ -881,6 +905,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: timeOut.TimesOut
                                 base_file: /src/controller_mission/state/timeOut.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -918,6 +943,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: timeOut.TimesOut
                     base_file: /src/controller_mission/state/timeOut.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -970,14 +996,15 @@ statesui:
 - *id020
 - *id021
 - *id022
-- !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id028 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 100
-  - 100
+  - 606
+  - 156
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
     base_file: /src/controller_mission/state/timeOut.py
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -985,7 +1012,104 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: TimesOut
+      value: !!python/unicode 'TimesOut40'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 180.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'TimesOut30'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id028
+    state2: &id030 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 710
+      - 310
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'TimesOut30'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 1.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions: []
+      transitions: []
+- &id029 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 829
+  - 163
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: false
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'TimesOut70'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 180.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'TimesOut30'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id029
+    state2: *id030
+- &id031 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 736
+  - -23
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'TimesOut67'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -995,5 +1119,20 @@ statesui:
       description: ' ''Times Out'''
       value: succeeded
       variable_name: param_to_return
-    transitions: []
-  transitions: []
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'TimesOut70'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'TimesOut40'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id031
+    state2: *id029
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id031
+    state2: *id028
+- *id030

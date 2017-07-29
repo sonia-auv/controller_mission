@@ -30,87 +30,15 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: pushToBuoy
+      state: HitCountFront
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: HitCountFront
+      state: gateForBuoy
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 269
-      - 188
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: navigation/pushToBuoy
-        base_file: /missions/navigation/pushToBuoy.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 2.0
-          variable_name: first_push
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 3.0
-          variable_name: second_push
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.5
-          variable_name: depth_to_start_buoy
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: pushToBuoy
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: navigation/pushToBuoy.yml
-          variable_name: SubMission_file
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'Stop'
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 255
-          - 351
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'Stop'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 1.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions: []
-          transitions: []
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 537
       - 177
@@ -163,8 +91,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id003
-        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 539
           - 311
@@ -199,8 +127,8 @@ statesui:
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id004
-            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 428
               - 438
@@ -232,8 +160,8 @@ statesui:
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id005
-                state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                state1: *id004
+                state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 541
                   - 601
@@ -266,8 +194,8 @@ statesui:
                   transitions: []
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id004
-            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id003
+            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 622
               - 465
@@ -302,12 +230,72 @@ statesui:
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id006
-                state2: *id007
+                state1: *id005
+                state2: *id006
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 259
+      - 212
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: navigation/gateForBuoy
+        base_file: /missions/navigation/gateForBuoy.yml
+        global_params: []
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: gateForBuoy
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: navigation/gateForBuoy.yml
+          variable_name: SubMission_file
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Stop'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id007
+        state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 227
+          - 391
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Stop'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 1.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions: []
+          transitions: []
 - *id002
+- *id004
+- *id008
 - *id003
 - *id005
-- *id008
-- *id004
 - *id006
 - *id007

@@ -3,7 +3,7 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 362
+  - 399
   - 11
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State

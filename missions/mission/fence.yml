@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 262
-  - 190
+  - 275
+  - 195
   radius: 152
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: navigation/reachFenceWithStyle
@@ -18,14 +18,6 @@ statesui:
       description: ''
       value: -0.6
       variable_name: push_z_relative
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 180.0
-      variable_name: heading_style
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: -6.0
-      variable_name: last_push
     is_root: false
     is_submission: true
     outcome_states:

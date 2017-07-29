@@ -41,8 +41,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 241
-      - 181
+      - 401
+      - 173
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: final_mission/Buoys
@@ -54,11 +54,11 @@ statesui:
           variable_name: first_push
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.0
+          value: 4.0
           variable_name: second_push
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.75
+          value: 1.5
           variable_name: depth_to_start_buoy
         is_root: false
         is_submission: true
@@ -96,7 +96,7 @@ statesui:
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 1.5
+              value: 1.3
               variable_name: depth_start
             is_submission: true
             outcome_states:
@@ -220,7 +220,7 @@ statesui:
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 1.5
+              value: 1.3
               variable_name: up
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
@@ -228,7 +228,7 @@ statesui:
               variable_name: heading_to_square_buoy
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 6.0
+              value: 3.5
               variable_name: push_front
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
@@ -256,50 +256,7 @@ statesui:
             name: succeeded
             state1: *id006
             state2: *id003
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: aborted
-    state1: *id001
-    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 525
-      - 160
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: final_mission/findBuoyRed
-        base_file: /missions/final_mission/findBuoyRed.yml
-        global_params: []
-        is_root: false
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: findBuoyRed
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: final_mission/findBuoyRed.yml
-          variable_name: SubMission_file
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: Buoys
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: aborted
-          state: findFencePath
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id007
-        state2: *id002
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: aborted
-        state1: *id007
-        state2: *id003
 - *id002
-- *id007
 - *id003
 - *id006
 - *id004

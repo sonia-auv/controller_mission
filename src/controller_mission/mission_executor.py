@@ -256,7 +256,7 @@ class MissionExecutor:
                 all_concurrent_transition.append(sub_mission_name + '|' + state_ui.state.name + '|' + tran.outcome)
 
         all_concurrent_transition.append('preempted')
-        
+
         default_outcome = 'succeeded'
         if len(all_concurrent_transition) > 0:
             default_outcome = all_concurrent_transition[0]

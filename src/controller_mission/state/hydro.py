@@ -117,4 +117,4 @@ class Hydro(MissionState):
         self.ping = rospy.Subscriber('/proc_hydrophone/ping', PingPose, self.ping_cb)
 
     def end(self):
-        pass
+        self.ping.unregister()

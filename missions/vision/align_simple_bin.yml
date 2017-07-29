@@ -25,7 +25,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: !!python/unicode 'distance_z'
+      value: 2.0
       variable_name: param_distance_z
     transitions: []
   transitions: []

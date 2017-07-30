@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 399
-  - 11
+  - 382
+  - -31
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: final_mission/GatePathOfBuoy
@@ -14,7 +14,7 @@ statesui:
       description: ''
       value: 1.5
       variable_name: depth_start
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -80,6 +80,7 @@ statesui:
               description: ''
               value: 1.3
               variable_name: depth_start
+            is_root: false
             is_submission: true
             outcome_states:
             - succeeded
@@ -117,6 +118,7 @@ statesui:
                   description: ''
                   value: 4.0
                   variable_name: push_front
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -150,6 +152,7 @@ statesui:
                     _name: final_mission/DoBinSimple
                     base_file: /missions/final_mission/DoBinSimple.yml
                     global_params: []
+                    is_root: false
                     is_submission: true
                     outcome_states:
                     - succeeded
@@ -180,6 +183,7 @@ statesui:
                         _name: final_mission/DoTorpido
                         base_file: /missions/final_mission/DoTorpido.yml
                         global_params: []
+                        is_root: false
                         is_submission: true
                         outcome_states:
                         - succeeded
@@ -210,6 +214,7 @@ statesui:
                             _name: final_mission/simpleTower
                             base_file: /missions/final_mission/simpleTower.yml
                             global_params: []
+                            is_root: false
                             is_submission: true
                             outcome_states:
                             - succeeded
@@ -239,3 +244,30 @@ statesui:
 - *id005
 - *id006
 - *id007
+- &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 221
+  - -53
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setDepthOfSet.SetDepthOfSet
+    base_file: /src/controller_mission/state/setDepthOfSet.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: SetDepthOfSet
+      variable_name: state_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: GatePathOfBuoy
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id008
+    state2: *id001

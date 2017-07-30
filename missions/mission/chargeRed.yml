@@ -160,7 +160,7 @@ statesui:
               variable_name: times_out
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 3.5
+              value: 2.5
               variable_name: distance_x
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''

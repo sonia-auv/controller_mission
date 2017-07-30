@@ -117,4 +117,7 @@ class Hydro(MissionState):
         self.ping = rospy.Subscriber('/proc_hydrophone/ping', PingPose, self.ping_cb)
 
     def end(self):
-        self.ping.unregister()
+        try:
+            self.ping.unregister()
+        except:
+            rospy.logerr('Nice catch bitch !')

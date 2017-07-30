@@ -147,7 +147,7 @@ statesui:
                   variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
-                  value: !!python/unicode 'aborted'
+                  value: !!python/unicode 'succeeded'
                   variable_name: param_to_return
                 transitions: []
               transitions: []

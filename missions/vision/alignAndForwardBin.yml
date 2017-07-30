@@ -29,7 +29,7 @@ statesui:
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode 'simple_bin'
+      value: !!python/unicode 'simple_bin_white'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -130,7 +130,7 @@ statesui:
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode 'simple_bin'
+      value: !!python/unicode 'simple_bin_white'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''

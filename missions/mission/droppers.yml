@@ -70,8 +70,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 474
-          - 553
+          - 508
+          - 517
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: dropperState.Droppers
@@ -100,8 +100,8 @@ statesui:
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 313
-              - 525
+              - 271
+              - 526
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: dropperState.Droppers

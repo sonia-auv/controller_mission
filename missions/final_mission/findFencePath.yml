@@ -322,7 +322,7 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'TimesOut2'
+              state: !!python/unicode 'Dum'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
@@ -353,9 +353,6 @@ statesui:
                   value: succeeded
                   variable_name: param_to_return
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'HitCountPath'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: !!python/unicode 'Push2'

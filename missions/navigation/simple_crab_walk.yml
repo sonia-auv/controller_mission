@@ -89,9 +89,6 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'GoRight2'
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
           state: !!python/unicode 'Wait1'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -158,9 +155,6 @@ statesui:
                   variable_name: param_distance_y
                 - *id002
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'Wait2'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: !!python/unicode 'GoFront3'
@@ -263,10 +257,7 @@ statesui:
                               value: !!python/unicode 'frist_last_move_left'
                               variable_name: param_distance_y
                             - *id002
-                            transitions:
-                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                              outcome: succeeded
-                              state: !!python/unicode 'GoFront6'
+                            transitions: []
                           transitions: []
 - *id003
 - *id005

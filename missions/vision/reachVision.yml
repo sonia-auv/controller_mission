@@ -176,10 +176,7 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: filVision
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'AlignToVision1'
+          state: !!python/unicode 'AlignVision'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
@@ -249,7 +246,7 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'SetBox2'
+              state: !!python/unicode 'ResetBox'
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: forward
               state: !!python/unicode 'ForwardVision'
@@ -303,9 +300,6 @@ statesui:
                   value: 0.5
                   variable_name: param_bounding_box_pitch
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'AlignToVision1'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: !!python/unicode 'StopVision'
@@ -405,10 +399,10 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: aborted
-                  state: !!python/unicode 'AlignToVision1'
+                  state: !!python/unicode 'AlignVision'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'SetBox2'
+                  state: !!python/unicode 'ResetBox'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: aborted

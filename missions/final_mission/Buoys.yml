@@ -120,9 +120,6 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: chargeRedAndGreen
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
               state: !!python/unicode 'TimesOut1'
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
@@ -157,9 +154,6 @@ statesui:
                   value: succeeded
                   variable_name: param_to_return
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'NextMission'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: !!python/unicode 'Dum3'

@@ -50,9 +50,6 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Depth2'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
       state: !!python/unicode 'ResetBox'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -143,9 +140,6 @@ statesui:
     - *id002
     - *id003
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: AlignPath
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: AlignBin

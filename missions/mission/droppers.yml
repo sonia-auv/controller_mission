@@ -122,7 +122,7 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'Droppers21'
+                  state: !!python/unicode 'Droppers22'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
@@ -181,9 +181,6 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: ramBin
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
       state: !!python/unicode 'WaitStabilization'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -217,7 +214,7 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: Droppers
+          state: Droppers1
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded

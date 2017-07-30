@@ -42,9 +42,6 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Up'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
       state: MoveRelativeZ
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -143,9 +140,6 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'ReturnPostion'
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
                   state: MoveZ
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -203,9 +197,6 @@ statesui:
                   value: succeeded
                   variable_name: param_to_return
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: !!python/unicode 'ReturnPostion'
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: MoveZ

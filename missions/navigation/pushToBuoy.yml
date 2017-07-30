@@ -46,9 +46,6 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Depth'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
       state: !!python/unicode 'PushFront2'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -87,9 +84,6 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: findNextBuoy
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
           state: !!python/unicode 'Up'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -117,10 +111,7 @@ statesui:
               description: ' ''Distance to travel'''
               value: !!python/unicode 'depth_to_start_buoy'
               variable_name: param_distance_z
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: WaitForHit
+            transitions: []
           transitions: []
 - *id002
 - *id003

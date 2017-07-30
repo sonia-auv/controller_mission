@@ -38,9 +38,6 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'GoLeft3'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
       state: !!python/unicode 'SimpleCrab1'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
@@ -92,7 +89,7 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'SimpleCrab1'
+          state: !!python/unicode 'SimpleCrab2'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded

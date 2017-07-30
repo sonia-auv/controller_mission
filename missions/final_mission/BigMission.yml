@@ -32,9 +32,6 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: Buoys
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: aborted
-      state: findBuoyRed
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -63,9 +60,6 @@ statesui:
           value: final_mission/Buoys.yml
           variable_name: SubMission_file
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: GotoNextPAth
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: findFencePath
@@ -102,16 +96,7 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: fence
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: fence
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
               state: bigFence
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: aborted
-              state: bigHydro
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: aborted
               state: DoBinSimple
@@ -146,12 +131,6 @@ statesui:
                   value: final_mission/bigFence.yml
                   variable_name: SubMission_file
                 transitions:
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: succeeded
-                  state: bigHydro
-                - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                  outcome: aborted
-                  state: bigHydro
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: DoBinSimple

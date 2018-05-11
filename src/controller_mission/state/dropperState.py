@@ -2,7 +2,6 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_actuators.srv import cmActionSrv, cmActionSrvRequest
-#DoActionSrv, DoActionSrvRequest
 
 
 class Droppers(MissionState):

@@ -1,7 +1,8 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from provider_actuators.srv import DoActionSrv, DoActionSrvRequest
+from proc_actuators.srv import cmActionSrv, cmActionSrvRequest
+#DoActionSrv, DoActionSrvRequest
 
 
 class Droppers(MissionState):
@@ -11,7 +12,7 @@ class Droppers(MissionState):
         self.start_time = None
         self.do_action = None
 
-        self.action = DoActionSrvRequest()
+        self.action = cmActionSrvRequest()
         self.action_dic = {'1': self.action.SIDE_PORT, '2': self.action.SIDE_STARBOARD}
 
     def define_parameters(self):
@@ -21,8 +22,8 @@ class Droppers(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
-        rospy.wait_for_service('/provider_actuators/do_action_srv')
-        self.do_action = rospy.ServiceProxy('/provider_actuators/do_action_srv', DoActionSrv)
+        rospy.wait_for_service('/proc_actuators/cm_action_srv')
+        self.do_action = rospy.ServiceProxy('/proc_actuators/cm_action_srv', cmActionSrv)
         try:
 
             self.do_action(self.action.ELEMENT_DROPPER, self.action_dic[str(int(self.param_id))], self.action.ACTION_DROPPER_LAUNCH)

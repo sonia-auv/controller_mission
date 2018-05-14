@@ -118,7 +118,7 @@ class AlignPath(MissionState):
         vision_position_yaw = self.vision_position_yaw
 
         if not self.submarine_is_align:
-            self.set_target(vision_position_x, vision_position_y, vision_position_yaw)
+            self.set_target(vision_position_x, vision_position_y, vision_position_yaw % 360)
 
     def set_target(self, position_x, position_y, position_yaw):
         try:

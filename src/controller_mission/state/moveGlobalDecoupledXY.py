@@ -1,5 +1,4 @@
 import rospy
-
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
 from proc_control.srv import SetDecoupledTarget
@@ -11,8 +10,6 @@ class MoveDecoupledXY(MissionState):
     def __init__(self):
         MissionState.__init__(self)
 
-        #self.position = None
-        #self.orientation = None
         self.target_reached = False
 
     def define_parameters(self):
@@ -29,15 +26,13 @@ class MoveDecoupledXY(MissionState):
         rospy.wait_for_service('/proc_control/set_global_decoupled_target')
         set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
 
-        #self.current_position = rospy.Subscriber('/proc_navigation/odom', Odometry, self.current_position_cb)
-
         self.target_reached = False
 
         try:
             response = set_global_target(self.param_distance_x,
                                          self.param_distance_y,
                                          0, 0, 0, 0,
-                                         True, True, False, False, False, False)
+                                         False, False, True, True, True, True)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -53,4 +48,3 @@ class MoveDecoupledXY(MissionState):
 
     def end(self):
         self.target_reach_sub.unregister()
-        #self.current_position.unregister()

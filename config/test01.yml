@@ -1,0 +1,24 @@
+mission:
+  00_global:
+    color: black #red
+    pinger_frequency: 40
+  01_find_casino:
+    rotation_scale: 1
+  02_enter_casino:
+    black_side: left #right
+  03_paths:
+    first_path:
+      first_side: left #right
+    second_path:
+      first_side: left #right
+  04_shoot_craps:
+    first_dice:
+      dice: 1 # 2, 4 or 6
+      approx_depth: 2
+    second_dice:
+      dice: 1 # 2, 4 or 6
+      approx_depth: 1.5
+  05_buy_gold_chip:
+  06_play_slots:
+  07_play_roulette:
+  08_cash_in:

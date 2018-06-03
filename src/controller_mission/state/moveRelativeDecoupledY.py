@@ -5,7 +5,7 @@ from proc_control.msg import TargetReached
 from proc_control.srv import SetDecoupledTarget
 
 
-class MoveDecoupledRelativeY(MissionState):
+class MoveRelativeDecoupledY(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -25,9 +25,9 @@ class MoveDecoupledRelativeY(MissionState):
         set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         try:
-            set_local_target(0, self.param_distance_y,
-                                   0, 0, 0, 0,
-                                  True, False, True, True, True, True)
+            set_local_target(0.0, self.param_distance_y,
+                                   0.0, 0.0, 0.0, 0.0,
+                                  False, False, True, True, True, True)
 
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))

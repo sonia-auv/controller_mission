@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 101
-  - 134
+  - 88
+  - 229
   radius: 128
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/07_align_forward
@@ -31,33 +31,63 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: droppers
+      state: !!python/unicode 'MoveBackward'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 404
-      - 147
+      - 343
+      - 234
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2018/actuators/droppers
-        base_file: /missions/2018/actuators/droppers.yml
-        global_params: []
-        is_submission: true
+        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
         outcome_states:
         - succeeded
         - aborted
+        - preempted
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: droppers
+          value: !!python/unicode 'MoveBackward'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: 2018/actuators/droppers.yml
-          variable_name: SubMission_file
-        transitions: []
-      transitions: []
+          description: ' ''Distance to travel'''
+          value: -0.7
+          variable_name: param_distance_x
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: droppers
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 541
+          - 233
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/actuators/droppers
+            base_file: /missions/2018/actuators/droppers.yml
+            global_params: []
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: droppers
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/actuators/droppers.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
+- *id003
 - *id002

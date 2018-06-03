@@ -1,10 +1,10 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 315
-  - 123
+  - 569
+  - 160
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/06_play_slots
@@ -24,42 +24,12 @@ statesui:
       description: SubMission_file
       value: 2018/objectives/06_play_slots.yml
       variable_name: SubMission_file
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: torpedos
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 516
-      - 121
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2018/actuators/torpedos
-        base_file: /missions/2018/actuators/torpedos.yml
-        global_params: []
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: torpedos
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: 2018/actuators/torpedos.yml
-          variable_name: SubMission_file
-        transitions: []
-      transitions: []
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+    transitions: []
+  transitions: []
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 135
-  - 124
+  - 94
+  - 156
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZ.MoveZ
@@ -76,15 +46,44 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 1.0
+      value: 0.5
       variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: 06_play_slots
+      state: !!python/unicode 'Depth2'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id002
-    state2: *id001
-- *id003
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 313
+      - 159
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
+        base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Depth2'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.5
+          variable_name: param_distance_z
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: 06_play_slots
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id003
+- *id002

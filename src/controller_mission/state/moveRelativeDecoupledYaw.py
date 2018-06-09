@@ -28,7 +28,7 @@ class MoveRelativeDecoupledYaw(MissionState):
             set_local_target(0.0, 0.0, 0.0,
                              0.0, 0.0,self.param_angle_yaw,
                              True, True, True, True, True, False)
-
+            self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

@@ -64,10 +64,10 @@ statesui:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 699
-          - 437
+          - 602
+          - 419
           radius: 152
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -89,9 +89,38 @@ statesui:
               description: ' ''Times Out'''
               value: succeeded
               variable_name: param_to_return
-            transitions: []
-          transitions: []
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: MoveDecoupledYaw
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 875
+              - 430
+              radius: 128
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveGlobalDecoupledYaw.MoveDecoupledYaw
+                base_file: /src/controller_mission/state/moveGlobalDecoupledYaw.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: MoveDecoupledYaw
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 270.0
+                  variable_name: param_heading
+                transitions: []
+              transitions: []
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 125
   - 236
@@ -120,8 +149,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
-    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id004
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 312
       - 221
@@ -153,8 +182,9 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id004
+        state1: *id005
         state2: *id001
-- *id004
-- *id002
 - *id005
+- *id002
+- *id003
+- *id006

@@ -4,6 +4,7 @@ mission:
     pinger_frequency: 40
   01_find_casino:
     rotation_scale: 1
+    deg_angle: 180
   02_enter_casino:
     black_side: left #right
   03_paths:

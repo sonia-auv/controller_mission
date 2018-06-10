@@ -5,7 +5,7 @@ from proc_control.msg import TargetReached
 from proc_control.srv import SetDecoupledTarget
 
 
-class MoveDecoupledYaw(MissionState):
+class MoveDecoupledYawFromGlobalParam(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

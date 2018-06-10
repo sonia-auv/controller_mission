@@ -137,7 +137,7 @@ class AlignXYVision(MissionState):
     def run(self, ud):
         self.submarine_is_align = self.vision_is_reach_x and self.vision_is_reach_y
         if self.submarine_is_align:
-            self.set_target(0.0, 0.0, 0.0)
+            self.set_target(0.0, 0.0)
             return 'succeeded'
 
     def end(self):

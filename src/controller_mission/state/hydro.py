@@ -13,6 +13,7 @@ class Hydro(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
+        self.target_reached = False
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_queu_size', 10, 'Maximum size of queue'))
@@ -20,14 +21,15 @@ class Hydro(MissionState):
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
 
+    def target_reach_cb(self, data):
+        self.target_reached = data.target_is_reached
+
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_global_target')
         self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
         rospy.wait_for_service('/proc_mapping/pinger_location_service')
         self.pinger_location_service = rospy.ServiceProxy('/proc_mapping/pinger_location_service', PingerLocationService)
-
-    def run(self, ud):
 
         try:
             response = self.pinger_location_service(40) #TODO param_frequency
@@ -42,11 +44,17 @@ class Hydro(MissionState):
                                    0,
                                    0,
                                    pose.orientation.z * 180 / math.pi)
-
-            return 'succeeded'
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
-            return 'aborted'
+        
+        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
+
+    def run(self, ud):
+        if self.target_reached > 0:
+            return 'succeeded'
+        pass
+
         
     def end(self):
+        self.target_reach_sub.unregister()
         pass

@@ -38,7 +38,7 @@ class MoveDecoupledYawFromGlobalParam(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position Yaw = %f' % set_global_target)
+        rospy.loginfo('Set position Yaw = %f' % globalYaw)
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
     def run(self, ud):

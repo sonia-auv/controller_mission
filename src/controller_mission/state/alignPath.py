@@ -131,8 +131,8 @@ class AlignPath(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position y = %f' % position_x)
-        rospy.loginfo('Set relative position z = %f' % position_y)
+        rospy.loginfo('Set relative position x = %f' % position_x)
+        rospy.loginfo('Set relative position y = %f' % position_y)
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):

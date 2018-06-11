@@ -54,12 +54,12 @@ class ForwardVision(MissionState):
                                   0.0,
                                   0.0,
                                   0.0,
-                                  -1000.0)
+                                  0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position x = %f' % position_x)
-        rospy.loginfo('Set relative position yaw = %f' % -1000.0)
+        rospy.loginfo('Set relative position yaw = %f' % 0.0)
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')

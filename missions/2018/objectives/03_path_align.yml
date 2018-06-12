@@ -20,7 +20,7 @@ statesui:
       variable_name: node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode 'simple_piper45'
+      value: !!python/unicode '''simple_pipe45'''
       variable_name: filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

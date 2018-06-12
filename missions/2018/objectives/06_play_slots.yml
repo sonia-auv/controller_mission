@@ -24,7 +24,7 @@ statesui:
       variable_name: media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 200.0
+      value: 250.0
       variable_name: bounding_box_vision
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -32,23 +32,23 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 100.0
+      value: 500.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 15.0
+      value: 0.0
       variable_name: heading
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.23
+      value: 0.2
       variable_name: target_width_in_meter
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''/proc_image_processing/buoy_red_result'''
+      value: !!python/unicode '''/proc_image_processing/torpedos_result'''
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 250.0
+      value: 650.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -56,11 +56,11 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 10.0
+      value: 5.0
       variable_name: max_queue_size
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.5
+      value: 0.3
       variable_name: control_bounding_box_in_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

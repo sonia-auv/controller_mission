@@ -6,7 +6,7 @@ mission_params:
     #rotation_scale: 1
     angle1_deg: 90
     angle2_deg: 90
-    final_global_angle: 270
+    final_global_angle: 135
   02_enter_casino:
     black_side: left #right
   03_paths:

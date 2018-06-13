@@ -1,18 +1,18 @@
 import rospy
-
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
 from proc_control.srv import SetDecoupledTarget
 
 
-class MoveDecoupledYawFromGlobalParam(MissionState):
+class MoveDecoupledXYFromGlobalParam(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_yaw_global_param_name', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_x_global_param_name', 1.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_y_global_param_name', 1.0, 'Distance to travel'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -24,21 +24,28 @@ class MoveDecoupledYawFromGlobalParam(MissionState):
         rospy.wait_for_service('/proc_control/set_global_decoupled_target')
         set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
 
-        global_yaw = rospy.get_param(self.param_yaw_global_param_name, 0.0)
+        global_x = rospy.get_param(self.param_x_global_param_name, 0.0)
+        global_y = rospy.get_param(self.param_y_global_param_name, 0.0)
 
-        if not rospy.has_param(self.param_yaw_global_param_name):
-            rospy.logerr('No param defined for %s. A default value is used' % self.param_yaw_global_param_name)
+        if not rospy.has_param(self.param_x_global_param_name):
+            raise Exception('%s param is no defined' % self.param_x_global_param_name)
+
+        if not rospy.has_param(self.param_y_global_param_name):
+            raise Exception('%s param is no defined' % self.param_y_global_param_name)
 
 
         try:
-            set_global_target(0.0, 0.0, 0.0,
-                              0.0, 0.0, global_yaw,
-                              True, True, True, True, True, False)
+            response = set_global_target(global_x,
+                                         global_y,
+                                         0, 0, 0, 0,
+                                         False, False, True, True, True, True)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set position Yaw = %f' % global_yaw)
+        rospy.loginfo('Set decoupled position x = %f' % global_x)
+        rospy.loginfo('Set decoupled position y = %f' % global_y)
+
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
     def run(self, ud):

@@ -26,7 +26,7 @@ class MoveRelativeDecoupledXFromGlobalParam(MissionState):
 
         relative_x = rospy.get_param(self.param_distance_x_global_param_name, 1.0)
 
-        if not rospy.has_param(self.param_distance_y_global_param_name):
+        if not rospy.has_param(self.param_distance_x_global_param_name):
             rospy.logerr('No param defined for %s. A default value is used' % self.param_distance_x_global_param_name)
 
 

@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, SetDecoupledTarget
 from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
 
@@ -48,20 +48,16 @@ class ForwardBottom(MissionState):
 
     def set_target(self, position_z):
         try:
-            self.set_local_target(0.0,
-                                  0.0,
-                                  position_z,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_local_target(0.0, 0.0, position_z, 0.0, 0.0, 0.0,
+                                  True, True, False, True, True, True)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position z = %f' % position_z)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         self.buoy_position = rospy.Subscriber(str(self.param_topic_to_listen), VisionTarget, self.vision_cb)
 

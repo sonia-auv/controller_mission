@@ -122,12 +122,8 @@ class AlignPath(MissionState):
 
     def set_target(self, position_x, position_y, position_yaw):
         try:
-            self.set_local_target(position_x,
-                                  position_y,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  position_yaw)
+            self.set_local_target(position_x, position_y, 0.0, 0.0, 0.0, position_yaw,
+                                  False, False, True, True, True, True)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

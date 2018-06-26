@@ -31,6 +31,8 @@ class Hydro(MissionState):
         rospy.wait_for_service('/proc_mapping/pinger_location_service')
         self.pinger_location_service = rospy.ServiceProxy('/proc_mapping/pinger_location_service', PingerLocationService)
 
+        self.target_reached = 0
+
         try:
             response = self.pinger_location_service(40) #TODO param_frequency
 
@@ -41,8 +43,8 @@ class Hydro(MissionState):
             self.set_global_target(pose.position.x,
                                    pose.position.y,
                                    pose.position.z,
-                                   0,
-                                   0,
+                                   0.0,
+                                   0.0,
                                    pose.orientation.z * 180 / math.pi)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))

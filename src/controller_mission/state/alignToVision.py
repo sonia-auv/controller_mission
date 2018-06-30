@@ -154,7 +154,7 @@ class AlignToVision(MissionState):
 
     def run(self, ud):
         if self.is_align_with_heading_active and self.vision_is_reach_y:
-            self.set_target(0.0, 0.0, 0.0)
+            self.set_target(0.0, 0.0, 0.0, False, False)
 
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
@@ -162,11 +162,11 @@ class AlignToVision(MissionState):
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
             rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
             rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
-            self.set_target(0.0, 0.0, 0.0)
+            self.set_target(0.0, 0.0, 0.0, False, False)
             return 'succeeded'
 
         if self.vision_is_reach:
-            self.set_target(0.0, 0.0, 0.0)
+            self.set_target(0.0, 0.0, 0.0, False, False)
             return 'forward'
 
         if self.count >= self.param_maximum_nb_alignment:

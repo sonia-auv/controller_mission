@@ -1,0 +1,166 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 9
+  - 137
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2018/align/align_front
+    base_file: /missions/2018/align/align_front.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_dice6'''
+      variable_name: node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_dice6'''
+      variable_name: filterchaine_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/provider_vision/Front_GigE'''
+      variable_name: media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 200.0
+      variable_name: bounding_box_vision
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''red'''
+      variable_name: color
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 100.0
+      variable_name: threshold_width
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 15.0
+      variable_name: heading
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.23
+      variable_name: target_width_in_meter
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/proc_image_processing/simple_dice6_result'''
+      variable_name: topic_to_listen
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 250.0
+      variable_name: nb_pixel_to_victory
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 30.0
+      variable_name: maximum_nb_alignment
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 10.0
+      variable_name: max_queue_size
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: control_bounding_box_in_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.0
+      variable_name: distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 600.0
+      variable_name: initial_bounding_box
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 300.0
+      variable_name: final_bounding_box
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.5
+      variable_name: control_bounding_box_xy
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 0.3
+      variable_name: control_bounding_box_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 5.0
+      variable_name: control_bounding_box_yaw
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Align'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2018/align/align_front.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Ram'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 250
+      - 139
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Ram'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 1.5
+          variable_name: param_distance_x
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Back'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 483
+          - 137
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+            base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Back'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 1.5
+              variable_name: param_distance_x
+            transitions: []
+          transitions: []
+- *id002
+- *id003

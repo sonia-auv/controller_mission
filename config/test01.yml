@@ -18,9 +18,11 @@ mission_params:
     first_dice:
       dice: 1 # 2, 4 or 6
       approx_depth: 2
+      ram_distance: 1.5
     second_dice:
       dice: 1 # 2, 4 or 6
       approx_depth: 1.5
+      ram_distance: 1.5
   #05_buy_gold_chip:
   #06_play_slots:
   #07_play_roulette:

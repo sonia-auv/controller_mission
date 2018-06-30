@@ -25,5 +25,6 @@ mission_params:
       ram_distance: 1.5
   #05_buy_gold_chip:
   #06_play_slots:
-  #07_play_roulette:
+  07_play_roulette:
+    final_depth: 2.0
   #08_cash_in:

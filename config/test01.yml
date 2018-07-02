@@ -15,16 +15,28 @@ mission_params:
     second_path:
       first_side: left #right
   04_shoot_craps:
-    first_dice:
-      dice: 1 # 2, 4 or 6
-      approx_depth: 2
-      ram_distance: 1.5
-    second_dice:
-      dice: 1 # 2, 4 or 6
-      approx_depth: 1.5
-      ram_distance: 1.5
-  #05_buy_gold_chip:
-  #06_play_slots:
+    sum_11:
+      first_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 2
+        ram_distance: 1.5
+      second_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 1.5
+        ram_distance: 1.5
+    sum_7:
+      first_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 2
+        ram_distance: 1.5
+      second_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 1.5
+        ram_distance: 1.5
+  05_buy_gold_chip:
+    approx_depth: 2
+  06_play_slots:
+    approx_depth: 2
   07_play_roulette:
     final_depth: 2.0
   #08_cash_in:

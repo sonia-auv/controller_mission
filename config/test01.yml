@@ -12,8 +12,10 @@ mission_params:
   03_paths:
     first_path:
       first_side: left #right
+      align_depth: 1.5
     second_path:
       first_side: left #right
+      align_depth: 1.5
   04_shoot_craps:
     sum_11:
       first_dice:
@@ -38,5 +40,6 @@ mission_params:
   06_play_slots:
     approx_depth: 2
   07_play_roulette:
+    searching_depth: 1.5
     final_depth: 2.0
   #08_cash_in:

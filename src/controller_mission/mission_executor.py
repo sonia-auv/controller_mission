@@ -191,10 +191,16 @@ class MissionExecutor:
 
             if global_params:
                 for global_param in global_params:
-                    print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                    if isinstance(global_param.value, basestring) and global_param.value[:1] == '@':
+                        print('{}_{} = self.{}_{}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       '_'.join(sub_mission_name.split('|')[:-1]), global_param.value[1:]))
+                        exec ('self.{}_{} = self.{}_{}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       '_'.join(sub_mission_name.split('|')[:-1]), global_param.value[1:]))
+                    else:
+                        print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
                                               global_param.value)
-                    exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
-                                                   global_param.value))
+                        exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       global_param.value))
             # Replace single state with concurrent transitions by concurrent state
             for stateui in mission_container.statesui:
                 transitions = {}

@@ -4,6 +4,7 @@ mission_params:
     pinger_frequency: 40
   01_find_casino:
     #rotation_scale: 1
+    depth: 1.0
     angle1_deg: 90
     angle2_deg: 90
     final_global_angle: 135
@@ -20,7 +21,7 @@ mission_params:
     sum_11:
       first_dice:
         dice: 1 # 2, 4 or 6
-        approx_depth: 2
+        approx_depth: 2.0
         ram_distance: 1.5
       second_dice:
         dice: 1 # 2, 4 or 6
@@ -29,16 +30,16 @@ mission_params:
     sum_7:
       first_dice:
         dice: 1 # 2, 4 or 6
-        approx_depth: 2
+        approx_depth: 2.0
         ram_distance: 1.5
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
   05_buy_gold_chip:
-    approx_depth: 2
+    approx_depth: 2.0
   06_play_slots:
-    approx_depth: 2
+    approx_depth: 2.0
   07_play_roulette:
     searching_depth: 1.5
     final_depth: 2.0

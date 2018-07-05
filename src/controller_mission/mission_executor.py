@@ -146,6 +146,9 @@ class MissionExecutor:
 
     def _run_start_mission(self):
 
+        if not rospy.has_param('/mission_params'):
+            rospy.logwarn('No mission params loaded!')
+
         try:
             self.mapping_objective_reset_srv(ObjectiveResetRequest.ALL)
         except rospy.ServiceException:

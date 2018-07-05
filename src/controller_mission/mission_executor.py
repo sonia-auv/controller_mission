@@ -22,6 +22,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     SendMissionResponse, ReceivedState, ReceivedStateResponse
 from proc_control.srv import EnableControl, EnableControlRequest
 from proc_navigation.srv import SetWorldXYOffset
+from proc_mapping.srv import ObjectiveReset, ObjectiveResetRequest
 
 from provider_kill_mission.msg import MissionSwitchMsg
 
@@ -59,11 +60,14 @@ class MissionExecutor:
                                                     self._handle_mission_switch_activated)
         self.enable_control_srv = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
         self.set_initial_position_srv = rospy.ServiceProxy('/proc_navigation/set_world_x_y_offset', SetWorldXYOffset)
+        
+        self.mapping_objective_reset_srv = rospy.ServiceProxy('proc_mapping/objective_reset', ObjectiveReset)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
         rospy.Service('mission_executor/current_mission', CurrentMission, self._handle_current_mission)
         rospy.Service('mission_executor/stop_mission', StopMission, self._handle_stop_mission)
+        
 
         # Download state content
         rospy.Service('mission_executor/push_state_content', ReceivedState, self._handle_state_received)
@@ -141,6 +145,12 @@ class MissionExecutor:
         return self.create_state_machine(mission, 'main', None)
 
     def _run_start_mission(self):
+
+        try:
+            self.mapping_objective_reset_srv(ObjectiveResetRequest.ALL)
+        except rospy.ServiceException:
+            rospy.logwarn('proc_mapping ObjectiveReset service is not available')
+
         try:
             self.set_initial_position_srv()
             time.sleep(2)

@@ -16,7 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 # G E N E R A T E   M E S S A G E S   &   S E R V I C E S
 
 add_service_files(DIRECTORY srv
-  FILES
+  FILES 
   ListMissions.srv
   LoadMission.srv
   StartMission.srv

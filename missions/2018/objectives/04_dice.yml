@@ -1,22 +1,46 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''simple_dice1'''
+  variable_name: node_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''simple_dice1'''
+  variable_name: filterchain_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+  variable_name: topic_to_listen
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.5
+  variable_name: ram_distance
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: -1.5
+  variable_name: back_distance
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.5
+  variable_name: approx_depth
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 69
-  - 151
-  radius: 104
+  - 9
+  - 137
+  radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/align/align_front
     base_file: /missions/2018/align/align_front.yml
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''torpedos'''
+      value: !!python/unicode '@node_name'
       variable_name: node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''simple_torpille'''
+      value: !!python/unicode '@filterchain_name'
       variable_name: filterchaine_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -24,7 +48,7 @@ statesui:
       variable_name: media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 250.0
+      value: 200.0
       variable_name: bounding_box_vision
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -32,23 +56,23 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 500.0
+      value: 100.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.0
+      value: 15.0
       variable_name: heading
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.2
+      value: 0.23
       variable_name: target_width_in_meter
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''/proc_image_processing/torpedos_result'''
+      value: !!python/unicode '@topic_to_listen'
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 650.0
+      value: 250.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -56,11 +80,11 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 5.0
+      value: 10.0
       variable_name: max_queue_size
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.3
+      value: 0.5
       variable_name: control_bounding_box_in_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -94,7 +118,7 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'AlignTorpedos'
+      value: !!python/unicode 'Align'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: SubMission_file
@@ -103,45 +127,75 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'LaunchTorpedos'
+      state: !!python/unicode 'Ram'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 359
-      - 150
-      radius: 112
+      - 250
+      - 139
+      radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2018/actuators/torpedos
-        base_file: /missions/2018/actuators/torpedos.yml
-        global_params: []
+        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
         is_root: false
-        is_submission: true
         outcome_states:
         - succeeded
         - aborted
+        - preempted
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'LaunchTorpedos'
+          value: !!python/unicode 'Ram'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: 2018/actuators/torpedos.yml
-          variable_name: SubMission_file
-        transitions: []
-      transitions: []
+          description: ' ''Distance to travel'''
+          value: !!python/unicode 'ram_distance'
+          variable_name: param_distance_x
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Back'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 483
+          - 137
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+            base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Back'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: !!python/unicode 'back_distance'
+              variable_name: param_distance_x
+            transitions: []
+          transitions: []
 - *id002
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id003
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -188
-  - 150
+  - -210
+  - 137
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
-    base_file: /src/controller_mission/state/moveGlobalDecoupledZFromGlobalParam.py
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
     is_root: true
     outcome_states:
     - succeeded
@@ -154,14 +208,14 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: !!python/unicode '/mission_params/06_play_slots/approx_depth'
-      variable_name: param_distance_z_global_param_name
+      value: !!python/unicode 'approx_depth'
+      variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'AlignTorpedos'
+      state: !!python/unicode 'Align'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
+    state1: *id004
     state2: *id001

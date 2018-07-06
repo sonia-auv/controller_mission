@@ -3,7 +3,7 @@ import rospy
 from ..mission_state import MissionState, Parameter
 
 from Queue import deque
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetPositionTarget, SetDecoupledTarget
 from proc_control.msg import TargetReached
 from proc_image_processing.msg import VisionTarget
 
@@ -106,12 +106,8 @@ class AlignRoulette(MissionState):
 
     def set_target(self, position_x, position_y):
         try:
-            self.set_local_target(position_x,
-                                  position_y,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_local_target(position_x, position_y, 0, 0, 0, 0,
+                                  False, False, True, True, True, True)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -119,8 +115,8 @@ class AlignRoulette(MissionState):
         rospy.loginfo('Set relative position x = %f' % position_y)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

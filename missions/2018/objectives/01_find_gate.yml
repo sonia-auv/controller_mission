@@ -39,6 +39,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -59,19 +60,20 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'TODO_Set_GLobal_Yaw'
+          state: !!python/unicode 'SetGlobalYaw'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 605
-          - 423
-          radius: 152
+          - 941
+          - 165
+          radius: 248
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
+            _name: moveGlobalDecoupledYawFromGlobalParam.MoveDecoupledYawFromGlobalParam
+            base_file: /src/controller_mission/state/moveGlobalDecoupledYawFromGlobalParam.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -79,48 +81,15 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'TODO_Set_GLobal_Yaw'
+              value: !!python/unicode 'SetGlobalYaw'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 0.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: MoveDecoupledYawFromGlobalParam
-          transitions:
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id003
-            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple
-              - 1066
-              - 375
-              radius: 248
-              state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: moveGlobalDecoupledYawFromGlobalParam.MoveDecoupledYawFromGlobalParam
-                base_file: /src/controller_mission/state/moveGlobalDecoupledYawFromGlobalParam.py
-                outcome_states:
-                - succeeded
-                - aborted
-                - preempted
-                parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: state_name
-                  value: MoveDecoupledYawFromGlobalParam
-                  variable_name: state_name
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: !!python/unicode '/mission_params/01_find_casino/final_global_angle'
-                  variable_name: param_yaw_global_param_name
-                transitions: []
-              transitions: []
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              description: ' ''Distance to travel'''
+              value: !!python/unicode '/mission_params/01_find_casino/final_global_angle'
+              variable_name: param_yaw_global_param_name
+            transitions: []
+          transitions: []
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 125
   - 237
@@ -128,7 +97,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledYawFromGlobalParam.MoveRelativeDecoupledYawFromGlobalParam
     base_file: /src/controller_mission/state/moveRelativeDecoupledYawFromGlobalParam.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -149,8 +118,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id003
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 312
       - 221
@@ -158,6 +127,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -182,19 +152,20 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id005
+        state1: *id004
         state2: *id001
-- *id005
+- *id004
 - *id002
-- *id003
-- !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id005
+- &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 1057
-  - 195
-  radius: 128
+  - -66
+  - 240
+  radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalDecoupledYaw.MoveDecoupledYaw
-    base_file: /src/controller_mission/state/moveGlobalDecoupledYaw.py
+    _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZFromGlobalParam.py
+    is_root: true
     outcome_states:
     - succeeded
     - aborted
@@ -202,12 +173,18 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: MoveDecoupledYaw
+      value: !!python/unicode 'Depth'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 270.0
-      variable_name: param_heading
-    transitions: []
-  transitions: []
-- *id006
+      value: !!python/unicode '/mission_params/01_find_casino/depth'
+      variable_name: param_distance_z_global_param_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Rotate1'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id006
+    state2: *id003

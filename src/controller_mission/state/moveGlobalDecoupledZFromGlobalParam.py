@@ -5,7 +5,7 @@ from proc_control.msg import TargetReached
 from proc_control.srv import SetDecoupledTarget
 
 
-class MoveDecoupledZFromGlobal(MissionState):
+class MoveDecoupledZFromGlobalParam(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

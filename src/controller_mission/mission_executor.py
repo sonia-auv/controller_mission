@@ -22,6 +22,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     SendMissionResponse, ReceivedState, ReceivedStateResponse
 from proc_control.srv import EnableControl, EnableControlRequest
 from proc_navigation.srv import SetWorldXYOffset
+from proc_mapping.srv import ObjectiveReset, ObjectiveResetRequest
 
 from provider_kill_mission.msg import MissionSwitchMsg
 
@@ -59,11 +60,14 @@ class MissionExecutor:
                                                     self._handle_mission_switch_activated)
         self.enable_control_srv = rospy.ServiceProxy('/proc_control/enable_control', EnableControl)
         self.set_initial_position_srv = rospy.ServiceProxy('/proc_navigation/set_world_x_y_offset', SetWorldXYOffset)
+        
+        self.mapping_objective_reset_srv = rospy.ServiceProxy('proc_mapping/objective_reset', ObjectiveReset)
 
         # Service to start mission
         rospy.Service('mission_executor/start_mission', StartMission, self._handle_start_mission)
         rospy.Service('mission_executor/current_mission', CurrentMission, self._handle_current_mission)
         rospy.Service('mission_executor/stop_mission', StopMission, self._handle_stop_mission)
+        
 
         # Download state content
         rospy.Service('mission_executor/push_state_content', ReceivedState, self._handle_state_received)
@@ -141,6 +145,15 @@ class MissionExecutor:
         return self.create_state_machine(mission, 'main', None)
 
     def _run_start_mission(self):
+
+        if not rospy.has_param('/mission_params'):
+            rospy.logwarn('No mission params loaded!')
+
+        try:
+            self.mapping_objective_reset_srv(ObjectiveResetRequest.ALL)
+        except rospy.ServiceException:
+            rospy.logwarn('proc_mapping ObjectiveReset service is not available')
+
         try:
             self.set_initial_position_srv()
             time.sleep(2)
@@ -191,10 +204,16 @@ class MissionExecutor:
 
             if global_params:
                 for global_param in global_params:
-                    print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                    if isinstance(global_param.value, basestring) and global_param.value[:1] == '@':
+                        print('{}_{} = self.{}_{}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       '_'.join(sub_mission_name.split('|')[:-1]), global_param.value[1:]))
+                        exec ('self.{}_{} = self.{}_{}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       '_'.join(sub_mission_name.split('|')[:-1]), global_param.value[1:]))
+                    else:
+                        print '{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
                                               global_param.value)
-                    exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
-                                                   global_param.value))
+                        exec ('self.{}_{} = {}'.format(sub_mission_name.replace('|', '_'), global_param.variable_name,
+                                                       global_param.value))
             # Replace single state with concurrent transitions by concurrent state
             for stateui in mission_container.statesui:
                 transitions = {}
@@ -330,13 +349,17 @@ class MissionExecutor:
                 for global_param in mission_container.globalparams:
                     if param.value == global_param.variable_name:
                         value_is_param = True
-                        exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'),
-                                                         param.value))
+                        exec('param_value = self.{}_{}'.format(sub_mission_name.replace('|', '_'),
+                                                                param.value))
+                        param_value = self.check_for_rosparam(param_value)
+                        exec ('s.{} = param_value'.format(param.variable_name))
+            
+            param_value = self.check_for_rosparam(param.value)
 
-            if isinstance(param.value, basestring) and not value_is_param:
-                exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
+            if isinstance(param_value, basestring) and not value_is_param:
+                exec ('s.{} = \'{}\''.format(param.variable_name, param_value))
             elif not value_is_param:
-                exec ('s.{} = {}'.format(param.variable_name, param.value))
+                exec ('s.{} = {}'.format(param.variable_name, param_value))
 
         rospy.loginfo(
             'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
@@ -346,6 +369,15 @@ class MissionExecutor:
                 sub_mission_name + '|' + stateui.state.name,
                 transitions,
                 "{'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3'}"))
+
+    def check_for_rosparam(self, value):
+        if isinstance(value, basestring) and value[0] == '$':
+            print("LOADED PARAM!")
+            if rospy.has_param(value[1:]):
+                value = rospy.get_param(value[1:])
+            else:
+                raise Exception('{} param is not defined'.format(value[1:]))
+        return value
 
     def instanciate_submission_state(self, stateui, transition_dict, sub_mission_name):
         transitions = {}

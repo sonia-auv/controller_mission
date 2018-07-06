@@ -1,0 +1,856 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 172
+  - 138
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2018/objectives/04_dice
+    base_file: /missions/2018/objectives/04_dice.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_dice1'''
+      variable_name: node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''simple_dice1'''
+      variable_name: filterchain_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+      variable_name: topic_to_listen
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.5
+      variable_name: ram_distance
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: -1.5
+      variable_name: back_distance
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.5
+      variable_name: approx_depth
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Sum11_1'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2018/objectives/04_dice.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Split_Sum11_2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 336
+      - 134
+      radius: 104
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Split_Sum11_2'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 0.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Sum11_2'
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Timer_Sum11_2'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 484
+          - 32
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/objectives/04_dice
+            base_file: /missions/2018/objectives/04_dice.yml
+            global_params:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''simple_dice1'''
+              variable_name: node_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''simple_dice1'''
+              variable_name: filterchain_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+              variable_name: topic_to_listen
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.5
+              variable_name: ram_distance
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: -1.5
+              variable_name: back_distance
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.5
+              variable_name: approx_depth
+            is_root: false
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Sum11_2'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/objectives/04_dice.yml
+              variable_name: SubMission_file
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Succeded01'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 963
+              - -194
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Succeded01'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 0.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions: []
+              transitions: []
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 475
+          - 216
+          radius: 104
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Timer_Sum11_2'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 1.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Split_Sum11_C1'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id004
+            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 631
+              - 210
+              radius: 112
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Split_Sum11_C1'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 0.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Sum11_C1'
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Timer_Sum11_C1'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id005
+                state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 783
+                  - 24
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: 2018/objectives/04_dice
+                    base_file: /missions/2018/objectives/04_dice.yml
+                    global_params:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: !!python/unicode '''simple_dice1'''
+                      variable_name: node_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: !!python/unicode '''simple_dice1'''
+                      variable_name: filterchain_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                      variable_name: topic_to_listen
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: 1.5
+                      variable_name: ram_distance
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: -1.5
+                      variable_name: back_distance
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ''
+                      value: 1.5
+                      variable_name: approx_depth
+                    is_root: false
+                    is_submission: true
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Sum11_C1'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: SubMission_file
+                      value: 2018/objectives/04_dice.yml
+                      variable_name: SubMission_file
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'Succeded01'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id006
+                    state2: *id007
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id005
+                state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 800
+                  - 203
+                  radius: 112
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: timeOut.TimesOut
+                    base_file: /src/controller_mission/state/timeOut.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Timer_Sum11_C1'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: 1.0
+                      variable_name: param_time
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: succeeded
+                      variable_name: param_to_return
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'Split_Sum11_C2'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id008
+                    state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 988
+                      - 204
+                      radius: 112
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: timeOut.TimesOut
+                        base_file: /src/controller_mission/state/timeOut.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'Split_Sum11_C2'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: 0.0
+                          variable_name: param_time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: succeeded
+                          variable_name: param_to_return
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Sum11_C2'
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Timer_Sum11_C2'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id009
+                        state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 1073
+                          - 17
+                          radius: 100
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: 2018/objectives/04_dice
+                            base_file: /missions/2018/objectives/04_dice.yml
+                            global_params:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: !!python/unicode '''simple_dice1'''
+                              variable_name: node_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: !!python/unicode '''simple_dice1'''
+                              variable_name: filterchain_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                              variable_name: topic_to_listen
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 1.5
+                              variable_name: ram_distance
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: -1.5
+                              variable_name: back_distance
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 1.5
+                              variable_name: approx_depth
+                            is_root: false
+                            is_submission: true
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'Sum11_C2'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: SubMission_file
+                              value: 2018/objectives/04_dice.yml
+                              variable_name: SubMission_file
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'Succeded01'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id010
+                            state2: *id007
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id009
+                        state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 1162
+                          - 201
+                          radius: 112
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: timeOut.TimesOut
+                            base_file: /src/controller_mission/state/timeOut.py
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'Timer_Sum11_C2'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: 1.0
+                              variable_name: param_time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: succeeded
+                              variable_name: param_to_return
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'Aborted'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id011
+                            state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 1342
+                              - 201
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: timeOut.TimesOut
+                                base_file: /src/controller_mission/state/timeOut.py
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                - preempted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'Aborted'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: 0.0
+                                  variable_name: param_time
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: !!python/unicode 'aborted'
+                                  variable_name: param_to_return
+                                transitions: []
+                              transitions: []
+- *id003
+- *id006
+- *id010
+- &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 25
+  - 215
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Split_Sum11_1'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 0.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Sum11_1'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Timer_Sum11_1'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id012
+    state2: *id001
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id012
+    state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 179
+      - 472
+      radius: 104
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Timer_Sum11_1'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 1.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'Split_Sum7_1'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id013
+        state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 365
+          - 480
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Split_Sum7_1'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 1.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Sum07_1'
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Timer_Sum7_1'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id014
+            state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 542
+              - 398
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2018/objectives/04_dice
+                base_file: /missions/2018/objectives/04_dice.yml
+                global_params:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''simple_dice1'''
+                  variable_name: node_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''simple_dice1'''
+                  variable_name: filterchain_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                  variable_name: topic_to_listen
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: 1.5
+                  variable_name: ram_distance
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: -1.5
+                  variable_name: back_distance
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: 1.5
+                  variable_name: approx_depth
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Sum07_1'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2018/objectives/04_dice.yml
+                  variable_name: SubMission_file
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Split_Sum7_2'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id015
+                state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 704
+                  - 411
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: timeOut.TimesOut
+                    base_file: /src/controller_mission/state/timeOut.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Split_Sum7_2'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: 1.0
+                      variable_name: param_time
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: succeeded
+                      variable_name: param_to_return
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'Sum07_2'
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'Timer_Sum7_2'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id016
+                    state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 863
+                      - 340
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: 2018/objectives/04_dice
+                        base_file: /missions/2018/objectives/04_dice.yml
+                        global_params:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''simple_dice1'''
+                          variable_name: node_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''simple_dice1'''
+                          variable_name: filterchain_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                          variable_name: topic_to_listen
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.5
+                          variable_name: ram_distance
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: -1.5
+                          variable_name: back_distance
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.5
+                          variable_name: approx_depth
+                        is_submission: true
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'Sum07_2'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: SubMission_file
+                          value: 2018/objectives/04_dice.yml
+                          variable_name: SubMission_file
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Succeeded02'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id017
+                        state2: &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 1061
+                          - 326
+                          radius: 100
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: timeOut.TimesOut
+                            base_file: /src/controller_mission/state/timeOut.py
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'Succeeded02'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: 1.0
+                              variable_name: param_time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: succeeded
+                              variable_name: param_to_return
+                            transitions: []
+                          transitions: []
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id016
+                    state2: &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 863
+                      - 484
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: timeOut.TimesOut
+                        base_file: /src/controller_mission/state/timeOut.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'Timer_Sum7_2'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: 1.0
+                          variable_name: param_time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: succeeded
+                          variable_name: param_to_return
+                        transitions: []
+                      transitions: []
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id014
+            state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 521
+              - 575
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Timer_Sum7_1'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 1.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions: []
+              transitions: []
+- *id002
+- *id013
+- *id004
+- *id008
+- *id009
+- *id005
+- *id011
+- *id007
+- *id018
+- *id014
+- *id015
+- *id019
+- *id020
+- *id021
+- *id016
+- *id017

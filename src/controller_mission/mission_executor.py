@@ -349,13 +349,17 @@ class MissionExecutor:
                 for global_param in mission_container.globalparams:
                     if param.value == global_param.variable_name:
                         value_is_param = True
-                        exec ('s.{} = self.{}_{}'.format(param.variable_name, sub_mission_name.replace('|', '_'),
-                                                         param.value))
+                        exec('param_value = self.{}_{}'.format(sub_mission_name.replace('|', '_'),
+                                                                param.value))
+                        param_value = self.check_for_rosparam(param_value)
+                        exec ('s.{} = param_value'.format(param.variable_name))
+            
+            param_value = self.check_for_rosparam(param.value)
 
-            if isinstance(param.value, basestring) and not value_is_param:
-                exec ('s.{} = \'{}\''.format(param.variable_name, param.value))
+            if isinstance(param_value, basestring) and not value_is_param:
+                exec ('s.{} = \'{}\''.format(param.variable_name, param_value))
             elif not value_is_param:
-                exec ('s.{} = {}'.format(param.variable_name, param.value))
+                exec ('s.{} = {}'.format(param.variable_name, param_value))
 
         rospy.loginfo(
             'Add single state {} with transitions={})'.format(sub_mission_name + '|' + stateui.state.name, transitions))
@@ -365,6 +369,15 @@ class MissionExecutor:
                 sub_mission_name + '|' + stateui.state.name,
                 transitions,
                 "{'generic_data_field_1':'generic_data_field_1','generic_data_field_2':'generic_data_field_2','generic_data_field_3':'generic_data_field_3'}"))
+
+    def check_for_rosparam(self, value):
+        if isinstance(value, basestring) and value[0] == '$':
+            print("LOADED PARAM!")
+            if rospy.has_param(value[1:]):
+                value = rospy.get_param(value[1:])
+            else:
+                raise Exception('{} param is not defined'.format(value[1:]))
+        return value
 
     def instanciate_submission_state(self, stateui, transition_dict, sub_mission_name):
         transitions = {}

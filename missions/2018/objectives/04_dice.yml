@@ -12,6 +12,18 @@ globalparams:
   description: ''
   value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
   variable_name: topic_to_listen
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.5
+  variable_name: ram_distance
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: -1.5
+  variable_name: back_distance
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: 1.5
+  variable_name: approx_depth
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -98,7 +110,7 @@ statesui:
       description: ''
       value: 5.0
       variable_name: control_bounding_box_yaw
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -140,7 +152,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 1.5
+          value: !!python/unicode 'ram_distance'
           variable_name: param_distance_x
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -170,9 +182,40 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: 1.5
+              value: !!python/unicode 'back_distance'
               variable_name: param_distance_x
             transitions: []
           transitions: []
 - *id002
 - *id003
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -210
+  - 137
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Depth'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode 'approx_depth'
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Align'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id004
+    state2: *id001

@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 172
-  - 138
+  - 153
+  - 140
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/04_dice
@@ -12,15 +12,15 @@ statesui:
     global_params:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''simple_dice1'''
+      value: !!python/unicode '''sum11_1'''
       variable_name: node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''simple_dice1'''
+      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/first_dice/filterchain_name'''
       variable_name: filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+      value: !!python/unicode '''/proc_image_processing/sum11_1_result'''
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -104,15 +104,15 @@ statesui:
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: !!python/unicode '''simple_dice1'''
+              value: !!python/unicode '''sum11_2'''
               variable_name: node_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: !!python/unicode '''simple_dice1'''
+              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/second_dice/filterchain_name'''
               variable_name: filterchain_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+              value: !!python/unicode '''/proc_image_processing/sum11_2_result'''
               variable_name: topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
@@ -180,7 +180,7 @@ statesui:
         state1: *id002
         state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 475
+          - 474
           - 216
           radius: 104
           state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -197,7 +197,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 1.0
+              value: !!python/unicode '$/mission_params/04_shoot_craps/sum_11/second_dice/max_time'
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
@@ -258,15 +258,15 @@ statesui:
                     global_params:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: !!python/unicode '''simple_dice1'''
+                      value: !!python/unicode '''sum11_c1'''
                       variable_name: node_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: !!python/unicode '''simple_dice1'''
+                      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/filterchain_name'''
                       variable_name: filterchain_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                      value: !!python/unicode '''/proc_image_processing/sum11_c1_result'''
                       variable_name: topic_to_listen
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
@@ -325,7 +325,7 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
-                      value: 1.0
+                      value: !!python/unicode '$/mission_params/04_shoot_craps/sum_11/complementary_1/max_time'
                       variable_name: param_time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
@@ -386,15 +386,15 @@ statesui:
                             global_params:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: !!python/unicode '''simple_dice1'''
+                              value: !!python/unicode '''sum11_c2'''
                               variable_name: node_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: !!python/unicode '''simple_dice1'''
+                              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_2/filterchain_name'''
                               variable_name: filterchain_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                              value: !!python/unicode '''/proc_image_processing/sum11_c2_result'''
                               variable_name: topic_to_listen
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
@@ -453,7 +453,7 @@ statesui:
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ' ''Times Out'''
-                              value: 1.0
+                              value: !!python/unicode '$/mission_params/04_shoot_craps/sum_11/complementary_2/max_time'
                               variable_name: param_time
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ' ''Times Out'''
@@ -462,15 +462,15 @@ statesui:
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition
                               outcome: succeeded
-                              state: !!python/unicode 'Aborted'
+                              state: !!python/unicode 'Aborted02'
                           transitions:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
                             state1: *id011
-                            state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
+                            state2: &id031 !!python/object:rqt_mission_planner.Renderer.StateUI
                               position: !!python/tuple
-                              - 1342
-                              - 201
+                              - 1359
+                              - 211
                               radius: 100
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: timeOut.TimesOut
@@ -499,8 +499,8 @@ statesui:
 - *id010
 - &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 25
-  - 215
+  - -6
+  - 279
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -540,8 +540,8 @@ statesui:
     state1: *id012
     state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 179
-      - 472
+      - 151
+      - 453
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -557,7 +557,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: 1.0
+          value: !!python/unicode '$/mission_params/04_shoot_craps/sum_11/first_dice/max_time'
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -590,7 +590,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 1.0
+              value: 0.0
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
@@ -618,15 +618,15 @@ statesui:
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: !!python/unicode '''simple_dice1'''
+                  value: !!python/unicode '''sum07_1'''
                   variable_name: node_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: !!python/unicode '''simple_dice1'''
+                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/first_dice/filterchain_name'''
                   variable_name: filterchain_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                  value: !!python/unicode '''/proc_image_processing/sum07_1_result'''
                   variable_name: topic_to_listen
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
@@ -663,8 +663,8 @@ statesui:
                 state1: *id015
                 state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 704
-                  - 411
+                  - 690
+                  - 405
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: timeOut.TimesOut
@@ -680,7 +680,7 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
-                      value: 1.0
+                      value: 0.0
                       variable_name: param_time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
@@ -708,15 +708,15 @@ statesui:
                         global_params:
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: !!python/unicode '''simple_dice1'''
+                          value: !!python/unicode '''sum07_2'''
                           variable_name: node_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: !!python/unicode '''simple_dice1'''
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/second_dice/filterchain_name'''
                           variable_name: filterchain_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
+                          value: !!python/unicode '''/proc_image_processing/sum07_2_result'''
                           variable_name: topic_to_listen
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
@@ -751,7 +751,7 @@ statesui:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id017
-                        state2: &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
+                        state2: &id032 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
                           - 1061
                           - 326
@@ -781,10 +781,10 @@ statesui:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id016
-                    state2: &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
+                    state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 863
-                      - 484
+                      - 864
+                      - 525
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: timeOut.TimesOut
@@ -800,18 +800,204 @@ statesui:
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Times Out'''
-                          value: 1.0
+                          value: !!python/unicode '$/mission_params/04_shoot_craps/sum_07/second_dice/max_time'
                           variable_name: param_time
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Times Out'''
                           value: succeeded
                           variable_name: param_to_return
-                        transitions: []
-                      transitions: []
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Split_Sum7_C1'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id018
+                        state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 1045
+                          - 525
+                          radius: 104
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: timeOut.TimesOut
+                            base_file: /src/controller_mission/state/timeOut.py
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'Split_Sum7_C1'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: 0.0
+                              variable_name: param_time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: succeeded
+                              variable_name: param_to_return
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'Sum07_C1'
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'Time_Sum7_C1'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id019
+                            state2: &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 1224
+                              - 425
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: 2018/objectives/04_dice
+                                base_file: /missions/2018/objectives/04_dice.yml
+                                global_params:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''sum07_c1'''
+                                  variable_name: node_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/complementary_1/filterchain_name'''
+                                  variable_name: filterchain_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''/proc_image_processing/sum07_c1_result'''
+                                  variable_name: topic_to_listen
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: 1.5
+                                  variable_name: ram_distance
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: -1.5
+                                  variable_name: back_distance
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: 1.5
+                                  variable_name: approx_depth
+                                is_submission: true
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'Sum07_C1'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: SubMission_file
+                                  value: 2018/objectives/04_dice.yml
+                                  variable_name: SubMission_file
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'Success03'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id020
+                                state2: &id029 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - 1491
+                                  - 552
+                                  radius: 100
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: timeOut.TimesOut
+                                    base_file: /src/controller_mission/state/timeOut.py
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: !!python/unicode 'Success03'
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Times Out'''
+                                      value: 0.0
+                                      variable_name: param_time
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Times Out'''
+                                      value: succeeded
+                                      variable_name: param_to_return
+                                    transitions: []
+                                  transitions: []
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id019
+                            state2: &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 1228
+                              - 593
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: timeOut.TimesOut
+                                base_file: /src/controller_mission/state/timeOut.py
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                - preempted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'Time_Sum7_C1'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: !!python/unicode '$/mission_params/04_shoot_craps/sum_07/complementary_1/max_time'
+                                  variable_name: param_time
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: succeeded
+                                  variable_name: param_to_return
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'Aborted02'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id021
+                                state2: &id027 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - 1489
+                                  - 659
+                                  radius: 100
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: timeOut.TimesOut
+                                    base_file: /src/controller_mission/state/timeOut.py
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: !!python/unicode 'Aborted02'
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Times Out'''
+                                      value: 0.0
+                                      variable_name: param_time
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Times Out'''
+                                      value: !!python/unicode 'aborted'
+                                      variable_name: param_to_return
+                                    transitions: []
+                                  transitions: []
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id014
-            state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state2: &id022 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 521
               - 575
@@ -830,14 +1016,275 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
-                  value: 1.0
+                  value: !!python/unicode '$/mission_params/04_shoot_craps/sum_07/first_dice/max_time'
                   variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
                   value: succeeded
                   variable_name: param_to_return
-                transitions: []
-              transitions: []
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Split_LastDices_1'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id022
+                state2: &id023 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 646
+                  - 662
+                  radius: 136
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: timeOut.TimesOut
+                    base_file: /src/controller_mission/state/timeOut.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Split_LastDices_1'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: 0.0
+                      variable_name: param_time
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: succeeded
+                      variable_name: param_to_return
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'Timer_LastDices_1'
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'LastDices_1'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id023
+                    state2: &id024 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 836
+                      - 810
+                      radius: 136
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: timeOut.TimesOut
+                        base_file: /src/controller_mission/state/timeOut.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'Timer_LastDices_1'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: !!python/unicode '$/mission_params/04_shoot_craps/last_dices/first_dice/max_time'
+                          variable_name: param_time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: succeeded
+                          variable_name: param_to_return
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Split_LastDices_2'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id024
+                        state2: &id025 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 1032
+                          - 712
+                          radius: 136
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: timeOut.TimesOut
+                            base_file: /src/controller_mission/state/timeOut.py
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'Split_LastDices_2'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: 0.0
+                              variable_name: param_time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: succeeded
+                              variable_name: param_to_return
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'Timer_LastDices_2'
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'LastDices_2'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id025
+                            state2: &id026 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 1194
+                              - 878
+                              radius: 136
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: timeOut.TimesOut
+                                base_file: /src/controller_mission/state/timeOut.py
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                - preempted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'Timer_LastDices_2'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: !!python/unicode '$/mission_params/04_shoot_craps/last_dices/second_dice/max_time'
+                                  variable_name: param_time
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Times Out'''
+                                  value: succeeded
+                                  variable_name: param_to_return
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'Aborted02'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id026
+                                state2: *id027
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id025
+                            state2: &id028 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 1225
+                              - 728
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: 2018/objectives/04_dice
+                                base_file: /missions/2018/objectives/04_dice.yml
+                                global_params:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''lastdices_2'''
+                                  variable_name: node_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/second_dice/filterchain_name'''
+                                  variable_name: filterchain_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: !!python/unicode '''/proc_image_processing/lastdices_2_result'''
+                                  variable_name: topic_to_listen
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: 1.5
+                                  variable_name: ram_distance
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: -1.5
+                                  variable_name: back_distance
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ''
+                                  value: 1.5
+                                  variable_name: approx_depth
+                                is_submission: true
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'LastDices_2'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: SubMission_file
+                                  value: 2018/objectives/04_dice.yml
+                                  variable_name: SubMission_file
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'Success03'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id028
+                                state2: *id029
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id023
+                    state2: &id030 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 849
+                      - 658
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: 2018/objectives/04_dice
+                        base_file: /missions/2018/objectives/04_dice.yml
+                        global_params:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''lastdices_1'''
+                          variable_name: node_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/first_dice/filterchain_name'''
+                          variable_name: filterchain_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: !!python/unicode '''/proc_image_processing/lastdices_1_result'''
+                          variable_name: topic_to_listen
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.5
+                          variable_name: ram_distance
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: -1.5
+                          variable_name: back_distance
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.5
+                          variable_name: approx_depth
+                        is_submission: true
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'LastDices_1'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: SubMission_file
+                          value: 2018/objectives/04_dice.yml
+                          variable_name: SubMission_file
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'Split_LastDices_2'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id030
+                        state2: *id025
 - *id002
 - *id013
 - *id004
@@ -846,11 +1293,22 @@ statesui:
 - *id005
 - *id011
 - *id007
-- *id018
+- *id031
 - *id014
 - *id015
-- *id019
-- *id020
-- *id021
+- *id022
+- *id018
+- *id032
 - *id016
 - *id017
+- *id024
+- *id021
+- *id023
+- *id019
+- *id025
+- *id027
+- *id026
+- *id029
+- *id020
+- *id030
+- *id028

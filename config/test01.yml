@@ -25,43 +25,50 @@ mission_params:
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       complementary_1:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       complementary_2:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-    sum_7:
+        filterchain_name: 'simple_dice1'
+    sum_07:
       first_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       complementary_1:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
     last_dices:
       first_dice:
         dice: 1 # 2, 4 or 6
@@ -69,12 +76,14 @@ mission_params:
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
+        filterchain_name: 'simple_dice1'
   05_buy_gold_chip:
     approx_depth: 2.0
   06_play_slots:

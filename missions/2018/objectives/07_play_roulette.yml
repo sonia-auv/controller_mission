@@ -240,7 +240,7 @@ statesui:
     state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 163
-      - 273
+      - 275
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2018/hydros/find_pinger
@@ -268,13 +268,13 @@ statesui:
 - *id008
 - &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -281
-  - 272
+  - -417
+  - 265
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
     base_file: /src/controller_mission/state/moveGlobalDecoupledZFromGlobalParam.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -297,3 +297,65 @@ statesui:
     name: succeeded
     state1: *id009
     state2: *id004
+- &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -414
+  - 144
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: hydro.Hydro
+    base_file: /src/controller_mission/state/hydro.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Hydro01'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Maximum size of queue'''
+      value: 10.0
+      variable_name: param_queu_size
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Hydro02'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id010
+    state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -237
+      - 156
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: hydro.Hydro
+        base_file: /src/controller_mission/state/hydro.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Hydro02'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum size of queue'''
+          value: 10.0
+          variable_name: param_queu_size
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'SearchingDepth'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id011
+        state2: *id009
+- *id011

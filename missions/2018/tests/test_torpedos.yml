@@ -90,8 +90,8 @@ statesui:
     state2: *id001
 - &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 196
-  - 198
+  - 185
+  - 289
   radius: 120
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
@@ -120,8 +120,8 @@ statesui:
     state1: *id004
     state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 387
-      - 261
+      - 364
+      - 353
       radius: 120
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
@@ -173,10 +173,10 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'DecoupledDepth2'
+      state: 06_play_slots
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id006
-    state2: *id004
+    state2: *id002
 - *id005

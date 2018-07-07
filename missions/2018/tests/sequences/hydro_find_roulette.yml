@@ -1,10 +1,10 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+- !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 296
-  - 104
+  - 295
+  - 250
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZ.MoveDecoupledZ
@@ -23,6 +23,30 @@ statesui:
       description: ' ''Distance to travel'''
       value: 1.5
       variable_name: param_distance_z
+    transitions: []
+  transitions: []
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 104
+  - 95
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Depth01'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
@@ -31,7 +55,7 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 505
       - 85
@@ -55,35 +79,4 @@ statesui:
           variable_name: SubMission_file
         transitions: []
       transitions: []
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 100
-  - 100
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalDecoupledZ.MoveDecoupledZ
-    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
-    is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'Depth01'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Distance to travel'''
-      value: 1.0
-      variable_name: param_distance_z
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'Depth02'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id002
-    state2: *id001
-- *id003
+- *id002

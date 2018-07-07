@@ -33,8 +33,8 @@ statesui:
     state1: *id001
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 507
-      - 87
+      - 505
+      - 85
       radius: 128
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2018/objectives/07_play_roulette

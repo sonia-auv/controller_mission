@@ -157,7 +157,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: 180.0
+          value: 720.0
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -268,12 +268,12 @@ statesui:
 - *id008
 - &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -215
-  - 270
+  - -281
+  - 272
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveRelativeDecoupledZFromGlobalParam.MoveRelativeDecoupledZFromGlobalParam
-    base_file: /src/controller_mission/state/moveRelativeDecoupledZFromGlobalParam.py
+    _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZFromGlobalParam.py
     is_root: true
     outcome_states:
     - succeeded

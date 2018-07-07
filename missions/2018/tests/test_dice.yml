@@ -21,37 +21,25 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 2.0
+      value: 1.5
       variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: 04_dice
+      state: 04_play_dices
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 568
-      - 207
-      radius: 100
+      - 565
+      - 224
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2018/objectives/04_dice
-        base_file: /missions/2018/objectives/04_dice.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''simple_dice1'''
-          variable_name: node_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''simple_dice1'''
-          variable_name: filterchain_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: !!python/unicode '''/proc_image_processing/simple_dice1_result'''
-          variable_name: topic_to_listen
+        _name: 2018/objectives/04_play_dices
+        base_file: /missions/2018/objectives/04_play_dices.yml
+        global_params: []
         is_submission: true
         outcome_states:
         - succeeded
@@ -59,11 +47,11 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: 04_dice
+          value: 04_play_dices
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: 2018/objectives/04_dice.yml
+          value: 2018/objectives/04_play_dices.yml
           variable_name: SubMission_file
         transitions: []
       transitions: []

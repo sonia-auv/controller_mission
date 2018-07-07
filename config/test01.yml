@@ -20,19 +20,19 @@ mission_params:
   04_shoot_craps:
     sum_11:
       first_dice:
-        dice: 1 # 2, 4 or 6
+        dice: 5 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice5'
       second_dice:
-        dice: 1 # 2, 4 or 6
+        dice: 6 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice6'
       complementary_1:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
@@ -41,20 +41,20 @@ mission_params:
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_2:
-        dice: 1 # 2, 4 or 6
+        dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice2'
     sum_07:
       first_dice:
-        dice: 1 # 2, 4 or 6
+        dice: 6 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice6'
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
@@ -63,12 +63,12 @@ mission_params:
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_1:
-        dice: 1 # 2, 4 or 6
+        dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice2'
     last_dices:
       first_dice:
         dice: 1 # 2, 4 or 6
@@ -78,17 +78,17 @@ mission_params:
         max_time: 120 
         filterchain_name: 'simple_dice1'
       second_dice:
-        dice: 1 # 2, 4 or 6
+        dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
         back_distance: -1.5  
         max_time: 120 
-        filterchain_name: 'simple_dice1'
+        filterchain_name: 'simple_dice2'
   05_buy_gold_chip:
     approx_depth: 2.0
   06_play_slots:
     approx_depth: 2.0
   07_play_roulette:
-    searching_depth: 1.5
+    searching_depth: 2.0
     final_depth: 2.0
   #08_cash_in:

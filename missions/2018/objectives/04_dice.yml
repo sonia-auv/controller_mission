@@ -72,7 +72,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 250.0
+      value: 400.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -80,7 +80,7 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 10.0
+      value: 20.0
       variable_name: max_queue_size
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -151,7 +151,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: -0.2
+          value: -0.5
           variable_name: param_distance_z
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition

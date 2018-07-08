@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 406
-  - 87
+  - 391
+  - 73
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
@@ -21,15 +21,15 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'align_roulette'
+      value: !!python/unicode 'find_slots'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
-      value: !!python/unicode 'simple_roulette'
+      value: !!python/unicode 'simple_torpille'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: !!python/unicode '/provider_vision/Bottom_GigE'
+      value: !!python/unicode '/provider_vision/Front_GigE'
       variable_name: param_media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
@@ -53,8 +53,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 385
-      - 262
+      - 360
+      - 279
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget
@@ -70,7 +70,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '/proc_image_processing/align_roulette_result'
+          value: !!python/unicode '/proc_image_processing/find_slots_result'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''

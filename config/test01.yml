@@ -87,8 +87,8 @@ mission_params:
   05_buy_gold_chip:
     approx_depth: 2.0
   06_play_slots:
-    approx_depth: 2.0
+    approx_depth: 1.5
   07_play_roulette:
     searching_depth: 2.0
-    final_depth: 2.0
+    final_depth: 3.1
   #08_cash_in:

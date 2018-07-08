@@ -3,7 +3,7 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 167
+  - 168
   - 176
   radius: 168
   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -26,10 +26,6 @@ statesui:
       description: ''
       value: !!python/unicode '''/proc_image_processing/align_path_result'''
       variable_name: topic_to_listen
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''simple_pipe'''
-      variable_name: first_filterchain
     is_root: true
     is_submission: true
     outcome_states:
@@ -73,36 +69,6 @@ statesui:
           description: ' ''Distance to travel'''
           value: 1.0
           variable_name: param_distance_x
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'Forward2'
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 729
-          - 207
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
-            base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'Forward2'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: 1.0
-              variable_name: param_distance_x
-            transitions: []
-          transitions: []
+        transitions: []
+      transitions: []
 - *id002
-- *id003

@@ -24,15 +24,15 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1.5
+      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/first_dice/ram_distance'''
       variable_name: ram_distance
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: -1.5
+      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/first_dice/back_distance'''
       variable_name: back_distance
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1.5
+      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/first_dice/approx_depth'''
       variable_name: approx_depth
     is_root: false
     is_submission: true
@@ -116,15 +116,15 @@ statesui:
               variable_name: topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 1.5
+              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/second_dice/ram_distance'''
               variable_name: ram_distance
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: -1.5
+              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/second_dice/back_distance'''
               variable_name: back_distance
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 1.5
+              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/second_dice/approx_depth'''
               variable_name: approx_depth
             is_root: false
             is_submission: true
@@ -270,15 +270,15 @@ statesui:
                       variable_name: topic_to_listen
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 1.5
+                      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/ram_distance'''
                       variable_name: ram_distance
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: -1.5
+                      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/back_distance'''
                       variable_name: back_distance
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 1.5
+                      value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/approx_depth'''
                       variable_name: approx_depth
                     is_root: false
                     is_submission: true
@@ -398,15 +398,15 @@ statesui:
                               variable_name: topic_to_listen
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: 1.5
+                              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/ram_distance'''
                               variable_name: ram_distance
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: -1.5
+                              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/back_distance'''
                               variable_name: back_distance
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ''
-                              value: 1.5
+                              value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_11/complementary_1/approx_depth'''
                               variable_name: approx_depth
                             is_root: false
                             is_submission: true
@@ -630,15 +630,15 @@ statesui:
                   variable_name: topic_to_listen
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 1.5
+                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/first_dice/ram_distance'''
                   variable_name: ram_distance
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: -1.5
+                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/first_dice/back_distance'''
                   variable_name: back_distance
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 1.5
+                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/first_dice/approx_depth'''
                   variable_name: approx_depth
                 is_submission: true
                 outcome_states:
@@ -720,15 +720,15 @@ statesui:
                           variable_name: topic_to_listen
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: 1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/second_dice/ram_distance'''
                           variable_name: ram_distance
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: -1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/second_dice/back_distance'''
                           variable_name: back_distance
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: 1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/second_dice/approx_depth'''
                           variable_name: approx_depth
                         is_submission: true
                         outcome_states:
@@ -873,15 +873,15 @@ statesui:
                                   variable_name: topic_to_listen
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: 1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/complementary_1/ram_distance'''
                                   variable_name: ram_distance
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: -1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/complementary_1/back_distance'''
                                   variable_name: back_distance
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: 1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/sum_07/complementary_1/approx_depth'''
                                   variable_name: approx_depth
                                 is_submission: true
                                 outcome_states:
@@ -1175,7 +1175,7 @@ statesui:
                             state2: &id028 !!python/object:rqt_mission_planner.Renderer.StateUI
                               position: !!python/tuple
                               - 1225
-                              - 728
+                              - 729
                               radius: 100
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: 2018/objectives/04_dice
@@ -1195,15 +1195,15 @@ statesui:
                                   variable_name: topic_to_listen
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: 1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/second_dice/ram_distance'''
                                   variable_name: ram_distance
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: -1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/second_dice/back_distance'''
                                   variable_name: back_distance
                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                   description: ''
-                                  value: 1.5
+                                  value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/second_dice/approx_depth'''
                                   variable_name: approx_depth
                                 is_submission: true
                                 outcome_states:
@@ -1253,15 +1253,15 @@ statesui:
                           variable_name: topic_to_listen
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: 1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/first_dice/ram_distance'''
                           variable_name: ram_distance
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: -1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/first_dice/back_distance'''
                           variable_name: back_distance
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ''
-                          value: 1.5
+                          value: !!python/unicode '''$/mission_params/04_shoot_craps/last_dices/first_dice/approx_depth'''
                           variable_name: approx_depth
                         is_submission: true
                         outcome_states:

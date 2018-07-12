@@ -16,7 +16,7 @@ class Hydro(MissionState):
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_queu_size', 10, 'Maximum size of queue'))
+        self.parameters.append(Parameter('param_frequency', '$/mission_params/00_global/pinger_frequency', 'Pigner frequency'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -34,11 +34,9 @@ class Hydro(MissionState):
         self.target_reached = 0
 
         try:
-            response = self.pinger_location_service(40) #TODO param_frequency
+            response = self.pinger_location_service(self.param_frequency)
 
             pose = response.pingerLocation.pose
-
-            #rospy.loginfo('Position received : ' + str(pose))
 
             self.set_global_target(pose.position.x,
                                    pose.position.y,

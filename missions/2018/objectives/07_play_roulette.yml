@@ -315,10 +315,10 @@ statesui:
       description: state_name
       value: !!python/unicode 'Hydro01'
       variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Maximum size of queue'''
-      value: 10.0
-      variable_name: param_queu_size
+    - &id011 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Pigner frequency'''
+      value: $/mission_params/00_global/pinger_frequency
+      variable_name: param_frequency
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
@@ -327,7 +327,7 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id010
-    state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - -237
       - 156
@@ -345,10 +345,7 @@ statesui:
           description: state_name
           value: !!python/unicode 'Hydro02'
           variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Maximum size of queue'''
-          value: 10.0
-          variable_name: param_queu_size
+        - *id011
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
@@ -356,6 +353,6 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id011
+        state1: *id012
         state2: *id009
-- *id011
+- *id012

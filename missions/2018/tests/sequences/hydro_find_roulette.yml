@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 295
-  - 250
+  - 292
+  - 252
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZ.MoveDecoupledZ
@@ -27,8 +27,8 @@ statesui:
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 104
-  - 95
+  - 103
+  - 96
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZ.MoveDecoupledZ

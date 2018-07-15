@@ -16,7 +16,7 @@ statesui:
       variable_name: distance_z
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 550.0
+      value: 450.0
       variable_name: pixel_to_victory
     is_root: false
     is_submission: true
@@ -239,8 +239,8 @@ statesui:
     state1: *id004
     state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 163
-      - 275
+      - 166
+      - 276
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2018/hydros/find_pinger

@@ -1,13 +1,13 @@
 mission_params:
   00_global:
     color: black #red
-    pinger_frequency: 40
+    pinger_frequency: 35
   01_find_casino:
     #rotation_scale: 1
     depth: 1.0
     angle1_deg: 90
     angle2_deg: 90
-    final_global_angle: 135
+    final_global_angle: 175
   02_enter_casino:
     black_side: left #right
   03_paths:
@@ -89,7 +89,7 @@ mission_params:
   06_play_slots:
     approx_depth: 1.5
   07_play_roulette:
-    searching_depth: 2.0
+    searching_depth: 1.5
     final_depth: 3.1
   08_cash_in:
     searching_depth: 2.0

@@ -160,6 +160,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                         base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -189,6 +190,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                             base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -210,7 +212,7 @@ statesui:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
                             state1: *id007
-                            state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+                            state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
                               position: !!python/tuple
                               - 752
                               - 547
@@ -218,6 +220,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                                 base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -268,14 +271,17 @@ statesui:
 - *id003
 - *id004
 - *id005
-- &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id006
+- *id009
+- *id007
+- &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 278
-  - 90
-  radius: 176
+  - 231
+  - 146
+  radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
-    base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
     is_root: true
     outcome_states:
     - succeeded
@@ -284,7 +290,7 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: MoveRelativeDecoupledZ
+      value: MoveDecoupledZ
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
@@ -297,8 +303,5 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id009
+    state1: *id010
     state2: *id002
-- *id006
-- *id010
-- *id007

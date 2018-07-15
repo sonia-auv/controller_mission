@@ -23,7 +23,7 @@ class MoveRelativeDecoupledX(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
         set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
-
+        self.target_reached = False
         try:
             set_local_target(self.param_distance_x,
                                   0.0, 0.0, 0.0, 0.0, 0.0,

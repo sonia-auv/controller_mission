@@ -1,5 +1,9 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''$/mission_params/03_paths/first_path/align_depth'''
+  variable_name: param_depth
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -26,7 +30,7 @@ statesui:
       description: ''
       value: !!python/unicode '''/proc_image_processing/align_path_result'''
       variable_name: topic_to_listen
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -56,6 +60,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
         base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -72,3 +77,34 @@ statesui:
         transitions: []
       transitions: []
 - *id002
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -48
+  - 210
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'SetDepth'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode 'param_depth'
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'AlignBottomXYThenAngle'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id003
+    state2: *id001

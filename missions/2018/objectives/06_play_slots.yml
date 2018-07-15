@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 69
-  - 151
+  - 70
+  - 120
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/align/align_front
@@ -110,8 +110,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 245
-      - 158
+      - 269
+      - 121
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -139,8 +139,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 433
-          - 140
+          - 474
+          - 119
           radius: 112
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2018/actuators/torpedos
@@ -165,8 +165,8 @@ statesui:
 - *id003
 - &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -188
-  - 150
+  - -355
+  - 148
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
@@ -188,10 +188,110 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'AlignTorpedos'
+      state: !!python/unicode 'Split'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id004
-    state2: *id001
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -196
+      - 118
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Split'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 0.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: forward
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: 06_find_slots
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - -66
+          - 14
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/move/forward
+            base_file: /missions/2018/move/forward.yml
+            global_params:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.0
+              variable_name: param_distance
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: forward
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/move/forward.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - -62
+          - 229
+          radius: 104
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/objectives/06_find_slots
+            base_file: /missions/2018/objectives/06_find_slots.yml
+            global_params: []
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: 06_find_slots
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/objectives/06_find_slots.yml
+              variable_name: SubMission_file
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'AlignTorpedos'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id006
+            state2: *id001
 - *id002
+- *id006
+- *id007
+- *id005

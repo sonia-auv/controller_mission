@@ -20,6 +20,7 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
   04_shoot_craps:
+    search_depth: 1.5
     sum_11:
       first_dice:
         dice: 5 # 2, 4 or 6

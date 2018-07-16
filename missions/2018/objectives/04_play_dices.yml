@@ -59,42 +59,11 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: forward
+          state: 04_find_dices
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: 04_find_dices
+          state: 04_forward_dices
       transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 417
-          - -116
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2018/move/forward
-            base_file: /missions/2018/move/forward.yml
-            global_params:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 1.0
-              variable_name: param_distance
-            is_submission: true
-            outcome_states:
-            - succeeded
-            - aborted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: forward
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: 2018/move/forward.yml
-              variable_name: SubMission_file
-            transitions: []
-          transitions: []
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
@@ -128,7 +97,7 @@ statesui:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
-            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 651
               - -20
@@ -152,7 +121,38 @@ statesui:
                   variable_name: SubMission_file
                 transitions: []
               transitions: []
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 414
+          - -137
+          radius: 128
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/objectives/04_forward_dices
+            base_file: /missions/2018/objectives/04_forward_dices.yml
+            global_params:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 1.0
+              variable_name: param_distance
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: 04_forward_dices
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/objectives/04_forward_dices.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
 - *id002
-- *id004
 - *id003
+- *id004
 - *id005

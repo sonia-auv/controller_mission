@@ -6,7 +6,7 @@ globalparams:
   variable_name: distance_z
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
-  value: 500.0
+  value: 350.0
   variable_name: pixel_to_victory
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI

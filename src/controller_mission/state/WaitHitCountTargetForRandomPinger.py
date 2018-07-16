@@ -49,6 +49,8 @@ class WaitHitCountTargetForRandomPinger(MissionState):
             rospy.loginfo('Lost count !!!!')
         self.last_vision_target = vision_data
 
+        self.deep_learning_present = False
+
     def set_target(self, position_y, position_z, position_yaw):
         try:
             self.set_local_target(0.0,

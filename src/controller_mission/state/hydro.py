@@ -4,7 +4,7 @@ import math
 from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_mapping.srv import PingerLocationService
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetDecoupledTarget
 from proc_control.msg import TargetReached
 from nav_msgs.msg import Odometry
 
@@ -25,8 +25,8 @@ class Hydro(MissionState):
         self.target_reached = data.target_is_reached
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_global_target')
-        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_global_decoupled_target')
+        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
 
         rospy.wait_for_service('/proc_mapping/pinger_location_service')
         self.pinger_location_service = rospy.ServiceProxy('/proc_mapping/pinger_location_service', PingerLocationService)
@@ -40,10 +40,11 @@ class Hydro(MissionState):
 
             self.set_global_target(pose.position.x,
                                    pose.position.y,
-                                   pose.position.z,
                                    0.0,
                                    0.0,
-                                   pose.orientation.z * 180 / math.pi)
+                                   0.0,
+                                   pose.orientation.z * 180 / math.pi,
+                                   False, False, True, True, True, False)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
         

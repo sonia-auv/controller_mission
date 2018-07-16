@@ -1,13 +1,13 @@
 mission_params:
   00_global:
     color: black #red
-    pinger_frequency: 35
+    pinger_frequency: 40
   01_find_casino:
     #rotation_scale: 1
     depth: 1.0
     angle1_deg: 90
     angle2_deg: 90
-    final_global_angle: 175
+    final_global_angle: 165
   02_enter_casino:
     black_side: left #right
   03_paths:
@@ -20,20 +20,20 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
   04_shoot_craps:
-    search_depth: 1.5
+    search_depth: 2.0
     sum_11:
       first_dice:
         dice: 5 # 2, 4 or 6
-        approx_depth: 2.0
-        ram_distance: 1.5
-        back_distance: -1.5  
+        approx_depth: 1.5
+        ram_distance: 2.0
+        back_distance: -2.5  
         max_time: 120 
         filterchain_name: 'simple_dice5'
       second_dice:
         dice: 6 # 2, 4 or 6
         approx_depth: 1.5
-        ram_distance: 1.5
-        back_distance: -1.5  
+        ram_distance: 2.0
+        back_distance: -2.5  
         max_time: 120 
         filterchain_name: 'simple_dice6'
       complementary_1:
@@ -93,8 +93,8 @@ mission_params:
     approx_depth: 1.5
   07_play_roulette:
     searching_depth: 1.5
-    final_depth: 3.1
+    final_depth: 2.8
   08_cash_in:
     searching_depth: 2.0
   90_random_pinger:
-    searching_depth: 2.0
+    searching_depth: 1.0

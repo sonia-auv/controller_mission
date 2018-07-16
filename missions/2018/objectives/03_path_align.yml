@@ -5,7 +5,7 @@ globalparams:
   value: !!python/unicode '''$/mission_params/03_paths/first_path/align_depth'''
   variable_name: param_depth
 statesui:
-- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 168
   - 176
@@ -44,40 +44,9 @@ statesui:
       description: SubMission_file
       value: 2018/align/align_bottom_xy_angle.yml
       variable_name: SubMission_file
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'Forward1'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 502
-      - 211
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
-        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
-        is_root: false
-        outcome_states:
-        - succeeded
-        - aborted
-        - preempted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: !!python/unicode 'Forward1'
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Distance to travel'''
-          value: 1.0
-          variable_name: param_distance_x
-        transitions: []
-      transitions: []
-- *id002
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+    transitions: []
+  transitions: []
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - -48
   - 210
@@ -106,5 +75,5 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
-    state2: *id001
+    state1: *id001
+    state2: *id002

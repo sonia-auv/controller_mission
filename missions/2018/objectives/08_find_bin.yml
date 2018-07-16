@@ -3,7 +3,7 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 406
+  - 407
   - 87
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -25,7 +25,7 @@ statesui:
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
-      value: !!python/unicode 'simple_bin'
+      value: !!python/unicode 'simple_deep_cashred'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''

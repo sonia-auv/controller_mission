@@ -4,7 +4,7 @@ statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 535
-  - 235
+  - 504
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledYawFromGlobalParam.MoveRelativeDecoupledYawFromGlobalParam
@@ -33,8 +33,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 705
-      - 223
+      - 745
+      - 418
       radius: 136
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -91,8 +91,8 @@ statesui:
           transitions: []
 - &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 125
-  - 237
+  - 206
+  - 342
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledYawFromGlobalParam.MoveRelativeDecoupledYawFromGlobalParam
@@ -121,8 +121,8 @@ statesui:
     state1: *id003
     state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 312
-      - 221
+      - 303
+      - 439
       radius: 136
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -159,8 +159,8 @@ statesui:
 - *id005
 - &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -66
-  - 240
+  - 457
+  - 172
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
@@ -182,9 +182,9 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Rotate1'
+      state: !!python/unicode 'SetGlobalYaw'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id006
-    state2: *id003
+    state2: *id005

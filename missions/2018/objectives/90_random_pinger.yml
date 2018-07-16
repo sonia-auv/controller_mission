@@ -50,7 +50,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: !!python/unicode '$/mission_params/00_global/pinger_frequency'
+          value: !!python/unicode '$/mission_params/90_random_pinger/searching_depth'
           variable_name: param_distance_z
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition

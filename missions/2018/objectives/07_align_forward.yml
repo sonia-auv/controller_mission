@@ -146,7 +146,7 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: AlignRoulette
+      state: !!python/unicode 'AlignRoulette'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -167,7 +167,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: AlignRoulette
+          value: !!python/unicode 'AlignRoulette'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''bounding box in pixel'''
@@ -252,7 +252,7 @@ statesui:
               state: !!python/unicode 'StopVision'
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: aborted
-              state: AlignRoulette
+              state: !!python/unicode 'AlignRoulette'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded

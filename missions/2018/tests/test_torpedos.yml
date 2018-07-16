@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 570
-  - 154
+  - 571
+  - 155
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/06_play_slots
@@ -126,6 +126,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
         base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -150,13 +151,13 @@ statesui:
         state2: *id002
 - &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 15
-  - 190
+  - 25
+  - 304
   radius: 120
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
     base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -180,3 +181,65 @@ statesui:
     state1: *id006
     state2: *id002
 - *id005
+- &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 47
+  - 156
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'DD1'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'DD2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id007
+    state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 273
+      - 160
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveGlobalDecoupledZ.MoveDecoupledZ
+        base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'DD2'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 1.5
+          variable_name: param_distance_z
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: 06_play_slots
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id008
+        state2: *id002
+- *id008

@@ -105,12 +105,24 @@ statesui:
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 570
-              - 34
+              - 33
               radius: 128
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: 2018/objectives/07_find_roulette
                 base_file: /missions/2018/objectives/07_find_roulette.yml
-                global_params: []
+                global_params:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''align_roulette'''
+                  variable_name: param_topic_filterchain
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''/proc_image_processing/align_bin_result'''
+                  variable_name: param_topic_deeplearning_result
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
+                  variable_name: param_topic_filterchain_result
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -234,7 +246,15 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: 2018/objectives/08_find_bin
                 base_file: /missions/2018/objectives/08_find_bin.yml
-                global_params: []
+                global_params:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''align_bin'''
+                  variable_name: param_topic_deeplearning
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: !!python/unicode '''/proc_image_processing/align_bin_result'''
+                  variable_name: param_topic_deeplearning_result
                 is_submission: true
                 outcome_states:
                 - succeeded

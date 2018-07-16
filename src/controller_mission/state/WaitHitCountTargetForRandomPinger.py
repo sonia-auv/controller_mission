@@ -22,7 +22,7 @@ class WaitHitCountTargetForRandomPinger(MissionState):
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_topic_to_listen_DeepLearning', '/proc_image_processing/find_bin_result', 'topic of deep learning'))
-        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red_result', 'Name of topic to listen'))
+        self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/align_roulette_result', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_hit_to_victory', 30, 'nb of hit to finish this state'))
         self.parameters.append(Parameter('param_max_distance_between_vision_target', 50, 'max distance in pixel to have a consecutive count'))
 

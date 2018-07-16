@@ -1,5 +1,17 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''align_roulette'''
+  variable_name: param_topic_filterchain
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/align_bin_result'''
+  variable_name: param_topic_deeplearning_result
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
+  variable_name: param_topic_filterchain_result
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -21,7 +33,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'align_roulette'
+      value: !!python/unicode 'param_topic_filterchain'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
@@ -46,19 +58,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: WaitHitCountTarget
+      state: WaitHitCountTargetForRandomPinger
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 386
-      - 261
-      radius: 144
+      - 151
+      - 234
+      radius: 264
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: WaitHitCountTarget.WaitHitCountTarget
-        base_file: /src/controller_mission/state/WaitHitCountTarget.py
+        _name: WaitHitCountTargetForRandomPinger.WaitHitCountTargetForRandomPinger
+        base_file: /src/controller_mission/state/WaitHitCountTargetForRandomPinger.py
         outcome_states:
         - succeeded
         - aborted
@@ -66,20 +78,55 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: WaitHitCountTarget
+          value: WaitHitCountTargetForRandomPinger
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''topic of deep learning'''
+          value: !!python/unicode 'param_topic_deeplearning_result'
+          variable_name: param_topic_to_listen_DeepLearning
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '/proc_image_processing/align_roulette_result'
+          value: !!python/unicode 'param_topic_filterchain_result'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: 12.0
+          value: 10.0
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''
-          value: 50.0
+          value: 200.0
           variable_name: param_max_distance_between_vision_target
         transitions: []
       transitions: []
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 527
+  - 301
+  radius: 144
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: WaitHitCountTarget.WaitHitCountTarget
+    base_file: /src/controller_mission/state/WaitHitCountTarget.py
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: WaitHitCountTarget
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Name of topic to listen'''
+      value: !!python/unicode '/proc_image_processing/align_roulette_result'
+      variable_name: param_topic_to_listen
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''nb of hit to finish this state'''
+      value: 12.0
+      variable_name: param_nb_hit_to_victory
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''max distance in pixel to have a consecutive count'''
+      value: 50.0
+      variable_name: param_max_distance_between_vision_target
+    transitions: []
+  transitions: []
 - *id002

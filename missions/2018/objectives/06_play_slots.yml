@@ -4,7 +4,7 @@ statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 70
-  - 120
+  - 121
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/align/align_front
@@ -32,7 +32,7 @@ statesui:
       variable_name: color
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 400.0
+      value: 10.0
       variable_name: threshold_width
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -48,7 +48,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1300.0
+      value: 500.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -111,7 +111,7 @@ statesui:
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 269
-      - 121
+      - 122
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX

@@ -153,8 +153,8 @@ statesui:
     state1: *id004
     state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 211
-      - 321
+      - 210
+      - 323
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: alignRoulette.AlignRoulette
@@ -171,7 +171,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''bounding box in pixel'''
-          value: 100.0
+          value: 125.0
           variable_name: param_bounding_box
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''transform pixel to meter'''

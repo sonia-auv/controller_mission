@@ -119,8 +119,37 @@ statesui:
                   description: SubMission_file
                   value: 2018/objectives/04_align_dices.yml
                   variable_name: SubMission_file
-                transitions: []
-              transitions: []
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'EndDepth'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 928
+                  - -14
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+                    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'EndDepth'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: !!python/unicode '/mission_params/04_shoot_craps/end_depth'
+                      variable_name: param_distance_z
+                    transitions: []
+                  transitions: []
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
@@ -156,3 +185,4 @@ statesui:
 - *id003
 - *id004
 - *id005
+- *id006

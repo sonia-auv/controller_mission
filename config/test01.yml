@@ -7,7 +7,7 @@ mission_params:
     depth: 1.0
     angle1_deg: 90
     angle2_deg: 90
-    final_global_angle: 165
+    final_global_angle: 155
   02_enter_casino:
     black_side: left #right
   03_paths:
@@ -21,19 +21,20 @@ mission_params:
       align_depth: 1.5
   04_shoot_craps:
     search_depth: 2.0
+    end_depth: 0.5
     sum_11:
       first_dice:
         dice: 5 # 2, 4 or 6
-        approx_depth: 1.5
+        approx_depth: 1.2
         ram_distance: 2.0
-        back_distance: -2.5  
+        back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice5'
       second_dice:
         dice: 6 # 2, 4 or 6
-        approx_depth: 1.5
+        approx_depth: 2.3
         ram_distance: 2.0
-        back_distance: -2.5  
+        back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice6'
       complementary_1:

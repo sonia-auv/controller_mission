@@ -147,7 +147,7 @@ statesui:
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 810
-                  - 21
+                  - 22
                   radius: 128
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: 2018/objectives/07_align_forward
@@ -159,7 +159,7 @@ statesui:
                       variable_name: distance_z
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 350.0
+                      value: 425.0
                       variable_name: pixel_to_victory
                     is_submission: true
                     outcome_states:
@@ -316,8 +316,8 @@ statesui:
                     state1: *id008
                     state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 989
-                      - 312
+                      - 990
+                      - 310
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: timeOut.TimesOut
@@ -342,22 +342,22 @@ statesui:
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                           outcome: succeeded
-                          state: !!python/unicode 'Surface'
+                          state: !!python/unicode 'SurfaceTimer'
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                           outcome: succeeded
-                          state: !!python/unicode 'SurfaceTimer'
+                          state: !!python/unicode 'Surface'
                       transitions:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id009
                         state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
-                          - 1167
-                          - 225
+                          - 1160
+                          - 404
                           radius: 100
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
-                            _name: moveRelativeZ.MoveRelativeZ
-                            base_file: /src/controller_mission/state/moveRelativeZ.py
+                            _name: timeOut.TimesOut
+                            base_file: /src/controller_mission/state/timeOut.py
                             outcome_states:
                             - succeeded
                             - aborted
@@ -365,12 +365,16 @@ statesui:
                             parameters:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: state_name
-                              value: !!python/unicode 'Surface'
+                              value: !!python/unicode 'SurfaceTimer'
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Distance to travel'''
-                              value: -1.0
-                              variable_name: param_distance_z
+                              description: ' ''Times Out'''
+                              value: 20.0
+                              variable_name: param_time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Times Out'''
+                              value: succeeded
+                              variable_name: param_to_return
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition
                               outcome: succeeded
@@ -407,12 +411,12 @@ statesui:
                         state1: *id009
                         state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
-                          - 1160
-                          - 404
+                          - 1125
+                          - 196
                           radius: 100
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
-                            _name: timeOut.TimesOut
-                            base_file: /src/controller_mission/state/timeOut.py
+                            _name: moveGlobalDecoupledZ.MoveDecoupledZ
+                            base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
                             outcome_states:
                             - succeeded
                             - aborted
@@ -420,16 +424,12 @@ statesui:
                             parameters:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: state_name
-                              value: !!python/unicode 'SurfaceTimer'
+                              value: !!python/unicode 'Surface'
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Times Out'''
-                              value: 15.0
-                              variable_name: param_time
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Times Out'''
-                              value: succeeded
-                              variable_name: param_to_return
+                              description: ' ''Distance to travel'''
+                              value: -1.0
+                              variable_name: param_distance_z
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition
                               outcome: succeeded
@@ -573,5 +573,5 @@ statesui:
 - *id017
 - *id009
 - *id010
-- *id011
 - *id012
+- *id011

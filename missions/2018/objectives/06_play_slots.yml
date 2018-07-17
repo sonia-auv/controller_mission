@@ -195,7 +195,7 @@ statesui:
     state1: *id004
     state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -196
+      - -197
       - 118
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -221,42 +221,11 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: forward
+          state: 06_find_slots
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: 06_find_slots
+          state: 06_navigation_slots
       transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id005
-        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - -66
-          - 14
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2018/move/forward
-            base_file: /missions/2018/move/forward.yml
-            global_params:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 1.0
-              variable_name: param_distance
-            is_submission: true
-            outcome_states:
-            - succeeded
-            - aborted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: forward
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: 2018/move/forward.yml
-              variable_name: SubMission_file
-            transitions: []
-          transitions: []
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id005
@@ -291,7 +260,34 @@ statesui:
             name: succeeded
             state1: *id006
             state2: *id001
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - -85
+          - -44
+          radius: 152
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2018/objectives/06_navigation_slots
+            base_file: /missions/2018/objectives/06_navigation_slots.yml
+            global_params: []
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: 06_navigation_slots
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2018/objectives/06_navigation_slots.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
 - *id002
 - *id006
-- *id007
 - *id005
+- *id007

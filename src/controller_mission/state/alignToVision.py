@@ -116,9 +116,11 @@ class AlignToVision(MissionState):
         if self.is_align_with_heading_active:
             if not self.vision_is_reach_y:
                 self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
+                rospy.logdebug('set_target : 1 - align_submarine')
                 self.set_target(0.0, target_z, self.heading, True, False)
 
         elif not self.vision_is_reach:
+            rospy.logdebug('set_target : 2 - align_submarine')
             self.set_target(vision_position_y, target_z, 0.0, False, True)
 
     def set_target(self, position_y, position_z, position_yaw, keepY, keepYaw):
@@ -154,6 +156,7 @@ class AlignToVision(MissionState):
 
     def run(self, ud):
         if self.is_align_with_heading_active and self.vision_is_reach_y:
+            rospy.logdebug('set_target : 1 - run')
             self.set_target(0.0, 0.0, 0.0, False, False)
 
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
@@ -162,10 +165,12 @@ class AlignToVision(MissionState):
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
             rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
             rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
+            rospy.logdebug('set_target : 2 - run')
             self.set_target(0.0, 0.0, 0.0, False, False)
             return 'succeeded'
 
         if self.vision_is_reach:
+            rospy.logdebug('set_target : 2 - run')
             self.set_target(0.0, 0.0, 0.0, False, False)
             return 'forward'
 

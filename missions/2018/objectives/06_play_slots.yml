@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 70
-  - 121
+  - 65
+  - 109
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/align/align_front
@@ -48,7 +48,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 500.0
+      value: 600.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -110,8 +110,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 269
-      - 122
+      - 219
+      - 265
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -127,46 +127,75 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 0.3
+          value: 1.0
           variable_name: param_distance_x
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'LaunchTorpedos'
+          state: !!python/unicode 'FinalDepth'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 474
-          - 119
-          radius: 112
+          - 422
+          - 239
+          radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2018/actuators/torpedos
-            base_file: /missions/2018/actuators/torpedos.yml
-            global_params: []
-            is_root: false
-            is_submission: true
+            _name: moveGlobalDecoupledZ.MoveDecoupledZ
+            base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
             outcome_states:
             - succeeded
             - aborted
+            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'LaunchTorpedos'
+              value: !!python/unicode 'FinalDepth'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: 2018/actuators/torpedos.yml
-              variable_name: SubMission_file
-            transitions: []
-          transitions: []
-- *id003
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              description: ' ''Distance to travel'''
+              value: !!python/unicode '$/mission_params/06_play_slots/approx_depth'
+              variable_name: param_distance_z
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'LaunchTorpedos'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 519
+              - 86
+              radius: 112
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2018/actuators/torpedos
+                base_file: /missions/2018/actuators/torpedos.yml
+                global_params: []
+                is_root: false
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'LaunchTorpedos'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2018/actuators/torpedos.yml
+                  variable_name: SubMission_file
+                transitions: []
+              transitions: []
+- *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -355
-  - 148
+  - -382
+  - 130
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
@@ -192,8 +221,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id005
+    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - -197
       - 118
@@ -228,8 +257,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id005
-        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id006
+        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - -62
           - 229
@@ -258,15 +287,15 @@ statesui:
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id006
+            state1: *id007
             state2: *id001
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id005
-        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id006
+        state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - -85
-          - -44
+          - -45
           radius: 152
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2018/objectives/06_navigation_slots
@@ -288,6 +317,7 @@ statesui:
             transitions: []
           transitions: []
 - *id002
-- *id006
-- *id005
 - *id007
+- *id006
+- *id008
+- *id003

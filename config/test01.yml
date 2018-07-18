@@ -25,14 +25,14 @@ mission_params:
     sum_11:
       first_dice:
         dice: 5 # 2, 4 or 6
-        approx_depth: 1.2
+        approx_depth: 1.1
         ram_distance: 2.0
         back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice5'
       second_dice:
         dice: 6 # 2, 4 or 6
-        approx_depth: 2.3
+        approx_depth: 2.0
         ram_distance: 2.0
         back_distance: -3.0  
         max_time: 120 
@@ -89,9 +89,9 @@ mission_params:
         max_time: 120 
         filterchain_name: 'simple_dice2'
   05_buy_gold_chip:
-    approx_depth: 2.0
-  06_play_slots:
     approx_depth: 1.5
+  06_play_slots:
+    approx_depth: 0.65
   07_play_roulette:
     searching_depth: 1.5
     final_depth: 2.8

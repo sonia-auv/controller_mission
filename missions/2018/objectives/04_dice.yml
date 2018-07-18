@@ -27,8 +27,8 @@ globalparams:
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -29
-  - 138
+  - -23
+  - 135
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/align/align_front
@@ -72,7 +72,7 @@ statesui:
       variable_name: topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 500.0
+      value: 400.0
       variable_name: nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
@@ -100,15 +100,15 @@ statesui:
       variable_name: final_bounding_box
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.5
+      value: 0.3
       variable_name: control_bounding_box_xy
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.3
+      value: 0.2
       variable_name: control_bounding_box_z
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 5.0
+      value: 4.0
       variable_name: control_bounding_box_yaw
     is_root: false
     is_submission: true
@@ -127,20 +127,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Ram'
+      state: !!python/unicode 'Offset'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 250
-      - 139
+      - 98
+      - 240
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
-        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
-        is_root: false
+        _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
+        base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
         outcome_states:
         - succeeded
         - aborted
@@ -148,24 +147,24 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'Ram'
+          value: !!python/unicode 'Offset'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: !!python/unicode 'ram_distance'
-          variable_name: param_distance_x
+          value: -0.3
+          variable_name: param_distance_z
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'Back'
+          state: !!python/unicode 'Ram'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 483
-          - 137
+          - 250
+          - 139
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -178,17 +177,47 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'Back'
+              value: !!python/unicode 'Ram'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: !!python/unicode 'back_distance'
+              value: !!python/unicode 'ram_distance'
               variable_name: param_distance_x
-            transitions: []
-          transitions: []
-- *id002
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Back'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 483
+              - 137
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+                base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                is_root: false
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'Back'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: !!python/unicode 'back_distance'
+                  variable_name: param_distance_x
+                transitions: []
+              transitions: []
 - *id003
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - -210
   - 137
@@ -217,35 +246,6 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: *id001
-- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 98
-  - 241
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
-    base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'Offset'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Distance to travel'''
-      value: -0.5
-      variable_name: param_distance_z
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'Ram'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
     state1: *id005
-    state2: *id002
+    state2: *id001
+- *id002

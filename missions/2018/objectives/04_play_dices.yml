@@ -1,5 +1,5 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: null
+globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
@@ -156,7 +156,7 @@ statesui:
         state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 374
-          - -139
+          - -140
           radius: 152
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2018/objectives/04_navigation_dices

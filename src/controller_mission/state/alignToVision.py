@@ -123,8 +123,8 @@ class AlignToVision(MissionState):
 
     def set_target(self, position_y, position_z, position_yaw, keepY, keepYaw):
         try:
-            self.set_local_target(0.0, position_y, position_z, 0.0, 0.0, position_yaw,
-                                  True, keepY, False, True, True, keepYaw)
+            self.set_local_target(0.0, position_y, 0.0, 0.0, 0.0, position_yaw,
+                                  True, keepY, True, True, True, keepYaw)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -134,7 +134,7 @@ class AlignToVision(MissionState):
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget, persistent=True)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

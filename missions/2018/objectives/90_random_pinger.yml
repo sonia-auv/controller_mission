@@ -39,6 +39,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalDecoupledZ.MoveDecoupledZ
         base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -68,6 +69,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -123,6 +125,7 @@ statesui:
                   description: ''
                   value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
                   variable_name: param_topic_filterchain_result
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -161,6 +164,7 @@ statesui:
                       description: ''
                       value: 750.0
                       variable_name: pixel_to_victory
+                    is_root: false
                     is_submission: true
                     outcome_states:
                     - succeeded
@@ -190,6 +194,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveGlobalDecoupledZ.MoveDecoupledZ
                         base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -219,6 +224,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: timeOut.TimesOut
                             base_file: /src/controller_mission/state/timeOut.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -253,6 +259,7 @@ statesui:
                                 _name: 2018/actuators/droppers
                                 base_file: /missions/2018/actuators/droppers.yml
                                 global_params: []
+                                is_root: false
                                 is_submission: true
                                 outcome_states:
                                 - succeeded
@@ -288,6 +295,7 @@ statesui:
                   description: ''
                   value: !!python/unicode '''/proc_image_processing/align_bin_result'''
                   variable_name: param_topic_deeplearning_result
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -326,6 +334,7 @@ statesui:
                       description: ''
                       value: 500.0
                       variable_name: pixel_to_victory
+                    is_root: false
                     is_submission: true
                     outcome_states:
                     - succeeded
@@ -352,6 +361,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: timeOut.TimesOut
                         base_file: /src/controller_mission/state/timeOut.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -388,6 +398,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: timeOut.TimesOut
                             base_file: /src/controller_mission/state/timeOut.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -421,6 +432,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: moveGlobalDecoupledZ.MoveDecoupledZ
                                 base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -447,6 +459,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: moveGlobalDecoupledZ.MoveDecoupledZ
                             base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -481,6 +494,7 @@ statesui:
                 _name: 2018/hydros/find_pinger
                 base_file: /missions/2018/hydros/find_pinger.yml
                 global_params: []
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -507,6 +521,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: timeOut.TimesOut
                 base_file: /src/controller_mission/state/timeOut.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -540,6 +555,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: timeOut.TimesOut
                     base_file: /src/controller_mission/state/timeOut.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -561,13 +577,13 @@ statesui:
                   transitions: []
 - &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 60
-  - 82
+  - 83
+  - 96
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: hydro.Hydro
     base_file: /src/controller_mission/state/hydro.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -606,3 +622,34 @@ statesui:
 - *id013
 - *id012
 - *id007
+- &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -99
+  - 84
+  radius: 144
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Presearching_depth'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/90_random_pinger/presearching_depth'
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Hydro01'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id019
+    state2: *id015

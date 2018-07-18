@@ -34,21 +34,21 @@ mission_params:
         dice: 6 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 2.0
-        back_distance: -3.0  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice6'
       complementary_1:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_2:
         dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice2'
     sum_07:
@@ -56,21 +56,21 @@ mission_params:
         dice: 6 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice6'
       second_dice:
         dice: 1 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_1:
         dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice2'
     last_dices:
@@ -78,14 +78,14 @@ mission_params:
         dice: 1 # 2, 4 or 6
         approx_depth: 2.0
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       second_dice:
         dice: 2 # 2, 4 or 6
         approx_depth: 1.5
         ram_distance: 1.5
-        back_distance: -1.5  
+        back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice2'
   05_buy_gold_chip:
@@ -98,4 +98,5 @@ mission_params:
   08_cash_in:
     searching_depth: 2.0
   90_random_pinger:
+    presearching_depth: 0.5
     searching_depth: 1.0

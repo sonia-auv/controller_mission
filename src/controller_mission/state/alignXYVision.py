@@ -113,7 +113,7 @@ class AlignXYVision(MissionState):
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget, persistent= True)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 

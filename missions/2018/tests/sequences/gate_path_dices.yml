@@ -3,14 +3,14 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 272
-  - 192
+  - 314
+  - 301
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/01_find_gate
     base_file: /missions/2018/objectives/01_find_gate.yml
     global_params: []
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -34,8 +34,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 459
-      - 190
+      - 449
+      - 352
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -64,12 +64,13 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 629
-          - 204
+          - 630
+          - 354
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
             base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -108,6 +109,7 @@ statesui:
                   description: ''
                   value: !!python/unicode '''$/mission_params/03_paths/first_path/search_depth'''
                   variable_name: param_search_depth
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -137,6 +139,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                     base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -167,6 +170,7 @@ statesui:
                         _name: 2018/objectives/04_align_dices
                         base_file: /missions/2018/objectives/04_align_dices.yml
                         global_params: []
+                        is_root: false
                         is_submission: true
                         outcome_states:
                         - succeeded
@@ -187,3 +191,65 @@ statesui:
 - *id006
 - *id004
 - *id005
+- &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 445
+  - 110
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Depth01'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Depth02'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id007
+    state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 632
+      - 103
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveGlobalDecoupledZ.MoveDecoupledZ
+        base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Depth02'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 1.5
+          variable_name: param_distance_z
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: 03_play_path
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id008
+        state2: *id004
+- *id008

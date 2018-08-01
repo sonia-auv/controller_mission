@@ -52,7 +52,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 3.0
+          value: 3.5
           variable_name: param_distance_x
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -81,7 +81,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: 3.0
+              value: 3.5
               variable_name: param_distance_x
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -110,7 +110,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: 3.0
+                  value: 3.5
                   variable_name: param_distance_x
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -139,7 +139,7 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Distance to travel'''
-                      value: 3.0
+                      value: 3.5
                       variable_name: param_distance_x
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -168,7 +168,7 @@ statesui:
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Distance to travel'''
-                          value: 3.0
+                          value: 3.5
                           variable_name: param_distance_x
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition

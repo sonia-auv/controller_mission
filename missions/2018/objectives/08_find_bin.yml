@@ -54,15 +54,15 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: WaitHitCountTarget
+      state: !!python/unicode 'WaitHitCountTarget2'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 385
-      - 262
+      - 384
+      - 272
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget
@@ -88,6 +88,179 @@ statesui:
           description: ' ''max distance in pixel to have a consecutive count'''
           value: 50.0
           variable_name: param_max_distance_between_vision_target
-        transitions: []
-      transitions: []
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'ReturnNormalDepth'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 411
+          - 481
+          radius: 112
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveGlobalDecoupledZ.MoveDecoupledZ
+            base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'SearchBinDepth'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 2.0
+              variable_name: param_distance_z
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Success'
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'WaitHitCountTarget2'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 531
+              - 632
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: TimesOut
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 15.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'ReturnNormalDepth'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 711
+                  - 418
+                  radius: 136
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveGlobalDecoupledZ.MoveDecoupledZ
+                    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'ReturnNormalDepth'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: 1.0
+                      variable_name: param_distance_z
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'WaitHitCountTarget2'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id005
+                    state2: *id002
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 236
+              - 611
+              radius: 152
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: WaitHitCountTarget.WaitHitCountTarget
+                base_file: /src/controller_mission/state/WaitHitCountTarget.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'WaitHitCountTarget2'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Name of topic to listen'''
+                  value: /proc_image_processing/buoy_red_result
+                  variable_name: param_topic_to_listen
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''nb of hit to finish this state'''
+                  value: 5.0
+                  variable_name: param_nb_hit_to_victory
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''max distance in pixel to have a consecutive count'''
+                  value: 50.0
+                  variable_name: param_max_distance_between_vision_target
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'Success'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id006
+                state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 253
+                  - 806
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: timeOut.TimesOut
+                    base_file: /src/controller_mission/state/timeOut.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'Success'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: 0.0
+                      variable_name: param_time
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Times Out'''
+                      value: succeeded
+                      variable_name: param_to_return
+                    transitions: []
+                  transitions: []
 - *id002
+- *id003
+- *id004
+- *id006
+- *id007
+- *id005

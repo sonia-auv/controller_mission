@@ -105,3 +105,4 @@ mission_params:
   90_random_pinger:
     presearching_depth: 0.5
     searching_depth: 1.0
+    #searching_depth: 2.0

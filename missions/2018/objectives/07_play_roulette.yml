@@ -188,6 +188,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -228,6 +229,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: timeOut.TimesOut
                 base_file: /src/controller_mission/state/timeOut.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -284,8 +286,8 @@ statesui:
       transitions: []
 - &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 153
-  - 458
+  - 146
+  - 438
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -349,13 +351,13 @@ statesui:
 - *id010
 - &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -417
-  - 265
+  - -419
+  - 271
   radius: 112
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
     base_file: /src/controller_mission/state/moveGlobalDecoupledZFromGlobalParam.py
-    is_root: false
+    is_root: true
     outcome_states:
     - succeeded
     - aborted
@@ -372,46 +374,15 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Split01'
+      state: !!python/unicode 'Hydro01'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id011
-    state2: *id004
-- &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - -414
-  - 144
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: hydro.Hydro
-    base_file: /src/controller_mission/state/hydro.py
-    is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'Hydro01'
-      variable_name: state_name
-    - &id013 !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Pigner frequency'''
-      value: $/mission_params/00_global/pinger_frequency
-      variable_name: param_frequency
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'Hydro02'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id012
-    state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -237
-      - 156
+      - -321
+      - 136
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: hydro.Hydro
@@ -424,18 +395,49 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'Hydro02'
+          value: !!python/unicode 'Hydro01'
           variable_name: state_name
-        - *id013
+        - &id013 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Pigner frequency'''
+          value: $/mission_params/00_global/pinger_frequency
+          variable_name: param_frequency
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'SearchingDepth'
+          state: !!python/unicode 'Hydro02'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id014
-        state2: *id011
+        state1: *id012
+        state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - -244
+          - 330
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: hydro.Hydro
+            base_file: /src/controller_mission/state/hydro.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'Hydro02'
+              variable_name: state_name
+            - *id013
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'Split01'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id014
+            state2: *id004
+- *id012
 - *id014
 - *id006
 - *id007

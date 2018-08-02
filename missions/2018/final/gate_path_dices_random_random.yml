@@ -10,7 +10,7 @@ statesui:
     _name: 2018/objectives/01_find_gate
     base_file: /missions/2018/objectives/01_find_gate.yml
     global_params: []
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -70,6 +70,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
             base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -99,6 +100,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                 base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -128,6 +130,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                     base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -166,6 +169,7 @@ statesui:
                           description: ''
                           value: !!python/unicode '''$/mission_params/03_paths/first_path/search_depth'''
                           variable_name: param_search_depth
+                        is_root: false
                         is_submission: true
                         outcome_states:
                         - succeeded
@@ -195,6 +199,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: timeOut.TimesOut
                             base_file: /src/controller_mission/state/timeOut.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -232,6 +237,7 @@ statesui:
                                 _name: 2018/objectives/04_play_dices
                                 base_file: /missions/2018/objectives/04_play_dices.yml
                                 global_params: []
+                                is_root: false
                                 is_submission: true
                                 outcome_states:
                                 - succeeded
@@ -261,6 +267,7 @@ statesui:
                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                     _name: timeOut.TimesOut
                                     base_file: /src/controller_mission/state/timeOut.py
+                                    is_root: false
                                     outcome_states:
                                     - succeeded
                                     - aborted
@@ -295,6 +302,7 @@ statesui:
                                         _name: 2018/objectives/90_random_pinger
                                         base_file: /missions/2018/objectives/90_random_pinger.yml
                                         global_params: []
+                                        is_root: false
                                         is_submission: true
                                         outcome_states:
                                         - succeeded
@@ -325,6 +333,7 @@ statesui:
                                             _name: 2018/objectives/90_random_pinger
                                             base_file: /missions/2018/objectives/90_random_pinger.yml
                                             global_params: []
+                                            is_root: false
                                             is_submission: true
                                             outcome_states:
                                             - succeeded
@@ -351,6 +360,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: timeOut.TimesOut
                                 base_file: /src/controller_mission/state/timeOut.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -384,6 +394,7 @@ statesui:
                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                     _name: moveGlobalDecoupledZ.MoveDecoupledZ
                                     base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                                    is_root: false
                                     outcome_states:
                                     - succeeded
                                     - aborted
@@ -413,6 +424,7 @@ statesui:
                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                         _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                                         base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                                        is_root: false
                                         outcome_states:
                                         - succeeded
                                         - aborted
@@ -442,6 +454,7 @@ statesui:
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
                                             base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                                            is_root: false
                                             outcome_states:
                                             - succeeded
                                             - aborted
@@ -478,3 +491,30 @@ statesui:
 - *id009
 - *id004
 - *id005
+- &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -73
+  - 190
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setDepthOfSet.SetDepthOfSet
+    base_file: /src/controller_mission/state/setDepthOfSet.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: SetDepthOfSet
+      variable_name: state_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: 01_find_gate
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id016
+    state2: *id001

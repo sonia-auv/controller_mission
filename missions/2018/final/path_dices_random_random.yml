@@ -169,7 +169,7 @@ statesui:
                           description: ''
                           value: !!python/unicode '''$/mission_params/03_paths/first_path/search_depth'''
                           variable_name: param_search_depth
-                        is_root: true
+                        is_root: false
                         is_submission: true
                         outcome_states:
                         - succeeded
@@ -491,3 +491,30 @@ statesui:
 - *id009
 - *id004
 - *id005
+- &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -61
+  - 176
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setDepthOfSet.SetDepthOfSet
+    base_file: /src/controller_mission/state/setDepthOfSet.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: SetDepthOfSet
+      variable_name: state_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: 01_find_gate
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id016
+    state2: *id001

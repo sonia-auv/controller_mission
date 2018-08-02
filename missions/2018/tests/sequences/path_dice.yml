@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 31
-  - 346
+  - 25
+  - 388
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZ.MoveDecoupledZ
@@ -33,13 +33,17 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 239
-      - 192
+      - 237
+      - 195
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2018/objectives/03_path_align
         base_file: /missions/2018/objectives/03_path_align.yml
-        global_params: []
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''$/mission_params/03_paths/first_path/align_depth'''
+          variable_name: param_depth
         is_submission: true
         outcome_states:
         - succeeded
@@ -119,8 +123,8 @@ statesui:
               transitions: []
 - &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -137
-  - 214
+  - -134
+  - 215
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalDecoupledZ.MoveDecoupledZ
@@ -142,12 +146,12 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'Depth2'
+      state: 03_path_align
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id004
-    state2: *id001
+    state2: *id002
 - *id002
 - *id005
 - *id003

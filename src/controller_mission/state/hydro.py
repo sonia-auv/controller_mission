@@ -45,6 +45,9 @@ class Hydro(MissionState):
                                    0.0,
                                    pose.orientation.z * 180 / math.pi,
                                    False, False, True, True, True, False)
+            
+            rospy.loginfo('Set global position x = %f y = %f' % (pose.position.x, pose.position.y))
+
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
         

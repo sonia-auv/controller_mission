@@ -123,7 +123,7 @@ statesui:
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 217
-                  - 172
+                  - 170
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -144,44 +144,45 @@ statesui:
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: !!python/unicode 'Forward5'
+                      state: !!python/unicode 'random1'
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 395
-                      - 255
+                      - 645
+                      - 291
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
-                        _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
-                        base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+                        _name: 2018/objectives/90_random_pinger
+                        base_file: /missions/2018/objectives/90_random_pinger.yml
+                        global_params: []
+                        is_submission: true
                         outcome_states:
                         - succeeded
                         - aborted
-                        - preempted
                         parameters:
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: state_name
-                          value: !!python/unicode 'Forward5'
+                          value: !!python/unicode 'random1'
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Distance to travel'''
-                          value: 3.5
-                          variable_name: param_distance_x
+                          description: SubMission_file
+                          value: 2018/objectives/90_random_pinger.yml
+                          variable_name: SubMission_file
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                           outcome: succeeded
-                          state: !!python/unicode 'random1'
+                          state: !!python/unicode 'random2'
                       transitions:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id006
                         state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
-                          - 645
-                          - 291
+                          - 794
+                          - 213
                           radius: 100
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: 2018/objectives/90_random_pinger
@@ -194,48 +195,47 @@ statesui:
                             parameters:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: state_name
-                              value: !!python/unicode 'random1'
+                              value: !!python/unicode 'random2'
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: SubMission_file
                               value: 2018/objectives/90_random_pinger.yml
                               variable_name: SubMission_file
-                            transitions:
-                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                              outcome: succeeded
-                              state: !!python/unicode 'random2'
-                          transitions:
-                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-                            name: succeeded
-                            state1: *id007
-                            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
-                              position: !!python/tuple
-                              - 794
-                              - 213
-                              radius: 100
-                              state: !!python/object:rqt_mission_planner.mission_model.state.State
-                                _name: 2018/objectives/90_random_pinger
-                                base_file: /missions/2018/objectives/90_random_pinger.yml
-                                global_params: []
-                                is_submission: true
-                                outcome_states:
-                                - succeeded
-                                - aborted
-                                parameters:
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: state_name
-                                  value: !!python/unicode 'random2'
-                                  variable_name: state_name
-                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                                  description: SubMission_file
-                                  value: 2018/objectives/90_random_pinger.yml
-                                  variable_name: SubMission_file
-                                transitions: []
-                              transitions: []
+                            transitions: []
+                          transitions: []
 - *id002
 - *id003
 - *id004
 - *id005
-- *id008
 - *id007
 - *id006
+- &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 244
+  - 396
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
+    base_file: /src/controller_mission/state/moveRelativeDecoupledX.py
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Forward5'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 3.5
+      variable_name: param_distance_x
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'random1'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id008
+    state2: *id006

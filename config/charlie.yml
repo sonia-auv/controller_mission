@@ -27,7 +27,7 @@ mission_params:
       second_dice:
         dice: 5 # 2, 4 or 6
         approx_depth: 2.6
-        ram_distance: 1.3
+        ram_distance: 2.0
         #back_distance: -3.0  
         back_distance: -1.0  
         max_time: 120 
@@ -35,7 +35,7 @@ mission_params:
       first_dice:
       #second_dice:
         dice: 6 # 2, 4 or 6
-        approx_depth: 2.6
+        approx_depth: 2.0
         ram_distance: 2.0
         #back_distance: -1.0  
         back_distance: -3.0  
@@ -43,14 +43,14 @@ mission_params:
         filterchain_name: 'simple_dice6'
       complementary_1:
         dice: 1 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.6
         ram_distance: 1.5
         back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_2:
         dice: 2 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.0  
         max_time: 120 
@@ -58,21 +58,21 @@ mission_params:
     sum_07:
       first_dice:
         dice: 6 # 2, 4 or 6
-        approx_depth: 2.6
+        approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice6'
       second_dice:
         dice: 1 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.6
         ram_distance: 1.5
         back_distance: -1.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       complementary_1:
         dice: 2 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.0  
         max_time: 120 
@@ -80,14 +80,14 @@ mission_params:
     last_dices:
       first_dice:
         dice: 1 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.6
         ram_distance: 1.5
         back_distance: -3.0  
         max_time: 120 
         filterchain_name: 'simple_dice1'
       second_dice:
         dice: 2 # 2, 4 or 6
-        approx_depth: 2.1
+        approx_depth: 2.0
         ram_distance: 1.5
         back_distance: -1.0  
         max_time: 120 

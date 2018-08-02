@@ -80,7 +80,7 @@ statesui:
       variable_name: maximum_nb_alignment
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 20.0
+      value: 10.0
       variable_name: max_queue_size
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''

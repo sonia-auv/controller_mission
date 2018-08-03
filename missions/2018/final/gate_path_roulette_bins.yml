@@ -432,19 +432,19 @@ statesui:
                                                         transitions:
                                                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                                                           outcome: succeeded
-                                                          state: !!python/unicode 'Surface'
+                                                          state: MoveToXYGradualy
                                                       transitions:
                                                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                                         name: succeeded
                                                         state1: *id014
-                                                        state2: &id025 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                        state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
                                                           position: !!python/tuple
-                                                          - 2190
-                                                          - 91
-                                                          radius: 100
+                                                          - 2142
+                                                          - 108
+                                                          radius: 128
                                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
-                                                            _name: moveGlobalDecoupledZ.MoveDecoupledZ
-                                                            base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                                                            _name: MoveToXYGradualy.MoveToXYGradualy
+                                                            base_file: /src/controller_mission/state/MoveToXYGradualy.py
                                                             outcome_states:
                                                             - succeeded
                                                             - aborted
@@ -452,19 +452,59 @@ statesui:
                                                             parameters:
                                                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                                               description: state_name
-                                                              value: !!python/unicode 'Surface'
+                                                              value: MoveToXYGradualy
                                                               variable_name: state_name
                                                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                                               description: ' ''Distance
                                                                 to travel'''
-                                                              value: -1.0
-                                                              variable_name: param_distance_z
-                                                            transitions: []
-                                                          transitions: []
+                                                              value: 18.0
+                                                              variable_name: param_distance_x
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: ' ''Distance
+                                                                to travel'''
+                                                              value: -36.25
+                                                              variable_name: param_distance_y
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: ' ''Distance
+                                                                to travel'''
+                                                              value: 3.0
+                                                              variable_name: param_max_distance
+                                                            transitions:
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                                              outcome: succeeded
+                                                              state: !!python/unicode 'Surface'
+                                                          transitions:
+                                                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                                            name: succeeded
+                                                            state1: *id015
+                                                            state2: &id026 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                              position: !!python/tuple
+                                                              - 2390
+                                                              - 151
+                                                              radius: 100
+                                                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                                _name: moveGlobalDecoupledZ.MoveDecoupledZ
+                                                                base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+                                                                outcome_states:
+                                                                - succeeded
+                                                                - aborted
+                                                                - preempted
+                                                                parameters:
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: state_name
+                                                                  value: !!python/unicode 'Surface'
+                                                                  variable_name: state_name
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: ' ''Distance
+                                                                    to travel'''
+                                                                  value: -1.0
+                                                                  variable_name: param_distance_z
+                                                                transitions: []
+                                                              transitions: []
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id006
-                        state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+                        state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
                           - 1144
                           - 284
@@ -496,12 +536,12 @@ statesui:
                           transitions:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
-                            state1: *id015
+                            state1: *id016
                             state2: *id008
 - *id002
 - *id003
 - *id007
-- &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 1227
   - 606
@@ -531,8 +571,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id016
-    state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id017
+    state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 1601
       - 557
@@ -557,8 +597,8 @@ statesui:
           variable_name: SubMission_file
         transitions: []
       transitions: []
-- *id017
-- &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
+- *id018
+- &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 581
   - 432
@@ -588,8 +628,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id018
-    state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id019
+    state2: &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 932
       - 437
@@ -622,10 +662,10 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id019
-        state2: *id016
+        state1: *id020
+        state2: *id017
 - *id006
-- &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 406
   - 709
@@ -658,8 +698,8 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id020
-    state2: &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id021
+    state2: &id022 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 565
       - 716
@@ -688,8 +728,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id021
-        state2: &id022 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id022
+        state2: &id023 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 731
           - 727
@@ -718,8 +758,8 @@ statesui:
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id022
-            state2: &id023 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id023
+            state2: &id024 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 858
               - 719
@@ -748,15 +788,15 @@ statesui:
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id023
-                state2: *id019
-- *id021
-- *id023
+                state1: *id024
+                state2: *id020
 - *id022
-- *id019
+- *id024
+- *id023
+- *id020
 - *id004
 - *id005
-- &id024 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id025 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - -73
   - 190
@@ -781,18 +821,18 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id024
+    state1: *id025
     state2: *id001
 - *id009
 - *id010
 - *id013
 - *id011
 - *id012
-- *id025
-- *id015
+- *id026
+- *id016
 - *id014
 - *id008
-- &id026 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id027 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 889
   - -97
@@ -820,5 +860,6 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id026
+    state1: *id027
     state2: *id006
+- *id015

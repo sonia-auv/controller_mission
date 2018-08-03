@@ -7,7 +7,7 @@ mission_params:
     depth: 1.0
     angle1_deg: 90
     angle2_deg: 90
-    final_global_angle: 52
+    final_global_angle: 56
   02_enter_casino:
     black_side: left #right
   03_paths:

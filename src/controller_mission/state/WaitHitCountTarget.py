@@ -3,7 +3,7 @@ import math
 
 from ..mission_state import MissionState, Parameter
 from proc_image_processing.msg import VisionTarget
-from proc_control.srv import SetPositionTarget, SetDecoupledTarget
+from proc_control.srv import SetDecoupledTarget
 
 
 class WaitHitCountTarget(MissionState):
@@ -53,7 +53,7 @@ class WaitHitCountTarget(MissionState):
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)

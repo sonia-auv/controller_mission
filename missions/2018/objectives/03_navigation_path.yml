@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 353
-  - -122
+  - 414
+  - 251
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/navigation/core/crab_walk
@@ -51,8 +51,8 @@ statesui:
     state2: *id001
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 127
-  - -122
+  - 199
+  - 256
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledX.MoveRelativeDecoupledX
@@ -74,9 +74,9 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: crab_walk
+      state: !!python/unicode 'Forward1'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id002
-    state2: *id001
+    state2: *id002

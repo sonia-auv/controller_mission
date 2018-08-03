@@ -3,7 +3,7 @@ import math
 
 from ..mission_state import MissionState, Parameter
 from proc_image_processing.msg import VisionTarget
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetDecoupledTarget
 
 
 class WaitHitCountTargetForRandomPinger(MissionState):
@@ -57,12 +57,9 @@ class WaitHitCountTargetForRandomPinger(MissionState):
 
     def set_target(self, position_y, position_z, position_yaw):
         try:
-            self.set_local_target(0.0,
-                                  position_y,
-                                  position_z,
-                                  0.0,
-                                  0.0,
-                                  position_yaw)
+            self.set_local_target(0.0, position_y, position_z, 0.0, 0.0, position_yaw,
+                                  False, False, True, True, True, False)
+
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -71,8 +68,8 @@ class WaitHitCountTargetForRandomPinger(MissionState):
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
         self.vision_deepLearning = rospy.Subscriber(self.param_topic_to_listen_DeepLearning, VisionTarget, self.vision_deep_learning_cb)

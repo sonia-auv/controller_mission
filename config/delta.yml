@@ -99,7 +99,7 @@ mission_params:
     end_depth: 1.0
   07_play_roulette:
     searching_depth: 1.5
-    final_depth: 3.1
+    final_depth: 2.8
   08_cash_in:
     searching_depth: 1.5
   90_random_pinger:

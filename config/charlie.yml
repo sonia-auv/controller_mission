@@ -98,7 +98,7 @@ mission_params:
     approx_depth: 0.80
     end_depth: 1.0
   07_play_roulette:
-    searching_depth: 1.5
+    searching_depth: 1.0
     final_depth: 3.1
   08_cash_in:
     searching_depth: 1.5

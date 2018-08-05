@@ -202,7 +202,7 @@ statesui:
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: ' ''Angle change for Yaw'''
-                              value: 45.0
+                              value: -45.0
                               variable_name: param_angle_yaw
                             transitions:
                             - !!python/object:rqt_mission_planner.mission_model.state.Transition

@@ -1,0 +1,107 @@
+mission_params:
+  00_global:
+    color: black #red
+    pinger_frequency: 30
+  01_find_casino:
+    #rotation_scale: 1
+    depth: 1.0
+    angle1_deg: 90
+    angle2_deg: 90
+    final_global_angle: 240
+  02_enter_casino:
+    black_side: left #right
+  03_paths:
+    first_path:
+      first_side: left #right
+      search_depth: 1.5
+      align_depth: 1.5
+    second_path:
+      first_side: left #right
+      search_depth: 1.5
+      align_depth: 1.5
+  04_shoot_craps:
+    search_depth: 2.0
+    end_depth: 0.5
+    sum_11:
+      #first_dice:
+      second_dice:
+        dice: 5 # 2, 4 or 6
+        approx_depth: 2.6
+        ram_distance: 1.3
+        #back_distance: -3.0  
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice5'
+      first_dice:
+      #second_dice:
+        dice: 6 # 2, 4 or 6
+        approx_depth: 2.6
+        ram_distance: 2.0
+        #back_distance: -1.0  
+        back_distance: -3.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice6'
+      complementary_1:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice1'
+      complementary_2:
+        dice: 2 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice2'
+    sum_07:
+      first_dice:
+        dice: 6 # 2, 4 or 6
+        approx_depth: 2.6
+        ram_distance: 1.5
+        back_distance: -3.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice6'
+      second_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice1'
+      complementary_1:
+        dice: 2 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice2'
+    last_dices:
+      first_dice:
+        dice: 1 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -3.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice1'
+      second_dice:
+        dice: 2 # 2, 4 or 6
+        approx_depth: 2.1
+        ram_distance: 1.5
+        back_distance: -1.0  
+        max_time: 120 
+        filterchain_name: 'simple_dice2'
+  05_buy_gold_chip:
+    approx_depth: 1.4
+  06_play_slots:
+    approx_depth: 0.80
+    end_depth: 1.0
+  07_play_roulette:
+    searching_depth: 1.0
+    final_depth: 2.9
+  08_cash_in:
+    searching_depth: 1.0
+  90_random_pinger:
+    presearching_depth: 0.5
+    searching_depth: 1.0

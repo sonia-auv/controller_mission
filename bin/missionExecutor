@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+from controller_mission.mission_executor import MissionExecutor
+
+if __name__ == '__main__':
+    MissionExecutor()
+

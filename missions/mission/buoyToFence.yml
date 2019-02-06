@@ -1,0 +1,83 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 333
+  - 77
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: navigation/GotoNextPAth
+    base_file: /missions/navigation/GotoNextPAth.yml
+    global_params:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 1.2
+      variable_name: up
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: -30.0
+      variable_name: heading_to_square_buoy
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 4.0
+      variable_name: push_front
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 2.0
+      variable_name: down
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: GotoNextPAth
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: navigation/GotoNextPAth.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: pathToBuoyRedAndGreen
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: pathToFence
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 333
+      - 334
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: mission/pathToFence
+        base_file: /missions/mission/PathFence.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: 4.0
+          variable_name: push_front
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: pathToFence
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: mission/PathFence.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002

@@ -1,7 +1,0 @@
-#!/usr/bin/env python
-
-import controller_mission.main
-
-if __name__ == '__main__':
-    controller_mission.main.main()
-

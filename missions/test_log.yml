@@ -1,0 +1,66 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 328
+  - 288
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: log.Log
+    base_file: /src/controller_mission/state/log.py
+    is_root: false
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'LogEnd'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Started(1) or finished(2)'''
+      value: 2.0
+      variable_name: param_start
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''The message to log'''
+      value: !!python/unicode 'The End'
+      variable_name: param_message
+    transitions: []
+  transitions: []
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 327
+  - 73
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: log.Log
+    base_file: /src/controller_mission/state/log.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'LogStart'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Started(1) or finished(2)'''
+      value: 1.0
+      variable_name: param_start
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''The message to log'''
+      value: !!python/unicode 'The Start'
+      variable_name: param_message
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'LogEnd'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: *id002

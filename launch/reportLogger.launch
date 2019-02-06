@@ -1,0 +1,6 @@
+<launch>
+	<node name="reportLogger"
+	    pkg="controller_mission"
+	    type="post_mission_report.py"
+	    output="screen" />
+</launch>

@@ -12,16 +12,22 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
 )
 
-catkin_python_setup()
-
 #===============================================================================
 # G E N E R A T E   M E S S A G E S   &   S E R V I C E S
 
 add_service_files(DIRECTORY srv
-  FILES
-  Position.srv
+  FILES 
+  ListMissions.srv
+  LoadMission.srv
+  StartMission.srv
+  StopMission.srv
+  CurrentMission.srv
+  ReceivedMission.srv
+  ReceivedState.srv
+  SendMission.srv
 )
 
+catkin_python_setup()
 generate_messages(
   DEPENDENCIES std_msgs geometry_msgs
 )
@@ -29,7 +35,6 @@ generate_messages(
 generate_dynamic_reconfigure_options(
     cfg/SquareTest.cfg
 )
-
 catkin_package(
   CATKIN_DEPENDS roscpp
                  rospy
@@ -47,13 +52,12 @@ include_directories(
 
 #===============================================================================
 # I N S T A L L
-
-catkin_install_python(PROGRAMS bin/controller_mission
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+catkin_install_python(PROGRAMS bin/missionExecutor
+ DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 #===============================================================================
 # U N I T   T E S T S
 
 # Add folders to be run by python nosetests
-catkin_add_nosetests(test)
+#catkin_add_nosetests(test)

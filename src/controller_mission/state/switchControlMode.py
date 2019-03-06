@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetControlMode
+from proc_control.srv import SetControlMode, SetControlModeRequest
 
 
 class Switch(MissionState):
@@ -11,6 +11,7 @@ class Switch(MissionState):
         self.start_time = None
         self.set_mode = None
 
+        self.mode = SetControlModeRequest()
         self.mode_dic = {'0': self.mode.PositionModePID, '1': self.mode.PositionModePPI, '2': self.mode.VelocityModeB}
 
     def define_parameters(self):

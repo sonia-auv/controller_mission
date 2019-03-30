@@ -35,7 +35,7 @@ class MoveSpeed(MissionState):
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position x = %f' % self.param_distance_x)
-        rospy.loginfo('Set relative position z = %f' % self.param_distance_y)
+        rospy.loginfo('Set relative position z = %f' % self.param_distance_z)
         rospy.loginfo('Set relative orientation yaw = %f' % self.param_distance_yaw)
 
     def run(self, ud):
@@ -43,4 +43,4 @@ class MoveSpeed(MissionState):
             return 'succeeded'
 
     def end(self):
-        self.target_reach_sub.unregister()
+	return

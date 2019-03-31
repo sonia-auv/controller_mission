@@ -1,0 +1,79 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 207
+  - 158
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: launchVision.LaunchVision
+    base_file: /src/controller_mission/state/launchVision.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: LaunchVision
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Topic of  result'''
+      value: align_buoy
+      variable_name: param_node_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Filter chain name'''
+      value: simple_buoy
+      variable_name: param_filterchain_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Media name'''
+      value: /provider_vision/Front_GigE
+      variable_name: param_media_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Media name'''
+      value: 1.0
+      variable_name: param_start_front
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Media name'''
+      value: 2.0
+      variable_name: param_start_bottom
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 1.0
+      variable_name: param_cmd
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'find_ghost'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 373
+      - 241
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2018/objectives/04_find_dices
+        base_file: /missions/2018/objectives/04_find_dices.yml
+        global_params: []
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'find_ghost'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2018/objectives/04_find_dices.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002

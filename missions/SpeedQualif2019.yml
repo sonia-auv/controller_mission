@@ -204,7 +204,7 @@ statesui:
                     global_params:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 8.0
+                      value: 6.0
                       variable_name: Time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''

@@ -66,7 +66,7 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 10.0
+          value: 30.0
           variable_name: Time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -204,7 +204,7 @@ statesui:
                     global_params:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 6.0
+                      value: 20.0
                       variable_name: Time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
@@ -241,8 +241,8 @@ statesui:
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 726
-                      - 223
+                      - 696
+                      - 239
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveGlobalXY.MoveXY

@@ -13,9 +13,9 @@ class MoveSpeed(MissionState):
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_yaw', 0.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_x', 1.0, 'Travel speed'))
+        self.parameters.append(Parameter('param_distance_z', 1.0, 'Depth'))
+        self.parameters.append(Parameter('param_distance_yaw', 0.0, 'Travel orientation'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']

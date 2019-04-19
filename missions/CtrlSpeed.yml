@@ -55,7 +55,7 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 312
       - 205
@@ -80,38 +80,9 @@ statesui:
           description: ' ''Times Out'''
           value: succeeded
           variable_name: param_to_return
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'Mode0'
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 454
-          - 134
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: switchControlMode.Switch
-            base_file: /src/controller_mission/state/switchControlMode.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'Mode0'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Control Mode'''
-              value: 0.0
-              variable_name: param_mode
-            transitions: []
-          transitions: []
-- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 20
   - 361
@@ -143,12 +114,12 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
+    state1: *id002
     state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id003
-    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id002
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 203
       - 356
@@ -180,8 +151,7 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id004
-        state2: *id002
+        state1: *id003
+        state2: *id004
+- *id003
 - *id004
-- *id002
-- *id005

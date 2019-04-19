@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 75
-  - 335
+  - -6
+  - 364
   radius: 168
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: setControlBoundingBox.SetControlBoundingBox
@@ -50,107 +50,73 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'speed_1'
+      state: Switch
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 163
-      - 190
+      - 41
+      - 262
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: CtrlSpeed
-        base_file: /missions/CtrlSpeed.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 30.0
-          variable_name: Time
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.8
-          variable_name: SpeedX
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.0
-          variable_name: SetZ
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 0.0
-          variable_name: SetYaw
-        is_submission: true
+        _name: switchControlMode.Switch
+        base_file: /src/controller_mission/state/switchControlMode.py
         outcome_states:
         - succeeded
         - aborted
+        - preempted
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'speed_1'
+          value: Switch
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: CtrlSpeed.yml
-          variable_name: SubMission_file
+          description: ' ''Control Mode'''
+          value: 0.0
+          variable_name: param_mode
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'speed2'
+          state: MoveDecoupledZ
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 278
-          - 64
-          radius: 100
+          - 14
+          - 139
+          radius: 112
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: CtrlSpeed
-            base_file: /missions/CtrlSpeed.yml
-            global_params:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 3.0
-              variable_name: Time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 1.8
-              variable_name: SpeedX
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 1.0
-              variable_name: SetZ
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 90.0
-              variable_name: SetYaw
-            is_submission: true
+            _name: moveGlobalDecoupledZ.MoveDecoupledZ
+            base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
             outcome_states:
             - succeeded
             - aborted
+            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'speed2'
+              value: MoveDecoupledZ
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: CtrlSpeed.yml
-              variable_name: SubMission_file
+              description: ' ''Distance to travel'''
+              value: 1.0
+              variable_name: param_distance_z
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: CtrlSpeed
+              state: !!python/unicode 'speed_1'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 412
-              - 14
+              - 165
+              - 143
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: CtrlSpeed
@@ -158,7 +124,7 @@ statesui:
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 3.0
+                  value: 30.0
                   variable_name: Time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
@@ -170,7 +136,7 @@ statesui:
                   variable_name: SetZ
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 180.0
+                  value: 290.0
                   variable_name: SetYaw
                 is_submission: true
                 outcome_states:
@@ -179,7 +145,7 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: CtrlSpeed
+                  value: !!python/unicode 'speed_1'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: SubMission_file
@@ -188,15 +154,15 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'speed3'
+                  state: !!python/unicode 'speed2'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 542
-                  - 132
+                  - 272
+                  - 63
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: CtrlSpeed
@@ -204,7 +170,7 @@ statesui:
                     global_params:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 20.0
+                      value: 3.0
                       variable_name: Time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
@@ -216,7 +182,7 @@ statesui:
                       variable_name: SetZ
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ''
-                      value: 180.0
+                      value: 200.0
                       variable_name: SetYaw
                     is_submission: true
                     outcome_states:
@@ -225,7 +191,7 @@ statesui:
                     parameters:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: state_name
-                      value: !!python/unicode 'speed3'
+                      value: !!python/unicode 'speed2'
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: SubMission_file
@@ -234,74 +200,168 @@ statesui:
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: !!python/unicode 'abs2x'
+                      state: CtrlSpeed
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 696
-                      - 239
+                      - 412
+                      - 14
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
-                        _name: moveGlobalXY.MoveXY
-                        base_file: /src/controller_mission/state/moveGlobalXY.py
+                        _name: CtrlSpeed
+                        base_file: /missions/CtrlSpeed.yml
+                        global_params:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 3.0
+                          variable_name: Time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.8
+                          variable_name: SpeedX
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 1.0
+                          variable_name: SetZ
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ''
+                          value: 110.0
+                          variable_name: SetYaw
+                        is_submission: true
                         outcome_states:
                         - succeeded
                         - aborted
-                        - preempted
                         parameters:
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: state_name
-                          value: !!python/unicode 'abs2x'
+                          value: CtrlSpeed
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Distance to travel'''
-                          value: 2.0
-                          variable_name: param_distance_x
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Distance to travel'''
-                          value: 0.0
-                          variable_name: param_distance_y
+                          description: SubMission_file
+                          value: CtrlSpeed.yml
+                          variable_name: SubMission_file
                         transitions:
                         - !!python/object:rqt_mission_planner.mission_model.state.Transition
                           outcome: succeeded
-                          state: !!python/unicode 'abs-1'
+                          state: !!python/unicode 'speed3'
                       transitions:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id006
                         state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
-                          - 560
-                          - 354
+                          - 539
+                          - 132
                           radius: 100
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
-                            _name: moveGlobalXY.MoveXY
-                            base_file: /src/controller_mission/state/moveGlobalXY.py
+                            _name: CtrlSpeed
+                            base_file: /missions/CtrlSpeed.yml
+                            global_params:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 20.0
+                              variable_name: Time
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 1.8
+                              variable_name: SpeedX
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 1.0
+                              variable_name: SetZ
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ''
+                              value: 20.0
+                              variable_name: SetYaw
+                            is_submission: true
                             outcome_states:
                             - succeeded
                             - aborted
-                            - preempted
                             parameters:
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                               description: state_name
-                              value: !!python/unicode 'abs-1'
+                              value: !!python/unicode 'speed3'
                               variable_name: state_name
                             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Distance to travel'''
-                              value: -1.0
-                              variable_name: param_distance_x
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Distance to travel'''
-                              value: 0.0
-                              variable_name: param_distance_y
-                            transitions: []
-                          transitions: []
-- *id002
-- *id003
-- *id005
-- *id006
-- *id007
+                              description: SubMission_file
+                              value: CtrlSpeed.yml
+                              variable_name: SubMission_file
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'abs2x'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id007
+                            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - 696
+                              - 239
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: moveGlobalXY.MoveXY
+                                base_file: /src/controller_mission/state/moveGlobalXY.py
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                - preempted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'abs2x'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Distance to travel'''
+                                  value: 2.0
+                                  variable_name: param_distance_x
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Distance to travel'''
+                                  value: 0.0
+                                  variable_name: param_distance_y
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'abs-1'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id008
+                                state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - 560
+                                  - 354
+                                  radius: 100
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: moveGlobalXY.MoveXY
+                                    base_file: /src/controller_mission/state/moveGlobalXY.py
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: !!python/unicode 'abs-1'
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: -1.0
+                                      variable_name: param_distance_x
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: 0.0
+                                      variable_name: param_distance_y
+                                    transitions: []
+                                  transitions: []
 - *id004
+- *id005
+- *id007
+- *id008
+- *id009
+- *id006
+- *id003
+- *id002

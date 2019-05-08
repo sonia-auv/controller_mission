@@ -1,0 +1,196 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 589
+  - 198
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: Foward_W_Style
+    base_file: /missions/Foward_W_Style.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Foward'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: Foward_W_Style.yml
+      variable_name: SubMission_file
+    transitions: []
+  transitions: []
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 154
+  - 237
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: mission/findFence
+    base_file: /missions/mission/findFence.yml
+    global_params: []
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: findFence
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: mission/findFence.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: AlignToVision
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: aborted
+      state: !!python/unicode 'At least he tried'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 369
+      - 161
+      radius: 104
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: alignToVision.AlignToVision
+        base_file: /src/controller_mission/state/alignToVision.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - forward
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: AlignToVision
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''bounding box in pixel'''
+          value: 200.0
+          variable_name: param_bounding_box
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''color of object to align'''
+          value: red
+          variable_name: param_color
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''maximum nb of pixel to align with heading'''
+          value: 100.0
+          variable_name: param_threshold_width
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Yaw rotation to align vision'''
+          value: 10.0
+          variable_name: param_heading
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''transform pixel to meter'''
+          value: 0.23
+          variable_name: param_vision_target_width_in_meter
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Name of topic to listen'''
+          value: /proc_image_processing/buoy_red
+          variable_name: param_topic_to_listen
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Minimal nb of pixel to ram'''
+          value: 300.0
+          variable_name: param_nb_pixel_to_victory
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum number of alignment'''
+          value: 4.0
+          variable_name: param_maximum_nb_alignment
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum size of queue'''
+          value: 10.0
+          variable_name: param_max_queue_size
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Control bounding box in y'''
+          value: 0.5
+          variable_name: param_control_bounding_box_in_y
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum size of queue'''
+          value: 'False'
+          variable_name: param_check_vision_reach
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'At least he tried'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id003
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: aborted
+    state1: *id001
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 355
+      - 355
+      radius: 136
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: Foward_W_Style
+        base_file: /missions/Foward_W_Style.yml
+        global_params: []
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'At least he tried'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: Foward_W_Style.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002
+- *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -50
+  - 204
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: TimesOut
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 1.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: findFence
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id005
+    state2: *id001

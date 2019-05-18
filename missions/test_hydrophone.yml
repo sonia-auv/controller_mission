@@ -20,9 +20,9 @@ statesui:
       value: Hydro
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Maximum size of queue'''
-      value: 10.0
-      variable_name: param_queu_size
+      description: ' ''Pigner frequency'''
+      value: 55.0
+      variable_name: param_frequency
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
@@ -119,8 +119,8 @@ statesui:
     state1: *id003
     state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 292
-      - 130
+      - 288
+      - 134
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalZ.MoveZ

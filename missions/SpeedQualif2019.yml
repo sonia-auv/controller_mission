@@ -20,11 +20,11 @@ statesui:
       variable_name: SpeedX
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 1.0
+      value: 0.5
       variable_name: SetZ
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ''
-      value: 0.0
+      value: 140.0
       variable_name: SetYaw
     is_root: false
     is_submission: true
@@ -67,11 +67,11 @@ statesui:
           variable_name: SpeedX
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.0
+          value: 0.5
           variable_name: SetZ
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 90.0
+          value: 230.0
           variable_name: SetYaw
         is_root: false
         is_submission: true
@@ -114,11 +114,11 @@ statesui:
               variable_name: SpeedX
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 1.0
+              value: 0.5
               variable_name: SetZ
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: 180.0
+              value: 320.0
               variable_name: SetYaw
             is_root: false
             is_submission: true
@@ -161,11 +161,11 @@ statesui:
                   variable_name: SpeedX
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 1.0
+                  value: 0.5
                   variable_name: SetZ
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 190.0
+                  value: 330.0
                   variable_name: SetYaw
                 is_root: false
                 is_submission: true
@@ -314,11 +314,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: MoveDecoupledZ
+      value: !!python/unicode 'Get_Down'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 1.0
+      value: 0.5
       variable_name: param_distance_z
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -385,8 +385,8 @@ statesui:
             state2: *id001
 - &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -1
-  - 564
+  - -84
+  - 632
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: switchControlMode.Switch
@@ -408,7 +408,7 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveDecoupledZ
+      state: !!python/unicode 'Get_Down'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded

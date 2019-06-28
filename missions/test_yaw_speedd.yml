@@ -13,7 +13,7 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
       value: MoveZ, variable_name: state_name}
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 1.0, variable_name: param_distance_z}
+        to travel''', value: 0.5, variable_name: param_distance_z}
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
       state: MoveRelativeYAw}

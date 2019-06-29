@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 495
-  - 88
+  - 553
+  - 154
   radius: 128
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2018/objectives/07_align_forward
@@ -42,8 +42,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 734
-      - 158
+      - 701
+      - 256
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalDecoupledZFromGlobalParam.MoveDecoupledZFromGlobalParam
@@ -60,44 +60,136 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: !!python/unicode '/mission_params/07_play_roulette/final_depth'
+          value: 2.0
           variable_name: param_distance_z_global_param_name
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: droppers
+          state: !!python/unicode 'torp'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 905
+          - 832
           - 97
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2018/actuators/droppers
-            base_file: /missions/2018/actuators/droppers.yml
-            global_params: []
-            is_root: false
-            is_submission: true
+            _name: torpidoState.Torpido
+            base_file: /src/controller_mission/state/torpidoState.py
             outcome_states:
             - succeeded
             - aborted
+            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: droppers
+              value: Torpido
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: 2018/actuators/droppers.yml
-              variable_name: SubMission_file
-            transitions: []
-          transitions: []
-- *id003
+              description: ' ''Torpido id'''
+              value: 1.0
+              variable_name: param_id
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Launch'''
+              value: 1.0
+              variable_name: param_launch
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'to3'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 1001
+              - 92
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'to3'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 1.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'torp'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 1193
+                  - 102
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: torpidoState.Torpido
+                    base_file: /src/controller_mission/state/torpidoState.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'torp'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Torpido id'''
+                      value: 2.0
+                      variable_name: param_id
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Launch'''
+                      value: 1.0
+                      variable_name: param_launch
+                    transitions: []
+                  transitions: []
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 1018
+  - -73
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2018/actuators/droppers
+    base_file: /missions/2018/actuators/droppers.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: droppers
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2018/actuators/droppers.yml
+      variable_name: SubMission_file
+    transitions: []
+  transitions: []
 - *id002
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - -251
   - 208
@@ -133,15 +225,18 @@ statesui:
       state: Find_bat_wolf
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: TimesOut
+      state: !!python/unicode 'to3'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: find_pinger
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id005
+    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 74
-      - 57
+      - 72
+      - 60
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: Find_bat_wolf
@@ -149,7 +244,7 @@ statesui:
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''align_roulette'''
+          value: !!python/unicode '''align_bat_wolf'''
           variable_name: param_topic_filterchain
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
@@ -179,8 +274,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id005
-        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id006
+        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 348
           - -20
@@ -216,12 +311,12 @@ statesui:
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id006
+            state1: *id007
             state2: *id001
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id006
-            state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id007
+            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 673
               - -95
@@ -250,18 +345,18 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: droppers
+                  state: !!python/unicode 'torp'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id007
+                state1: *id008
                 state2: *id003
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id004
-    state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id005
+    state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 109
+      - 110
       - 339
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -293,8 +388,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: aborted
-        state1: *id008
-        state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id009
+        state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 381
           - 363
@@ -323,37 +418,41 @@ statesui:
               variable_name: param_to_return
             transitions: []
           transitions: []
-- *id008
-- !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 88
-  - 200
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: 2018/hydros/find_pinger
-    base_file: /missions/2018/hydros/find_pinger.yml
-    global_params: []
-    is_root: false
-    is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: find_pinger
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: 2018/hydros/find_pinger.yml
-      variable_name: SubMission_file
-    transitions: []
-  transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id005
+    state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 88
+      - 200
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2018/hydros/find_pinger
+        base_file: /missions/2018/hydros/find_pinger.yml
+        global_params: []
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: find_pinger
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2018/hydros/find_pinger.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
 - *id009
+- *id010
+- *id011
 - !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -418
-  - 148
+  - -450
+  - 85
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: hydro.Hydro
@@ -368,16 +467,16 @@ statesui:
       description: state_name
       value: !!python/unicode 'Hydro01'
       variable_name: state_name
-    - &id010 !!python/object:rqt_mission_planner.mission_model.state.Parameter
+    - &id012 !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Pigner frequency'''
-      value: 40.0
+      value: 35.0
       variable_name: param_frequency
     transitions: []
   transitions: []
 - !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -319
-  - 135
+  - -309
+  - 54
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: hydro.Hydro
@@ -392,15 +491,15 @@ statesui:
       description: state_name
       value: !!python/unicode 'Hydro02'
       variable_name: state_name
-    - *id010
+    - *id012
     transitions: []
   transitions: []
-- *id006
 - *id007
+- *id008
 - !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 936
-  - 260
+  - 1025
+  - 345
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeDecoupledY.MoveRelativeDecoupledY
@@ -421,10 +520,10 @@ statesui:
       variable_name: param_distance_y
     transitions: []
   transitions: []
-- &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -571
-  - 404
+  - -696
+  - 462
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZ.MoveZ
@@ -450,11 +549,11 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id011
-    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state1: *id013
+    state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -471
-      - 243
+      - -640
+      - 227
       radius: 120
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalZ.MoveZ
@@ -480,7 +579,10 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id012
-        state2: *id004
-- *id012
-- *id005
+        state1: *id014
+        state2: *id005
+- *id014
+- *id006
+- *id003
+- *id015
+- *id004

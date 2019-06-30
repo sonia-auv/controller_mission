@@ -4,7 +4,7 @@ from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 
 
-class MoveSpeed(MissionState):
+class MoveForward(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

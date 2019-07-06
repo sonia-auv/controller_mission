@@ -1,10 +1,10 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 478
-  - 213
+  - 532
+  - 216
   radius: 144
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveSpeedRelativeX.MoveRelativeSpeedX
@@ -31,8 +31,8 @@ statesui:
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 128
-  - 231
+  - 112
+  - 271
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZ.MoveZ
@@ -54,9 +54,39 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveRelativeSpeedX
+      state: Switch
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: *id002
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 322
+      - 255
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: switchControlMode.Switch
+        base_file: /src/controller_mission/state/switchControlMode.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: Switch
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Control Mode'''
+          value: 2.0
+          variable_name: param_mode
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: MoveRelativeSpeedX
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id003
+- *id002

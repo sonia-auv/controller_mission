@@ -25,8 +25,8 @@ class MoveSpeedHydro(MissionState):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
         rospy.wait_for_service('/proc_control/set_global_decoupled_target')
 
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target_decoupled', SetDecoupledTarget)
-        self.set_global_target = rospy.ServiceProxy('/proc_coontrol/set_global_target_decoupled', SetDecoupledTarget)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
 
         self.pinger_location = rospy.Subscriber('/proc_mapping/pinger_location', PingerLocation,
                                                 self.pinger_location_cb)
@@ -42,8 +42,7 @@ class MoveSpeedHydro(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set speed x = %f' % self.param_distance_x)
-        rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
+        rospy.loginfo('Set speed x = %f' % self.param_speed_x)
 
     def pinger_location_cb(self, pinger_location_data):
         if pinger_location_data.frequency == self.param_pinger_frequency:
@@ -60,12 +59,10 @@ class MoveSpeedHydro(MissionState):
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
 
-            rospy.loginfo('Set speed x = %f' % self.param_distance_x)
             rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
 
     def run(self, ud):
-        if self.target_reached:
-            return 'succeeded'
+        pass
 
     def end(self):
         self.pinger_location.unregister()

@@ -13,9 +13,9 @@ class MoveSpeed(MissionState):
         self.target_reached = False
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_z', 1.0, 'Distance to travel'))
-        self.parameters.append(Parameter('param_distance_yaw', 0.0, 'Distance to travel'))
+        self.parameters.append(Parameter('param_distance_x', 1.0, 'Speed to use while traveling'))
+        self.parameters.append(Parameter('param_distance_z', 1.0, 'Depth during traveling'))
+        self.parameters.append(Parameter('param_distance_yaw', 0.0, 'Heading'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -34,9 +34,9 @@ class MoveSpeed(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative position x = %f' % self.param_distance_x)
-        rospy.loginfo('Set relative position z = %f' % self.param_distance_z)
-        rospy.loginfo('Set relative orientation yaw = %f' % self.param_distance_yaw)
+        rospy.loginfo('Set sub speed = %f' % self.param_distance_x)
+        rospy.loginfo('Set depth = %f' % self.param_distance_z)
+        rospy.loginfo('Set global orientation yaw = %f' % self.param_distance_yaw)
 
     def run(self, ud):
         if self.target_reached:

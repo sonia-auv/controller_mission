@@ -1,31 +1,31 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget
-from nav_msgs.msg import Odometry
-import math
+from proc_control.srv import SetDecoupledTarget
+from proc_mapping.msg import PingerLocation
 
-class MoveRelativeSpeedX(MissionState):
+
+class MoveSpeedHydro(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
-        self.odom = None
-        self.first_position = None
-        self.position = None
+        self.pinger_location = None
+        self.heading = None
 
     def define_parameters(self):
-        self.parameters.append(Parameter('param_distance_x', 1.0, 'Distance to travel'))
         self.parameters.append(Parameter('param_speed_x', 1.0, 'Speed to use while traveling'))
+        self.parameters.append(Parameter('param_pinger_frequency', 0.0, 'Pinger frequency'))
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetDecoupledTarget)
 
-        self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
+        self.pinger_location = rospy.Subscriber('/proc_mapping/pinger_location', PingerLocation,
+                                                self.pinger_location_cb)
 
         try:
             self.set_local_target(self.param_speed_x,
@@ -33,39 +33,35 @@ class MoveRelativeSpeedX(MissionState):
                                   0.0,
                                   0.0,
                                   0.0,
-                                  0.0)
+                                  0.0,
+                                  False, False, True, True, True, True)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set relative speed x = %f' % self.param_distance_x)
+        rospy.loginfo('Set speed x = %f' % self.param_distance_x)
+        rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
 
-    def odom_cb(self, odom_data):
-        if self.first_position is None:
-            self.first_position = odom_data.pose.pose.position
+    def pinger_location_cb(self, pinger_location_data):
+        if pinger_location_data.frequency == self.param_pinger_frequency:
+            self.heading = pinger_location_data.pose.orientation.z
 
-        self.position = odom_data.pose.pose.position
-
-    def run(self, ud):
-        # Check if both position are set. If not, check pass
-        if self.first_position is None or self.position is None:
-            return
-
-        x = self.first_position.x - self.position.x
-        y = self.first_position.y - self.position.y
-
-        distance = math.sqrt(x * x + y * y)
-
-        if distance >= self.param_distance_x:
             try:
-                self.set_local_target(0.0,
+                self.set_local_target(self.param_speed_x,
                                       0.0,
                                       0.0,
                                       0.0,
                                       0.0,
-                                      0.0)
+                                      self.heading,
+                                      False, False, True, True, True, False)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
+
+            rospy.loginfo('Set speed x = %f' % self.param_distance_x)
+            rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
+
+    def run(self, ud):
+        if self.target_reached:
             return 'succeeded'
 
     def end(self):
-        self.odom.unregister()
+        self.pinger_location.unregister()

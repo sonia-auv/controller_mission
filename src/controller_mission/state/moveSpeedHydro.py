@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetDecoupledTarget
+from proc_control.srv import SetPositionTarget
 from nav_msgs.msg import Odometry
 import math
 
@@ -22,8 +22,8 @@ class MoveRelativeSpeedX(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
         self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
 
@@ -33,13 +33,11 @@ class MoveRelativeSpeedX(MissionState):
                                   0.0,
                                   0.0,
                                   0.0,
-                                  0.0,
-                                  False, False, True, True, True, True)
+                                  0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-        rospy.loginfo('Set distance to travel x = %f' % self.param_distance_x)
-        rospy.loginfo('Set relative speed x = %f' % self.param_speed_x)
+        rospy.loginfo('Set relative speed x = %f' % self.param_distance_x)
 
     def odom_cb(self, odom_data):
         if self.first_position is None:
@@ -64,8 +62,7 @@ class MoveRelativeSpeedX(MissionState):
                                       0.0,
                                       0.0,
                                       0.0,
-                                      0.0,
-                                      False, False, True, True, True, True)
+                                      0.0)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
             return 'succeeded'

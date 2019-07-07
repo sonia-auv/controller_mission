@@ -10,6 +10,7 @@ class MoveSpeedHydro(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
+        self.set_global_target = None
         self.pinger_location = None
         self.heading = None
 
@@ -21,8 +22,11 @@ class MoveSpeedHydro(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetDecoupledTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        rospy.wait_for_service('/proc_control/set_global_decoupled_target')
+
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target_decoupled', SetDecoupledTarget)
+        self.set_global_target = rospy.ServiceProxy('/proc_coontrol/set_global_target_decoupled', SetDecoupledTarget)
 
         self.pinger_location = rospy.Subscriber('/proc_mapping/pinger_location', PingerLocation,
                                                 self.pinger_location_cb)
@@ -46,13 +50,13 @@ class MoveSpeedHydro(MissionState):
             self.heading = pinger_location_data.pose.orientation.z
 
             try:
-                self.set_local_target(self.param_speed_x,
-                                      0.0,
-                                      0.0,
-                                      0.0,
-                                      0.0,
-                                      self.heading,
-                                      False, False, True, True, True, False)
+                self.set_global_target(0.0,
+                                       0.0,
+                                       0.0,
+                                       0.0,
+                                       0.0,
+                                       self.heading,
+                                       True, True, True, True, True, False)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
 

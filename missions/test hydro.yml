@@ -2,48 +2,70 @@
 globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [348, 285]
+  position: !!python/tuple
+  - 348
+  - 285
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: do_hydro
     base_file: /missions/do_hydro.yml
     global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
-      value: 25.0, variable_name: frequency}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ''
+      value: 25.0
+      variable_name: frequency
     is_root: false
     is_submission: true
-    outcome_states: [succeeded, aborted]
+    outcome_states:
+    - succeeded
+    - aborted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: do_hydro, variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: SubMission_file,
-      value: do_hydro.yml, variable_name: SubMission_file}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: do_hydro
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: do_hydro.yml
+      variable_name: SubMission_file
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: do_hydro}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: do_hydro
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: *id001
 - &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple [99, 288]
+  position: !!python/tuple
+  - 99
+  - 288
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZ.MoveZ
     base_file: /src/controller_mission/state/moveGlobalZ.py
-    is_root: true
-    outcome_states: [succeeded, aborted, preempted]
+    is_root: false
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
     parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-      value: MoveZ, variable_name: state_name}
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Distance
-        to travel''', value: 1.0, variable_name: param_distance_z}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: MoveZ
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
     transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: do_hydro}
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-      state: !!python/unicode 'to90'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: do_hydro
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'to90'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -53,41 +75,97 @@ statesui:
     name: succeeded
     state1: *id002
     state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple [321, 438]
+      position: !!python/tuple
+      - 321
+      - 438
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
-        outcome_states: [succeeded, aborted, preempted]
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
         parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
-          value: !!python/unicode 'to90', variable_name: state_name}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-            Out''', value: 90.0, variable_name: param_time}
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
-            Out''', value: succeeded, variable_name: param_to_return}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'to90'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 90.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
         transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
-          state: !!python/unicode 'to90'}
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'to90'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id003
         state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple [547, 440]
+          position: !!python/tuple
+          - 547
+          - 440
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
-            outcome_states: [succeeded, aborted, preempted]
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
             parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: state_name, value: TimesOut, variable_name: state_name}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Times Out''', value: 1.0, variable_name: param_time}
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
-              description: ' ''Times Out''', value: succeeded, variable_name: param_to_return}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: TimesOut
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 1.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
             transitions: []
           transitions: []
 - *id003
 - *id004
+- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -64
+  - 282
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: switchControlMode.Switch
+    base_file: /src/controller_mission/state/switchControlMode.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Switch
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Control Mode'''
+      value: 0.0
+      variable_name: param_mode
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: MoveZ
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id005
+    state2: *id002

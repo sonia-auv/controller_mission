@@ -14,7 +14,6 @@ class MoveSpeed(MissionState):
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_distance_x', 1.0, 'Speed to use while traveling'))
-        self.parameters.append(Parameter('param_distance_z', 1.0, 'Depth during traveling'))
         self.parameters.append(Parameter('param_distance_yaw', 0.0, 'Heading'))
 
     def get_outcomes(self):
@@ -27,7 +26,7 @@ class MoveSpeed(MissionState):
         try:
             self.set_local_target(self.param_distance_x,
                                   0.0,
-                                  self.param_distance_z,
+                                  0.0,
                                   0.0,
                                   0.0,
                                   self.param_distance_yaw)

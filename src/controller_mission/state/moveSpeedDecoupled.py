@@ -1,14 +1,15 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetDecoupledTarget
 
 
-class MoveSpeed(MissionState):
+class MoveSpeedDecoupled(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
+        self.set_global_target = None
 
         self.target_reached = False
 
@@ -21,8 +22,10 @@ class MoveSpeed(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        rospy.wait_for_service('/proc_control/set_global_decoupled_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
 
         try:
             self.set_local_target(self.param_distance_x,
@@ -30,7 +33,16 @@ class MoveSpeed(MissionState):
                                   self.param_distance_z,
                                   0.0,
                                   0.0,
-                                  self.param_distance_yaw)
+                                  0.0,
+                                  False, False, False, True, True, True)
+
+            self.set_global_target(0.0,
+                                   0.0,
+                                   0.0,
+                                   0.0,
+                                   0.0,
+                                   self.param_distance_yaw,
+                                   True, True, True, True, True, False)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

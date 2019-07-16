@@ -1,6 +1,6 @@
 mission_params:
   00_global:
-    pinger_frequency: 30
+    pinger_frequency: 40
   01_gate:
     start_yaw: 240
     speed_yaw: 240
@@ -10,8 +10,6 @@ mission_params:
     distance_x: 1
     depth: 1
     forward_gate: -2
-  02_enter_fence:
-    black_side: left #right
   03_paths:
     first_path:
       first_side: left #right
@@ -44,7 +42,7 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
-  06_slay_vampyre:
+  06_slay_vampire:
     filterchain_name: simple_vampire
     back_distance: -1.0
     max_time: 120

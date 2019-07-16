@@ -25,7 +25,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Pigner frequency'''
-      value: !!python/unicode 'frequency'
+      value: !!python/unicode '$/mission_params/00_global/pinger_frequency'
       variable_name: param_frequency
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition

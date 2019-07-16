@@ -91,7 +91,7 @@ statesui:
               variable_name: node_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
+              value: !!python/unicode '''$/mission_params/04_hit_buoys/filterchain_name'''
               variable_name: filterchaine_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''

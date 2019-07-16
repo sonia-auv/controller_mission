@@ -1,5 +1,6 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams:
+<<<<<<< HEAD
 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
   description: ''
   value: !!python/unicode '''/provider_vision/Bottom_GigE'''
@@ -21,11 +22,25 @@ statesui:
   position: !!python/tuple
   - 402
   - 44
+=======
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''/provider_vision/Bottom_GigE''', variable_name: media_name}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''align_path''', variable_name: node_name}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''simple_pipe''', variable_name: filterchain_name}
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: '',
+  value: !!python/unicode '''/proc_image_processing/align_path_result''', variable_name: topic_to_listen}
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple [402, 44]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
     base_file: /src/controller_mission/state/launchVision.py
     is_root: true
+<<<<<<< HEAD
     outcome_states:
     - succeeded
     - aborted
@@ -66,19 +81,47 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: AlignXYVision
+=======
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'StartVision', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Topic
+        of  result''', value: !!python/unicode 'node_name', variable_name: param_node_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Filter
+        chain name''', value: !!python/unicode 'filterchain_name', variable_name: param_filterchain_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: !!python/unicode 'media_name', variable_name: param_media_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: 2.0, variable_name: param_start_front}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Media
+        name''', value: 1.0, variable_name: param_start_bottom}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 1.0, variable_name: param_cmd}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'Wait1'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: AlignXYVision}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
       position: !!python/tuple
       - 496
       - 181
+=======
+      position: !!python/tuple [496, 181]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
         is_root: false
+<<<<<<< HEAD
         outcome_states:
         - succeeded
         - aborted
@@ -100,18 +143,36 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: !!python/unicode 'Splitter1'
+=======
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'Wait1', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: 120.0, variable_name: param_time}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: succeeded, variable_name: param_to_return}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'Splitter1'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
           position: !!python/tuple
           - 402
           - 320
+=======
+          position: !!python/tuple [402, 320]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
+<<<<<<< HEAD
             outcome_states:
             - succeeded
             - aborted
@@ -136,19 +197,39 @@ statesui:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
               state: !!python/unicode 'Wait2'
+=======
+            outcome_states: [succeeded, aborted, preempted]
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: state_name, value: !!python/unicode 'Splitter1', variable_name: state_name}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: 0.0, variable_name: param_time}
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+              description: ' ''Times Out''', value: succeeded, variable_name: param_to_return}
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+              outcome: succeeded, state: !!python/unicode 'AlignPath2'}
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+              outcome: succeeded, state: !!python/unicode 'Wait2'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
               position: !!python/tuple
               - 294
               - 440
+=======
+              position: !!python/tuple [294, 440]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: alignPath.AlignPath
                 base_file: /src/controller_mission/state/alignPath.py
                 is_root: false
+<<<<<<< HEAD
                 outcome_states:
                 - succeeded
                 - aborted
@@ -190,18 +271,47 @@ statesui:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: MoveRelativeXY
+=======
+                outcome_states: [succeeded, aborted, preempted]
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: state_name, value: AlignPath, variable_name: state_name}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''bounding box in pixel''', value: 150.0, variable_name: param_bounding_box}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''bounding box in pixel''', value: 5.0, variable_name: param_yaw_bounding_box}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''transform pixel to meter''', value: 0.15, variable_name: param_vision_target_width_in_meter}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''transform pixel to meter''', value: 0.7, variable_name: param_vision_target_height_in_meter}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Name of topic to listen''', value: !!python/unicode 'topic_to_listen',
+                  variable_name: param_topic_to_listen}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Maximum size of queue''', value: 15.0, variable_name: param_max_queue_size}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Control bounding box in y''', value: 0.5, variable_name: param_control_bounding_box_in_y}
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                  outcome: succeeded, state: MoveRelativeXY}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
                   position: !!python/tuple
                   - 382
                   - 605
+=======
+                  position: !!python/tuple [382, 605]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
                   radius: 112
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXY.MoveRelativeXY
                     base_file: /src/controller_mission/state/moveRelativeXY.py
+<<<<<<< HEAD
                     outcome_states:
                     - succeeded
                     - aborted
@@ -227,19 +337,39 @@ statesui:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
                       state: !!python/unicode 'StopVision'
+=======
+                    outcome_states: [succeeded, aborted, preempted]
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: state_name, value: MoveRelativeXY, variable_name: state_name}
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: ' ''Distance to travel''', value: 1.0, variable_name: param_distance_x}
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: ' ''Distance to travel''', value: 0.0, variable_name: param_distance_y}
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                      description: ' ''Distance to travel''', value: 0.0, variable_name: param_distance_yaw}
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                      outcome: succeeded, state: !!python/unicode 'StopVision'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
                       position: !!python/tuple
                       - 410
                       - 813
+=======
+                      position: !!python/tuple [410, 813]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
                       radius: 100
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: launchVision.LaunchVision
                         base_file: /src/controller_mission/state/launchVision.py
                         is_root: false
+<<<<<<< HEAD
                         outcome_states:
                         - succeeded
                         - aborted
@@ -273,19 +403,46 @@ statesui:
                           description: ' ''Times Out'''
                           value: 2.0
                           variable_name: param_cmd
+=======
+                        outcome_states: [succeeded, aborted, preempted]
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: state_name, value: !!python/unicode 'StopVision',
+                          variable_name: state_name}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Topic of  result''', value: !!python/unicode 'node_name',
+                          variable_name: param_node_name}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Filter chain name''', value: !!python/unicode 'filterchain_name',
+                          variable_name: param_filterchain_name}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Media name''', value: !!python/unicode 'media_name',
+                          variable_name: param_media_name}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Media name''', value: 2.0, variable_name: param_start_front}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Media name''', value: 1.0, variable_name: param_start_bottom}
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                          description: ' ''Times Out''', value: 2.0, variable_name: param_cmd}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
                         transitions: []
                       transitions: []
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
               position: !!python/tuple
               - 505
               - 442
+=======
+              position: !!python/tuple [505, 442]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: timeOut.TimesOut
                 base_file: /src/controller_mission/state/timeOut.py
+<<<<<<< HEAD
                 outcome_states:
                 - succeeded
                 - aborted
@@ -307,6 +464,19 @@ statesui:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
                   state: MoveRelativeXY
+=======
+                outcome_states: [succeeded, aborted, preempted]
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: state_name, value: !!python/unicode 'Wait2', variable_name: state_name}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Times Out''', value: 45.0, variable_name: param_time}
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
+                  description: ' ''Times Out''', value: succeeded, variable_name: param_to_return}
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition {
+                  outcome: succeeded, state: MoveRelativeXY}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
@@ -316,13 +486,18 @@ statesui:
     name: succeeded
     state1: *id001
     state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
       position: !!python/tuple
       - 302
       - 186
+=======
+      position: !!python/tuple [302, 186]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: alignXYVision.AlignXYVision
         base_file: /src/controller_mission/state/alignXYVision.py
+<<<<<<< HEAD
         outcome_states:
         - succeeded
         - aborted
@@ -360,6 +535,27 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: !!python/unicode 'Splitter1'
+=======
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: AlignXYVision, variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''bounding
+            box in pixel''', value: 100.0, variable_name: param_bounding_box}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''transform
+            pixel to meter''', value: 0.15, variable_name: param_vision_target_width_in_meter}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''transform
+            pixel to meter''', value: 0.7, variable_name: param_vision_target_height_in_meter}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Name
+            of topic to listen''', value: !!python/unicode 'topic_to_listen', variable_name: param_topic_to_listen}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Maximum
+            size of queue''', value: 15.0, variable_name: param_max_queue_size}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Control
+            bounding box in y''', value: 0.5, variable_name: param_control_bounding_box_in_y}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'Splitter1'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
@@ -372,13 +568,18 @@ statesui:
 - *id003
 - *id006
 - &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
   position: !!python/tuple
   - 604
   - 680
+=======
+  position: !!python/tuple [604, 680]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: alignPath.AlignPath
     base_file: /src/controller_mission/state/alignPath.py
+<<<<<<< HEAD
     outcome_states:
     - succeeded
     - aborted
@@ -420,19 +621,47 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'StopVision'
+=======
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'AlignPath2', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''bounding
+        box in pixel''', value: 150.0, variable_name: param_bounding_box}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''bounding
+        box in pixel''', value: 5.0, variable_name: param_yaw_bounding_box}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''transform
+        pixel to meter''', value: 0.15, variable_name: param_vision_target_width_in_meter}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''transform
+        pixel to meter''', value: 0.7, variable_name: param_vision_target_height_in_meter}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Name
+        of topic to listen''', value: !!python/unicode 'topic_to_listen', variable_name: param_topic_to_listen}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Maximum
+        size of queue''', value: 15.0, variable_name: param_max_queue_size}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Control
+        bounding box in y''', value: 0.5, variable_name: param_control_bounding_box_in_y}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'StopVision'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id009
     state2: *id008
 - &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
   position: !!python/tuple
   - 712
   - 495
+=======
+  position: !!python/tuple [712, 495]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
     base_file: /src/controller_mission/state/timeOut.py
+<<<<<<< HEAD
     outcome_states:
     - succeeded
     - aborted
@@ -457,6 +686,21 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'Wait3'
+=======
+    outcome_states: [succeeded, aborted, preempted]
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+      value: !!python/unicode 'Splitter2', variable_name: state_name}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: 0.0, variable_name: param_time}
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+        Out''', value: succeeded, variable_name: param_to_return}
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'AlignPath2'}
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+      state: !!python/unicode 'Wait3'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -466,13 +710,18 @@ statesui:
     name: succeeded
     state1: *id010
     state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
       position: !!python/tuple
       - 812
       - 671
+=======
+      position: !!python/tuple [812, 671]
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
+<<<<<<< HEAD
         outcome_states:
         - succeeded
         - aborted
@@ -494,6 +743,19 @@ statesui:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
           state: !!python/unicode 'StopVision'
+=======
+        outcome_states: [succeeded, aborted, preempted]
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
+          value: !!python/unicode 'Wait3', variable_name: state_name}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: 45.0, variable_name: param_time}
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: ' ''Times
+            Out''', value: succeeded, variable_name: param_to_return}
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
+          state: !!python/unicode 'StopVision'}
+>>>>>>> e12b4bf124a8cc2f69ad4ffd0142ef65ce0e7dbb
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded

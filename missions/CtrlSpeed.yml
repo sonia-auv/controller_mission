@@ -37,16 +37,16 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: !!python/unicode 'SpeedX'
-      variable_name: param_distance_x
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Distance to travel'''
-      value: !!python/unicode 'SetZ'
+      value: !!python/unicode '$mission_params/01_gate/depth'
       variable_name: param_distance_z
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Distance to travel'''
-      value: !!python/unicode 'SetYaw'
-      variable_name: param_distance_yaw
+      description: ' ''Speed to use while traveling'''
+      value: !!python/unicode '$mission_params/01_gate/speed_x'
+      variable_name: param_speed_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Heading'''
+      value: !!python/unicode '$mission_params/01_gate/speed_yaw'
+      variable_name: param_orientation_yaw
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
@@ -57,8 +57,8 @@ statesui:
     state1: *id001
     state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 312
-      - 205
+      - 309
+      - 202
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -138,7 +138,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: !!python/unicode 'Time'
+          value: !!python/unicode '$mission_params/01_gate/time'
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''

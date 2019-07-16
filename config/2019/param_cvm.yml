@@ -1,12 +1,15 @@
 mission_params:
   00_global:
     pinger_frequency: 30
-  01_find_fence:
-    #rotation_scale: 1
-    depth: 1.0
-    angle1_deg: 90
-    angle2_deg: 90
-    final_global_angle: 56
+  01_gate:
+    start_yaw: 240
+    speed_yaw: 240
+    gate_yaw: -90
+    time: 6
+    speed_x: 1.5
+    distance_x: 1
+    depth: 1
+    forward_gate: -2
   02_enter_fence:
     black_side: left #right
   03_paths:

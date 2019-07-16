@@ -41,14 +41,14 @@ mission_params:
     search_epth: 2.0
     end_depth: 0.5
   06_slay_vampyre:
-    filterchain_name: 'simple_vampyre'
+    filterchain_name: simple_vampyre
     back_distance: -1.0
     max_time: 120
     fire_depth: 1.5
     search_depth: 2.0
     end_depth: 0.5
   07_do_grab:
-    filterchain_name: 'simple_grab'
+    filterchain_name: simple_grab
     searching_depth: 1.5
     grab_depth: 3.1
     max_time: 120

@@ -19,7 +19,7 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
   04_hit_buoys:
-    topic_to_listen: simple_jiangshi_result
+    topic_to_listen: /proc_image_processing/simple_jiangshi_result
     filterchain_name: simple_jiangshi
     search_depth: 2.0
     end_depth: 0.5
@@ -28,12 +28,14 @@ mission_params:
     max_time_align: 120
   05_bat_wolf:
     bin: bat
+    topic_to_listen: /proc_image_processing/simple_bat_wolf_result
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
     search_depth: 2.0
-    max_depth: 3.0
-    max_time_align: 120
+    pixel_to_victory: 350
+    time_max_align: 120
+    max_z: 3.0
     end_depth: 0.5
     offset:
       x: 0.5

@@ -1,0 +1,50 @@
+mission_params:
+  00_global:
+    pinger_frequency: 30
+  01_find_fence:
+    #rotation_scale: 1
+    depth: 1.0
+    angle1_deg: 90
+    angle2_deg: 90
+    final_global_angle: 56
+  02_enter_fence:
+    black_side: left #right
+  03_paths:
+    first_path:
+      first_side: left #right
+      search_depth: 1.5
+      align_depth: 1.5
+    second_path:
+      first_side: left #right
+      search_depth: 1.5
+      align_depth: 1.5
+  04_hit_buoys:
+    buoys: jiangshi
+    search_depth: 2.0
+    end_depth: 0.5
+    filterchain_name: simple_jiangshi
+    topic_to_listen: /proc_image_processing/simple_jiangshi_result
+    step_back: -1.0
+    max_time_find: 120
+    max_time_align: 120
+  05_bat_wolf:
+    bin: bat
+    filterchain_name: 'simple_bat'
+    drop_depth: 1.4
+    search_depth: 2.0
+    end_depth: 0.5
+  06_slay_vampyre:
+    filterchain_name: 'simple_vampire'
+    back_distance: -1.0
+    max_time: 120
+    fire_depth: 1.5
+    search_depth: 2.0
+    end_depth: 0.5
+  07_do_grab:
+    filterchain_name: 'simple_grab'
+    searching_depth: 1.5
+    grab_depth: 3.1
+    max_time: 120
+  90_random_pinger:
+    presearching_depth: 0.5
+    searching_depth: 1.0

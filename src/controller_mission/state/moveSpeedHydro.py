@@ -11,6 +11,7 @@ class MoveSpeedHydro(MissionState):
         MissionState.__init__(self)
         self.set_local_target = None
         self.pinger_location = None
+        self.depth = None
         self.heading = None
 
     def define_parameters(self):
@@ -27,28 +28,15 @@ class MoveSpeedHydro(MissionState):
         self.pinger_location = rospy.Subscriber('/proc_mapping/pinger_location', PingerLocation,
                                                 self.pinger_location_cb)
 
-        try:
-            self.set_local_target(self.param_speed_x,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
-
-        except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
-
-        rospy.loginfo('Set speed x = %f' % self.param_distance_x)
-        rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
-
     def pinger_location_cb(self, pinger_location_data):
         if pinger_location_data.frequency == self.param_pinger_frequency:
             self.heading = pinger_location_data.pose.orientation.z
+            self.depth = pinger_location_data.pose.position.z
 
             try:
                 self.set_local_target(self.param_speed_x,
                                       0.0,
-                                      0.0,
+                                      self.depth,
                                       0.0,
                                       0.0,
                                       self.heading)
@@ -56,6 +44,7 @@ class MoveSpeedHydro(MissionState):
                 rospy.loginfo('Service did not process request: ' + str(exc))
 
             rospy.loginfo('Set speed x = %f' % self.param_distance_x)
+            rospy.loginfo('Set depth z = %f' % self.depth)
             rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
 
     def run(self, ud):

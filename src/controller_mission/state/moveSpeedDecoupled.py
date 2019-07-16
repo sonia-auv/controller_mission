@@ -30,11 +30,11 @@ class MoveSpeedDecoupled(MissionState):
         try:
             self.set_local_target(self.param_distance_x,
                                   0.0,
-                                  self.param_distance_z,
                                   0.0,
                                   0.0,
                                   0.0,
-                                  False, False, False, True, True, True)
+                                  0.0,
+                                  False, False, True, True, True, True)
 
             self.set_global_target(0.0,
                                    0.0,

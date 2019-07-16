@@ -43,7 +43,8 @@ mission_params:
       y: -0.2
       yaw: 0
   06_slay_vampire:
-    filterchain_name: simple_vampire
+    filterchain_name_dl: simple_vampire
+    filterchain_name_vc: simple_vampire_torpille
     back_distance: -1.0
     max_time: 120
     fire_depth: 1.5

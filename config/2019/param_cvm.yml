@@ -20,8 +20,10 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
   04_hit_buoys:
+    buoys: jiangshi #jiangshi vetalas draugr answag
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
-    filterchain_name: simple_jiangshi
+    filterchain_name: simple_jiangshi 
+    filterchain_result: simple_jiangshi_result
     search_depth: 2.0
     end_depth: 0.5
     step_back: -1.0

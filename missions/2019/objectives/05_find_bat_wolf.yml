@@ -33,7 +33,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'param_topic_filterchain'
+      value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
@@ -82,7 +82,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_result'
+          value: !!python/unicode '$/mission_params/05_bat_wolf/topic_to_listen'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''

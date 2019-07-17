@@ -33,8 +33,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 333
-      - 287
+      - 341
+      - 291
       radius: 128
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2019/objectives/05_find_bat_wolf
@@ -46,11 +46,11 @@ statesui:
           variable_name: param_topic_filterchain
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''align_roulette'''
+          value: !!python/unicode '''/proc_image_processing/align_bin_result'''
           variable_name: param_topic_deeplearning_result
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: !!python/unicode '''align_roulette'''
+          value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
           variable_name: param_topic_filterchain_result
         is_submission: true
         outcome_states:

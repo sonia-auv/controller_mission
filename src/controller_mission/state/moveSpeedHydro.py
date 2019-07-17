@@ -43,13 +43,12 @@ class MoveSpeedHydro(MissionState):
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
 
-            rospy.loginfo('Set speed x = %f' % self.param_distance_x)
+            rospy.loginfo('Set speed x = %f' % self.param_speed_x)
             rospy.loginfo('Set depth z = %f' % self.depth)
             rospy.loginfo('Set pinger heading yaw = %f' % self.heading)
 
     def run(self, ud):
-        if self.target_reached:
-            return 'succeeded'
+        pass
 
     def end(self):
         self.pinger_location.unregister()

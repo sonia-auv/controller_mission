@@ -48,8 +48,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 409
-      - 113
+      - 420
+      - 93
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2018/objectives/03_find_path
@@ -144,7 +144,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: !!python/unicode '$/mission_params/03_path/front_after_path'
+                  value: !!python/unicode '$/mission_params/03_paths/front_after_path'
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''

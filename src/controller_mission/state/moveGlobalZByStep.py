@@ -2,7 +2,7 @@ import rospy
 
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetDecoupledTarget
+from proc_control.srv import SetPositionTarget
 from nav_msgs.msg import Odometry
 import math
 
@@ -38,6 +38,7 @@ class MoveZByStep(MissionState):
 
     def current_position_cb(self, position):
         self.position = position.pose.pose.position
+        self.orientation = position.pose.pose.orientation
 
     def wait_until_position_is_get(self):
         while not self.position:
@@ -46,8 +47,8 @@ class MoveZByStep(MissionState):
 
     def initialize(self):
 
-        rospy.wait_for_service('/proc_control/set_global_decoupled_target')
-        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_decoupled_target', SetDecoupledTarget)
+        rospy.wait_for_service('/proc_control/set_global_target')
+        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
 
         self.move_queue = []
 
@@ -56,10 +57,6 @@ class MoveZByStep(MissionState):
         self.wait_until_position_is_get()
 
         delta_z = self.param_z - self.position.z
-
-        nb_step = 0
-        mod = 0
-        sign = 0
 
         if delta_z > 0:
             nb_step = int(math.floor(delta_z/self.param_z_step))
@@ -92,13 +89,12 @@ class MoveZByStep(MissionState):
     def move_z(self, z_distance):
 
         try:
-            self.set_global_target(0,
-                                   0,
+            self.set_global_target(self.position.x,
+                                   self.position.y,
                                    z_distance,
                                    0,
                                    0,
-                                   0,
-                                   True, True, False, True, True, True)
+                                   self.orientation.z)
             self.target_reached = False
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))

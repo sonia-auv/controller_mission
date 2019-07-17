@@ -3,6 +3,7 @@ import rospy
 from ..mission_state import MissionState, Parameter
 from proc_control.srv import SetPositionTarget
 from proc_mapping.msg import PingerLocation
+import math
 
 
 class MoveSpeedHydro(MissionState):
@@ -31,6 +32,8 @@ class MoveSpeedHydro(MissionState):
     def pinger_location_cb(self, pinger_location_data):
         if pinger_location_data.frequency == self.param_pinger_frequency:
             self.heading = pinger_location_data.pose.orientation.z
+            self.heading = self.heading * 180 / math.pi
+
             self.depth = pinger_location_data.pose.position.z
 
             try:

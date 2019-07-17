@@ -39,7 +39,7 @@ class MoveSpeedHydro(MissionState):
             try:
                 self.set_local_target(self.param_speed_x,
                                       0.0,
-                                      self.depth,
+                                      1.0,
                                       0.0,
                                       0.0,
                                       self.heading)

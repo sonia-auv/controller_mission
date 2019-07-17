@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -51
-  - 242
+  - -117
+  - 270
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: switchControlMode.Switch
@@ -26,19 +26,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveZ
+      state: MoveZByStep
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -37
-      - 125
+      - -22
+      - 147
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: moveGlobalZ.MoveZ
-        base_file: /src/controller_mission/state/moveGlobalZ.py
+        _name: moveGlobalZByStep.MoveZByStep
+        base_file: /src/controller_mission/state/moveGlobalZByStep.py
         outcome_states:
         - succeeded
         - aborted
@@ -46,12 +46,16 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: MoveZ
+          value: MoveZByStep
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
           value: !!python/unicode '$mission_params/01_gate/depth'
-          variable_name: param_distance_z
+          variable_name: param_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.5
+          variable_name: param_z_step
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
@@ -62,8 +66,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 114
-          - 63
+          - 115
+          - 32
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveGlobalYaw.MoveYaw
@@ -100,16 +104,8 @@ statesui:
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 10.0
-                  variable_name: Time
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ''
                   value: 1.8
                   variable_name: SpeedX
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ''
-                  value: 1.0
-                  variable_name: SetZ
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
                   value: 0.0
@@ -221,5 +217,5 @@ statesui:
 - *id004
 - *id005
 - *id006
-- *id002
 - *id007
+- *id002

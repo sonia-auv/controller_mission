@@ -1,6 +1,7 @@
 mission_params:
   00_global:
     pinger_frequency: 40
+    safe_depth: 1.0
   01_gate:
     start_yaw: 240
     speed_yaw: 240

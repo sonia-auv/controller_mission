@@ -24,6 +24,12 @@ mission_params:
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
     filterchain_name: simple_jiangshi 
     filterchain_result: simple_jiangshi_result
+    max_alignment: 30
+    max_queu_size: 10
+    threshold_width: 100
+    pixel_to_victory: 350
+    target_width: .7
+    heading: 0
     search_depth: 2.0
     end_depth: 0.5
     step_back: -1.0

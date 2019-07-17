@@ -1,18 +1,10 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''simple_jiangshi'''
-  variable_name: filterchain_name
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''/proc_image_processing/simple_jiangshi_result'''
-  variable_name: topic
+globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 398
-  - 112
+  - 379
+  - 71
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
@@ -29,7 +21,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'find_buoy'
+      value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
@@ -61,8 +53,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 387
-      - 269
+      - 360
+      - 279
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget

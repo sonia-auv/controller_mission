@@ -132,7 +132,7 @@ statesui:
               variable_name: param_color
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''maximum nb of pixel to align with heading'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/heading'
+              value: !!python/unicode '$/mission_params/04_hit_buoys/threshold_width'
               variable_name: param_threshold_width
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Yaw rotation to align vision'''

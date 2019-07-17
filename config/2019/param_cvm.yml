@@ -12,6 +12,7 @@ mission_params:
     depth: 1
     forward_gate: -2
   03_paths:
+    front_after_path: 1.0
     first_path:
       first_side: left #right
       search_depth: 1.5

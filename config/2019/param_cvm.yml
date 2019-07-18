@@ -56,20 +56,50 @@ mission_params:
       y: -0.2
       yaw: 0
   06_slay_vampire:
-    filterchain_name_dl: simple_vampire
-    topic_to_listen_dl: /proc_image_processing/simple_vampire_result
-    filterchain_name_vc: simple_vampire_torpille
-    topic_to_listen_vc: /proc_image_processing/simple_vampire_torpille_result
-    back_distance: -1.0
-    max_time: 120
-    fire_depth: 1.5
-    search_depth: 2.0
+    max_time_find: 120
+    max_time_align: 120
+    dl:
+      vampire: head
+      filterchain_name: simple_vampire
+      filterchain_result: simple_vampire_result
+      topic_to_listen: /proc_image_processing/simple_vampire_result
+      max_alignment: 6
+      max_queu_size: 10
+      threshold_width: 100
+      pixel_to_victory: 350
+      target_width: .7
+      heading: 0
+      search_depth: 2.0
+      end_depth: 0.5
+    vc:
+      vampire: head
+      filterchain_name: simple_vampire_torpille
+      filterchain_result: simple_vampire_torpille_result
+      topic_to_listen: /proc_image_processing/simple_vampire_result
+      max_alignment: 6
+      max_queu_size: 10
+      threshold_width: 100
+      pixel_to_victory: 350
+      target_width: .3
+      heading: 0
+      search_depth: 2.0
+      end_depth: 0.5
+  07_grab:
+    bin: baby #coffins
+    topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
+    filterchain_name: simple_poignee_vampire
+    filterchain_result: simple_poignee_vampire_result
+    deep_result: simple_poignee_vampire_result
+    search_depth: 1.0
+    pixel_to_victory: 350
+    hit_to_victory: 10
+    time_max_align: 120
+    max_z: 2.6
     end_depth: 0.5
-  07_do_grab:
-    filterchain_name: simple_grab
-    searching_depth: 1.5
-    grab_depth: 3.1
-    max_time: 120
+    offset:
+      x: 0.5
+      y: -0.2
+      yaw: 0
   90_random_pinger:
     presearching_depth: 0.5
     searching_depth: 1.0

@@ -74,11 +74,11 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic of  result'''
-          value: !!python/unicode '$/mission_params/06_saly_vampire/filterchain_name_dl'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
           variable_name: param_node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Filter chain name'''
-          value: !!python/unicode '$/mission_params/06_saly_vampire/filterchain_name_dl'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
@@ -128,35 +128,35 @@ statesui:
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''color of object to align'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/buoys'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/vampire'
               variable_name: param_color
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''maximum nb of pixel to align with heading'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/threshold_width'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/threshold_width'
               variable_name: param_threshold_width
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Yaw rotation to align vision'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/heading'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/heading'
               variable_name: param_heading
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''transform pixel to meter'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/target_width'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/target_width'
               variable_name: param_vision_target_width_in_meter
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Name of topic to listen'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/topic_to_listen'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/topic_to_listen'
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Minimal nb of pixel to ram'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/pixel_to_victory'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/pixel_to_victory'
               variable_name: param_nb_pixel_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum number of alignment'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/max_alignment'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/max_alignment'
               variable_name: param_maximum_nb_alignment
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum size of queue'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/max_queu_size'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/max_queu_size'
               variable_name: param_max_queue_size
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Control bounding box in y'''
@@ -196,7 +196,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''color of object to align'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/buoys'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/vampire'
                   variable_name: param_color
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
@@ -212,19 +212,19 @@ statesui:
                   variable_name: param_final_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''maximum nb of pixel to align with heading'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/threshold_width'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/threshold_width'
                   variable_name: param_threshold_width
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/target_width'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/target_width'
                   variable_name: param_vision_target_width_in_meter
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/pixel_to_victory'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/pixel_to_victory'
                   variable_name: param_nb_pixel_to_victory
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Name of topic to listen'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/topic_to_listen'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/topic_to_listen'
                   variable_name: param_topic_to_listen
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition

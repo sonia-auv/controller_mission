@@ -33,11 +33,11 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_name'
+      value: !!python/unicode '$/mission_params/07_grab/filterchain_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_name'
+      value: !!python/unicode '$/mission_params/07_grab/filterchain_name'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -95,7 +95,7 @@ statesui:
           variable_name: param_vision_target_height_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '$/mission_params/05_bat_wolf/topic_to_listen'
+          value: !!python/unicode '$/mission_params/07_grab/topic_to_listen'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum size of queue'''
@@ -107,7 +107,7 @@ statesui:
           variable_name: param_control_bounding_box_in_y
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Control bounding box in y'''
-          value: !!python/unicode '$/mission_params/05_bat_wolf/pixel_to_victory'
+          value: !!python/unicode '$/mission_params/07_grab/pixel_to_victory'
           variable_name: param_nb_pixel_to_victory
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -148,15 +148,15 @@ statesui:
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''minimal nb of pixel to ram'''
-              value: !!python/unicode '$/mission_params/05_bat_wolf/max_z'
+              value: !!python/unicode '$/mission_params/07_grab/max_z'
               variable_name: param_distance_max_z
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''minimal nb of pixel to ram'''
-              value: !!python/unicode '$/mission_params/05_bat_wolf/pixel_to_victory'
+              value: !!python/unicode '$/mission_params/07_grab/pixel_to_victory'
               variable_name: param_nb_pixel_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Name of topic to listen'''
-              value: !!python/unicode '$/mission_params/05_bat_wolf/topic_to_listen'
+              value: !!python/unicode '$/mission_params/07_grab/topic_to_listen'
               variable_name: param_topic_to_listen
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition

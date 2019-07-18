@@ -37,6 +37,7 @@ mission_params:
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
+    hit_to_victory: 4
   05_bat_wolf:
     bin: bat
     topic_to_listen: /proc_image_processing/simple_bat_wolf_result
@@ -45,6 +46,7 @@ mission_params:
     deep_result: simple_bat_wolf_result
     search_depth: 1.0
     pixel_to_victory: 350
+    hit_to_victory: 10
     time_max_align: 120
     max_z: 2.6
     end_depth: 0.5

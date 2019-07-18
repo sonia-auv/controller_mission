@@ -1,10 +1,18 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams: []
+globalparams:
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''simple_jiangshi'''
+  variable_name: filterchain_name
+- !!python/object:rqt_mission_planner.mission_model.state.Parameter
+  description: ''
+  value: !!python/unicode '''/proc_image_processing/simple_jiangshi_result'''
+  variable_name: topic
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 379
-  - 71
+  - 398
+  - 112
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
@@ -53,8 +61,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 360
-      - 279
+      - 389
+      - 269
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget
@@ -74,7 +82,7 @@ statesui:
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: 10.0
+          value: !!python/unicode '$/mission_params/04_hit_buoys/hit_to_victory'
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''

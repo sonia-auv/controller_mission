@@ -104,10 +104,6 @@ statesui:
                 global_params:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ''
-                  value: 1.8
-                  variable_name: SpeedX
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ''
                   value: 0.0
                   variable_name: SetYaw
                 is_submission: true

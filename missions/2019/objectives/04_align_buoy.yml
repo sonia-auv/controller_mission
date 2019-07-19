@@ -200,7 +200,7 @@ statesui:
                   variable_name: param_color
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
-                  value: 1.0
+                  value: !!python/unicode '$/mission_params/04_hit_buoys/distance_forward'
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Initial bounding Box'''

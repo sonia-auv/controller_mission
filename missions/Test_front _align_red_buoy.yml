@@ -42,11 +42,11 @@ statesui:
       variable_name: param_vision_target_width_in_meter
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Name of topic to listen'''
-      value: /proc_image_processing/buoy_red
+      value: !!python/unicode '/proc_image_processing/align_buoy_result'
       variable_name: param_topic_to_listen
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Minimal nb of pixel to ram'''
-      value: 300.0
+      value: 150.0
       variable_name: param_nb_pixel_to_victory
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Maximum number of alignment'''
@@ -118,11 +118,11 @@ statesui:
           variable_name: param_vision_target_width_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''minimal nb of pixel to ram'''
-          value: 300.0
+          value: 150.0
           variable_name: param_nb_pixel_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '/proc_image_processing/buoy_red'
+          value: !!python/unicode '/proc_image_processing/align_buoy_result'
           variable_name: param_topic_to_listen
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition

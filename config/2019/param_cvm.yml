@@ -28,10 +28,13 @@ mission_params:
     filterchain_name: simple_jiangshi 
     filterchain_result: simple_jiangshi_result
     max_alignment: 30
-    max_queu_size: 10
+    max_queu_size: 3
     threshold_width: 100
-    pixel_to_victory: 350
-    target_width: .7
+    pixel_to_victory: 800
+    target_width: 0.7
+    distance_forward: 1.0
+    ram_distance: 2
+    offset_z: 1.5
     heading: 0
     search_depth: 2.0
     end_depth: 0.5
@@ -89,7 +92,6 @@ mission_params:
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
     filterchain_name: simple_poignee_vampire
     filterchain_result: simple_poignee_vampire_result
-    deep_result: simple_poignee_vampire_result
     search_depth: 1.0
     pixel_to_victory: 350
     hit_to_victory: 10

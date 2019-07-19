@@ -1,12 +1,12 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget
+from proc_control.srv import SetDecoupledTarget
 from nav_msgs.msg import Odometry
 import math
 
 
-class MoveRelativeSpeedX(MissionState):
+class MoveRelativeSpeedXDecoupled(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)
@@ -24,8 +24,8 @@ class MoveRelativeSpeedX(MissionState):
         return ['succeeded', 'aborted', 'preempted']
 
     def initialize(self):
-        rospy.wait_for_service('/proc_control/set_local_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+        rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
 
         self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
 
@@ -37,7 +37,8 @@ class MoveRelativeSpeedX(MissionState):
                                   self.position.z,
                                   0.0,
                                   0.0,
-                                  self.param_orientation_yaw)
+                                  self.param_orientation_yaw,
+                                  False, False, False, True, True, False)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -73,7 +74,8 @@ class MoveRelativeSpeedX(MissionState):
                                       0.0,
                                       0.0,
                                       0.0,
-                                      0.0)
+                                      0.0,
+                                      False, False, False, True, True, False)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
             return 'succeeded'

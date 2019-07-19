@@ -2,6 +2,8 @@ mission_params:
   00_global:
     pinger_frequency: 40
     safe_depth: 1.0
+    elgrandfrero: 1.5
+    elgrandfrera: -1.5
   01_gate:
     start_yaw: 240
     speed_yaw: 240
@@ -12,6 +14,7 @@ mission_params:
     depth: 1
     forward_gate: -2
   03_paths:
+    max_time_align: 120
     front_after_path: 1.0
     first_path:
       first_side: left #right
@@ -33,8 +36,9 @@ mission_params:
     pixel_to_victory: 800
     target_width: 0.7
     distance_forward: 1.0
-    ram_distance: 2
-    offset_z: 1.5
+    ram_dist: 2.0
+    time_for_ram: 10
+    offset_z: -0.5
     heading: 0
     search_depth: 2.0
     end_depth: 0.5
@@ -51,7 +55,10 @@ mission_params:
     search_depth: 1.0
     pixel_to_victory: 350
     hit_to_victory: 10
+    max_queu_size: 6
     time_max_align: 120
+    time_max_find: 120
+    forward_z: 0.5
     max_z: 2.6
     end_depth: 0.5
     offset:
@@ -61,6 +68,8 @@ mission_params:
   06_slay_vampire:
     max_time_find: 120
     max_time_align: 120
+    search_depth: 2.0
+    speedx: 1.0
     dl:
       vampire: head
       filterchain_name: simple_vampire
@@ -70,9 +79,15 @@ mission_params:
       max_queu_size: 10
       threshold_width: 100
       pixel_to_victory: 350
-      target_width: .7
+      hit_to_victory: 10
+      target_width: 0.7
       heading: 0
       search_depth: 2.0
+      offset:
+        x: 0
+        y: 0
+        yaw: 0
+        z: 0
       end_depth: 0.5
     vc:
       vampire: head
@@ -83,9 +98,15 @@ mission_params:
       max_queu_size: 10
       threshold_width: 100
       pixel_to_victory: 350
-      target_width: .3
+      hit_to_victory: 10
+      target_width: 0.7
       heading: 0
       search_depth: 2.0
+      offset:
+        x: 0
+        y: 0
+        yaw: 0
+        z: 0
       end_depth: 0.5
   07_grab:
     bin: baby #coffins

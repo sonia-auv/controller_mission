@@ -3,9 +3,9 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 125
+  - 210
   - 103
-  radius: 168
+  radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: setControlBoundingBox.SetControlBoundingBox
     base_file: /src/controller_mission/state/setControlBoundingBox.py
@@ -17,7 +17,7 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: SetControlBoundingBox
+      value: !!python/unicode 'set_box'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Set or reset bounding box'''
@@ -50,15 +50,15 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'close'
+      state: LaunchVision
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 434
-      - 149
+      - 446
+      - 103
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: launchVision.LaunchVision
@@ -74,15 +74,15 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic of  result'''
-          value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
           variable_name: param_node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Filter chain name'''
-          value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: /provider_vision/Front_GigE
+          value: !!python/unicode '/provider_vision/Front_GigE'
           variable_name: param_media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
@@ -106,8 +106,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 173
-          - 377
+          - 216
+          - 320
           radius: 104
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: alignToVision.AlignToVision
@@ -128,35 +128,35 @@ statesui:
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''color of object to align'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/buoys'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/vampire'
               variable_name: param_color
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''maximum nb of pixel to align with heading'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/threshold_width'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/threshold_width'
               variable_name: param_threshold_width
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Yaw rotation to align vision'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/heading'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/heading'
               variable_name: param_heading
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''transform pixel to meter'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/target_width'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/target_width'
               variable_name: param_vision_target_width_in_meter
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Name of topic to listen'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/topic_to_listen'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/topic_to_listen'
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Minimal nb of pixel to ram'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/pixel_to_victory'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/pixel_to_victory'
               variable_name: param_nb_pixel_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum number of alignment'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/max_alignment'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/max_alignment'
               variable_name: param_maximum_nb_alignment
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum size of queue'''
-              value: !!python/unicode '$/mission_params/04_hit_buoys/max_queu_size'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/max_queu_size'
               variable_name: param_max_queue_size
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Control bounding box in y'''
@@ -172,15 +172,15 @@ statesui:
               state: ForwardVision
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'reset box'
+              state: !!python/unicode 'reset_box'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: forward
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 578
-              - 373
+              - 569
+              - 320
               radius: 104
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: forwardVision.ForwardVision
@@ -196,11 +196,11 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''color of object to align'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/buoys'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/vampire'
                   variable_name: param_color
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/distance_forward'
+                  value: 1.0
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Initial bounding Box'''
@@ -212,19 +212,19 @@ statesui:
                   variable_name: param_final_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''maximum nb of pixel to align with heading'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/threshold_width'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/threshold_width'
                   variable_name: param_threshold_width
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/target_width'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/target_width'
                   variable_name: param_vision_target_width_in_meter
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/pixel_to_victory'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/pixel_to_victory'
                   variable_name: param_nb_pixel_to_victory
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Name of topic to listen'''
-                  value: !!python/unicode '$/mission_params/04_hit_buoys/topic_to_listen'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/topic_to_listen'
                   variable_name: param_topic_to_listen
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -232,7 +232,7 @@ statesui:
                   state: AlignToVision
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'reset box'
+                  state: !!python/unicode 'reset_box'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: aborted
@@ -243,8 +243,8 @@ statesui:
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 362
-                  - 566
+                  - 360
+                  - 512
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: setControlBoundingBox.SetControlBoundingBox
@@ -256,7 +256,7 @@ statesui:
                     parameters:
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: state_name
-                      value: !!python/unicode 'reset box'
+                      value: !!python/unicode 'reset_box'
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Set or reset bounding box'''
@@ -286,57 +286,8 @@ statesui:
                       description: ' ''set yaw bounding box'''
                       value: 0.5
                       variable_name: param_bounding_box_pitch
-                    transitions:
-                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                      outcome: succeeded
-                      state: !!python/unicode 'close'
-                  transitions:
-                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-                    name: succeeded
-                    state1: *id005
-                    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-                      position: !!python/tuple
-                      - 359
-                      - 737
-                      radius: 100
-                      state: !!python/object:rqt_mission_planner.mission_model.state.State
-                        _name: launchVision.LaunchVision
-                        base_file: /src/controller_mission/state/launchVision.py
-                        outcome_states:
-                        - succeeded
-                        - aborted
-                        - preempted
-                        parameters:
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: state_name
-                          value: !!python/unicode 'close'
-                          variable_name: state_name
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Topic of  result'''
-                          value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
-                          variable_name: param_node_name
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Filter chain name'''
-                          value: !!python/unicode '$/mission_params/04_hit_buoys/filterchain_name'
-                          variable_name: param_filterchain_name
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Media name'''
-                          value: /provider_vision/Front_GigE
-                          variable_name: param_media_name
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Media name'''
-                          value: 1.0
-                          variable_name: param_start_front
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Media name'''
-                          value: 2.0
-                          variable_name: param_start_bottom
-                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Times Out'''
-                          value: 2.0
-                          variable_name: param_cmd
-                        transitions: []
-                      transitions: []
+                    transitions: []
+                  transitions: []
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
@@ -345,4 +296,3 @@ statesui:
 - *id003
 - *id004
 - *id005
-- *id006

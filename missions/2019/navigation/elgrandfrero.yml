@@ -1,0 +1,632 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 101
+  - 279
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveRelativeXY.MoveRelativeXY
+    base_file: /src/controller_mission/state/moveRelativeXY.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'x1'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+      variable_name: param_distance_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.0
+      variable_name: param_distance_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.0
+      variable_name: param_distance_yaw
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'x1'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 100
+      - 100
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveRelativeXY.MoveRelativeXY
+        base_file: /src/controller_mission/state/moveRelativeXY.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'y1'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+          variable_name: param_distance_y
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_yaw
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'x1'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 344
+          - 98
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveRelativeXY.MoveRelativeXY
+            base_file: /src/controller_mission/state/moveRelativeXY.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'x2'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+              variable_name: param_distance_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 0.0
+              variable_name: param_distance_y
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 0.0
+              variable_name: param_distance_yaw
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'x1'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 353
+              - 280
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveRelativeXY.MoveRelativeXY
+                base_file: /src/controller_mission/state/moveRelativeXY.py
+                is_root: false
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'x3'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                  variable_name: param_distance_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_y
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: 0.0
+                  variable_name: param_distance_yaw
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'x1'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 351
+                  - 462
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeXY.MoveRelativeXY
+                    base_file: /src/controller_mission/state/moveRelativeXY.py
+                    is_root: false
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'y2'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: 0.0
+                      variable_name: param_distance_x
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                      variable_name: param_distance_y
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: 0.0
+                      variable_name: param_distance_yaw
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'x1'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id005
+                    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 111
+                      - 453
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: moveRelativeXY.MoveRelativeXY
+                        base_file: /src/controller_mission/state/moveRelativeXY.py
+                        is_root: false
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'y3'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: 0.0
+                          variable_name: param_distance_x
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                          variable_name: param_distance_y
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: 0.0
+                          variable_name: param_distance_yaw
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'x1'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id006
+                        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - -104
+                          - 463
+                          radius: 100
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: moveRelativeXY.MoveRelativeXY
+                            base_file: /src/controller_mission/state/moveRelativeXY.py
+                            is_root: false
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: !!python/unicode 'x4'
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                              variable_name: param_distance_x
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: 0.0
+                              variable_name: param_distance_y
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: 0.0
+                              variable_name: param_distance_yaw
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: !!python/unicode 'x1'
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id007
+                            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+                              position: !!python/tuple
+                              - -102
+                              - 262
+                              radius: 100
+                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                _name: moveRelativeXY.MoveRelativeXY
+                                base_file: /src/controller_mission/state/moveRelativeXY.py
+                                is_root: false
+                                outcome_states:
+                                - succeeded
+                                - aborted
+                                - preempted
+                                parameters:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: state_name
+                                  value: !!python/unicode 'x5'
+                                  variable_name: state_name
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Distance to travel'''
+                                  value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                                  variable_name: param_distance_x
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Distance to travel'''
+                                  value: 0.0
+                                  variable_name: param_distance_y
+                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                  description: ' ''Distance to travel'''
+                                  value: 0.0
+                                  variable_name: param_distance_yaw
+                                transitions:
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: !!python/unicode 'x1'
+                              transitions:
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id008
+                                state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - -104
+                                  - 102
+                                  radius: 100
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: moveRelativeXY.MoveRelativeXY
+                                    base_file: /src/controller_mission/state/moveRelativeXY.py
+                                    is_root: false
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: !!python/unicode 'x6'
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                                      variable_name: param_distance_x
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: 0.0
+                                      variable_name: param_distance_y
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel'''
+                                      value: 0.0
+                                      variable_name: param_distance_yaw
+                                    transitions:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                      outcome: succeeded
+                                      state: !!python/unicode 'x1'
+                                  transitions:
+                                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                    name: succeeded
+                                    state1: *id009
+                                    state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                      position: !!python/tuple
+                                      - -106
+                                      - -51
+                                      radius: 100
+                                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                        _name: moveRelativeXY.MoveRelativeXY
+                                        base_file: /src/controller_mission/state/moveRelativeXY.py
+                                        is_root: false
+                                        outcome_states:
+                                        - succeeded
+                                        - aborted
+                                        - preempted
+                                        parameters:
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: state_name
+                                          value: !!python/unicode 'y4'
+                                          variable_name: state_name
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Distance to travel'''
+                                          value: 0.0
+                                          variable_name: param_distance_x
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Distance to travel'''
+                                          value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                                          variable_name: param_distance_y
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Distance to travel'''
+                                          value: 0.0
+                                          variable_name: param_distance_yaw
+                                        transitions:
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                          outcome: succeeded
+                                          state: !!python/unicode 'x1'
+                                      transitions:
+                                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                        name: succeeded
+                                        state1: *id010
+                                        state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                          position: !!python/tuple
+                                          - 102
+                                          - -60
+                                          radius: 100
+                                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                            _name: moveRelativeXY.MoveRelativeXY
+                                            base_file: /src/controller_mission/state/moveRelativeXY.py
+                                            is_root: false
+                                            outcome_states:
+                                            - succeeded
+                                            - aborted
+                                            - preempted
+                                            parameters:
+                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                              description: state_name
+                                              value: !!python/unicode 'y5'
+                                              variable_name: state_name
+                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                              description: ' ''Distance to travel'''
+                                              value: 0.0
+                                              variable_name: param_distance_x
+                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                              description: ' ''Distance to travel'''
+                                              value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                                              variable_name: param_distance_y
+                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                              description: ' ''Distance to travel'''
+                                              value: 0.0
+                                              variable_name: param_distance_yaw
+                                            transitions:
+                                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                              outcome: succeeded
+                                              state: !!python/unicode 'x1'
+                                          transitions:
+                                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                            name: succeeded
+                                            state1: *id011
+                                            state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                              position: !!python/tuple
+                                              - 349
+                                              - -55
+                                              radius: 100
+                                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                _name: moveRelativeXY.MoveRelativeXY
+                                                base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                is_root: false
+                                                outcome_states:
+                                                - succeeded
+                                                - aborted
+                                                - preempted
+                                                parameters:
+                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                  description: state_name
+                                                  value: !!python/unicode 'y6'
+                                                  variable_name: state_name
+                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                  description: ' ''Distance to travel'''
+                                                  value: 0.0
+                                                  variable_name: param_distance_x
+                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                  description: ' ''Distance to travel'''
+                                                  value: !!python/unicode '$/mission_params/00_global/elgrandfrero'
+                                                  variable_name: param_distance_y
+                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                  description: ' ''Distance to travel'''
+                                                  value: 0.0
+                                                  variable_name: param_distance_yaw
+                                                transitions:
+                                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                                  outcome: succeeded
+                                                  state: !!python/unicode 'x1'
+                                              transitions:
+                                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                                name: succeeded
+                                                state1: *id012
+                                                state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                  position: !!python/tuple
+                                                  - 559
+                                                  - -50
+                                                  radius: 100
+                                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                    _name: moveRelativeXY.MoveRelativeXY
+                                                    base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                    is_root: false
+                                                    outcome_states:
+                                                    - succeeded
+                                                    - aborted
+                                                    - preempted
+                                                    parameters:
+                                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                      description: state_name
+                                                      value: !!python/unicode 'x7'
+                                                      variable_name: state_name
+                                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                      description: ' ''Distance to
+                                                        travel'''
+                                                      value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                                                      variable_name: param_distance_x
+                                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                      description: ' ''Distance to
+                                                        travel'''
+                                                      value: 0.0
+                                                      variable_name: param_distance_y
+                                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                      description: ' ''Distance to
+                                                        travel'''
+                                                      value: 0.0
+                                                      variable_name: param_distance_yaw
+                                                    transitions:
+                                                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                                      outcome: succeeded
+                                                      state: !!python/unicode 'x1'
+                                                  transitions:
+                                                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                                    name: succeeded
+                                                    state1: *id013
+                                                    state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                      position: !!python/tuple
+                                                      - 562
+                                                      - 104
+                                                      radius: 100
+                                                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                        _name: moveRelativeXY.MoveRelativeXY
+                                                        base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                        is_root: false
+                                                        outcome_states:
+                                                        - succeeded
+                                                        - aborted
+                                                        - preempted
+                                                        parameters:
+                                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                          description: state_name
+                                                          value: !!python/unicode 'x8'
+                                                          variable_name: state_name
+                                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                          description: ' ''Distance
+                                                            to travel'''
+                                                          value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                                                          variable_name: param_distance_x
+                                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                          description: ' ''Distance
+                                                            to travel'''
+                                                          value: 0.0
+                                                          variable_name: param_distance_y
+                                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                          description: ' ''Distance
+                                                            to travel'''
+                                                          value: 0.0
+                                                          variable_name: param_distance_yaw
+                                                        transitions:
+                                                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                                          outcome: succeeded
+                                                          state: !!python/unicode 'x1'
+                                                      transitions:
+                                                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                                        name: succeeded
+                                                        state1: *id014
+                                                        state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                          position: !!python/tuple
+                                                          - 559
+                                                          - 267
+                                                          radius: 100
+                                                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                            _name: moveRelativeXY.MoveRelativeXY
+                                                            base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                            is_root: false
+                                                            outcome_states:
+                                                            - succeeded
+                                                            - aborted
+                                                            - preempted
+                                                            parameters:
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: state_name
+                                                              value: !!python/unicode 'x9'
+                                                              variable_name: state_name
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: ' ''Distance
+                                                                to travel'''
+                                                              value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                                                              variable_name: param_distance_x
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: ' ''Distance
+                                                                to travel'''
+                                                              value: 0.0
+                                                              variable_name: param_distance_y
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                              description: ' ''Distance
+                                                                to travel'''
+                                                              value: 0.0
+                                                              variable_name: param_distance_yaw
+                                                            transitions:
+                                                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                                              outcome: succeeded
+                                                              state: !!python/unicode 'x1'
+                                                          transitions:
+                                                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                                            name: succeeded
+                                                            state1: *id015
+                                                            state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                              position: !!python/tuple
+                                                              - 566
+                                                              - 466
+                                                              radius: 100
+                                                              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                                                _name: moveRelativeXY.MoveRelativeXY
+                                                                base_file: /src/controller_mission/state/moveRelativeXY.py
+                                                                is_root: false
+                                                                outcome_states:
+                                                                - succeeded
+                                                                - aborted
+                                                                - preempted
+                                                                parameters:
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: state_name
+                                                                  value: !!python/unicode 'x10'
+                                                                  variable_name: state_name
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: ' ''Distance
+                                                                    to travel'''
+                                                                  value: !!python/unicode '$/mission_params/00_global/elgrandfrera'
+                                                                  variable_name: param_distance_x
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: ' ''Distance
+                                                                    to travel'''
+                                                                  value: 0.0
+                                                                  variable_name: param_distance_y
+                                                                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                                                  description: ' ''Distance
+                                                                    to travel'''
+                                                                  value: 0.0
+                                                                  variable_name: param_distance_yaw
+                                                                transitions: []
+                                                              transitions: []
+- *id003
+- *id004
+- *id005
+- *id006
+- *id007
+- *id008
+- *id009
+- *id010
+- *id011
+- *id012
+- *id013
+- *id014
+- *id016
+- *id015
+- *id002

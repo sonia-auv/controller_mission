@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 406
-  - 88
+  - 383
+  - 87
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: launchVision.LaunchVision
@@ -21,23 +21,23 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode 'align_path'
+      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
-      value: !!python/unicode 'simple_pipe45'
+      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: !!python/unicode '/provider_vision/Bottom_GigE'
+      value: !!python/unicode '/provider_vision/Front_GigE'
       variable_name: param_media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: 2.0
+      value: 1.0
       variable_name: param_start_front
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: 1.0
+      value: 2.0
       variable_name: param_start_bottom
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -53,8 +53,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 384
-      - 269
+      - 360
+      - 279
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: WaitHitCountTarget.WaitHitCountTarget
@@ -70,11 +70,11 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '/proc_image_processing/align_path_result'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/topic_to_listen'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: !!python/unicode '/proc_image_processing/hit_to_victory'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/hit_to_victory'
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''
@@ -90,8 +90,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 412
-          - 496
+          - 387
+          - 517
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: launchVision.LaunchVision
@@ -107,11 +107,11 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Topic of  result'''
-              value: !!python/unicode 'align_path'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
               variable_name: param_node_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Filter chain name'''
-              value: !!python/unicode 'simple_pipe45'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
               variable_name: param_filterchain_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Media name'''
@@ -119,11 +119,11 @@ statesui:
               variable_name: param_media_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Media name'''
-              value: 2.0
+              value: 1.0
               variable_name: param_start_front
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Media name'''
-              value: 1.0
+              value: 2.0
               variable_name: param_start_bottom
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''

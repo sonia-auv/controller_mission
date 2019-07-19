@@ -3,12 +3,12 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -197
-  - 120
+  - 690
+  - 27
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: timeOut.TimesOut
-    base_file: /src/controller_mission/state/timeOut.py
+    _name: moveRelativeXY.MoveRelativeXY
+    base_file: /src/controller_mission/state/moveRelativeXY.py
     is_root: false
     outcome_states:
     - succeeded
@@ -17,35 +17,33 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'Split'
+      value: !!python/unicode 'offset xy'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: 0.0
-      variable_name: param_time
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/offset/x'
+      variable_name: param_distance_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: succeeded
-      variable_name: param_to_return
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: 06_find_vampire
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: do_hydro
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/offset/y'
+      variable_name: param_distance_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/offset/yaw'
+      variable_name: param_distance_yaw
+    transitions: []
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -89
-      - 241
-      radius: 120
+      - 726
+      - 229
+      radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2019/objectives/06_find_vampire
-        base_file: /missions/2019/objectives/06_find_vampire.yml
+        _name: 2019/actuators/torpedos
+        base_file: /missions/2019/actuators/torpedos.yml
         global_params: []
         is_root: false
         is_submission: true
@@ -55,135 +53,186 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: 06_find_vampire
+          value: torpedos
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: 2019/objectives/06_find_vampire.yml
+          value: 2019/actuators/torpedos.yml
           variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002
+- &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -234
+  - 210
+  radius: 144
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2019/objectives/06_find_vampire_dl
+    base_file: /missions/2019/objectives/06_find_vampire_dl.yml
+    global_params: []
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: 06_find_vampire_dl
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2019/objectives/06_find_vampire_dl.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'stop'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id003
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -32
+      - 247
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveSpeed.MoveSpeed
+        base_file: /src/controller_mission/state/moveSpeed.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'stop'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Speed to use while traveling'''
+          value: 0.0
+          variable_name: param_speed_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Heading'''
+          value: 0.0
+          variable_name: param_orientation_yaw
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: align_front
+          state: Switch
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id002
-        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id004
+        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 77
-          - 141
+          - 139
+          - 248
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2019/align/align_front
-            base_file: /missions/2019/align/align_front.yml
-            global_params:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: !!python/unicode '''torpedos'''
-              variable_name: node_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: !!python/unicode '''simple_vampire'''
-              variable_name: filterchaine_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: !!python/unicode '''/provider_vision/Front_GigE'''
-              variable_name: media_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 200.0
-              variable_name: bounding_box_vision
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: !!python/unicode '''green'''
-              variable_name: color
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 100.0
-              variable_name: threshold_width
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 15.0
-              variable_name: heading
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 0.23
-              variable_name: target_width_in_meter
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: !!python/unicode '''/proc_image_processing/simple_vampire_result'''
-              variable_name: topic_to_listen
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 250.0
-              variable_name: nb_pixel_to_victory
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 30.0
-              variable_name: maximum_nb_alignment
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 10.0
-              variable_name: max_queue_size
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 0.5
-              variable_name: control_bounding_box_in_y
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 1.0
-              variable_name: distance_x
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 600.0
-              variable_name: initial_bounding_box
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 300.0
-              variable_name: final_bounding_box
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 0.5
-              variable_name: control_bounding_box_xy
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 0.3
-              variable_name: control_bounding_box_z
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ''
-              value: 5.0
-              variable_name: control_bounding_box_yaw
+            _name: switchControlMode.Switch
+            base_file: /src/controller_mission/state/switchControlMode.py
             is_root: false
-            is_submission: true
             outcome_states:
             - succeeded
             - aborted
+            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: align_front
+              value: Switch
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: SubMission_file
-              value: 2019/align/align_front.yml
-              variable_name: SubMission_file
+              description: ' ''Control Mode'''
+              value: 0.0
+              variable_name: param_mode
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'offset'
+              state: 06_align_vampire_vc
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'max align'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id003
-            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id005
+            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 250
-              - 114
+              - 297
+              - 194
+              radius: 152
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2019/objectives/06_align_vampire_vc
+                base_file: /missions/2019/objectives/06_align_vampire_vc.yml
+                global_params: []
+                is_root: false
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: 06_align_vampire_vc
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2019/objectives/06_align_vampire_vc.yml
+                  variable_name: SubMission_file
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'offset z'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id006
+                state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 498
+                  - 132
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeZ.MoveRelativeZ
+                    base_file: /src/controller_mission/state/moveRelativeZ.py
+                    is_root: false
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'offset z'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: !!python/unicode '$/mission_params/06_slay_vampire/dl/offset/z'
+                      variable_name: param_distance_z
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'offset xy'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id007
+                    state2: *id001
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id005
+            state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 330
+              - 438
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: moveRelativeXY.MoveRelativeXY
-                base_file: /src/controller_mission/state/moveRelativeXY.py
+                _name: timeOut.TimesOut
+                base_file: /src/controller_mission/state/timeOut.py
                 is_root: false
                 outcome_states:
                 - succeeded
@@ -192,223 +241,27 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: !!python/unicode 'offset'
+                  value: !!python/unicode 'max align'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: 1.0
-                  variable_name: param_distance_x
+                  description: ' ''Times Out'''
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/max_time_align'
+                  variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: 0.0
-                  variable_name: param_distance_y
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: 0.0
-                  variable_name: param_distance_yaw
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: !!python/unicode 'torpilose'
+                  state: torpedos
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id004
-                state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
-                  position: !!python/tuple
-                  - 443
-                  - 147
-                  radius: 100
-                  state: !!python/object:rqt_mission_planner.mission_model.state.State
-                    _name: 2019/actuators/torpedos
-                    base_file: /missions/2019/actuators/torpedos.yml
-                    global_params: []
-                    is_root: false
-                    is_submission: true
-                    outcome_states:
-                    - succeeded
-                    - aborted
-                    parameters:
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: state_name
-                      value: torpedos
-                      variable_name: state_name
-                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                      description: SubMission_file
-                      value: 2019/actuators/torpedos.yml
-                      variable_name: SubMission_file
-                    transitions: []
-                  transitions: []
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - -32
-      - 10
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: do_hydro
-        base_file: /missions/do_hydro.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 35.0
-          variable_name: frequency
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: do_hydro
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: do_hydro.yml
-          variable_name: SubMission_file
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: !!python/unicode 'abort'
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id005
-        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 118
-          - -55
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'abort'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 1.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: !!python/unicode 'torpilose'
-          transitions:
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id006
-            state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple
-              - 379
-              - -60
-              radius: 100
-              state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: 2019/actuators/torpedos
-                base_file: /missions/2019/actuators/torpedos.yml
-                global_params: []
-                is_submission: true
-                outcome_states:
-                - succeeded
-                - aborted
-                parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: state_name
-                  value: !!python/unicode 'torpilose'
-                  variable_name: state_name
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: SubMission_file
-                  value: 2019/actuators/torpedos.yml
-                  variable_name: SubMission_file
-                transitions: []
-              transitions: []
-- &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - -428
-  - 163
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalZ.MoveZ
-    base_file: /src/controller_mission/state/moveGlobalZ.py
-    is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: MoveZ
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Distance to travel'''
-      value: 1.0
-      variable_name: param_distance_z
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: !!python/unicode 'Split'
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id007
-    state2: *id001
-- !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - -42
-  - -89
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: 2019/navigation/crab_walk
-    base_file: /missions/2019/navigation/crab_walk.yml
-    global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: -1.5
-      variable_name: param_left_distance
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 1.5
-      variable_name: param_right_distance
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 3.0
-      variable_name: param_timeout
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: 1.5
-      variable_name: param_forward_distance
-    is_root: false
-    is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: crab_walk
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: 2019/navigation/crab_walk.yml
-      variable_name: SubMission_file
-    transitions: []
-  transitions: []
-- *id002
-- *id003
-- *id004
-- *id008
+                state1: *id008
+                state2: *id002
 - *id006
-- *id009
+- *id007
+- *id008
 - *id005
+- *id004

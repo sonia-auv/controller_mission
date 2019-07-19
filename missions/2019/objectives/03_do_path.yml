@@ -11,7 +11,7 @@ globalparams:
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 247
+  - 249
   - 25
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -42,6 +42,9 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: crab_walk
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'exit'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -79,8 +82,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 585
-          - -96
+          - 601
+          - -68
           radius: 168
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2019/align/align_bottom_xy_angle
@@ -124,7 +127,7 @@ statesui:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
-            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 872
               - -51
@@ -161,8 +164,8 @@ statesui:
     state1: *id001
     state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 412
-      - -130
+      - 415
+      - -101
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2019/navigation/crab_walk
@@ -198,13 +201,83 @@ statesui:
           description: SubMission_file
           value: 2019/navigation/crab_walk.yml
           variable_name: SubMission_file
-        transitions: []
-      transitions: []
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'exit'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id004
+        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 624
+          - -269
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'exit'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 0.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: !!python/unicode 'aborted'
+              variable_name: param_to_return
+            transitions: []
+          transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 340
+      - -263
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: TimesOut
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: !!python/unicode '$/mission_params/03_paths/max_time_find'
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'exit'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: *id006
 - *id002
 - *id004
-- *id005
+- *id007
 - *id003
-- &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 67
   - 43
@@ -237,5 +310,7 @@ statesui:
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
-    state1: *id006
+    state1: *id008
     state2: *id001
+- *id006
+- *id005

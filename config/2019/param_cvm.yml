@@ -1,10 +1,11 @@
 mission_params:
-  00_global:
+  00_global:  #  mission_params/00_global
     pinger_frequency: 40
+    x_speed_hydro: 1.0
     safe_depth: 1.0
-    elgrandfrero: 1.5
-    elgrandfrera: -1.5
-  01_gate:
+    elgrandfrero: 1.5 #positif
+    elgrandfrera: -1.5 #negatif
+  01_gate:  #  mission_params/01_gate
     start_yaw: 240
     speed_yaw: 240
     gate_yaw: -90
@@ -13,8 +14,9 @@ mission_params:
     distance_x: 1
     depth: 1
     forward_gate: -2
-  03_paths:
+  03_paths:   #  mission_params/03_paths
     max_time_align: 120
+    max_time_find: 120
     front_after_path: 1.0
     first_path:
       first_side: left #right
@@ -25,7 +27,7 @@ mission_params:
       first_side: left #right
       search_depth: 1.5
       align_depth: 1.5
-  04_hit_buoys:
+  04_hit_buoys: #  mission_params/04_hit_buoys
     buoys: jiangshi #jiangshi vetalas draugr answag
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
     filterchain_name: simple_jiangshi 
@@ -46,16 +48,25 @@ mission_params:
     max_time_find: 120
     max_time_align: 120
     hit_to_victory: 4
-  05_bat_wolf:
+    avoid_forward_x: 3
+    avoid:
+      depth: 0.5
+      hit_depth: 1.5
+      x: 3.0
+      y: -2.0
+      ram: 1.0
+  05_bat_wolf: #  mission_params/05_bat_wolf
     bin: bat
     topic_to_listen: /proc_image_processing/simple_bat_wolf_result
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
     search_depth: 1.0
+    search_depthme: 1.0
     pixel_to_victory: 350
     hit_to_victory: 10
     max_queu_size: 6
+    max_queue_size: 6
     time_max_align: 120
     time_max_find: 120
     forward_z: 0.5
@@ -65,7 +76,7 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
-  06_slay_vampire:
+  06_slay_vampire: #  mission_params/06_slay_vampire
     max_time_find: 120
     max_time_align: 120
     search_depth: 2.0
@@ -93,7 +104,7 @@ mission_params:
       vampire: head
       filterchain_name: simple_vampire_torpille
       filterchain_result: simple_vampire_torpille_result
-      topic_to_listen: /proc_image_processing/simple_vampire_result
+      topic_to_listen: /proc_image_processing/simple_vampire_torpille_result
       max_alignment: 6
       max_queu_size: 10
       threshold_width: 100
@@ -108,7 +119,7 @@ mission_params:
         yaw: 0
         z: 0
       end_depth: 0.5
-  07_grab:
+  07_grab:  #  mission_params/07_grab
     bin: baby #coffins
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
     filterchain_name: simple_poignee_vampire
@@ -123,6 +134,3 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
-  90_random_pinger:
-    presearching_depth: 0.5
-    searching_depth: 1.0

@@ -82,10 +82,10 @@ class MoveSpeedToPosition(MissionState):
             try:
                 self.set_local_target(0.0,
                                       0.0,
+                                      self.position.z,
                                       0.0,
                                       0.0,
-                                      0.0,
-                                      0.0)
+                                      self.yaw)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
             return 'succeeded'

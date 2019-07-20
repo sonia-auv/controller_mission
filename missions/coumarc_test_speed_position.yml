@@ -21,11 +21,11 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''X to join'''
-      value: 5.0
+      value: -2.0
       variable_name: param_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Y to join'''
-      value: 6.0
+      value: 1.0
       variable_name: param_y
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Speed to use while traveling'''
@@ -33,11 +33,11 @@ statesui:
       variable_name: param_speed_x
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Radius of tolerance between wanted position and reached position'''
-      value: 1.0
+      value: 0.5
       variable_name: param_tolerance_radius
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Time between yaw adjustment in second'''
-      value: 2.0
+      value: 1.0
       variable_name: param_time_between_yaw_adjustment
     transitions: []
   transitions: []
@@ -49,7 +49,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZByStep.MoveZByStep
     base_file: /src/controller_mission/state/moveGlobalZByStep.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -61,7 +61,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 1.0
+      value: 0.5
       variable_name: param_z
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
@@ -70,7 +70,7 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: Switch
+      state: !!python/unicode 'Switch0'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -83,6 +83,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: switchControlMode.Switch
         base_file: /src/controller_mission/state/switchControlMode.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -90,7 +91,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: Switch
+          value: !!python/unicode 'Switch2'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Control Mode'''
@@ -106,3 +107,34 @@ statesui:
         state1: *id002
         state2: *id003
 - *id002
+- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -225
+  - 104
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: switchControlMode.Switch
+    base_file: /src/controller_mission/state/switchControlMode.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Switch0'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Control Mode'''
+      value: 0.0
+      variable_name: param_mode
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: MoveZByStep
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id004
+    state2: *id001

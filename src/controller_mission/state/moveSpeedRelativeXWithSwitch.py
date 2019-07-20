@@ -6,7 +6,7 @@ from nav_msgs.msg import Odometry
 import math
 
 
-class MoveRelativeSpeedX(MissionState):
+class MoveRelativeSpeedXWithSwitch(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

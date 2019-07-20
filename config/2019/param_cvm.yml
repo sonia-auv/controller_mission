@@ -21,8 +21,8 @@ mission_params:
     front_after_path: 1.0
     first_path:
       first_side: left #right
-      search_depth: 1.5
-      align_depth: 1.5
+      search_depth: 0.5
+      align_depth: 0.5
       hit_to_victory: 10
     second_path:
       first_side: left #right
@@ -63,8 +63,7 @@ mission_params:
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
-    search_depth: 1.0
-    search_depthme: 1.0
+    search_depth: .5
     pixel_to_victory: 350
     hit_to_victory: 10
     max_queu_size: 6
@@ -72,7 +71,7 @@ mission_params:
     time_max_align: 120
     time_max_find: 120
     forward_z: 0.5
-    max_z: 2.6
+    max_z: 1.2
     end_depth: 0.5
     offset:
       x: 0.5
@@ -81,7 +80,7 @@ mission_params:
   06_slay_vampire: #  mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120
-    search_depth: 2.0
+    search_depth: 0.5
     speedx: 1.0
     dl:
       vampire: head
@@ -110,13 +109,14 @@ mission_params:
       max_alignment: 6
       max_queu_size: 10
       threshold_width: 100
-      pixel_to_victory: 350
+      pixel_to_victory_align: 350
+      pixel_to_victory_forward: 350
       hit_to_victory: 10
-      target_width: 0.7
+      target_width: 0.3
       heading: 0
-      search_depth: 2.0
+      search_depth: 0.8
       offset:
-        x: 0
+        x: 0.5
         y: 0
         yaw: 0
         z: 0

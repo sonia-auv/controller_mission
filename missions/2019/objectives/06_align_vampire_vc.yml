@@ -124,7 +124,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''bounding box in pixel'''
-              value: 200.0
+              value: 300.0
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''color of object to align'''
@@ -148,7 +148,7 @@ statesui:
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Minimal nb of pixel to ram'''
-              value: !!python/unicode '$/mission_params/06_slay_vampire/vc/pixel_to_victory'
+              value: !!python/unicode '$/mission_params/06_slay_vampire/vc/pixel_to_victory_align'
               variable_name: param_nb_pixel_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum number of alignment'''
@@ -160,7 +160,7 @@ statesui:
               variable_name: param_max_queue_size
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Control bounding box in y'''
-              value: 0.5
+              value: 1.0
               variable_name: param_control_bounding_box_in_y
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum size of queue'''
@@ -208,7 +208,7 @@ statesui:
                   variable_name: param_initial_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Final bounding Box'''
-                  value: 100.0
+                  value: 300.0
                   variable_name: param_final_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''maximum nb of pixel to align with heading'''
@@ -220,7 +220,7 @@ statesui:
                   variable_name: param_vision_target_width_in_meter
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''minimal nb of pixel to ram'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/vc/pixel_to_victory'
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/vc/pixel_to_victory_forward'
                   variable_name: param_nb_pixel_to_victory
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Name of topic to listen'''

@@ -21,11 +21,11 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode '$/mission_params_06_slay_vampire/filterchain_name_dl'
+      value: !!python/unicode '$/mission_params/06_slay_vampire/vc/filterchain_name'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Filter chain name'''
-      value: !!python/unicode '$/mission_params_06_slay_vampire/filterchain_name_dl'
+      value: !!python/unicode '$/mission_params/06_slay_vampire/vc/filterchain_name'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
@@ -70,11 +70,11 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '$/mission_params_06_slay_vampire/topic_to_listen'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/vc/topic_to_listen'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''nb of hit to finish this state'''
-          value: !!python/unicode '$/mission_params_06_slay_vampire/hit_to_victory'
+          value: !!python/unicode '$/mission_params/06_slay_vampire/vc/hit_to_victory'
           variable_name: param_nb_hit_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''max distance in pixel to have a consecutive count'''

@@ -73,7 +73,7 @@ class MoveRelativeSpeedX(MissionState):
                                       0.0,
                                       0.0,
                                       0.0,
-                                      0.0)
+                                      self.param_orientation_yaw)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
             return 'succeeded'

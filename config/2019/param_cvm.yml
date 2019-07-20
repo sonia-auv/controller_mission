@@ -1,11 +1,11 @@
 mission_params:
   00_global:  #  mission_params/00_global
-    pinger_frequency: 40
+    pinger_frequency: 30
     x_speed_hydro: 1.0
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
     elgrandfrera: -1.5 #negatif
-  01_gate:  #  mission_params/01_gate
+  01_gate:  #  mission_params/01_gate/
     start_yaw: 240
     speed_yaw: 240
     gate_yaw: -90
@@ -14,7 +14,8 @@ mission_params:
     distance_x: 1
     depth: 1
     forward_gate: -2
-  03_paths:   #  mission_params/03_paths
+  03_paths:   #  mission_params/03_paths/
+    face_path: 180
     max_time_align: 120
     max_time_find: 120
     front_after_path: 1.0
@@ -27,7 +28,7 @@ mission_params:
       first_side: left #right
       search_depth: 1.5
       align_depth: 1.5
-  04_hit_buoys: #  mission_params/04_hit_buoys
+  04_hit_buoys: #  mission_params/04_hit_buoys/
     buoys: jiangshi #jiangshi vetalas draugr answag
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
     filterchain_name: simple_jiangshi 
@@ -35,14 +36,14 @@ mission_params:
     max_alignment: 30
     max_queu_size: 3
     threshold_width: 100
-    pixel_to_victory: 800
+    pixel_to_victory: 1000
     target_width: 0.7
     distance_forward: 1.0
     ram_dist: 2.0
     time_for_ram: 10
-    offset_z: -0.5
+    offset_z: 0
     heading: 0
-    search_depth: 2.0
+    search_depth: 2.5
     end_depth: 0.5
     step_back: -1.0
     max_time_find: 120
@@ -51,11 +52,12 @@ mission_params:
     avoid_forward_x: 3
     avoid:
       depth: 0.5
-      hit_depth: 1.5
-      x: 3.0
+      hit_depth: 2.5
+      x: 3.5
       y: -2.0
+      yaw: 190
       ram: 1.0
-  05_bat_wolf: #  mission_params/05_bat_wolf
+  05_bat_wolf: #  mission_params/05_bat_wolf/
     bin: bat
     topic_to_listen: /proc_image_processing/simple_bat_wolf_result
     filterchain_name: simple_bat_wolf
@@ -76,7 +78,7 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
-  06_slay_vampire: #  mission_params/06_slay_vampire
+  06_slay_vampire: #  mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120
     search_depth: 2.0
@@ -119,7 +121,7 @@ mission_params:
         yaw: 0
         z: 0
       end_depth: 0.5
-  07_grab:  #  mission_params/07_grab
+  07_grab:  #  mission_params/07_grab/
     bin: baby #coffins
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
     filterchain_name: simple_poignee_vampire

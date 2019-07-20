@@ -9,7 +9,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: switchControlMode.Switch
     base_file: /src/controller_mission/state/switchControlMode.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -33,12 +33,13 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -22
+      - -21
       - 147
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalZByStep.MoveZByStep
         base_file: /src/controller_mission/state/moveGlobalZByStep.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -72,6 +73,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveGlobalYaw.MoveYaw
             base_file: /src/controller_mission/state/moveGlobalYaw.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -95,17 +97,14 @@ statesui:
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 237
-              - -63
+              - 238
+              - -72
               radius: 104
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: 2019/objectives/01_gate_speed
                 base_file: /missions/2019/objectives/01_gate_speed.yml
-                global_params:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ''
-                  value: 0.0
-                  variable_name: SetYaw
+                global_params: []
+                is_root: false
                 is_submission: true
                 outcome_states:
                 - succeeded
@@ -135,6 +134,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: switchControlMode.Switch
                     base_file: /src/controller_mission/state/switchControlMode.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -164,6 +164,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeYaw.MoveRelativeYAw
                         base_file: /src/controller_mission/state/moveRelativeYaw.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -194,6 +195,7 @@ statesui:
                             _name: Foward_W_Style
                             base_file: /missions/Foward_W_Style.yml
                             global_params: []
+                            is_root: false
                             is_submission: true
                             outcome_states:
                             - succeeded
@@ -215,3 +217,30 @@ statesui:
 - *id006
 - *id007
 - *id002
+- &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -216
+  - 369
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setDepthOfSet.SetDepthOfSet
+    base_file: /src/controller_mission/state/setDepthOfSet.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: SetDepthOfSet
+      variable_name: state_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: Switch
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id008
+    state2: *id001

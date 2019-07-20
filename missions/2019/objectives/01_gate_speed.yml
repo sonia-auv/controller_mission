@@ -26,19 +26,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveSpeed
+      state: MoveRelativeSpeedX
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 253
-      - 69
-      radius: 100
+      - 227
+      - -13
+      radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: timeOut.TimesOut
-        base_file: /src/controller_mission/state/timeOut.py
+        _name: moveSpeedRelativeX.MoveRelativeSpeedX
+        base_file: /src/controller_mission/state/moveSpeedRelativeX.py
         outcome_states:
         - succeeded
         - aborted
@@ -46,28 +46,32 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'to'
+          value: MoveRelativeSpeedX
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: !!python/unicode '$mission_params/01_gate/time'
-          variable_name: param_time
+          description: ' ''Distance to travel'''
+          value: !!python/unicode '$mission_params/01_gate/dist_x'
+          variable_name: param_distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Times Out'''
-          value: succeeded
-          variable_name: param_to_return
+          description: ' ''Speed to use while traveling'''
+          value: !!python/unicode '$mission_params/01_gate/speed_x'
+          variable_name: param_speed_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Heading'''
+          value: !!python/unicode '$mission_params/01_gate/speed_yaw'
+          variable_name: param_orientation_yaw
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'to'
+          state: TimesOut
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 358
-          - -97
+          - 377
+          - -112
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -91,43 +95,5 @@ statesui:
               variable_name: param_to_return
             transitions: []
           transitions: []
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - 132
-      - -30
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: moveSpeed.MoveSpeed
-        base_file: /src/controller_mission/state/moveSpeed.py
-        outcome_states:
-        - succeeded
-        - aborted
-        - preempted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: MoveSpeed
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Speed to use while traveling'''
-          value: !!python/unicode '$mission_params/01_gate/speed_x'
-          variable_name: param_speed_x
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Heading'''
-          value: !!python/unicode '$mission_params/01_gate/speed_yaw'
-          variable_name: param_orientation_yaw
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: TimesOut
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id003
-        state2: *id004
-- *id002
-- *id004
 - *id003
+- *id002

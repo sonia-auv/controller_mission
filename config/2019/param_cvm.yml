@@ -5,15 +5,20 @@ mission_params:
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
     elgrandfrera: -1.5 #negatif
+    crab:
+      x: 1.5
+      y: 1.5
+      yy: -1.5 #negatif
+      timer: 5
   01_gate:  #  mission_params/01_gate/
     start_yaw: 240
-    speed_yaw: 240
-    gate_yaw: -90
-    time: 6
+    speed_yaw: 240 #same as start yaw
+    gate_yaw: -90 #ajustement pour faire face a la gate 
+    time: 6 #use for time speed
     speed_x: 1.5
-    distance_x: 1
-    depth: 1
-    forward_gate: -2
+    distance_x: 1 #speedrelativeX
+    depth: 1 # search_depth
+    forward_gate: -2 
   03_paths:   #  mission_params/03_paths/
     face_path: 180
     max_time_align: 120
@@ -115,6 +120,9 @@ mission_params:
       target_width: 0.3
       heading: 0
       search_depth: 0.8
+      initial_bb: 600
+      final_bb: 300
+      distance_x: 1
       offset:
         x: 0.5
         y: 0

@@ -124,7 +124,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''bounding box in pixel'''
-              value: 300.0
+              value: !!python/unicode '$/mission_params/06_slay_vampire/vc/final_bb'
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''color of object to align'''
@@ -200,15 +200,15 @@ statesui:
                   variable_name: param_color
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Target'''
-                  value: 1.0
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/vc/distance_x'
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Initial bounding Box'''
-                  value: 600.0
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/vc/initial_bb'
                   variable_name: param_initial_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Final bounding Box'''
-                  value: 300.0
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/vc/final_bb'
                   variable_name: param_final_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''maximum nb of pixel to align with heading'''

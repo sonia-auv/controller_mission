@@ -124,7 +124,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''bounding box in pixel'''
-              value: 200.0
+              value: !!python/unicode '$/mission_params/04_hit_buoys/final_bb'
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''color of object to align'''
@@ -179,7 +179,7 @@ statesui:
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 578
+              - 568
               - 373
               radius: 104
               state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -204,11 +204,11 @@ statesui:
                   variable_name: param_distance_x
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Initial bounding Box'''
-                  value: 600.0
+                  value: !!python/unicode '$/mission_params/04_hit_buoys/initial_bb'
                   variable_name: param_initial_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Final bounding Box'''
-                  value: 100.0
+                  value: !!python/unicode '$/mission_params/04_hit_buoys/final_bb'
                   variable_name: param_final_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''maximum nb of pixel to align with heading'''

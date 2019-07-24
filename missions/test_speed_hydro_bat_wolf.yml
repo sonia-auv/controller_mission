@@ -27,6 +27,10 @@ statesui:
       description: ' ''Pinger frequency'''
       value: 40.0
       variable_name: param_pinger_frequency
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Depth to navigate'''
+      value: 1.0
+      variable_name: param_depth
     transitions: []
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
@@ -61,8 +65,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 169
-      - 315
+      - 140
+      - 319
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalZByStep.MoveZByStep
@@ -78,7 +82,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: 1.0
+          value: 0.5
           variable_name: param_z
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''

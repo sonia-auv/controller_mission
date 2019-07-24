@@ -31,8 +31,8 @@ statesui:
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 627
-  - 36
+  - 560
+  - -4
   radius: 104
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/04_align_buoy
@@ -52,7 +52,10 @@ statesui:
       description: SubMission_file
       value: 2019/objectives/04_align_buoy.yml
       variable_name: SubMission_file
-    transitions: []
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'offset'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -208,22 +211,18 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: 04_align_buoy
+          state: !!python/unicode 'time out align'
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'time out align'
+          state: 04_align_buoy
       transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id007
-        state2: *id001
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id007
         state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 719
-          - 248
+          - 729
+          - 244
           radius: 112
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -248,12 +247,16 @@ statesui:
               variable_name: param_to_return
             transitions: []
           transitions: []
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id007
+        state2: *id001
 - *id008
 - *id007
 - &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 413
-  - 561
+  - 458
+  - 467
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/navigation/sweep_walk

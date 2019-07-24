@@ -34,14 +34,17 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: 06_find_vampire_dl
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'timer find'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -47
-      - 19
+      - -29
+      - 59
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: do_hydro
@@ -68,74 +71,16 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'abort'
+          state: do_hydro
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 135
-          - -52
-          radius: 100
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: timeOut.TimesOut
-            base_file: /src/controller_mission/state/timeOut.py
-            is_root: false
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: !!python/unicode 'abort'
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: 1.0
-              variable_name: param_time
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Times Out'''
-              value: succeeded
-              variable_name: param_to_return
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: !!python/unicode 'torpilose'
-          transitions:
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id003
-            state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
-              position: !!python/tuple
-              - 379
-              - -60
-              radius: 100
-              state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: 2019/actuators/torpedos
-                base_file: /missions/2019/actuators/torpedos.yml
-                global_params: []
-                is_root: false
-                is_submission: true
-                outcome_states:
-                - succeeded
-                - aborted
-                parameters:
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: state_name
-                  value: !!python/unicode 'torpilose'
-                  variable_name: state_name
-                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: SubMission_file
-                  value: 2019/actuators/torpedos.yml
-                  variable_name: SubMission_file
-                transitions: []
-              transitions: []
+        state2: *id002
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - -80
       - 228
@@ -165,8 +110,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id004
-        state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state1: *id003
+        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 107
           - 157
@@ -196,8 +141,8 @@ statesui:
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
-            state1: *id005
-            state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+            state1: *id004
+            state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
               - 287
               - 90
@@ -230,8 +175,8 @@ statesui:
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
-                state1: *id006
-                state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                state1: *id005
+                state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 463
                   - 88
@@ -268,7 +213,7 @@ statesui:
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
-                    state1: *id007
+                    state1: *id006
                     state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
                       - 653
@@ -294,10 +239,72 @@ statesui:
                           variable_name: SubMission_file
                         transitions: []
                       transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -38
+      - -97
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'timer find'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/max_timer_find'
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'torpilose'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id007
+        state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 379
+          - -60
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: 2019/actuators/torpedos
+            base_file: /missions/2019/actuators/torpedos.yml
+            global_params: []
+            is_root: false
+            is_submission: true
+            outcome_states:
+            - succeeded
+            - aborted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'torpilose'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: SubMission_file
+              value: 2019/actuators/torpedos.yml
+              variable_name: SubMission_file
+            transitions: []
+          transitions: []
 - !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -42
-  - -89
+  - -337
+  - -180
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/navigation/crab_walk
@@ -335,9 +342,9 @@ statesui:
       variable_name: SubMission_file
     transitions: []
   transitions: []
-- *id007
+- *id006
 - *id008
-- *id003
+- *id007
 - *id009
 - *id002
 - &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
@@ -375,6 +382,6 @@ statesui:
     name: succeeded
     state1: *id010
     state2: *id001
+- *id003
 - *id004
 - *id005
-- *id006

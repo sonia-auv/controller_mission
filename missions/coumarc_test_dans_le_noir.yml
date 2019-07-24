@@ -1,0 +1,230 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 177
+  - 195
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalZByStep.MoveZByStep
+    base_file: /src/controller_mission/state/moveGlobalZByStep.py
+    is_root: false
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: MoveZByStep
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.5
+      variable_name: param_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.5
+      variable_name: param_z_step
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 's2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 347
+      - 215
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: switchControlMode.Switch
+        base_file: /src/controller_mission/state/switchControlMode.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 's2'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Control Mode'''
+          value: 2.0
+          variable_name: param_mode
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: MoveRelativeSpeedX
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 507
+          - 195
+          radius: 144
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: moveSpeedRelativeX.MoveRelativeSpeedX
+            base_file: /src/controller_mission/state/moveSpeedRelativeX.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: MoveRelativeSpeedX
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel'''
+              value: 3.0
+              variable_name: param_distance_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Speed to use while traveling'''
+              value: 0.75
+              variable_name: param_speed_x
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Heading'''
+              value: 165.0
+              variable_name: param_orientation_yaw
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: MoveSpeed
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 716
+              - 212
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveSpeed.MoveSpeed
+                base_file: /src/controller_mission/state/moveSpeed.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: MoveSpeed
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Speed to use while traveling'''
+                  value: 0.0
+                  variable_name: param_speed_x
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Heading'''
+                  value: 165.0
+                  variable_name: param_orientation_yaw
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 's2'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 855
+                  - 192
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: switchControlMode.Switch
+                    base_file: /src/controller_mission/state/switchControlMode.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 's0'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Control Mode'''
+                      value: 0.0
+                      variable_name: param_mode
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'z0'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id005
+                    state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 781
+                      - 418
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: moveGlobalZByStep.MoveZByStep
+                        base_file: /src/controller_mission/state/moveGlobalZByStep.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'z0'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: 0.0
+                          variable_name: param_z
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: 0.5
+                          variable_name: param_z_step
+                        transitions: []
+                      transitions: []
+- *id003
+- &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 37
+  - 210
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: switchControlMode.Switch
+    base_file: /src/controller_mission/state/switchControlMode.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Switch
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Control Mode'''
+      value: 0.0
+      variable_name: param_mode
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'z0'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id006
+    state2: *id001
+- *id002
+- *id004
+- *id005
+- *id007

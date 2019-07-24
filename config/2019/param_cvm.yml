@@ -9,7 +9,7 @@ mission_params:
       x: 1.5
       y: 1.5
       yy: -1.5 #negatif
-      timer: 5
+      timer: 2
   01_gate:  #  mission_params/01_gate/
     start_yaw: 240
     speed_yaw: 240 #same as start yaw
@@ -39,21 +39,23 @@ mission_params:
     filterchain_name: simple_jiangshi 
     filterchain_result: simple_jiangshi_result
     max_alignment: 30
-    max_queu_size: 3
-    threshold_width: 100
+    max_queu_size: 5
+    threshold_width: 200
     pixel_to_victory: 1000
+    initial_bb: 600
+    final_bb: 400
     target_width: 0.7
-    distance_forward: 1.0
+    distance_forward: 0.5
     ram_dist: 2.0
     time_for_ram: 10
     offset_z: 0
     heading: 0
-    search_depth: 2.5
+    search_depth: 0.7
     end_depth: 0.5
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
-    hit_to_victory: 4
+    hit_to_victory: 10
     avoid_forward_x: 3
     avoid:
       depth: 0.5
@@ -94,10 +96,14 @@ mission_params:
       topic_to_listen: /proc_image_processing/simple_vampire_result
       max_alignment: 6
       max_queu_size: 10
+      max_time_find: 120
       threshold_width: 100
       pixel_to_victory: 350
       hit_to_victory: 10
       target_width: 0.7
+      initial_bb: 600
+      final_bb: 300
+      distance_x: 1
       heading: 0
       search_depth: 2.0
       offset:
@@ -124,8 +130,8 @@ mission_params:
       final_bb: 300
       distance_x: 1
       offset:
-        x: 0.5
-        y: 0
+        x: 1
+        y: -0.3
         yaw: 0
         z: 0
       end_depth: 0.5

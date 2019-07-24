@@ -191,7 +191,7 @@ statesui:
 - &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 362
-  - 295
+  - 294
   radius: 128
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/05_find_bat_wolf
@@ -234,8 +234,8 @@ statesui:
     state2: *id004
 - &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 157
-  - 312
+  - 156
+  - 314
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZByStep.MoveZByStep
@@ -262,6 +262,9 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'time max find'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: forward_infinit
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
@@ -297,4 +300,32 @@ statesui:
           variable_name: param_to_return
         transitions: []
       transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id007
+    state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 367
+      - 495
+      radius: 120
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2019/navigation/forward_infinit
+        base_file: /missions/2019/navigation/forward_infinit.yml
+        global_params: []
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: forward_infinit
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2019/navigation/forward_infinit.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
 - *id008
+- *id009

@@ -1,7 +1,7 @@
 mission_params:
   00_global:  #  mission_params/00_global
     pinger_frequency: 30
-    x_speed_hydro: 1.0
+    x_speed_hydro: 0.5
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
     elgrandfrera: -1.5 #negatif
@@ -70,7 +70,7 @@ mission_params:
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
-    search_depth: .5
+    search_depth: 0.5
     pixel_to_victory: 350
     hit_to_victory: 10
     max_queu_size: 6
@@ -87,6 +87,7 @@ mission_params:
   06_slay_vampire: #  mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120
+    max_time_aborted: 30
     search_depth: 0.5
     speedx: 1.0
     dl:
@@ -99,7 +100,8 @@ mission_params:
       max_time_find: 120
       threshold_width: 100
       pixel_to_victory: 350
-      hit_to_victory: 10
+      hit_to_victory: 20
+      low_hit_to_victory: 10
       target_width: 0.7
       initial_bb: 600
       final_bb: 300
@@ -142,7 +144,8 @@ mission_params:
     filterchain_result: simple_poignee_vampire_result
     search_depth: 1.0
     pixel_to_victory: 350
-    hit_to_victory: 10
+    hit_to_victory: 20
+    low_hit_to_victory: 10
     time_max_align: 120
     max_z: 2.6
     end_depth: 0.5

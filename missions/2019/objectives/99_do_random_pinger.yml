@@ -1,0 +1,252 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 1082
+  - 184
+  radius: 208
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2019/objectives/99_switch_cam_w_speedHydro
+    base_file: /missions/2019/objectives/99_switch_cam_w_speedHydro.yml
+    global_params: []
+    is_root: true
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: 99_switch_cam_w_speedHydro
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2019/objectives/99_switch_cam_w_speedHydro.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: 06_low_find_vampire
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: aborted
+      state: 07_low_find_grab
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 675
+      - 88
+      radius: 152
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2019/objectives/06_low_find_vampire
+        base_file: /missions/2019/objectives/06_low_find_vampire.yml
+        global_params: []
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: 06_low_find_vampire
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2019/objectives/06_low_find_vampire.yml
+          variable_name: SubMission_file
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'split'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 953
+          - 82
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'split'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 0.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: 06_play_vampire
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 1218
+              - -172
+              radius: 120
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2019/objectives/06_play_vampire
+                base_file: /missions/2019/objectives/06_play_vampire.yml
+                global_params: []
+                is_root: false
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: 06_play_vampire
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2019/objectives/06_play_vampire.yml
+                  variable_name: SubMission_file
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: aborted
+                  state: 99_switch_cam_w_speedHydro
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: aborted
+                state1: *id004
+                state2: *id001
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: aborted
+    state1: *id001
+    state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 654
+      - 340
+      radius: 128
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2019/objectives/07_low_find_grab
+        base_file: /missions/2019/objectives/07_low_find_grab.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''align_roulette'''
+          variable_name: param_topic_filterchain
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/proc_image_processing/align_bin_result'''
+          variable_name: param_topic_deeplearning_result
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
+          variable_name: param_topic_filterchain_result
+        is_root: false
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: 07_low_find_grab
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2019/objectives/07_low_find_grab.yml
+          variable_name: SubMission_file
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'split1'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id005
+        state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 935
+          - 387
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'split1'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 0.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: 07_play_grab
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id006
+            state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 1196
+              - 543
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2019/objectives/07_play_grab
+                base_file: /missions/2019/objectives/07_play_grab.yml
+                global_params: []
+                is_root: false
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: 07_play_grab
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2019/objectives/07_play_grab.yml
+                  variable_name: SubMission_file
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: aborted
+                  state: 99_switch_cam_w_speedHydro
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: aborted
+                state1: *id007
+                state2: *id001
+- *id005
+- *id002
+- *id004
+- *id007
+- *id003
+- *id006

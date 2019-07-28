@@ -21,7 +21,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: 1.0
+      value: 0.0
       variable_name: param_time
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -58,7 +58,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: 15.0
+          value: !!python/unicode 'mission_params/99_pinger/switch_time'
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -179,7 +179,7 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
-                      value: 15.0
+                      value: !!python/unicode 'mission_params/99_pinger/switch_time'
                       variable_name: param_time
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Times Out'''
@@ -355,8 +355,8 @@ statesui:
     state1: *id001
     state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 310
-      - 157
+      - 272
+      - 155
       radius: 152
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2019/objectives/06_low_find_vampire

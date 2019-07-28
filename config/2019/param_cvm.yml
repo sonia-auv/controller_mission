@@ -153,3 +153,5 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
+  99_pinger: #  mission_params/99_pinger/
+    switch_time: 15

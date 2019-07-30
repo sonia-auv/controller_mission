@@ -1,6 +1,6 @@
 mission_params:
-  00_global:  #  mission_params/00_global
-    pinger_frequency: 30
+  00_global:  #  $/mission_params/00_global
+    pinger_frequency: 35
     x_speed_hydro: 0.5
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
@@ -10,30 +10,30 @@ mission_params:
       y: 1.5
       yy: -1.5 #negatif
       timer: 2
-  01_gate:  #  mission_params/01_gate/
-    start_yaw: 240
-    speed_yaw: 240 #same as start yaw
-    gate_yaw: -90 #ajustement pour faire face a la gate 
+  01_gate:  #  $/mission_params/01_gate/
+    start_yaw: 230
+    speed_yaw: 230 #same as start yaw
+    gate_yaw: 0 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
-    speed_x: 1.5
-    distance_x: 1 #speedrelativeX
+    speed_x: 1
+    distance_x: 2 #speedrelativeX
     depth: 1 # search_depth
-    forward_gate: -2 
-  03_paths:   #  mission_params/03_paths/
-    face_path: 180
+    forward_gate: 2 
+  03_paths:   #  $/mission_params/03_paths/
+    yaw_fail_path: -45
     max_time_align: 120
     max_time_find: 120
     front_after_path: 1.0
     first_path:
       first_side: left #right
-      search_depth: 0.5
-      align_depth: 0.5
+      search_depth: 1.5
+      align_depth: 1.5
       hit_to_victory: 10
     second_path:
       first_side: left #right
       search_depth: 1.5
       align_depth: 1.5
-  04_hit_buoys: #  mission_params/04_hit_buoys/
+  04_hit_buoys: #  $/mission_params/04_hit_buoys/
     buoys: jiangshi #jiangshi vetalas draugr answag
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
     filterchain_name: simple_jiangshi 
@@ -50,41 +50,49 @@ mission_params:
     time_for_ram: 10
     offset_z: 0
     heading: 0
-    search_depth: 0.7
-    end_depth: 0.5
+    search_depth: 2.15
+    end_depth: 1.5
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
     hit_to_victory: 10
-    avoid_forward_x: 3
+    simple_hit:
+      avoid_forward_x: 3
+      speed_x: 1
+      yaw: 40
+    fail_buoy_x: 2 # distance divide by 2
+    suc_buoy_x: 2.5
     avoid:
-      depth: 0.5
-      hit_depth: 2.5
+      depth: 1
+      hit_depth: 2.15
       x: 3.5
-      y: -2.0
-      yaw: 190
+      y: -3.0
+      yaw: -20
       ram: 1.0
-  05_bat_wolf: #  mission_params/05_bat_wolf/
+  05_bat_wolf: #  $/mission_params/05_bat_wolf/
     bin: bat
     topic_to_listen: /proc_image_processing/simple_bat_wolf_result
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
-    search_depth: 0.5
+    search_depth: 1.5
     pixel_to_victory: 350
     hit_to_victory: 10
     max_queu_size: 6
     max_queue_size: 6
+    target_height: 0.6
+    target_width: 0.3
+    param_bb: 250
     time_max_align: 120
     time_max_find: 120
     forward_z: 0.5
-    max_z: 1.2
-    end_depth: 0.5
+    max_z: 4.0
+    end_depth: 1.5
     offset:
       x: 0.5
       y: -0.2
       yaw: 0
-  06_slay_vampire: #  mission_params/06_slay_vampire/
+  06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120
     max_time_aborted: 30
@@ -137,7 +145,7 @@ mission_params:
         yaw: 0
         z: 0
       end_depth: 0.5
-  07_grab:  #  mission_params/07_grab/
+  07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
     filterchain_name: simple_poignee_vampire
@@ -146,6 +154,11 @@ mission_params:
     pixel_to_victory: 350
     hit_to_victory: 20
     low_hit_to_victory: 10
+    max_queue: 10
+    param_bb: 100
+    forward_z: 0.5
+    target_width: 0.05
+    target_height: 0.15
     time_max_align: 120
     max_z: 2.6
     end_depth: 0.5
@@ -153,5 +166,5 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
-  99_pinger: #  mission_params/99_pinger/
+  99_pinger: #  $/mission_params/99_pinger/
     switch_time: 15

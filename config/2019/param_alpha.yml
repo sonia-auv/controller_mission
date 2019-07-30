@@ -11,14 +11,14 @@ mission_params:
       yy: -1.5 #negatif
       timer: 2
   01_gate:  #  $/mission_params/01_gate/
-    start_yaw: 240
-    speed_yaw: 240 #same as start yaw
-    gate_yaw: -90 #ajustement pour faire face a la gate 
+    start_yaw: 40
+    speed_yaw: 40 #same as start yaw
+    gate_yaw: 0 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
-    speed_x: 1.5
-    distance_x: 1 #speedrelativeX
-    depth: 1 # search_depth
-    forward_gate: 2 
+    speed_x: 1
+    distance_x: 15 #speedrelativeX
+    depth: 1.75 # search_depth
+    forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
     yaw_fail_path: -45
     max_time_align: 120
@@ -26,8 +26,8 @@ mission_params:
     front_after_path: 1.0
     first_path:
       first_side: left #right
-      search_depth: 0.5
-      align_depth: 0.5
+      search_depth: 1.5
+      align_depth: 1.5
       hit_to_victory: 10
     second_path:
       first_side: left #right
@@ -50,21 +50,24 @@ mission_params:
     time_for_ram: 10
     offset_z: 0
     heading: 0
-    search_depth: 0.7
-    end_depth: 0.5
+    search_depth: 2.15
+    end_depth: 1.5
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
     hit_to_victory: 10
-    avoid_forward_x: 3
+    simple_hit:
+      avoid_forward_x: 3
+      speed_x: 1
+      yaw: 40
     fail_buoy_x: 2 # distance divide by 2
-    suc_buoy_x: 2
+    suc_buoy_x: 2.5
     avoid:
-      depth: 0.5
-      hit_depth: 2.5
+      depth: 1
+      hit_depth: 2.15
       x: 3.5
-      y: -2.0
-      yaw: 190
+      y: -3.0
+      yaw: -20
       ram: 1.0
   05_bat_wolf: #  $/mission_params/05_bat_wolf/
     bin: bat
@@ -72,7 +75,7 @@ mission_params:
     filterchain_name: simple_bat_wolf
     filterchain_result: simple_bat_wolf_result
     deep_result: simple_bat_wolf_result
-    search_depth: 0.5
+    search_depth: 1.5
     pixel_to_victory: 350
     hit_to_victory: 10
     max_queu_size: 6
@@ -83,8 +86,8 @@ mission_params:
     time_max_align: 120
     time_max_find: 120
     forward_z: 0.5
-    max_z: 1.2
-    end_depth: 0.5
+    max_z: 4.0
+    end_depth: 1.5
     offset:
       x: 0.5
       y: -0.2

@@ -83,15 +83,15 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''bounding box in pixel'''
-          value: 125.0
+          value: !!python/unicode '$/mission_params/05_bat_wolf/param_bb'
           variable_name: param_bounding_box
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''transform pixel to meter'''
-          value: 0.15
+          value: !!python/unicode '$/mission_params/05_bat_wolf/target_width'
           variable_name: param_vision_target_width_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''transform pixel to meter'''
-          value: 1.2
+          value: !!python/unicode '$/mission_params/05_bat_wolf/target_height'
           variable_name: param_vision_target_height_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
@@ -144,7 +144,7 @@ statesui:
               variable_name: param_distance_z
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Initial bounding Box'''
-              value: 250.0
+              value: !!python/unicode '$/mission_params/05_bat_wolf/param_bb'
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''minimal nb of pixel to ram'''
@@ -175,8 +175,8 @@ statesui:
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 191
-              - 537
+              - 212
+              - 542
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: setControlBoundingBox.SetControlBoundingBox

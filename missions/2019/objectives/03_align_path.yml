@@ -1,59 +1,14 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
-globalparams:
-- !!python/object:rqt_mission_planner.mission_model.state.Parameter
-  description: ''
-  value: !!python/unicode '''$/mission_params/03_paths/first_path/align_depth'''
-  variable_name: param_depth
+globalparams: []
 statesui:
-- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 168
-  - 176
-  radius: 168
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: 2018/align/align_bottom_xy_angle
-    base_file: /missions/2018/align/align_bottom_xy_angle.yml
-    global_params:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''/provider_vision/Bottom_GigE'''
-      variable_name: media_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''align_path'''
-      variable_name: node_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''simple_pipe45'''
-      variable_name: filterchain_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ''
-      value: !!python/unicode '''/proc_image_processing/align_path_result'''
-      variable_name: topic_to_listen
-    is_root: false
-    is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'AlignBottomXYThenAngle'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: 2018/align/align_bottom_xy_angle.yml
-      variable_name: SubMission_file
-    transitions: []
-  transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -48
-  - 210
+  - 194
+  - 347
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: moveGlobalDecoupledZ.MoveDecoupledZ
-    base_file: /src/controller_mission/state/moveGlobalDecoupledZ.py
+    _name: moveGlobalZByStep.MoveZByStep
+    base_file: /src/controller_mission/state/moveGlobalZByStep.py
     is_root: true
     outcome_states:
     - succeeded
@@ -62,18 +17,62 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'SetDepth'
+      value: MoveZByStep
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: !!python/unicode 'param_depth'
-      variable_name: param_distance_z
+      value: !!python/unicode '$/mission_params/03_paths/first_path/align_depth'
+      variable_name: param_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.5
+      variable_name: param_z_step
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'AlignBottomXYThenAngle'
+      state: align_bottom_xy_angle
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: *id002
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 366
+      - 301
+      radius: 168
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2019/align/align_bottom_xy_angle
+        base_file: /missions/2019/align/align_bottom_xy_angle.yml
+        global_params:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/provider_vision/Bottom_GigE'''
+          variable_name: media_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''align_path'''
+          variable_name: node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''simple_pipe'''
+          variable_name: filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ''
+          value: !!python/unicode '''/proc_image_processing/align_path_result'''
+          variable_name: topic_to_listen
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: align_bottom_xy_angle
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2019/align/align_bottom_xy_angle.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002

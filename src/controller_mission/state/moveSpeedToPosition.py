@@ -13,6 +13,7 @@ class MoveSpeedToPosition(MissionState):
         self.set_local_target = None
         self.odom = None
         self.position = None
+	self.first_position = None
         self.orientation = None
 
         self.distance_x = None
@@ -44,7 +45,7 @@ class MoveSpeedToPosition(MissionState):
         try:
             self.set_local_target(self.param_speed_x,
                                   0.0,
-                                  self.position.z,
+                                  self.first_position.z,
                                   0.0,
                                   0.0,
                                   self.yaw)
@@ -68,6 +69,10 @@ class MoveSpeedToPosition(MissionState):
         self.yaw = math.atan2(self.distance_y, self.distance_x) * 180 / math.pi
 
     def odom_cb(self, odom_data):
+	
+	if not self.first_position:
+	    self.first_position = odom_data.pose.pose.position
+	
         self.position = odom_data.pose.pose.position
         self.orientation = odom_data.pose.pose.orientation
 
@@ -82,7 +87,7 @@ class MoveSpeedToPosition(MissionState):
             try:
                 self.set_local_target(0.0,
                                       0.0,
-                                      self.position.z,
+                                      self.first_position.z,
                                       0.0,
                                       0.0,
                                       self.yaw)
@@ -94,7 +99,7 @@ class MoveSpeedToPosition(MissionState):
             try:
                 self.set_local_target(self.param_speed_x,
                                       0.0,
-                                      self.position.z,
+                                      self.first_position.z,
                                       0.0,
                                       0.0,
                                       self.yaw)

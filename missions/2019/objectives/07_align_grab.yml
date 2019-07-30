@@ -83,15 +83,15 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''bounding box in pixel'''
-          value: 125.0
+          value: !!python/unicode '$/mission_params/07_grab/param_bb'
           variable_name: param_bounding_box
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''transform pixel to meter'''
-          value: 0.15
+          value: !!python/unicode '$/mission_params/07_grab/target_width'
           variable_name: param_vision_target_width_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''transform pixel to meter'''
-          value: 1.2
+          value: !!python/unicode '$/mission_params/07_grab/target_height'
           variable_name: param_vision_target_height_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
@@ -99,7 +99,7 @@ statesui:
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum size of queue'''
-          value: 10.0
+          value: !!python/unicode '$/mission_params/07_grab/max_queue'
           variable_name: param_max_queue_size
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Control bounding box in y'''
@@ -140,11 +140,11 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Target'''
-              value: !!python/unicode 'distance_z'
+              value: !!python/unicode '$/mission_params/07_grab/forward_z'
               variable_name: param_distance_z
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Initial bounding Box'''
-              value: 250.0
+              value: !!python/unicode '$/mission_params/07_grab/param_bb'
               variable_name: param_bounding_box
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''minimal nb of pixel to ram'''

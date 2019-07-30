@@ -51,7 +51,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: !!python/unicode '$mission_params/01_gate/depth'
+          value: !!python/unicode '$/mission_params/01_gate/depth'
           variable_name: param_z
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
@@ -85,7 +85,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Distance to travel'''
-              value: !!python/unicode '$mission_params/01_gate/start_yaw'
+              value: !!python/unicode '$/mission_params/01_gate/start_yaw'
               variable_name: param_heading
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition

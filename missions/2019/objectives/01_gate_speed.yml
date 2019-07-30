@@ -50,15 +50,15 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Distance to travel'''
-          value: !!python/unicode '$mission_params/01_gate/dist_x'
+          value: !!python/unicode '$/mission_params/01_gate/distance_x'
           variable_name: param_distance_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Speed to use while traveling'''
-          value: !!python/unicode '$mission_params/01_gate/speed_x'
+          value: !!python/unicode '$/mission_params/01_gate/speed_x'
           variable_name: param_speed_x
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Heading'''
-          value: !!python/unicode '$mission_params/01_gate/speed_yaw'
+          value: !!python/unicode '$/mission_params/01_gate/speed_yaw'
           variable_name: param_orientation_yaw
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition

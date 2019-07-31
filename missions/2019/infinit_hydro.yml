@@ -67,7 +67,7 @@ statesui:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
-        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
           - 427
           - 481
@@ -92,12 +92,19 @@ statesui:
               description: ' ''Times Out'''
               value: succeeded
               variable_name: param_to_return
-            transitions: []
-          transitions: []
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: Hydro
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 678
       - 296
@@ -129,8 +136,8 @@ statesui:
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
-        state1: *id003
-        state2: *id004
-- *id004
-- *id002
+        state1: *id004
+        state2: *id003
 - *id003
+- *id002
+- *id004

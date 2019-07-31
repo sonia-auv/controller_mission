@@ -16,7 +16,7 @@ mission_params:
     gate_yaw: 6 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1
-    distance_x: 2 #speedrelativeX
+    distance_x: 12 #speedrelativeX
     depth: 1 # search_depth
     forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
@@ -40,17 +40,17 @@ mission_params:
     filterchain_result: simple_jiangshi_result
     max_alignment: 30
     max_queu_size: 5
-    threshold_width: 200
-    pixel_to_victory: 1000
+    threshold_width: 100
+    pixel_to_victory: 950
     initial_bb: 600
     final_bb: 400
     target_width: 0.7
-    distance_forward: 0.5
+    distance_forward: 1
     ram_dist: 2.0
-    time_for_ram: 10
+    time_for_ram: 6
     offset_z: 0
     heading: 0
-    search_depth: 2.15
+    search_depth: 1.75
     end_depth: 1.5
     step_back: -1.0
     max_time_find: 120
@@ -85,7 +85,7 @@ mission_params:
     param_bb: 250
     time_max_align: 120
     time_max_find: 120
-    forward_z: 0.5
+    forward_z: 0.75
     max_z: 4.0
     end_depth: 1.5
     offset:

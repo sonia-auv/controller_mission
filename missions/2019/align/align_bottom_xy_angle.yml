@@ -157,7 +157,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''bounding box in pixel'''
-                  value: 150.0
+                  value: 250.0
                   variable_name: param_bounding_box
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''bounding box in pixel'''

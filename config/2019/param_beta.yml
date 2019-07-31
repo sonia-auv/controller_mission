@@ -26,9 +26,8 @@ mission_params:
     front_after_path: 1.0
     first_path:
       first_side: left #right
-      search_depth: 1.5
-      align_depth: 1.5
-      hit_to_victory: 10
+      search_depth: 2
+      align_depth: 2
     second_path:
       first_side: left #right
       search_depth: 1.5
@@ -57,9 +56,9 @@ mission_params:
     max_time_align: 120
     hit_to_victory: 10
     simple_hit:
-      avoid_forward_x: 3
+      avoid_forward_x: 3 #distance to path
       speed_x: 1
-      yaw: 40
+      yaw: 100 #should be the same as gate
     fail_buoy_x: 2 # distance divide by 2
     suc_buoy_x: 2.5
     avoid:
@@ -96,7 +95,7 @@ mission_params:
     max_time_find: 120
     max_time_align: 120
     max_time_aborted: 30
-    search_depth: 2.0
+    search_depth: 2.5
     speedx: 1.0
     dl:
       vampire: head
@@ -107,7 +106,7 @@ mission_params:
       max_queu_size: 10
       max_time_find: 120
       threshold_width: 100
-      pixel_to_victory: 350
+      pixel_to_victory: 500
       hit_to_victory: 15
       low_hit_to_victory: 10
       target_width: 0.7
@@ -116,6 +115,7 @@ mission_params:
       distance_x: 1
       heading: 0
       search_depth: 2.0
+      delay_find: 5
       offset:
         x: 0
         y: 0
@@ -140,7 +140,7 @@ mission_params:
       final_bb: 400
       distance_x: 0.75
       offset:
-        x: 1
+        x: .75
         y: -0.3
         yaw: 0
         z: 0

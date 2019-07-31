@@ -26,9 +26,8 @@ mission_params:
     front_after_path: 1.0
     first_path:
       first_side: left #right
-      search_depth: 1.5
-      align_depth: 1.5
-      hit_to_victory: 10
+      search_depth: 2
+      align_depth: 2
     second_path:
       first_side: left #right
       search_depth: 1.5
@@ -116,6 +115,7 @@ mission_params:
       distance_x: 1
       heading: 0
       search_depth: 2.0
+      delay_find: 5
       offset:
         x: 0
         y: 0

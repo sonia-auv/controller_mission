@@ -155,6 +155,18 @@ mission_params:
         yaw: 0
         z: 0
       end_depth: 0.5
+      handle:
+        topic_to_listen: /proc_image_processing/simple_bin_handle_result
+        filterchain_name: simple_bin_handle
+        hit_to_victory: 10
+        search_depth: 2.5
+        target_width: 0.1
+        target_height: 0.2
+        max_queue_size: 6
+        pixel_to_victory: 350
+        forward_z: 0.75
+        param_bb: 350
+        max_z: 3.5
   07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result

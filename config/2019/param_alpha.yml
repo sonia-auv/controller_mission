@@ -158,7 +158,7 @@ mission_params:
       final_bb: 300
       distance_x: 1
       offset:
-        x: 1
+        x: 0.5
         y: -0.3
         yaw: 0
         z: 0

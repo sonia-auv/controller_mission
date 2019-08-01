@@ -100,6 +100,13 @@ mission_params:
       filterchain_name: simple_bin_handle
       hit_to_victory: 10
       search_depth: 2.5
+      target_width: 0.1
+      target_height: 0.2
+      max_queue_size: 6
+      pixel_to_victory: 350
+      forward_z: 0.75
+      param_bb: 350
+      max_z: 3.5
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120

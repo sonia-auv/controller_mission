@@ -17,11 +17,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'TorpidoStar'
+      value: !!python/unicode 'TorpidoPort2'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Torpido id'''
-      value: 2.0
+      value: 1.0
       variable_name: param_id
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Launch'''
@@ -65,8 +65,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 385
-      - 204
+      - 391
+      - 222
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
@@ -92,7 +92,7 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'TorpidoPort'
+          state: !!python/unicode 'TorpidoPort2'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded

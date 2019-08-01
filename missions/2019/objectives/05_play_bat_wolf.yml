@@ -239,8 +239,8 @@ statesui:
 - *id005
 - &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 367
-  - 287
+  - 388
+  - 286
   radius: 128
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/05_find_bat_wolf
@@ -358,36 +358,45 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'searchz'
+          state: 05_align_bw_handle
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id008
         state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 132
-          - 188
-          radius: 100
+          - 176
+          - 277
+          radius: 144
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveGlobalZByStep.MoveZByStep
-            base_file: /src/controller_mission/state/moveGlobalZByStep.py
+            _name: 2019/objectives/05_align_bw_handle
+            base_file: /missions/2019/objectives/05_align_bw_handle.yml
+            global_params:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 0.4
+              variable_name: distance_z
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 350.0
+              variable_name: pixel_to_victory
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ''
+              value: 3.0
+              variable_name: max_z
+            is_submission: true
             outcome_states:
             - succeeded
             - aborted
-            - preempted
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'searchz'
+              value: 05_align_bw_handle
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: !!python/unicode '$/mission_params/05_bat_wolf/search_depth'
-              variable_name: param_z
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Distance to travel'''
-              value: 0.5
-              variable_name: param_z_step
+              description: SubMission_file
+              value: 2019/objectives/05_align_bw_handle.yml
+              variable_name: SubMission_file
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
@@ -473,5 +482,5 @@ statesui:
 - *id010
 - *id011
 - *id008
-- *id009
 - *id012
+- *id009

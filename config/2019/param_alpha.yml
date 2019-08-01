@@ -1,3 +1,4 @@
+save_orientation: 0
 mission_params:
   00_global:  #  $/mission_params/00_global
     pinger_frequency: 30

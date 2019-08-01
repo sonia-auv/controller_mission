@@ -235,13 +235,13 @@ statesui:
 - *id002
 - &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -612
-  - 223
+  - -642
+  - 229
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
     base_file: /src/controller_mission/state/timeOut.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -303,3 +303,34 @@ statesui:
     state1: *id008
     state2: *id001
 - *id009
+- &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - -829
+  - 242
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: switchControlMode.Switch
+    base_file: /src/controller_mission/state/switchControlMode.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Switch
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Control Mode'''
+      value: 0.0
+      variable_name: param_mode
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'split2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id010
+    state2: *id008

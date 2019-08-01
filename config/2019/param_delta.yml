@@ -2,6 +2,7 @@ mission_params:
   00_global:  #  $/mission_params/00_global
     pinger_frequency: 35
     x_speed_hydro: 0.5
+    time_speed_hydro: 20
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
     elgrandfrera: -1.5 #negatif
@@ -32,6 +33,10 @@ mission_params:
       first_side: left #right
       search_depth: 1.5
       align_depth: 1.5
+    no_path:
+      yaw_buoy: 45
+      x_before_yaw: 2
+      x_after_yaw: 2
   04_hit_buoys: #  $/mission_params/04_hit_buoys/
     buoys: jiangshi #jiangshi vetalas draugr answag
     topic_to_listen: /proc_image_processing/simple_jiangshi_result
@@ -91,6 +96,11 @@ mission_params:
       x: 0.5
       y: -0.2
       yaw: 0
+    handle:
+      topic_to_listen: /proc_image_processing/simple_bin_handle_result
+      filterchain_name: simple_bin_handle
+      hit_to_victory: 10
+      search_depth: 2.5
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_align: 120

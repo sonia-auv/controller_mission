@@ -1,7 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetPositionTarget, SetControlMode, SetControlModeRequest
+from proc_control.srv import SetDecoupledTarget, SetControlMode, SetControlModeRequest
 from proc_control.msg import TargetReached
 from proc_mapping.msg import PingerLocation
 import math
@@ -33,12 +33,9 @@ class MoveYawHydro(MissionState):
             self.heading = self.heading * 180 / math.pi
 
             try:
-                self.set_global_target(0.0,
-                                       0.0,
-                                       0.0,
-                                       0.0,
-                                       0.0,
-                                       self.heading)
+                self.set_local_target(0.0, 0.0, 0.0,
+                                      0.0, 0.0, self.heading,
+                                      True, True, True, True, True, False)
             except rospy.ServiceException as exc:
                 rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -57,7 +54,7 @@ class MoveYawHydro(MissionState):
             rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.wait_for_service('/proc_control/set_global_target')
-        self.set_global_target = rospy.ServiceProxy('/proc_control/set_global_target', SetPositionTarget)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_global_target', SetDecoupledTarget)
 
         self.target_reached = False
 

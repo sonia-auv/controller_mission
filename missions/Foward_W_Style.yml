@@ -1,10 +1,10 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+- &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 188
-  - 124
+  - 761
+  - 316
   radius: 176
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
@@ -77,15 +77,15 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: MoveYaw
+          state: !!python/unicode 'MoveYa'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 133
-          - 350
+          - 161
+          - 405
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveGlobalYaw.MoveYaw
@@ -106,11 +106,101 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'forward'
+              state: !!python/unicode 'MoveRelativeYawTDecoupl'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
-            state2: *id004
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 93
+              - 127
+              radius: 184
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
+                base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'MoveRelativeYawTDecoupl'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Angle change for Yaw'''
+                  value: 120.0
+                  variable_name: param_angle_yaw
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'MoveRelativeYawTDecoupl'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 221
+                  - -107
+                  radius: 168
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
+                    base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'MoveRelativeYawTDecou'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Angle change for Yaw'''
+                      value: 120.0
+                      variable_name: param_angle_yaw
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: !!python/unicode 'MoveYa'
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id005
+                    state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 542
+                      - 96
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: moveGlobalYaw.MoveYaw
+                        base_file: /src/controller_mission/state/moveGlobalYaw.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: !!python/unicode 'MoveYa'
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Distance to travel'''
+                          value: !!python/unicode '$/mission_params/01_gate/start_yaw'
+                          variable_name: param_heading
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: !!python/unicode 'forward'
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id006
+                        state2: *id007
 - *id002
 - *id003
+- *id005
+- *id004
+- *id006

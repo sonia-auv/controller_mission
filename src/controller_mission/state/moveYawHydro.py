@@ -63,7 +63,8 @@ class MoveYawHydro(MissionState):
 
     def run(self, ud):
         if self.target_reached > 0:
-            return 'succeded'
+            return 'succeeded'
+	pass
 
     def end(self):
         self.pinger_location.unregister()

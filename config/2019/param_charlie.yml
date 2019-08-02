@@ -185,6 +185,7 @@ mission_params:
     target_width: 0.05
     target_height: 0.15
     time_max_align: 120
+    time_max_find: 300
     max_time_find: 300
     max_z: 2.6
     end_depth: 0.5

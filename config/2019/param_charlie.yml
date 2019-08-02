@@ -1,3 +1,7 @@
+octo:
+  x: 16.08
+  y: -32.65
+save_orientation: 0
 mission_params:
   00_global:  #  $/mission_params/00_global
     pinger_frequency: 25
@@ -25,11 +29,11 @@ mission_params:
     max_time_find: 120
     front_after_path: 1.0
     first_path:
-      first_side: left #right
+      first_side: 45
       search_depth: 2.5
       align_depth: 2.5
     second_path:
-      first_side: left #right
+      first_side: 45
       search_depth: 1.5
       align_depth: 1.5
     no_path:
@@ -44,17 +48,17 @@ mission_params:
     max_alignment: 30
     max_queu_size: 5
     threshold_width: 100
-    pixel_to_victory: 950
+    pixel_to_victory: 900
     initial_bb: 600
     final_bb: 400
     target_width: 0.7
-    distance_forward: 1
     ram_dist: 2.0
     time_for_ram: 6
     offset_z: 0
     heading: 0
     search_depth: 1.75
     end_depth: 1.5
+    distance_forward: 1
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
@@ -63,7 +67,7 @@ mission_params:
       avoid_forward_x: 3
       speed_x: 1
       yaw: 40
-    fail_buoy_x: 2 
+    fail_buoy_x: 3
     suc_buoy_x: 2.5
     avoid:
       depth: 1
@@ -73,8 +77,8 @@ mission_params:
       yaw: -20
       ram: 1.0
     double:
-      yaw: -20
-      ram: 2
+      yaw: -40
+      ram: 4
       back: 1
   05_bat_wolf: #  $/mission_params/05_bat_wolf/
     bin: bat
@@ -84,7 +88,7 @@ mission_params:
     deep_result: simple_bat_wolf_result
     search_depth: 1.5
     pixel_to_victory: 350
-    hit_to_victory: 10
+    hit_to_victory: 6
     max_queu_size: 6
     max_queue_size: 6
     target_height: 0.6
@@ -107,12 +111,13 @@ mission_params:
       target_width: 0.1
       target_height: 0.2
       max_queue_size: 6
-      pixel_to_victory: 350
+      pixel_to_victory: 150
       forward_z: 0.75
       param_bb: 350
       max_z: 3.5
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
+    max_time_low_find: 300
     max_time_align: 120
     max_time_aborted: 30
     search_depth: 2.5
@@ -180,7 +185,7 @@ mission_params:
     target_width: 0.05
     target_height: 0.15
     time_max_align: 120
-    time_max_find: 120
+    max_time_find: 300
     max_z: 2.6
     end_depth: 0.5
     offset:

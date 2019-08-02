@@ -64,8 +64,8 @@ statesui:
           outcome: succeeded
           state: 04_hit_buoy
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: aborted
-          state: !!python/unicode 'yaw_to_buoys'
+          outcome: succeeded
+          state: !!python/unicode 'back'
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
@@ -336,7 +336,7 @@ statesui:
                                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                         name: succeeded
                                         state1: *id010
-                                        state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                        state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
                                           position: !!python/tuple
                                           - 909
                                           - 557
@@ -366,7 +366,7 @@ statesui:
                                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                         name: aborted
                                         state1: *id010
-                                        state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                        state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
                                           position: !!python/tuple
                                           - 1116
                                           - 614
@@ -392,7 +392,7 @@ statesui:
                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                             name: succeeded
                             state1: *id007
-                            state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+                            state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
                               position: !!python/tuple
                               - 1137
                               - 49
@@ -495,16 +495,16 @@ statesui:
                     state1: *id012
                     state2: *id007
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: aborted
+        name: succeeded
         state1: *id002
         state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 121
-          - -34
+          - -4
+          - 11
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
-            base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+            _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
+            base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
             outcome_states:
             - succeeded
             - aborted
@@ -512,28 +512,28 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: !!python/unicode 'yaw_to_buoys'
+              value: !!python/unicode 'back'
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Angle change for Yaw'''
-              value: !!python/unicode '$/mission_params/03_paths/yaw_fail_path'
-              variable_name: param_angle_yaw
+              description: ' ''Distance to travel'''
+              value: -3.0
+              variable_name: param_distance_x
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'front_2m'
+              state: !!python/unicode 'yaw_to_buoys'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id013
             state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 293
-              - -49
+              - 148
+              - -106
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
-                base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
+                base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
                 outcome_states:
                 - succeeded
                 - aborted
@@ -541,34 +541,64 @@ statesui:
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: state_name
-                  value: !!python/unicode 'front_2m'
+                  value: !!python/unicode 'yaw_to_buoys'
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                  description: ' ''Distance to travel'''
-                  value: 2.0
-                  variable_name: param_distance_x
+                  description: ' ''Angle change for Yaw'''
+                  value: !!python/unicode '$/mission_params/03_paths/first_path/first_side'
+                  variable_name: param_angle_yaw
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                   outcome: succeeded
-                  state: 04_hit_buoy
+                  state: !!python/unicode 'front_2m'
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id014
-                state2: *id003
+                state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 332
+                  - -52
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
+                    base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'front_2m'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: 2.0
+                      variable_name: param_distance_x
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: 04_hit_buoy
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id015
+                    state2: *id003
 - *id002
-- *id013
-- *id003
 - *id014
+- *id003
+- *id015
 - *id004
 - *id011
 - *id012
 - *id007
 - *id009
 - *id008
-- *id015
+- *id016
 - *id005
 - *id006
 - *id010
-- *id016
 - *id017
+- *id018
+- *id013

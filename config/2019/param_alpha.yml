@@ -27,11 +27,11 @@ mission_params:
     max_time_find: 120
     front_after_path: 1.0
     first_path:
-      first_side: left #right
+      first_side: -45
       search_depth: 2
       align_depth: 2
     second_path:
-      first_side: left #right
+      first_side: 45
       search_depth: 1.5
       align_depth: 1.5
     no_path:

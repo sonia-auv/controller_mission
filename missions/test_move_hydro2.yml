@@ -2,12 +2,19 @@
 globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
   position: !!python/tuple [57, 368]
+=======
+  position: !!python/tuple
+  - 57
+  - 368
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: switchControlMode.Switch
     base_file: /src/controller_mission/state/switchControlMode.py
     is_root: true
+<<<<<<< HEAD
     outcome_states: [succeeded, aborted, preempted]
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
@@ -17,17 +24,43 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
       state: MoveZByStep}
+=======
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Switch
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Control Mode'''
+      value: 0.0
+      variable_name: param_mode
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: MoveZByStep
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
       position: !!python/tuple [196, 271]
+=======
+      position: !!python/tuple
+      - 196
+      - 271
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveGlobalZByStep.MoveZByStep
         base_file: /src/controller_mission/state/moveGlobalZByStep.py
         is_root: false
+<<<<<<< HEAD
         outcome_states: [succeeded, aborted, preempted]
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter {description: state_name,
@@ -39,17 +72,47 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition {outcome: succeeded,
           state: moveYawHydro2}
+=======
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: MoveZByStep
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.5
+          variable_name: param_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.5
+          variable_name: param_z_step
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: moveYawHydro2
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
           position: !!python/tuple [393, 193]
+=======
+          position: !!python/tuple
+          - 393
+          - 193
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
           radius: 104
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveYawHydro2.moveYawHydro2
             base_file: /src/controller_mission/state/moveYawHydro2.py
             is_root: false
+<<<<<<< HEAD
             outcome_states: [succeeded, aborted, preempted]
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -60,17 +123,43 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition {
               outcome: succeeded, state: TimesOut}
+=======
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: moveYawHydro2
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Pinger frequency'''
+              value: !!python/unicode '$/mission_params/00_global/pinger_frequency'
+              variable_name: param_frequency
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: TimesOut
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+<<<<<<< HEAD
               position: !!python/tuple [570, 181]
+=======
+              position: !!python/tuple
+              - 570
+              - 181
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: timeOut.TimesOut
                 base_file: /src/controller_mission/state/timeOut.py
                 is_root: false
+<<<<<<< HEAD
                 outcome_states: [succeeded, aborted, preempted]
                 parameters:
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter {
@@ -82,6 +171,29 @@ statesui:
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition {
                   outcome: succeeded, state: moveYawHydro2}
+=======
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: TimesOut
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 15.0
+                  variable_name: param_time
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: succeeded
+                  variable_name: param_to_return
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: moveYawHydro2
+>>>>>>> 6a2383ca1892844d04403da3b9f3b01fcd03fd4b
               transitions:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded

@@ -7,7 +7,7 @@ mission_params:
     pinger_frequency: 30
     x_speed_hydro: 0.5
     time_speed_hydro: 20
-    safe_depth: 1.5
+    safe_depth: 1
     elgrandfrero: 1.5 #positif
     elgrandfrera: -1.5 #negatif
     crab:
@@ -32,7 +32,7 @@ mission_params:
     first_path:
       first_side: -45
       search_depth: 2
-      align_depth: 2
+      align_depth: 2.5
     second_path:
       first_side: 45
       search_depth: 1.5
@@ -49,7 +49,7 @@ mission_params:
     max_alignment: 30
     max_queu_size: 5
     threshold_width: 100
-    pixel_to_victory: 950
+    pixel_to_victory: 900
     initial_bb: 600
     final_bb: 400
     target_width: 0.7
@@ -59,7 +59,7 @@ mission_params:
     offset_z: 0
     heading: 0
     search_depth: 1.75
-    end_depth: 1
+    end_depth: 1.5
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
@@ -78,7 +78,7 @@ mission_params:
       yaw: -20
       ram: 2.0
     double:
-      yaw: -20
+      yaw: -40
       ram: 2
       back: 1
   05_bat_wolf: #  $/mission_params/05_bat_wolf/

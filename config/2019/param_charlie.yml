@@ -5,7 +5,7 @@ save_orientation: 0
 mission_params:
   00_global:  #  $/mission_params/00_global
     pinger_frequency: 25
-    x_speed_hydro: 1
+    x_speed_hydro: 0.5
     time_speed_hydro: 20
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif
@@ -25,12 +25,13 @@ mission_params:
     depth: 1 # search_depth
     forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
+    yaw_fail_path: -45
     max_time_align: 120
     max_time_find: 120
     front_after_path: 1.0
     first_path:
       first_side: 45
-      search_depth: 2.5
+      search_depth: 2
       align_depth: 2.5
     second_path:
       first_side: 45
@@ -78,7 +79,7 @@ mission_params:
       ram: 1.0
     double:
       yaw: -40
-      ram: 4
+      ram: 2
       back: 1
   05_bat_wolf: #  $/mission_params/05_bat_wolf/
     bin: bat
@@ -115,6 +116,7 @@ mission_params:
       forward_z: 0.75
       param_bb: 350
       max_z: 3.5
+      z_up: -0.5
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_low_find: 300

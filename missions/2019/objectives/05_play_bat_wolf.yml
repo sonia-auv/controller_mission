@@ -34,7 +34,7 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 1408
       - 279
@@ -314,17 +314,14 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'time max find'
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: crab_walk
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id007
     state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -29
-      - 307
+      - -42
+      - 303
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2019/objectives/05_bw_handle
@@ -365,8 +362,8 @@ statesui:
         state1: *id008
         state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 176
-          - 277
+          - 99
+          - 440
           radius: 144
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2019/objectives/05_align_bw_handle
@@ -400,16 +397,45 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: 05_find_bat_wolf
+              state: MoveRelativeZDecoupled
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id009
-            state2: *id006
+            state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 144
+              - 146
+              radius: 176
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: moveRelativeZDecoupled.MoveRelativeZDecoupled
+                base_file: /src/controller_mission/state/moveRelativeZDecoupled.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: MoveRelativeZDecoupled
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance to travel'''
+                  value: -0.5
+                  variable_name: param_distance_z
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: 05_find_bat_wolf
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id010
+                state2: *id006
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id007
-    state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - -47
       - 143
@@ -436,51 +462,8 @@ statesui:
           variable_name: param_to_return
         transitions: []
       transitions: []
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id007
-    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
-      position: !!python/tuple
-      - -27
-      - 492
-      radius: 100
-      state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2019/navigation/crab_walk
-        base_file: /missions/2019/navigation/crab_walk.yml
-        global_params:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: -1.5
-          variable_name: param_left_distance
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.5
-          variable_name: param_right_distance
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.0
-          variable_name: param_timeout
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.5
-          variable_name: param_forward_distance
-        is_submission: true
-        outcome_states:
-        - succeeded
-        - aborted
-        parameters:
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: state_name
-          value: crab_walk
-          variable_name: state_name
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: SubMission_file
-          value: 2019/navigation/crab_walk.yml
-          variable_name: SubMission_file
-        transitions: []
-      transitions: []
-- *id010
 - *id011
-- *id008
 - *id012
+- *id008
 - *id009
+- *id010

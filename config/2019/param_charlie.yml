@@ -16,8 +16,8 @@ mission_params:
       yy: -1.5 #negatif
       timer: 2
   01_gate:  #  $/mission_params/01_gate/
-    start_yaw: 294
-    speed_yaw: 294 #same as start yaw
+    start_yaw: 300
+    speed_yaw: 300 #same as start yaw
     gate_yaw: 6 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1

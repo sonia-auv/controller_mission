@@ -190,7 +190,7 @@ mission_params:
     time_max_align: 120
     time_max_find: 300
     max_time_find: 300
-    max_z: 2.6
+    max_z: 3
     end_depth: 0.5
     offset:
       x: 0.5

@@ -33,11 +33,11 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode '$/mission_params/07_grab/filterchain_name'
+      value: !!python/unicode 'simple_body_baby'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode '$/mission_params/07_grab/filterchain_name'
+      value: !!python/unicode 'simple_body_baby'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -95,7 +95,7 @@ statesui:
           variable_name: param_vision_target_height_in_meter
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Name of topic to listen'''
-          value: !!python/unicode '$/mission_params/07_grab/topic_to_listen'
+          value: !!python/unicode '/proc_image_processing/simple_body_baby_result'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum size of queue'''
@@ -156,7 +156,7 @@ statesui:
               variable_name: param_nb_pixel_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Name of topic to listen'''
-              value: !!python/unicode '$/mission_params/07_grab/topic_to_listen'
+              value: !!python/unicode '/proc_image_processing/simple_body_baby_result'
               variable_name: param_topic_to_listen
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition

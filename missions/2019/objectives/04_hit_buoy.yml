@@ -118,7 +118,7 @@ statesui:
               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                 name: succeeded
                 state1: *id004
-                state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+                state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
                   - 1178
                   - 126
@@ -337,7 +337,7 @@ statesui:
                       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                         name: succeeded
                         state1: *id010
-                        state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
+                        state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
                           position: !!python/tuple
                           - 1334
                           - 478
@@ -436,7 +436,10 @@ statesui:
           state: 04_find_buoy
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: sweep_walk
+          state: sweep
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: WaitDistanceReached
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
@@ -445,14 +448,14 @@ statesui:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id012
-        state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
+        state2: &id016 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 360
-          - 380
+          - 345
+          - 392
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: 2019/navigation/sweep_walk
-            base_file: /missions/2019/navigation/sweep_walk.yml
+            _name: 2019/navigation/sweep
+            base_file: /missions/2019/navigation/sweep.yml
             global_params:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ''
@@ -477,21 +480,55 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: sweep_walk
+              value: sweep
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: SubMission_file
-              value: 2019/navigation/sweep_walk.yml
+              value: 2019/navigation/sweep.yml
               variable_name: SubMission_file
             transitions: []
           transitions: []
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id012
+        state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 314
+          - 560
+          radius: 152
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: WaitDistanceReached.WaitDistanceReached
+            base_file: /src/controller_mission/state/WaitDistanceReached.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: WaitDistanceReached
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Distance to travel before succeeded'''
+              value: 10.0
+              variable_name: param_distance_x
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'end_depth'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id013
+            state2: *id010
 - *id012
 - *id003
-- *id013
+- *id014
 - *id008
 - *id009
 - *id010
-- *id014
-- *id002
 - *id015
+- *id002
 - *id004
+- *id016
+- *id013

@@ -1,31 +1,6 @@
 !!python/object:rqt_mission_planner.Renderer.MissionContainer
 globalparams: []
 statesui:
-- !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 492
-  - -38
-  radius: 264
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: sequence_gate_path_bat_hydro_wolf
-    base_file: /missions/sequence_gate_path_bat_hydro_wolf.yml
-    global_params: []
-    is_root: false
-    is_submission: true
-    outcome_states:
-    - succeeded
-    - aborted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: sequence_gate_path_bat_hydro_wolf
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: SubMission_file
-      value: sequence_gate_path_bat_hydro_wolf.yml
-      variable_name: SubMission_file
-    transitions: []
-  transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
   - 101

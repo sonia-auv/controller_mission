@@ -7,8 +7,8 @@ globalparams:
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 415
-  - 474
+  - 414
+  - 476
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -21,11 +21,11 @@ statesui:
     parameters:
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: state_name
-      value: !!python/unicode 'time_out_10'
+      value: !!python/unicode 'time_out_15'
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: 10.0
+      value: 15.0
       variable_name: param_time
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -34,20 +34,20 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: HydroYawFirst
+      state: Hydro
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 411
-      - 164
-      radius: 104
+      - 415
+      - 130
+      radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: hydroYawFirst.HydroYawFirst
-        base_file: /src/controller_mission/state/hydroYawFirst.py
-        is_root: false
+        _name: hydro.Hydro
+        base_file: /src/controller_mission/state/hydro.py
+        is_root: true
         outcome_states:
         - succeeded
         - aborted
@@ -55,7 +55,7 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: HydroYawFirst
+          value: Hydro
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Pigner frequency'''
@@ -64,18 +64,52 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: !!python/unicode 'to'
+          state: WaitTargetReached
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: WaitTargetReached
+          state: TimesOut
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 644
-          - 322
+          - 165
+          - 289
+          radius: 136
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: waitTargetReached.WaitTargetReached
+            base_file: /src/controller_mission/state/waitTargetReached.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: WaitTargetReached
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Maximum size of queue'''
+              value: 10.0
+              variable_name: param_queu_size
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'time_out_15'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: *id001
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 678
+          - 296
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
@@ -101,81 +135,12 @@ statesui:
             transitions:
             - !!python/object:rqt_mission_planner.mission_model.state.Transition
               outcome: succeeded
-              state: !!python/unicode 'time_out_10'
-          transitions:
-          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-            name: succeeded
-            state1: *id003
-            state2: *id001
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id002
-        state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
-          position: !!python/tuple
-          - 165
-          - 289
-          radius: 136
-          state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: waitTargetReached.WaitTargetReached
-            base_file: /src/controller_mission/state/waitTargetReached.py
-            is_root: false
-            outcome_states:
-            - succeeded
-            - aborted
-            - preempted
-            parameters:
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: state_name
-              value: WaitTargetReached
-              variable_name: state_name
-            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-              description: ' ''Maximum size of queue'''
-              value: 10.0
-              variable_name: param_queu_size
-            transitions:
-            - !!python/object:rqt_mission_planner.mission_model.state.Transition
-              outcome: succeeded
-              state: !!python/unicode 'time_out_10'
+              state: !!python/unicode 'time_out_15'
           transitions:
           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
             name: succeeded
             state1: *id004
             state2: *id001
-- *id004
 - *id003
+- *id004
 - *id002
-- &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
-  position: !!python/tuple
-  - 427
-  - -14
-  radius: 100
-  state: !!python/object:rqt_mission_planner.mission_model.state.State
-    _name: timeOut.TimesOut
-    base_file: /src/controller_mission/state/timeOut.py
-    is_root: true
-    outcome_states:
-    - succeeded
-    - aborted
-    - preempted
-    parameters:
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: state_name
-      value: !!python/unicode 'to'
-      variable_name: state_name
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: 10.0
-      variable_name: param_time
-    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-      description: ' ''Times Out'''
-      value: succeeded
-      variable_name: param_to_return
-    transitions:
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: HydroYawFirst
-  transitions:
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id005
-    state2: *id002

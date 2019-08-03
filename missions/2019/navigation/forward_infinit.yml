@@ -3,8 +3,8 @@ globalparams: []
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 251
-  - 149
+  - 241
+  - 182
   radius: 176
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
@@ -21,14 +21,48 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Distance to travel'''
-      value: 2.0
+      value: 1.0
       variable_name: param_distance_x
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveRelativeXDecoupled
+      state: !!python/unicode 'TimesOut_10s'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 534
+      - 199
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'TimesOut_10s'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 10.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: succeeded
+          variable_name: param_to_return
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: MoveRelativeXDecoupled
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: *id001
+- *id002

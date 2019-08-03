@@ -57,6 +57,7 @@ mission_params:
     time_for_ram: 6
     offset_z: 0
     heading: 0
+    safe_depth: 1
     search_depth: 1.75
     end_depth: 1.5
     distance_forward: 1

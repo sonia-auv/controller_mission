@@ -314,14 +314,17 @@ statesui:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
       state: !!python/unicode 'time max find'
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: MoveRelativeSpeedX
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id007
     state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - -42
-      - 303
+      - -58
+      - 307
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: 2019/objectives/05_bw_handle
@@ -362,8 +365,8 @@ statesui:
         state1: *id008
         state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 99
-          - 440
+          - 211
+          - 446
           radius: 144
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: 2019/objectives/05_align_bw_handle
@@ -421,7 +424,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Distance to travel'''
-                  value: -0.5
+                  value: -1.0
                   variable_name: param_distance_z
                 transitions:
                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -462,8 +465,43 @@ statesui:
           variable_name: param_to_return
         transitions: []
       transitions: []
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id007
+    state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -107
+      - 459
+      radius: 144
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveSpeedRelativeX.MoveRelativeSpeedX
+        base_file: /src/controller_mission/state/moveSpeedRelativeX.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: MoveRelativeSpeedX
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 8.0
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Speed to use while traveling'''
+          value: 0.5
+          variable_name: param_speed_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Heading'''
+          value: 0.0
+          variable_name: param_orientation_yaw
+        transitions: []
+      transitions: []
 - *id011
 - *id012
 - *id008
 - *id009
 - *id010
+- *id013

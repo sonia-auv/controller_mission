@@ -92,8 +92,8 @@ statesui:
             state1: *id003
             state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
               position: !!python/tuple
-              - 222
-              - 222
+              - 253
+              - 215
               radius: 100
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
@@ -121,8 +121,8 @@ statesui:
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 382
-                  - 83
+                  - 359
+                  - 75
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: 2019/objectives/04_hit_buoy
@@ -243,6 +243,9 @@ statesui:
                                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                                   outcome: succeeded
                                   state: forward_infinit
+                                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                  outcome: succeeded
+                                  state: WaitDistanceReached
                               transitions:
                               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                 name: succeeded
@@ -250,7 +253,7 @@ statesui:
                                 state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
                                   position: !!python/tuple
                                   - 960
-                                  - 132
+                                  - 110
                                   radius: 100
                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                     _name: 2019/objectives/03_find_path
@@ -279,8 +282,8 @@ statesui:
                                     state1: *id009
                                     state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
                                       position: !!python/tuple
-                                      - 1202
-                                      - 121
+                                      - 1234
+                                      - 61
                                       radius: 168
                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                         _name: 2019/align/align_bottom_xy_angle
@@ -325,8 +328,8 @@ statesui:
                                         state1: *id010
                                         state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
                                           position: !!python/tuple
-                                          - 1090
-                                          - 337
+                                          - 1130
+                                          - 368
                                           radius: 128
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: 2019/objectives/05_play_bat_wolf
@@ -486,7 +489,7 @@ statesui:
                                                               state: 06_low_find_vampire
                                                             - !!python/object:rqt_mission_planner.mission_model.state.Transition
                                                               outcome: succeeded
-                                                              state: speed_pos_hydro
+                                                              state: infinit_hydro
                                                           transitions:
                                                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                                             name: succeeded
@@ -521,7 +524,7 @@ statesui:
                                                               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                                                 name: succeeded
                                                                 state1: *id016
-                                                                state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                                state2: &id020 !!python/object:rqt_mission_planner.Renderer.StateUI
                                                                   position: !!python/tuple
                                                                   - 646
                                                                   - 1012
@@ -548,14 +551,14 @@ statesui:
                                                           - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                                             name: succeeded
                                                             state1: *id015
-                                                            state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                                            state2: &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
                                                               position: !!python/tuple
-                                                              - 611
-                                                              - 737
-                                                              radius: 120
+                                                              - 573
+                                                              - 797
+                                                              radius: 104
                                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
-                                                                _name: 2019/navigation/speed_pos_hydro
-                                                                base_file: /missions/2019/navigation/speed_pos_hydro.yml
+                                                                _name: 2019/infinit_hydro
+                                                                base_file: /missions/2019/infinit_hydro.yml
                                                                 global_params:
                                                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                                                   description: ''
@@ -568,11 +571,11 @@ statesui:
                                                                 parameters:
                                                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                                                   description: state_name
-                                                                  value: speed_pos_hydro
+                                                                  value: infinit_hydro
                                                                   variable_name: state_name
                                                                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                                                                   description: SubMission_file
-                                                                  value: 2019/navigation/speed_pos_hydro.yml
+                                                                  value: 2019/infinit_hydro.yml
                                                                   variable_name: SubMission_file
                                                                 transitions: []
                                                               transitions: []
@@ -583,10 +586,10 @@ statesui:
                               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                 name: succeeded
                                 state1: *id008
-                                state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                state2: &id019 !!python/object:rqt_mission_planner.Renderer.StateUI
                                   position: !!python/tuple
-                                  - 1048
-                                  - -20
+                                  - 1087
+                                  - -59
                                   radius: 120
                                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                                     _name: 2019/navigation/forward_infinit
@@ -607,6 +610,68 @@ statesui:
                                       variable_name: SubMission_file
                                     transitions: []
                                   transitions: []
+                              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                name: succeeded
+                                state1: *id008
+                                state2: &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                  position: !!python/tuple
+                                  - 642
+                                  - 101
+                                  radius: 152
+                                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                    _name: WaitDistanceReached.WaitDistanceReached
+                                    base_file: /src/controller_mission/state/WaitDistanceReached.py
+                                    outcome_states:
+                                    - succeeded
+                                    - aborted
+                                    - preempted
+                                    parameters:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: state_name
+                                      value: WaitDistanceReached
+                                      variable_name: state_name
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                      description: ' ''Distance to travel before succeeded'''
+                                      value: 6.0
+                                      variable_name: param_distance_x
+                                    transitions:
+                                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                      outcome: succeeded
+                                      state: !!python/unicode 'yaw_to_bin'
+                                  transitions:
+                                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                    name: succeeded
+                                    state1: *id017
+                                    state2: &id018 !!python/object:rqt_mission_planner.Renderer.StateUI
+                                      position: !!python/tuple
+                                      - 845
+                                      - 208
+                                      radius: 100
+                                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                                        _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
+                                        base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                                        outcome_states:
+                                        - succeeded
+                                        - aborted
+                                        - preempted
+                                        parameters:
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: state_name
+                                          value: !!python/unicode 'yaw_to_bin'
+                                          variable_name: state_name
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                                          description: ' ''Angle change for Yaw'''
+                                          value: 35.0
+                                          variable_name: param_angle_yaw
+                                        transitions:
+                                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                                          outcome: succeeded
+                                          state: 05_play_bat_wolf
+                                      transitions:
+                                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                                        name: succeeded
+                                        state1: *id018
+                                        state2: *id011
 - *id003
 - *id005
 - *id004
@@ -617,11 +682,13 @@ statesui:
 - *id011
 - *id012
 - *id002
-- *id017
+- *id019
 - *id014
 - *id013
 - *id016
 - *id015
-- *id018
-- *id019
+- *id020
 - *id006
+- *id017
+- *id018
+- *id021

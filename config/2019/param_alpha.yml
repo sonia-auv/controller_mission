@@ -16,13 +16,13 @@ mission_params:
       yy: -1.5 #negatif
       timer: 2
   01_gate:  #  $/mission_params/01_gate/
-    start_yaw: 55
-    speed_yaw: 55 #same as start yaw
+    start_yaw: 57
+    speed_yaw: 57 #same as start yaw
     gate_yaw: 0 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1
-    distance_x: 9.5 #speedrelativeX
-    depth: 1 # search_depth
+    distance_x: 11 #speedrelativeX
+    depth: .75 # search_depth
     forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
     yaw_fail_path: -45
@@ -187,6 +187,7 @@ mission_params:
     target_height: 0.15
     time_max_align: 120
     time_max_find: 120
+    max_time_find: 300
     max_z: 2.6
     end_depth: 0.5
     offset:

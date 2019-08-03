@@ -58,7 +58,7 @@ mission_params:
     offset_z: 0
     heading: 0
     safe_depth: 1
-    search_depth: 2.25
+    search_depth: 2.5
     end_depth: 1.5
     distance_forward: 1
     step_back: -1.0
@@ -142,7 +142,7 @@ mission_params:
       final_bb: 300
       distance_x: 1
       heading: 0
-      search_depth: 2.0
+      search_depth: 2.25
       delay_find: 5
       offset:
         x: 0
@@ -179,7 +179,7 @@ mission_params:
     filterchain_name: simple_poignee_vampire
     filterchain_result: simple_poignee_vampire_result
     search_depth: 1.0
-    pixel_to_victory: 350
+    pixel_to_victory: 150
     hit_to_victory: 20
     low_hit_to_victory: 10
     max_queue: 10

@@ -28,6 +28,7 @@ class SaveOrientation(MissionState):
         time.sleep(3)
         orientation = self.orientation
         rospy.set_param('/save_orientation',orientation)
+        rospy.loginfo("Orientation saved : {}".format(orientation))
         return 'succeeded'
 
     def end(self):

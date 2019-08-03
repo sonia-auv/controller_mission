@@ -45,7 +45,7 @@ mission_params:
     max_alignment: 30
     max_queu_size: 5
     threshold_width: 100
-    pixel_to_victory: 950
+    pixel_to_victory: 900
     initial_bb: 600
     final_bb: 400
     target_width: 0.7
@@ -59,7 +59,7 @@ mission_params:
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
-    hit_to_victory: 10
+    hit_to_victory: 8
     simple_hit:
       avoid_forward_x: 3 #distance to path
       speed_x: 1
@@ -110,7 +110,7 @@ mission_params:
         max_z: 3.5
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
-    max_time_align: 120
+    max_time_align: 300
     max_time_aborted: 30
     search_depth: 2.5
     speedx: 0.5
@@ -165,9 +165,9 @@ mission_params:
       end_depth: 1
   07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
-    topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
-    filterchain_name: simple_poignee_vampire
-    filterchain_result: simple_poignee_vampire_result
+    topic_to_listen: /proc_image_processing/simple_body_baby_result
+    filterchain_name: simple_body_baby
+    filterchain_result: simple_body_baby_result
     search_depth: 1.5
     pixel_to_victory: 150
     hit_to_victory: 20

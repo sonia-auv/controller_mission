@@ -8,6 +8,7 @@ class TimesOut(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.start_time = None
+        self.current_second = 0
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_time', 1, 'Times Out'))
@@ -20,7 +21,18 @@ class TimesOut(MissionState):
         self.start_time = rospy.get_time()
 
     def run(self, ud):
-        if (rospy.get_time() - self.start_time) >= self.param_time:
+        time = rospy.get_time() - self.start_time
+
+        int_time = int(time)
+
+        if int_time > self.current_second:
+            self.current_second = int_time
+
+            rospy.loginfo("Time left : {} sec".format(self.param_time - int_time))
+
+        self.current_second = int(time)
+
+        if time >= self.param_time:
             return str(self.param_to_return)
 
     def end(self):

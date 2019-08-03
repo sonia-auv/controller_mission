@@ -17,8 +17,8 @@ mission_params:
     gate_yaw: 8 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1
-    distance_x: 11.5 #speedrelativeX
-    depth: 1 # search_depth
+    distance_x: 14 #speedrelativeX
+    depth: 0.5 # search_depth
     forward_gate: 2 
   03_paths:   #  $/mission_params/03_paths/
     yaw_fail_path: -45
@@ -34,7 +34,7 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
     no_path:
-      yaw_buoy: 45
+      yaw_buoy: 0
       x_before_yaw: 2
       x_after_yaw: 2
   04_hit_buoys: #  $/mission_params/04_hit_buoys/
@@ -54,8 +54,8 @@ mission_params:
     time_for_ram: 6
     offset_z: 0
     heading: 0
-    search_depth: 1.75
-    end_depth: 1.5
+    search_depth: 2.5
+    end_depth: 2
     step_back: -1.0
     max_time_find: 120
     max_time_align: 120
@@ -104,7 +104,7 @@ mission_params:
         target_width: 0.1
         target_height: 0.2
         max_queue_size: 6
-        pixel_to_victory: 350
+        pixel_to_victory: 150
         forward_z: 0.75
         param_bb: 350
         max_z: 3.5
@@ -113,7 +113,7 @@ mission_params:
     max_time_align: 120
     max_time_aborted: 30
     search_depth: 2.5
-    speedx: 1.0
+    speedx: 0.5
     dl:
       vampire: head
       filterchain_name: simple_vampire
@@ -151,24 +151,25 @@ mission_params:
       pixel_to_victory_forward: 350
       hit_to_victory: 10
       target_width: 0.3
+      target_height: 0.5
       heading: 0
       search_depth: 2
       initial_bb: 600
       final_bb: 400
       distance_x: 0.75
       offset:
-        x: .75
-        y: -0.3
+        x: 0.5
+        y: 0
         yaw: 0
         z: 0
-      end_depth: 0.5
+      end_depth: 1
   07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
     topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
     filterchain_name: simple_poignee_vampire
     filterchain_result: simple_poignee_vampire_result
-    search_depth: 1.0
-    pixel_to_victory: 350
+    search_depth: 1.5
+    pixel_to_victory: 150
     hit_to_victory: 20
     low_hit_to_victory: 10
     max_queue: 10
@@ -177,11 +178,11 @@ mission_params:
     target_width: 0.05
     target_height: 0.15
     time_max_align: 120
-    max_z: 2.6
+    max_z: 3.5
     end_depth: 0.5
     offset:
       x: 0.5
-      y: -0.2
+      y: 0
       yaw: 0
   99_pinger: #  $/mission_params/99_pinger/
     switch_time: 15

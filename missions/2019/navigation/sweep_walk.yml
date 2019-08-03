@@ -59,6 +59,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
         base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -88,6 +89,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
             base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -117,6 +119,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXYDecoupled.MoveRelativeXYDecoupled
                 base_file: /src/controller_mission/state/moveRelativeXYDecoupled.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -147,6 +150,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXYDecoupled.MoveRelativeXYDecoupled
                     base_file: /src/controller_mission/state/moveRelativeXYDecoupled.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -177,6 +181,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                         base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -203,6 +208,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                             base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -232,6 +238,7 @@ statesui:
                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                 _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                                 base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                                is_root: false
                                 outcome_states:
                                 - succeeded
                                 - aborted
@@ -248,7 +255,7 @@ statesui:
                                 transitions:
                                 - !!python/object:rqt_mission_planner.mission_model.state.Transition
                                   outcome: succeeded
-                                  state: TimesOut
+                                  state: !!python/unicode 'wait'
                               transitions:
                               - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                                 name: succeeded
@@ -295,6 +302,7 @@ statesui:
                                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                                         _name: moveRelativeXYDecoupled.MoveRelativeXYDecoupled
                                         base_file: /src/controller_mission/state/moveRelativeXYDecoupled.py
+                                        is_root: false
                                         outcome_states:
                                         - succeeded
                                         - aborted
@@ -325,6 +333,7 @@ statesui:
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                                             base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                                            is_root: false
                                             outcome_states:
                                             - succeeded
                                             - aborted
@@ -351,6 +360,7 @@ statesui:
                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                 _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                                                 base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                                                is_root: false
                                                 outcome_states:
                                                 - succeeded
                                                 - aborted
@@ -403,6 +413,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
         base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -429,6 +440,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
             base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -459,7 +471,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXYDecoupled.MoveRelativeXYDecoupled
     base_file: /src/controller_mission/state/moveRelativeXYDecoupled.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -495,3 +507,38 @@ statesui:
 - *id010
 - *id011
 - *id016
+- &id017 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 1112
+  - 453
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'wait'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 10.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'left1'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id017
+    state2: *id015

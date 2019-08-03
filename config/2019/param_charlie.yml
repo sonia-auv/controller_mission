@@ -38,7 +38,7 @@ mission_params:
       search_depth: 1.5
       align_depth: 1.5
     no_path:
-      yaw_buoy: 45
+      yaw_buoy: 15
       x_before_yaw: 2
       x_after_yaw: 2
   04_hit_buoys: #  $/mission_params/04_hit_buoys/
@@ -58,7 +58,7 @@ mission_params:
     offset_z: 0
     heading: 0
     safe_depth: 1
-    search_depth: 1.75
+    search_depth: 2.25
     end_depth: 1.5
     distance_forward: 1
     step_back: -1.0

@@ -22,7 +22,7 @@ mission_params:
     time: 6 #use for time speed
     speed_x: 1
     distance_x: 12 #speedrelativeX
-    depth: 1 # search_depth
+    depth: 0.5 # search_depth
     forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
     yaw_fail_path: -45
@@ -175,9 +175,9 @@ mission_params:
       end_depth: 0.5
   07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
-    topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
-    filterchain_name: simple_poignee_vampire
-    filterchain_result: simple_poignee_vampire_result
+    topic_to_listen: /proc_image_processing/simple_body_baby_result
+    filterchain_name: simple_body_baby
+    filterchain_result: simple_body_baby_result
     search_depth: 1.0
     pixel_to_victory: 150
     hit_to_victory: 20

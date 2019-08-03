@@ -151,19 +151,19 @@ statesui:
                     transitions:
                     - !!python/object:rqt_mission_planner.mission_model.state.Transition
                       outcome: succeeded
-                      state: MoveRelativeYawTDecoupled
+                      state: MoveRelativeXDecoupled
                   transitions:
                   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
                     name: succeeded
                     state1: *id005
                     state2: &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
                       position: !!python/tuple
-                      - 524
-                      - -234
-                      radius: 200
+                      - 659
+                      - -394
+                      radius: 176
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
-                        _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
-                        base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                        _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
+                        base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
                         outcome_states:
                         - succeeded
                         - aborted
@@ -171,43 +171,14 @@ statesui:
                         parameters:
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: state_name
-                          value: MoveRelativeYawTDecoupled
+                          value: MoveRelativeXDecoupled
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                          description: ' ''Angle change for Yaw'''
-                          value: !!python/unicode '$/mission_params/01_gate/start_yaw'
-                          variable_name: param_angle_yaw
-                        transitions:
-                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-                          outcome: succeeded
-                          state: MoveRelativeXDecoupled
-                      transitions:
-                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-                        name: succeeded
-                        state1: *id006
-                        state2: &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
-                          position: !!python/tuple
-                          - 659
-                          - -394
-                          radius: 176
-                          state: !!python/object:rqt_mission_planner.mission_model.state.State
-                            _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
-                            base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
-                            outcome_states:
-                            - succeeded
-                            - aborted
-                            - preempted
-                            parameters:
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: state_name
-                              value: MoveRelativeXDecoupled
-                              variable_name: state_name
-                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-                              description: ' ''Distance to travel'''
-                              value: !!python/unicode '$mission_params/01_gate/forward_gate'
-                              variable_name: param_distance_x
-                            transitions: []
-                          transitions: []
+                          description: ' ''Distance to travel'''
+                          value: !!python/unicode '$mission_params/01_gate/forward_gate'
+                          variable_name: param_distance_x
+                        transitions: []
+                      transitions: []
 - *id003
 - *id004
 - *id005
@@ -237,5 +208,4 @@ statesui:
     transitions: []
   transitions: []
 - *id002
-- *id007
 - *id006

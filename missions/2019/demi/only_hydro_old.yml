@@ -10,7 +10,7 @@ statesui:
     _name: 2019/objectives/01_do_gate
     base_file: /missions/2019/objectives/01_do_gate.yml
     global_params: []
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -40,7 +40,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
         base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
-        is_root: false
+        is_root: true
         outcome_states:
         - succeeded
         - aborted
@@ -141,6 +141,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                     base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -170,6 +171,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                         base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -199,6 +201,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
                             base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -244,6 +247,7 @@ statesui:
                                   description: ''
                                   value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
                                   variable_name: param_topic_filterchain_result
+                                is_root: false
                                 is_submission: true
                                 outcome_states:
                                 - succeeded
@@ -286,6 +290,7 @@ statesui:
                                       description: ''
                                       value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
                                       variable_name: param_topic_filterchain_result
+                                    is_root: false
                                     is_submission: true
                                     outcome_states:
                                     - succeeded
@@ -328,6 +333,7 @@ statesui:
                                           description: ''
                                           value: 3.0
                                           variable_name: max_z
+                                        is_root: false
                                         is_submission: true
                                         outcome_states:
                                         - succeeded
@@ -357,6 +363,7 @@ statesui:
                                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                                             _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                                             base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                                            is_root: false
                                             outcome_states:
                                             - succeeded
                                             - aborted
@@ -386,6 +393,7 @@ statesui:
                                               state: !!python/object:rqt_mission_planner.mission_model.state.State
                                                 _name: moveGlobalZByStep.MoveZByStep
                                                 base_file: /src/controller_mission/state/moveGlobalZByStep.py
+                                                is_root: false
                                                 outcome_states:
                                                 - succeeded
                                                 - aborted
@@ -421,6 +429,7 @@ statesui:
                                   description: ''
                                   value: 35.0
                                   variable_name: frequency
+                                is_root: false
                                 is_submission: true
                                 outcome_states:
                                 - succeeded
@@ -447,6 +456,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: timeOut.TimesOut
                     base_file: /src/controller_mission/state/timeOut.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -484,6 +494,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: timeOut.TimesOut
             base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -526,6 +537,7 @@ statesui:
               description: ''
               value: 35.0
               variable_name: frequency
+            is_root: false
             is_submission: true
             outcome_states:
             - succeeded

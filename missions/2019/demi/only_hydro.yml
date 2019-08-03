@@ -45,6 +45,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: moveRelativeYawDecoupled.MoveRelativeYawTDecoupled
         base_file: /src/controller_mission/state/moveRelativeYawDecoupled.py
+        is_root: true
         outcome_states:
         - succeeded
         - aborted
@@ -74,6 +75,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
             base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -103,6 +105,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                 base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -641,7 +644,7 @@ statesui:
     _name: 2019/objectives/01_gate_no_style
     base_file: /missions/2019/objectives/01_gate_no_style.yml
     global_params: []
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded

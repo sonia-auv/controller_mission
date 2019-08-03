@@ -514,7 +514,7 @@ statesui:
       state: !!python/unicode 'split2'
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: MoveYaw
+      state: !!python/unicode 'yaww'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: aborted
@@ -742,8 +742,8 @@ statesui:
                 state2: *id015
 - &id021 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -212
-  - 517
+  - -186
+  - 485
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
@@ -805,10 +805,40 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'forward'
+      state: !!python/unicode 'yaww'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id023
-    state2: *id021
+    state2: &id024 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -376
+      - 594
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveGlobalYaw.MoveYaw
+        base_file: /src/controller_mission/state/moveGlobalYaw.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'yaww'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 300.0
+          variable_name: param_heading
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'forward'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id024
+        state2: *id021
 - *id019
+- *id024

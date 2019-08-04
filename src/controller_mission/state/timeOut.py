@@ -19,6 +19,7 @@ class TimesOut(MissionState):
 
     def initialize(self):
         self.start_time = rospy.get_time()
+        rospy.loginfo("Asked time : {} sec".format(self.param_time))
 
     def run(self, ud):
         time = rospy.get_time() - self.start_time
@@ -28,7 +29,7 @@ class TimesOut(MissionState):
         if int_time > self.current_second:
             self.current_second = int_time
 
-            rospy.loginfo("Time left : {} sec".format(self.param_time - int_time))
+            rospy.loginfo("Time left : {} sec".format(float(self.param_time) - int_time))
 
         self.current_second = int(time)
 

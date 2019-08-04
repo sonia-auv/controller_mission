@@ -12,8 +12,8 @@ mission_params:
       yy: -1.5 #negatif
       timer: 2
   01_gate:  #  $/mission_params/01_gate/
-    start_yaw: 100
-    speed_yaw: 100 #same as start yaw
+    start_yaw: 110
+    speed_yaw: 110 #same as start yaw
     gate_yaw: 8 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1
@@ -45,7 +45,7 @@ mission_params:
     max_alignment: 30
     max_queu_size: 5
     threshold_width: 100
-    pixel_to_victory: 850
+    pixel_to_victory: 700
     initial_bb: 600
     final_bb: 400
     target_width: 0.7

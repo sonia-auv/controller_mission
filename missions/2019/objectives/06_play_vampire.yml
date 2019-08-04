@@ -243,7 +243,7 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
-                  value: !!python/unicode '$/mission_params/06_slay_vampire/max_time_align'
+                  value: 240.0
                   variable_name: param_time
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''
@@ -320,7 +320,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: !!python/unicode '$/mission_params/06_slay_vampire/max_time_aborted'
+          value: 120.0
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''

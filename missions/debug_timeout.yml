@@ -40,6 +40,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: saveOrientation.SaveOrientation
         base_file: /src/controller_mission/state/saveOrientation.py
+        is_root: false
         outcome_states:
         - succeeded
         - aborted
@@ -65,6 +66,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveRelativeZDecoupled.MoveRelativeZDecoupled
             base_file: /src/controller_mission/state/moveRelativeZDecoupled.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -97,6 +99,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                 base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -126,6 +129,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                     base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -183,7 +187,7 @@ statesui:
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: timeOut.TimesOut
         base_file: /src/controller_mission/state/timeOut.py
-        is_root: false
+        is_root: true
         outcome_states:
         - succeeded
         - aborted
@@ -232,7 +236,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 120.0
+              value: 20.0
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
@@ -254,6 +258,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                 base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -283,6 +288,7 @@ statesui:
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
                     _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
                     base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                    is_root: false
                     outcome_states:
                     - succeeded
                     - aborted
@@ -312,6 +318,7 @@ statesui:
                       state: !!python/object:rqt_mission_planner.mission_model.state.State
                         _name: moveGlobalZByStep.MoveZByStep
                         base_file: /src/controller_mission/state/moveGlobalZByStep.py
+                        is_root: false
                         outcome_states:
                         - succeeded
                         - aborted
@@ -345,6 +352,7 @@ statesui:
                           state: !!python/object:rqt_mission_planner.mission_model.state.State
                             _name: timeOut.TimesOut
                             base_file: /src/controller_mission/state/timeOut.py
+                            is_root: false
                             outcome_states:
                             - succeeded
                             - aborted
@@ -378,7 +386,7 @@ statesui:
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZByStep.MoveZByStep
     base_file: /src/controller_mission/state/moveGlobalZByStep.py
-    is_root: true
+    is_root: false
     outcome_states:
     - succeeded
     - aborted
@@ -473,6 +481,7 @@ statesui:
               description: ''
               value: 1.5
               variable_name: param_forward_distance
+            is_root: false
             is_submission: true
             outcome_states:
             - succeeded
@@ -499,6 +508,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: WaitDistanceReached.WaitDistanceReached
             base_file: /src/controller_mission/state/WaitDistanceReached.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted

@@ -97,7 +97,7 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode '$/mission_params/05_bat_wolf/time_max_align'
+      value: 120.0
       variable_name: param_time
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -483,7 +483,7 @@ statesui:
                           variable_name: state_name
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Times Out'''
-                          value: !!python/unicode '$/mission_params/05_bat_wolf/time_max_find'
+                          value: 120.0
                           variable_name: param_time
                         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                           description: ' ''Times Out'''
@@ -549,7 +549,7 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
-          value: !!python/unicode '$/mission_params/05_bat_wolf/time_max_find'
+          value: 120.0
           variable_name: param_time
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''

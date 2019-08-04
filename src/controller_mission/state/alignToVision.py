@@ -1,4 +1,5 @@
 import rospy
+import time
 
 from Queue import deque
 from ..mission_state import MissionState, Parameter
@@ -31,11 +32,15 @@ class AlignToVision(MissionState):
 
         self.is_align_with_heading_active = False
         self.victory = False
+        self.is_detecting = False
 
         self.vision_x_pixel = None
         self.vision_y_pixel = None
 
         self.count = 0
+        self.not_detect = 0
+        self.not_detect_count = 0
+        self.z_offset = 0
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_bounding_box', 200, 'bounding box in pixel'))
@@ -46,9 +51,16 @@ class AlignToVision(MissionState):
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Name of topic to listen'))
         self.parameters.append(Parameter('param_nb_pixel_to_victory', 300, 'Minimal nb of pixel to ram'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
+        self.parameters.append(Parameter('param_maximum_not_detect', 4, 'Maximum number of time it didn\'t detect'))
+        self.parameters.append(Parameter('param_maximum_z_offset', 4, 'Maximum number of z offset to have'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
         self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.5, 'Control bounding box in y'))
         self.parameters.append(Parameter('param_check_vision_reach', False, 'Maximum size of queue'))
+        self.parameters.append(Parameter('param_z_offset', -0.5, 'the z offset given when not detecting'))
+        self.parameters.append(Parameter('param_depth_max', 3, 'maximum depth'))
+        self.parameters.append(Parameter('param_depth_min', 1, 'minimum depth'))
+
+
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']
@@ -152,12 +164,19 @@ class AlignToVision(MissionState):
         self.vision_is_reach_z = False
         self.vision_is_reach = False
 
+        self.not_detect = 0
+        self.not_detect_count = 0
         self.count += 1
 
+        self.z_offset = self.param_z_offset
+
     def run(self, ud):
+        self.is_detecting = False
+        
         if self.is_align_with_heading_active and self.vision_is_reach_y:
             rospy.logdebug('set_target : 1 - run')
             self.set_target(0.0, 0.0, 0.0, False, False, False)
+            is_detecting = True
 
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
@@ -176,6 +195,25 @@ class AlignToVision(MissionState):
 
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'
+        
+        if self.not_detect_count >= self.param_maximum_z_offset:
+            return 'aborted'
+        elif not is_detecting:
+            self.not_detect += 1
+            time.sleep(0.1)
+
+        
+        if self.not_detect >= self.param_maximum_not_detect:
+            self.not_detect = 0
+            self.not_detect_count += 1
+            if self.position_z >= self.param_depth_max:
+                self.set_target(0.0, 0.0, 0.0, True, False, True)
+                self.z_offset = -self.z_offset
+            elif self.position_z <= self.param_depth_min:
+                self.set_target(0.0, 0.0, 0.0, True, False, True)
+                self.z_offset = -self.z_offset
+            else:
+                self.set_target(0.0, self.z_offset, 0.0, True, False, True)
 
     def end(self):
         self.vision_subscriber.unregister()

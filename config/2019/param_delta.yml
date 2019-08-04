@@ -12,12 +12,14 @@ mission_params:
       yy: -1.5 #negatif
       timer: 2
   01_gate:  #  $/mission_params/01_gate/
-    start_yaw: 233
-    speed_yaw: 233 #same as start yaw
+    start_yaw: 240
+    speed_yaw: 240 #same as start yaw
+    yaw_bw: 215
+    dist_bw: 25
     gate_yaw: 0 #ajustement pour faire face a la gate 
     time: 6 #use for time speed
     speed_x: 1
-    distance_x: 14 #speedrelativeX
+    distance_x: 15 #speedrelativeX
     depth: 0.5 # search_depth
     forward_gate: 2
   03_paths:   #  $/mission_params/03_paths/
@@ -165,13 +167,15 @@ mission_params:
       end_depth: 0.5
   07_grab:  #  $/mission_params/07_grab/
     bin: baby #coffins
-    topic_to_listen: /proc_image_processing/simple_poignee_vampire_result
-    filterchain_name: simple_poignee_vampire
-    filterchain_result: simple_poignee_vampire_result
-    search_depth: 1.0
+    topic_to_listen: /proc_image_processing/simple_body_baby_result
+    filterchain_name: simple_body_baby
+    filterchain_result: simple_body_baby_result
+    search_depth: 1.5
     pixel_to_victory: 350
-    hit_to_victory: 20
+    hit_to_victory: 15
     low_hit_to_victory: 10
+    dist_from_bw: 15
+    yaw_from_bw: 200
     max_queue: 10
     param_bb: 100
     forward_z: 0.5
@@ -181,7 +185,7 @@ mission_params:
     max_z: 2.6
     end_depth: 0.5
     offset:
-      x: 0.5
+      x: 2
       y: -0.2
       yaw: 0
   99_pinger: #  $/mission_params/99_pinger/

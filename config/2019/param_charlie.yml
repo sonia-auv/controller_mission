@@ -103,7 +103,7 @@ mission_params:
     end_depth: 1.5
     offset:
       x: 0.5
-      y: -0.2
+      y: 0
       yaw: 0
     handle:
       topic_to_listen: /proc_image_processing/simple_bin_handle_result
@@ -121,7 +121,7 @@ mission_params:
   06_slay_vampire: #  $/mission_params/06_slay_vampire/
     max_time_find: 120
     max_time_low_find: 300
-    max_time_align: 120
+    max_time_align: 300
     max_time_aborted: 30
     search_depth: 2.5
     speedx: 1.0
@@ -190,7 +190,7 @@ mission_params:
     time_max_align: 120
     time_max_find: 300
     max_time_find: 300
-    max_z: 2.6
+    max_z: 3
     end_depth: 0.5
     offset:
       x: 0.5

@@ -1,6 +1,6 @@
 mission_params:
   00_global:  #  mission_params/00_global
-    pinger_frequency: 30
+    pinger_frequency: 35
     x_speed_hydro: 0.5
     safe_depth: 1.0
     elgrandfrero: 1.5 #positif

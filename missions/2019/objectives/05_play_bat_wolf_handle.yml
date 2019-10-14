@@ -34,7 +34,7 @@ statesui:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
-    state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id015 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
       - 1408
       - 279
@@ -153,8 +153,8 @@ statesui:
     state2: *id001
 - &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 630
-  - 438
+  - 590
+  - 295
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -239,8 +239,8 @@ statesui:
 - *id005
 - &id006 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 396
-  - 417
+  - 411
+  - 277
   radius: 128
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/05_find_bat_wolf
@@ -283,8 +283,8 @@ statesui:
     state2: *id004
 - &id007 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 99
-  - 161
+  - -311
+  - 309
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: moveGlobalZByStep.MoveZByStep
@@ -310,46 +310,35 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: 05_find_bat_wolf
+      state: 05_bw_handle
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: crab_walk
-    - !!python/object:rqt_mission_planner.mission_model.state.Transition
-      outcome: succeeded
-      state: WaitDistanceReached
+      state: !!python/unicode 'time max find'
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id007
-    state2: *id006
-  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-    name: succeeded
-    state1: *id007
-    state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 473
-      - 180
+      - -107
+      - 399
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: 2019/navigation/crab_walk
-        base_file: /missions/2019/navigation/crab_walk.yml
+        _name: 2019/objectives/05_bw_handle
+        base_file: /missions/2019/objectives/05_bw_handle.yml
         global_params:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: -1.5
-          variable_name: param_left_distance
+          value: !!python/unicode '''align_roulette'''
+          variable_name: param_topic_filterchain
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.5
-          variable_name: param_right_distance
+          value: !!python/unicode '''/proc_image_processing/align_bin_result'''
+          variable_name: param_topic_deeplearning_result
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ''
-          value: 1.0
-          variable_name: param_timeout
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ''
-          value: 1.5
-          variable_name: param_forward_distance
+          value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
+          variable_name: param_topic_filterchain_result
         is_submission: true
         outcome_states:
         - succeeded
@@ -357,25 +346,198 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: crab_walk
+          value: 05_bw_handle
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: SubMission_file
-          value: 2019/navigation/crab_walk.yml
+          value: 2019/objectives/05_bw_handle.yml
           variable_name: SubMission_file
-        transitions: []
-      transitions: []
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: Switch
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id008
+        state2: &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - -29
+          - 614
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: switchControlMode.Switch
+            base_file: /src/controller_mission/state/switchControlMode.py
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: Switch
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Control Mode'''
+              value: 0.0
+              variable_name: param_mode
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: 05_align_bw_handle
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id009
+            state2: &id010 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 205
+              - 441
+              radius: 144
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: 2019/objectives/05_align_bw_handle
+                base_file: /missions/2019/objectives/05_align_bw_handle.yml
+                global_params:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: 0.4
+                  variable_name: distance_z
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: 350.0
+                  variable_name: pixel_to_victory
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ''
+                  value: 3.0
+                  variable_name: max_z
+                is_submission: true
+                outcome_states:
+                - succeeded
+                - aborted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: 05_align_bw_handle
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: SubMission_file
+                  value: 2019/objectives/05_align_bw_handle.yml
+                  variable_name: SubMission_file
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: MoveRelativeZDecoupled
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id010
+                state2: &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 171
+                  - 154
+                  radius: 176
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: moveRelativeZDecoupled.MoveRelativeZDecoupled
+                    base_file: /src/controller_mission/state/moveRelativeZDecoupled.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: MoveRelativeZDecoupled
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Distance to travel'''
+                      value: -1.0
+                      variable_name: param_distance_z
+                    transitions:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                      outcome: succeeded
+                      state: 05_find_bat_wolf
+                  transitions:
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id011
+                    state2: *id006
+                  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                    name: succeeded
+                    state1: *id011
+                    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
+                      position: !!python/tuple
+                      - 519
+                      - 79
+                      radius: 100
+                      state: !!python/object:rqt_mission_planner.mission_model.state.State
+                        _name: timeOut.TimesOut
+                        base_file: /src/controller_mission/state/timeOut.py
+                        outcome_states:
+                        - succeeded
+                        - aborted
+                        - preempted
+                        parameters:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: state_name
+                          value: TimesOut
+                          variable_name: state_name
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: 120.0
+                          variable_name: param_time
+                        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                          description: ' ''Times Out'''
+                          value: !!python/unicode 'succeeded'
+                          variable_name: param_to_return
+                        transitions:
+                        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                          outcome: succeeded
+                          state: MoveRelativeXDecoupled
+                      transitions:
+                      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                        name: succeeded
+                        state1: *id012
+                        state2: &id013 !!python/object:rqt_mission_planner.Renderer.StateUI
+                          position: !!python/tuple
+                          - 747
+                          - 9
+                          radius: 176
+                          state: !!python/object:rqt_mission_planner.mission_model.state.State
+                            _name: moveRelativeXDecoupled.MoveRelativeXDecoupled
+                            base_file: /src/controller_mission/state/moveRelativeXDecoupled.py
+                            outcome_states:
+                            - succeeded
+                            - aborted
+                            - preempted
+                            parameters:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: state_name
+                              value: MoveRelativeXDecoupled
+                              variable_name: state_name
+                            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                              description: ' ''Distance to travel'''
+                              value: 0.75
+                              variable_name: param_distance_x
+                            transitions:
+                            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                              outcome: succeeded
+                              state: Droppers
+                          transitions:
+                          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                            name: succeeded
+                            state1: *id013
+                            state2: *id001
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id007
-    state2: &id008 !!python/object:rqt_mission_planner.Renderer.StateUI
+    state2: &id014 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 549
-      - -85
-      radius: 152
+      - -53
+      - 184
+      radius: 104
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: WaitDistanceReached.WaitDistanceReached
-        base_file: /src/controller_mission/state/WaitDistanceReached.py
+        _name: timeOut.TimesOut
+        base_file: /src/controller_mission/state/timeOut.py
         outcome_states:
         - succeeded
         - aborted
@@ -383,21 +545,23 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: WaitDistanceReached
+          value: !!python/unicode 'time max find'
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Distance to travel before succeeded'''
-          value: 6.0
-          variable_name: param_distance_x
-        transitions:
-        - !!python/object:rqt_mission_planner.mission_model.state.Transition
-          outcome: succeeded
-          state: Droppers
-      transitions:
-      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
-        name: succeeded
-        state1: *id008
-        state2: *id001
-- *id009
-- *id010
+          description: ' ''Times Out'''
+          value: 120.0
+          variable_name: param_time
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: !!python/unicode 'aborted'
+          variable_name: param_to_return
+        transitions: []
+      transitions: []
+- *id014
+- *id015
 - *id008
+- *id010
+- *id011
+- *id009
+- *id012
+- *id013

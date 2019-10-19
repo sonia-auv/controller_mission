@@ -82,6 +82,7 @@ statesui:
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: moveGlobalZByStep.MoveZByStep
             base_file: /src/controller_mission/state/moveGlobalZByStep.py
+            is_root: false
             outcome_states:
             - succeeded
             - aborted
@@ -103,8 +104,8 @@ statesui:
           transitions: []
 - &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 41
-  - 277
+  - 158
+  - 258
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/07_find_grab
@@ -122,7 +123,7 @@ statesui:
       description: ''
       value: !!python/unicode '''/proc_image_processing/align_roulette_result'''
       variable_name: param_topic_filterchain_result
-    is_root: true
+    is_root: false
     is_submission: true
     outcome_states:
     - succeeded
@@ -197,7 +198,7 @@ statesui:
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
-              value: 1.0
+              value: 120.0
               variable_name: param_time
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Times Out'''
@@ -222,6 +223,7 @@ statesui:
               state: !!python/object:rqt_mission_planner.mission_model.state.State
                 _name: armState.Arm
                 base_file: /src/controller_mission/state/armState.py
+                is_root: false
                 outcome_states:
                 - succeeded
                 - aborted
@@ -281,3 +283,38 @@ statesui:
 - *id004
 - *id008
 - *id006
+- &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 27
+  - 336
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalZByStep.MoveZByStep
+    base_file: /src/controller_mission/state/moveGlobalZByStep.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: MoveZByStep
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: !!python/unicode '$/mission_params/07_grab/search_depth'
+      variable_name: param_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 0.5
+      variable_name: param_z_step
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: 07_find_grab
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id009
+    state2: *id003

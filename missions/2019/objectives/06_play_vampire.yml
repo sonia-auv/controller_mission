@@ -28,8 +28,8 @@ statesui:
   transitions: []
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -418
-  - 207
+  - -387
+  - 364
   radius: 144
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: 2019/objectives/06_find_vampire_dl
@@ -265,8 +265,8 @@ statesui:
 - *id003
 - &id009 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -642
-  - 229
+  - -555
+  - 245
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: timeOut.TimesOut
@@ -335,8 +335,8 @@ statesui:
 - *id010
 - &id011 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - -829
-  - 242
+  - -934
+  - 249
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
     _name: switchControlMode.Switch
@@ -358,10 +358,44 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'split2'
+      state: MoveZByStep
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id011
-    state2: *id009
+    state2: &id012 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - -763
+      - 246
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveGlobalZByStep.MoveZByStep
+        base_file: /src/controller_mission/state/moveGlobalZByStep.py
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: MoveZByStep
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: !!python/unicode '$/mission_params/06_slay_vampire/search_depth'
+          variable_name: param_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.5
+          variable_name: param_z_step
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'split2'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id012
+        state2: *id009
 - *id002
+- *id012

@@ -118,7 +118,7 @@ mission_params:
     max_time_low_find: 300
     max_time_align: 120
     max_time_aborted: 30
-    search_depth: 0.5
+    search_depth: 1.5
     speedx: 1.0
     dl:
       vampire: head

@@ -1,0 +1,137 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 361
+  - 106
+  radius: 152
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: Align_Bottom_w_path
+    base_file: /missions/Align_Bottom_w_path.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: Align_Bottom_w_path
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: Align_Bottom_w_path.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Move_Speed_2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 634
+      - 109
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveSpeed.MoveSpeed
+        base_file: /src/controller_mission/state/moveSpeed.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'Move_Speed_2'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 1.8
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_yaw
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 150
+  - 350
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveRelativeDecoupledZ.MoveRelativeDecoupledZ
+    base_file: /src/controller_mission/state/moveRelativeDecoupledZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'Get_Down'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'Move_Speed_2'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 193
+      - 185
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: moveSpeed.MoveSpeed
+        base_file: /src/controller_mission/state/moveSpeed.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: MoveSpeed
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 1.8
+          variable_name: param_distance_x
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_z
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Distance to travel'''
+          value: 0.0
+          variable_name: param_distance_yaw
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: Align_Bottom_w_path
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id003
+        state2: *id001
+- *id003
+- *id004

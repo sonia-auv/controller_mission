@@ -1,0 +1,58 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 101
+  - 227
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: moveGlobalZ.MoveZ
+    base_file: /src/controller_mission/state/moveGlobalZ.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: MoveZ
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Distance to travel'''
+      value: 1.0
+      variable_name: param_distance_z
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: test_time2
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 396
+      - 257
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: test_time2
+        base_file: /missions/test_time2.yml
+        global_params: []
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: test_time2
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: test_time2.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- *id002

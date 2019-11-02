@@ -154,26 +154,6 @@ class MissionExecutor:
         except rospy.ServiceException:
             rospy.logwarn('proc_mapping ObjectiveReset service is not available')
 
-        rospy.loginfo('Mission start in 13 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 12 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 11 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 10 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 9 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 8 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 7 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 6 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 5 ...')
-        time.sleep(1)
-        rospy.loginfo('Mission start in 4 ...')
-        time.sleep(1)
         try:
             self.set_initial_position_srv()
             time.sleep(2)
@@ -437,6 +417,7 @@ class MissionExecutor:
     def _handle_list_missions(self, req):
         self.missions = []
         self.load_missions_file(self.missions_directory)
+        self.missions.sort(key=str.lower)
         missions_list = None
         for mission in self.missions:
             if not missions_list:

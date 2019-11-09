@@ -49,16 +49,11 @@ class AlignToVisionTest(MissionState):
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_bounding_box', 200, 'bounding box in pixel'))
-        # self.parameters.append(Parameter('param_color', 'red', 'color of object to align'))
-        # self.parameters.append(Parameter('param_threshold_width', 100, 'maximum nb of pixel to align with heading'))
-        self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
-        # self.parameters.append(Parameter('param_vision_target_width_in_meter', 0.23, 'transform pixel to meter'))
+        self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision')) 
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
         self.parameters.append(Parameter('param_distance_to_victory', 2, 'Minimal distance to ram (m)'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
-        # self.parameters.append(Parameter('param_control_bounding_box_in_y', 0.25, 'Control bounding box in y (m)'))
-        # self.parameters.append(Parameter('param_check_vision_reach', False, 'Maximum size of queue'))
         self.parameters.append(Parameter('param_object_real_height', 10, 'Object height (cm)'))
         self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (cm)'))
         self.parameters.append(Parameter('param_image_height', 1544, 'Image height (px)'))
@@ -100,11 +95,6 @@ class AlignToVisionTest(MissionState):
             # rospy.logdebug('set_target : 2 - run')
             self.set_target(0.0, 0.0, 0.0, 0.0, False, False, False, False)
             return 'succeeded'
-
-        # if self.vision_is_reach:
-        #    rospy.logdebug('set_target : 2 - run')
-        #    self.set_target(0.0, 0.0, 0.0, False, False)
-        #    return 'forward'
 
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'
@@ -226,7 +216,7 @@ class AlignToVisionTest(MissionState):
         rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def get_outcomes(self):
-        return ['succeeded', 'aborted', 'forward', 'preempted']
+        return ['succeeded', 'aborted', 'preempted']
 
     # def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
     #    if pos_y <= self.param_control_bounding_box_in_y:

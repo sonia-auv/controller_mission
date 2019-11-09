@@ -15,7 +15,7 @@ globalparams:
 statesui:
 - &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
   position: !!python/tuple
-  - 343
+  - 342
   - 182
   radius: 100
   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -33,11 +33,11 @@ statesui:
       variable_name: state_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Topic of  result'''
-      value: !!python/unicode '$/mission_params/filterchain_name'
+      value: !!python/unicode 'simple_align_test'
       variable_name: param_node_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode '$/mission_params/filterchain_name'
+      value: !!python/unicode 'simple_align_test'
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -58,19 +58,19 @@ statesui:
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
       outcome: succeeded
-      state: !!python/unicode 'align'
+      state: AlignToVisionTest
   transitions:
   - !!python/object:rqt_mission_planner.Renderer.TransitionUI
     name: succeeded
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 351
-      - 344
-      radius: 104
+      - 483
+      - 337
+      radius: 136
       state: !!python/object:rqt_mission_planner.mission_model.state.State
-        _name: alignRoulette.AlignRoulette
-        base_file: /src/controller_mission/state/alignRoulette.py
+        _name: alignToVisionTest.AlignToVisionTest
+        base_file: /src/controller_mission/state/alignToVisionTest.py
         outcome_states:
         - succeeded
         - aborted
@@ -79,36 +79,64 @@ statesui:
         parameters:
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: state_name
-          value: !!python/unicode 'align'
+          value: AlignToVisionTest
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''bounding box in pixel'''
-          value: !!python/unicode '$/mission_params/param_bb'
+          value: 200.0
           variable_name: param_bounding_box
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''transform pixel to meter'''
-          value: !!python/unicode '$/mission_params/target_width'
-          variable_name: param_vision_target_width_in_meter
+          description: ' ''maximum nb of pixel to align with heading'''
+          value: 100.0
+          variable_name: param_threshold_width
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''transform pixel to meter'''
-          value: !!python/unicode '$/mission_params/target_height'
-          variable_name: param_vision_target_height_in_meter
+          description: ' ''Yaw rotation to align vision'''
+          value: 10.0
+          variable_name: param_heading
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Name of topic to listen'''
-          value: !!python/unicode '$/mission_params/topic_to_listen'
+          description: ' ''Topic to listen'''
+          value: /proc_image_processing/buoy_red
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Minimal distance to ram (m)'''
+          value: 2.0
+          variable_name: param_distance_to_victory
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Maximum number of alignment'''
+          value: 4.0
+          variable_name: param_maximum_nb_alignment
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum size of queue'''
-          value: !!python/unicode '$/mission_params/max_queue_size'
+          value: 10.0
           variable_name: param_max_queue_size
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Control bounding box in y'''
-          value: !!python/unicode '$/mission_params/param_bb_y'
-          variable_name: param_control_bounding_box_in_y
+          description: ' ''Maximum size of queue'''
+          value: 'False'
+          variable_name: param_check_vision_reach
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Control bounding box in y'''
-          value: !!python/unicode '$/mission_params/pixel_to_victory'
-          variable_name: param_nb_pixel_to_victory
+          description: ' ''Object height (cm)'''
+          value: 10.0
+          variable_name: param_object_real_height
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Object width (cm)'''
+          value: 10.0
+          variable_name: param_object_real_width
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Image height (px)'''
+          value: 1544.0
+          variable_name: param_image_height
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Image width (px)'''
+          value: 2064.0
+          variable_name: param_image_width
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Lateral offset'''
+          value: 0.0
+          variable_name: param_offset_y
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Vertical offset'''
+          value: 0.0
+          variable_name: param_offset_z
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
@@ -119,8 +147,8 @@ statesui:
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 344
-          - 504
+          - 415
+          - 514
           radius: 100
           state: !!python/object:rqt_mission_planner.mission_model.state.State
             _name: setControlBoundingBox.SetControlBoundingBox
@@ -190,11 +218,11 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Topic of  result'''
-                  value: !!python/unicode '$/mission_params/filterchain_name'
+                  value: !!python/unicode 'simple_align_test'
                   variable_name: param_node_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Filter chain name'''
-                  value: !!python/unicode '$/mission_params/filterchain_name'
+                  value: !!python/unicode 'simple_align_test'
                   variable_name: param_filterchain_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''
@@ -270,5 +298,5 @@ statesui:
     state1: *id004
     state2: *id001
 - *id003
-- *id002
 - *id005
+- *id002

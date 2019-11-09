@@ -53,7 +53,7 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 383
+      - 384
       - 269
       radius: 144
       state: !!python/object:rqt_mission_planner.mission_model.state.State

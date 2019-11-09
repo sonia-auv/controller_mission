@@ -169,7 +169,7 @@ class AlignToVisionTest(MissionState):
                                 self.param_image_width / 2)) / pixel_to_meter
                     if self.vision_is_reach_z:
                         self.is_align_with_heading_active = True
-                    else
+                    else:
                         self.is_align_with_heading_active = False
                 self.align_submarine()
 

@@ -63,8 +63,8 @@ class AlignToVisionTest(MissionState):
         self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (cm)'))
         self.parameters.append(Parameter('param_image_height', 1544, 'Image height (px)'))
         self.parameters.append(Parameter('param_image_width', 2064, 'Image width (px)'))
-        self.parameters.append(Parameter('param_offset_y', 0, 'Offset latéral'))
-        self.parameters.append(Parameter('param_offset_z', 0, 'Offset vertical'))
+        self.parameters.append(Parameter('param_offset_y', 0, 'Lateral offset'))
+        self.parameters.append(Parameter('param_offset_z', 0, 'Vertical offset'))
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')

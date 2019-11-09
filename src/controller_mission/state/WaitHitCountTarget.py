@@ -35,7 +35,7 @@ class WaitHitCountTarget(MissionState):
         distance = math.sqrt(((vision_data.x - self.last_vision_target.x) ** 2)+((vision_data.y - self.last_vision_target.y) ** 2))
         if distance <= self.param_max_distance_between_vision_target:
             self.nb_hit_count += 1
-            rospy.loginfo('Hit count = %f' % self.nb_hit_count)
+            rospy.loginfo('Hit count = %f at %s' % (self.nb_hit_count, vision_data.desc_2))
         else:
             self.nb_hit_count = 0
             rospy.loginfo('Lost count !!!!')

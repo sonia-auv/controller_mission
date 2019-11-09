@@ -417,6 +417,7 @@ class MissionExecutor:
     def _handle_list_missions(self, req):
         self.missions = []
         self.load_missions_file(self.missions_directory)
+        self.missions.sort(key=str.lower)
         missions_list = None
         for mission in self.missions:
             if not missions_list:

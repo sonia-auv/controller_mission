@@ -1,0 +1,117 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 541
+  - 200
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: 2019/objectives/04_hit_buoy
+    base_file: /missions/2019/objectives/04_hit_buoy.yml
+    global_params: []
+    is_root: false
+    is_submission: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: 04_hit_buoy
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: SubMission_file
+      value: 2019/objectives/04_hit_buoy.yml
+      variable_name: SubMission_file
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: 04_avoid_buoy
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 722
+      - 198
+      radius: 104
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: 2019/objectives/04_avoid_buoy
+        base_file: /missions/2019/objectives/04_avoid_buoy.yml
+        global_params: []
+        is_submission: true
+        outcome_states:
+        - succeeded
+        - aborted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: 04_avoid_buoy
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: SubMission_file
+          value: 2019/objectives/04_avoid_buoy.yml
+          variable_name: SubMission_file
+        transitions: []
+      transitions: []
+- &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 167
+  - 192
+  radius: 104
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setDepthOfSet.SetDepthOfSet
+    base_file: /src/controller_mission/state/setDepthOfSet.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: SetDepthOfSet
+      variable_name: state_name
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: Switch
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id002
+    state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 335
+      - 200
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: switchControlMode.Switch
+        base_file: /src/controller_mission/state/switchControlMode.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: Switch
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Control Mode'''
+          value: 0.0
+          variable_name: param_mode
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: 04_hit_buoy
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id003
+        state2: *id001
+- *id003
+- *id004

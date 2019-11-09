@@ -1,0 +1,175 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 305
+  - 261
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: timeOut.TimesOut
+    base_file: /src/controller_mission/state/timeOut.py
+    is_root: false
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'split1'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: 1.0
+      variable_name: param_time
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Times Out'''
+      value: succeeded
+      variable_name: param_to_return
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: LaunchVision
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 46
+      - 227
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: launchVision.LaunchVision
+        base_file: /src/controller_mission/state/launchVision.py
+        is_root: true
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: LaunchVision
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Topic of  result'''
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
+          variable_name: param_node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Filter chain name'''
+          value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
+          variable_name: param_filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: /provider_vision/Front_GigE
+          variable_name: param_media_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 1.0
+          variable_name: param_start_front
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 2.0
+          variable_name: param_start_bottom
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 1.0
+          variable_name: param_cmd
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: TimesOut
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 146
+          - 24
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: timeOut.TimesOut
+            base_file: /src/controller_mission/state/timeOut.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: TimesOut
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: 1.0
+              variable_name: param_time
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Times Out'''
+              value: succeeded
+              variable_name: param_to_return
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'stopvis'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 523
+              - 55
+              radius: 100
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: launchVision.LaunchVision
+                base_file: /src/controller_mission/state/launchVision.py
+                is_root: false
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: !!python/unicode 'stopvis'
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Topic of  result'''
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
+                  variable_name: param_node_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Filter chain name'''
+                  value: !!python/unicode '$/mission_params/06_slay_vampire/dl/filterchain_name'
+                  variable_name: param_filterchain_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Media name'''
+                  value: !!python/unicode '/provider_vision/Bottom_GigE'
+                  variable_name: param_media_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Media name'''
+                  value: 1.0
+                  variable_name: param_start_front
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Media name'''
+                  value: 2.0
+                  variable_name: param_start_bottom
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Times Out'''
+                  value: 2.0
+                  variable_name: param_cmd
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'split1'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: *id001
+- *id003
+- *id004
+- *id002

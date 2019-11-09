@@ -44,6 +44,7 @@ class MissionState(smach.State):
                 self.end()
                 return 'preempted'
             result = self.run(ud)
+
             if result:
                 self.end()
                 return result

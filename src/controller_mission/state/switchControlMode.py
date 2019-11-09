@@ -1,8 +1,7 @@
 import rospy
 
 from ..mission_state import MissionState, Parameter
-from proc_control.srv import SetControlMode, SetControlModeRequest
-
+from proc_control.srv import SetControlMode, SetControlModeRequest, SetDecoupledTarget
 
 class Switch(MissionState):
 
@@ -26,7 +25,12 @@ class Switch(MissionState):
         try:
 
             self.set_mode(self.mode_dic[str(int(self.param_mode))])
-
+            if self.param_mode==0:
+                rospy.wait_for_service('/proc_control/set_local_decoupled_target')
+                set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget)
+                set_local_target(0.0,
+                                 0.0, 0.0, 0.0, 0.0, 0.0,
+                                 False, False, False, True, True, False)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 

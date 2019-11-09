@@ -63,6 +63,8 @@ class AlignToVision(MissionState):
         self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (cm)'))
         self.parameters.append(Parameter('param_image_height', 1544, 'Image height (px)'))
         self.parameters.append(Parameter('param_image_width', 2064, 'Image width (px)'))
+        self.parameters.append(Parameter('param_offset_y', 0, 'Offset latéral'))
+        self.parameters.append(Parameter('param_offset_z', 0, 'Offset vertical'))
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
@@ -140,14 +142,6 @@ class AlignToVision(MissionState):
             else:
                 self.vision_is_reach_z = False
 
-            pixel_to_meter = width / self.param_image_width
-
-            if self.vision_is_reach_y and not self.vision_is_reach_z:
-                self.distance_to_cover_z = (self.averaging_vision_y_pixel - (self.param_image_height / 2)) / pixel_to_meter
-
-            if self.vision_is_reach_z and not self.vision_is_reach_y:
-                self.distance_to_cover_y = (self.averaging_vision_x_pixel - (self.param_image_width / 2)) / pixel_to_meter
-
             if self.vision_is_reach_y and self.vision_is_reach_z:
                 self.target_height = height / self.pixel_to_meter
                 self.target_width = width / self.pixel_to_meter
@@ -163,7 +157,20 @@ class AlignToVision(MissionState):
                 else:
                     self.need_to_advance = True
 
-            if self.target_reached:
+            if self.target_reached and not self.victory:
+                pixel_to_meter = width / self.param_image_width
+
+                if not self.vision_is_reach_z:
+                    self.distance_to_cover_z = (self.averaging_vision_y_pixel - (
+                                self.param_image_height / 2)) / pixel_to_meter
+
+                if not self.vision_is_reach_y:
+                    self.distance_to_cover_y = (self.averaging_vision_x_pixel - (
+                                self.param_image_width / 2)) / pixel_to_meter
+                    if self.vision_is_reach_z:
+                        self.is_align_with_heading_active = True
+                    else
+                        self.is_align_with_heading_active = False
                 self.align_submarine()
 
             # if self.target_reached:
@@ -172,6 +179,25 @@ class AlignToVision(MissionState):
             #    self.align_submarine()
 
     def align_submarine(self):
+
+        if self.need_to_advance:
+            distance_to_cover_x = 0.5
+        else:
+            distance_to_cover_x = 0.0
+
+        if self.is_align_with_heading_active:
+            self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
+            rospy.logdebug('set_target_mode : align_heading')
+            self.set_target(0.0, self.distance_to_cover_y, 0.0, self.heading, True, True, True, False)
+
+        elif not self.vision_is_reach:
+            rospy.logdebug('set_target : 2 - align_submarine')
+            self.set_target(distance_to_cover_x, self.distance_to_cover_y, self.distance_to_cover_z, 0.0, False, False, False, True)
+
+        elif not self.victory:
+            rospy.logdebug('set_target_mode : move_forward')
+            self.set_target(distance_to_cover_x,0.0, 0.0, 0.0, False, True, True, True)
+
         # vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
         # vision_position_z = self.vision_position_z
 
@@ -179,37 +205,26 @@ class AlignToVision(MissionState):
 
         # target_z = 0.4 * (vision_position_z / abs(vision_position_z))
 
-        if self.is_align_with_heading_active:
-            if not self.vision_is_reach_y:
-                self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
-                rospy.logdebug('set_target : 1 - align_submarine')
-                self.set_target(0.0, target_z, self.heading, True, False)
+    def set_target(self, position_x, position_y, position_z, position_yaw, keepX, keepY, keepZ, keepYaw):
+        try:
+            self.set_local_target(position_x, position_y, position_z, 0.0, 0.0, position_yaw,
+                                  keepX, keepY, keepZ, True, True, keepYaw)
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
 
-        elif not self.vision_is_reach:
-            rospy.logdebug('set_target : 2 - align_submarine')
-            self.set_target(vision_position_y, target_z, 0.0, False, True)
+        rospy.loginfo('Set relative position x = %f' % position_x)
+        rospy.loginfo('Set relative position y = %f' % position_y)
+        rospy.loginfo('Set relative position z = %f' % position_z)
+        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'forward', 'preempted']
 
-    def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
-        if pos_y <= self.param_control_bounding_box_in_y:
-            return self.param_control_bounding_box_in_y + 0.1
-        else:
-            return pos_y
-
-
-
-    def set_target(self, position_y, position_z, position_yaw, keepY, keepYaw):
-        try:
-            self.set_local_target(0.0, position_y, 0.0, 0.0, 0.0, position_yaw,
-                                  True, keepY, True, True, True, keepYaw)
-        except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
-
-        rospy.loginfo('Set relative position y = %f' % position_y)
-        rospy.loginfo('Set relative position z = %f' % position_z)
-        rospy.loginfo('Set relative position yaw = %f' % position_yaw)
+    # def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
+    #    if pos_y <= self.param_control_bounding_box_in_y:
+    #        return self.param_control_bounding_box_in_y + 0.1
+    #   else:
+    #        return pos_y
 
     def end(self):
         self.vision_subscriber.unregister()

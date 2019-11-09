@@ -87,9 +87,9 @@ class AlignToVisionTest(MissionState):
         self.count += 1
 
     def run(self, ud):
-        if self.is_align_with_heading_active and self.vision_is_reach_y:
-            rospy.logdebug('set_target : 1 - run')
-            self.set_target(0.0, 0.0, 0.0, False, False)
+        # if self.is_align_with_heading_active and self.vision_is_reach_y:
+        #    rospy.logdebug('set_target : 1 - run')
+        #    self.set_target(0.0, 0.0, 0.0, False, False)
 
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
@@ -97,14 +97,14 @@ class AlignToVisionTest(MissionState):
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
             rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
             rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
-            rospy.logdebug('set_target : 2 - run')
-            self.set_target(0.0, 0.0, 0.0, False, False)
+            # rospy.logdebug('set_target : 2 - run')
+            self.set_target(0.0, 0.0, 0.0, 0.0, False, False, False, False)
             return 'succeeded'
 
-        if self.vision_is_reach:
-            rospy.logdebug('set_target : 2 - run')
-            self.set_target(0.0, 0.0, 0.0, False, False)
-            return 'forward'
+        # if self.vision_is_reach:
+        #    rospy.logdebug('set_target : 2 - run')
+        #    self.set_target(0.0, 0.0, 0.0, False, False)
+        #    return 'forward'
 
         if self.count >= self.param_maximum_nb_alignment:
             return 'aborted'
@@ -148,6 +148,7 @@ class AlignToVisionTest(MissionState):
 
                 if self.target_width >= self.param_image_height and self.target_height >= self.param_image_width:
                     self.target_distance = self.target_width * self.vision_distance
+                    rospy.loginfo('Target distance : %f' % self.target_distance)
 
                     if self.target_distance <= self.param_distance_to_victory:
                         self.victory = True
@@ -181,22 +182,29 @@ class AlignToVisionTest(MissionState):
     def align_submarine(self):
 
         if self.need_to_advance:
-            distance_to_cover_x = 0.5
+            if self.target_distance < 0.5:
+                distance_to_cover_x = self.target_distance
+            else:
+                distance_to_cover_x = 0.5
         else:
             distance_to_cover_x = 0.0
 
         if self.is_align_with_heading_active:
             self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
-            rospy.logdebug('set_target_mode : align_heading')
+            rospy.loginfo('set_target_mode : align_heading')
             self.set_target(0.0, self.distance_to_cover_y, 0.0, self.heading, True, True, True, False)
 
         elif not self.vision_is_reach:
-            rospy.logdebug('set_target : 2 - align_submarine')
+            rospy.loginfo('set_target : 2 - align_submarine')
             self.set_target(distance_to_cover_x, self.distance_to_cover_y, self.distance_to_cover_z, 0.0, False, False, False, True)
 
         elif not self.victory:
-            rospy.logdebug('set_target_mode : move_forward')
+            rospy.loginfo('set_target_mode : move_forward')
             self.set_target(distance_to_cover_x,0.0, 0.0, 0.0, False, True, True, True)
+
+        rospy.loginfo('Align number %i' % self.count)
+
+        self.count += 1
 
         # vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
         # vision_position_z = self.vision_position_z

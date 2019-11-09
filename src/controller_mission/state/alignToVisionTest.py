@@ -54,8 +54,8 @@ class AlignToVisionTest(MissionState):
         self.parameters.append(Parameter('param_distance_to_victory', 2, 'Minimal distance to ram (m)'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
-        self.parameters.append(Parameter('param_object_real_height', 10, 'Object height (cm)'))
-        self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (cm)'))
+        self.parameters.append(Parameter('param_object_real_height', 10, 'Object height (m)'))
+        self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (m)'))
         self.parameters.append(Parameter('param_image_height', 1544, 'Image height (px)'))
         self.parameters.append(Parameter('param_image_width', 2064, 'Image width (px)'))
         self.parameters.append(Parameter('param_offset_y', 0, 'Lateral offset'))
@@ -128,14 +128,10 @@ class AlignToVisionTest(MissionState):
             else:
                 self.vision_is_reach_z = False
 
-            pixel_to_meter = width / self.param_image_width
-
             if self.vision_is_reach_y and self.vision_is_reach_z:
-                self.target_height = height / pixel_to_meter
-                self.target_width = width / pixel_to_meter
 
-                if self.target_width >= self.param_image_height and self.target_height >= self.param_image_width:
-                    self.target_distance = self.target_width * self.vision_distance
+                if self.target_width >= self.param_object_real_width and self.target_height >= self.param_object_real_height:
+                    self.target_distance = 1.36827 * ((self.param_object_real_width * self.param_image_height) / height)
                     rospy.loginfo('Target distance : %f' % self.target_distance)
 
                     if self.target_distance <= self.param_distance_to_victory:
@@ -147,7 +143,7 @@ class AlignToVisionTest(MissionState):
                     self.need_to_advance = True
 
             if self.target_reached and not self.victory:
-                pixel_to_meter = width / self.param_image_width
+                pixel_to_meter = width / self.param_object_real_width
 
                 if not self.vision_is_reach_z:
                     self.distance_to_cover_z = (self.averaging_vision_y_pixel - (
@@ -173,7 +169,7 @@ class AlignToVisionTest(MissionState):
             distance_to_cover_x = 0.0
 
         if self.is_align_with_heading_active:
-            self.heading = self.param_heading * (self.vision_position_y / abs(self.vision_position_y))
+            self.heading = self.param_heading * (self.distance_to_cover_y / abs(self.distance_to_cover_y))
             rospy.loginfo('set_target_mode : align_heading')
             self.set_target(0.0, self.distance_to_cover_y, 0.0, self.heading, True, True, True, False)
 

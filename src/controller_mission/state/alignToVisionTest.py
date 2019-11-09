@@ -7,7 +7,7 @@ from proc_control.srv import SetPositionTarget, SetDecoupledTarget
 from proc_image_processing.msg import VisionTarget
 
 
-class AlignToVision(MissionState):
+class AlignToVisionTest(MissionState):
 
     def __init__(self):
         MissionState.__init__(self)

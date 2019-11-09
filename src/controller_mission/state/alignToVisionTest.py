@@ -128,17 +128,16 @@ class AlignToVisionTest(MissionState):
             else:
                 self.vision_is_reach_z = False
 
+            self.target_distance = 1.36827 * ((self.param_object_real_width * self.param_image_height) / height)
+            rospy.loginfo('Target distance : %f' % self.target_distance)
+
             if self.vision_is_reach_y and self.vision_is_reach_z:
 
                 if self.target_width >= self.param_object_real_width and self.target_height >= self.param_object_real_height:
-                    self.target_distance = 1.36827 * ((self.param_object_real_width * self.param_image_height) / height)
-                    rospy.loginfo('Target distance : %f' % self.target_distance)
-
                     if self.target_distance <= self.param_distance_to_victory:
                         self.victory = True
                     else:
                         self.need_to_advance = True
-
                 else:
                     self.need_to_advance = True
 

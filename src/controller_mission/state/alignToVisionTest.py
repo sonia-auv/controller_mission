@@ -128,9 +128,11 @@ class AlignToVisionTest(MissionState):
             else:
                 self.vision_is_reach_z = False
 
+            pixel_to_meter = width / self.param_image_width
+
             if self.vision_is_reach_y and self.vision_is_reach_z:
-                self.target_height = height / self.pixel_to_meter
-                self.target_width = width / self.pixel_to_meter
+                self.target_height = height / pixel_to_meter
+                self.target_width = width / pixel_to_meter
 
                 if self.target_width >= self.param_image_height and self.target_height >= self.param_image_width:
                     self.target_distance = self.target_width * self.vision_distance

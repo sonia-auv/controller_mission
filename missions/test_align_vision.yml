@@ -41,7 +41,7 @@ statesui:
       variable_name: param_filterchain_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
-      value: !!python/unicode '/provider_vision/Bottom_GigE'
+      value: !!python/unicode '/provider_vision/Front_GigE'
       variable_name: param_media_name
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Times Out'''
@@ -49,11 +49,11 @@ statesui:
       variable_name: param_cmd
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: 2.0
+      value: 1.0
       variable_name: param_start_front
     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
       description: ' ''Media name'''
-      value: 1.0
+      value: 2.0
       variable_name: param_start_bottom
     transitions:
     - !!python/object:rqt_mission_planner.mission_model.state.Transition
@@ -86,40 +86,32 @@ statesui:
           value: 200.0
           variable_name: param_bounding_box
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''maximum nb of pixel to align with heading'''
-          value: 100.0
-          variable_name: param_threshold_width
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Yaw rotation to align vision'''
           value: 10.0
           variable_name: param_heading
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic to listen'''
-          value: /proc_image_processing/buoy_red
+          value: !!python/unicode '/proc_image_processing/simple_align_test_result'
           variable_name: param_topic_to_listen
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Minimal distance to ram (m)'''
-          value: 2.0
+          value: 0.2
           variable_name: param_distance_to_victory
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum number of alignment'''
-          value: 4.0
+          value: 15.0
           variable_name: param_maximum_nb_alignment
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Maximum size of queue'''
           value: 10.0
           variable_name: param_max_queue_size
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
-          description: ' ''Maximum size of queue'''
-          value: 'False'
-          variable_name: param_check_vision_reach
-        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Object height (cm)'''
-          value: 10.0
+          value: 30.0
           variable_name: param_object_real_height
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Object width (cm)'''
-          value: 10.0
+          value: 15.0
           variable_name: param_object_real_width
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Image height (px)'''
@@ -230,11 +222,11 @@ statesui:
                   variable_name: param_media_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''
-                  value: 2.0
+                  value: 1.0
                   variable_name: param_start_front
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''
-                  value: 1.0
+                  value: 2.0
                   variable_name: param_start_bottom
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Times Out'''

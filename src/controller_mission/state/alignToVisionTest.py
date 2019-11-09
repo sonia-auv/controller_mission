@@ -82,9 +82,6 @@ class AlignToVisionTest(MissionState):
         self.count += 1
 
     def run(self, ud):
-        # if self.is_align_with_heading_active and self.vision_is_reach_y:
-        #    rospy.logdebug('set_target : 1 - run')
-        #    self.set_target(0.0, 0.0, 0.0, False, False)
 
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
 
@@ -92,7 +89,6 @@ class AlignToVisionTest(MissionState):
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
             rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
             rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
-            # rospy.logdebug('set_target : 2 - run')
             self.set_target(0.0, 0.0, 0.0, 0.0, False, False, False, False)
             return 'succeeded'
 
@@ -164,11 +160,6 @@ class AlignToVisionTest(MissionState):
                         self.is_align_with_heading_active = False
                 self.align_submarine()
 
-            # if self.target_reached:
-            #    self.vision_position_y = self.averaging_vision_x_pixel / pixel_to_meter
-            #    self.vision_position_z = self.averaging_vision_y_pixel / pixel_to_meter * -1
-            #    self.align_submarine()
-
     def align_submarine(self):
 
         if self.need_to_advance:
@@ -196,13 +187,6 @@ class AlignToVisionTest(MissionState):
 
         self.count += 1
 
-        # vision_position_y = self.find_y_pos_to_matches_to_control_bounding_box(self.vision_position_y)
-        # vision_position_z = self.vision_position_z
-
-        # vision_position_y = vision_position_y * (self.vision_position_y / abs(self.vision_position_y))
-
-        # target_z = 0.4 * (vision_position_z / abs(vision_position_z))
-
     def set_target(self, position_x, position_y, position_z, position_yaw, keepX, keepY, keepZ, keepYaw):
         try:
             self.set_local_target(position_x, position_y, position_z, 0.0, 0.0, position_yaw,
@@ -217,12 +201,6 @@ class AlignToVisionTest(MissionState):
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
-
-    # def find_y_pos_to_matches_to_control_bounding_box(self, pos_y):
-    #    if pos_y <= self.param_control_bounding_box_in_y:
-    #        return self.param_control_bounding_box_in_y + 0.1
-    #   else:
-    #        return pos_y
 
     def end(self):
         self.vision_subscriber.unregister()

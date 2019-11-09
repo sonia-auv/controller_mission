@@ -3,8 +3,8 @@ mission_params:
   param_bb: 200
   target_width: 0.13
   target_height: 0.22
-  topic_to_listen: simple_align_test_result
-  max_queue_size: 10
+  topic_to_listen: /proc_image_processing/simple_align_test_result
+  max_queue_size: 6
   param_bb_y: 100
   pixel_to_victory: 300
   forward_x: 0.4

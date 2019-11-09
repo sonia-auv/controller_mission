@@ -190,11 +190,11 @@ statesui:
                   variable_name: state_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Topic of  result'''
-                  value: !!python/unicode '$/mission_params/05_bat_wolf/handle/filterchain_name'
+                  value: !!python/unicode '$/mission_params/filterchain_name'
                   variable_name: param_node_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Filter chain name'''
-                  value: !!python/unicode '$/mission_params/05_bat_wolf/handle/filterchain_name'
+                  value: !!python/unicode '$/mission_params/filterchain_name'
                   variable_name: param_filterchain_name
                 - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                   description: ' ''Media name'''

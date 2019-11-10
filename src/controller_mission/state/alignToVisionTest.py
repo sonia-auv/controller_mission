@@ -153,10 +153,13 @@ class AlignToVisionTest(MissionState):
                 if not self.vision_is_reach_z:
                     self.distance_to_cover_z = (self.averaging_vision_y_pixel - (
                                 self.param_image_height / 2)) / pixel_to_meter_height
+                    rospy.loginfo('distance to cover z : %f' % self.distance_to_cover_z)
 
                 if not self.vision_is_reach_y:
                     self.distance_to_cover_y = (self.averaging_vision_x_pixel - (
                                 self.param_image_width / 2)) / pixel_to_meter_width
+                    rospy.loginfo('distance to cover y : %f' % self.distance_to_cover_y)
+
                     if self.vision_is_reach_z:
                         self.is_align_with_heading_active = True
                     else:

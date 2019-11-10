@@ -79,7 +79,7 @@ class AlignToVisionTest(MissionState):
         self.vision_is_reach_z = False
         self.vision_is_reach = False
 
-        self.count += 1
+        self.count = 0
 
     def run(self, ud):
 
@@ -131,7 +131,7 @@ class AlignToVisionTest(MissionState):
             else:
                 self.vision_is_reach_z = False
 
-            self.target_distance = 1.36827 * ((self.param_object_real_width * self.param_image_height) / height)
+            self.target_distance = 0.0136827 * ((self.param_object_real_width * self.param_image_height) / height)
             rospy.loginfo('Target distance : %f' % self.target_distance)
 
             if self.vision_is_reach_y and self.vision_is_reach_z:
@@ -151,13 +151,13 @@ class AlignToVisionTest(MissionState):
                 pixel_to_meter_height = height / self.param_object_real_height
 
                 if not self.vision_is_reach_z:
-                    self.distance_to_cover_z = (self.averaging_vision_y_pixel - (
-                                self.param_image_height / 2)) / pixel_to_meter_height
+                    self.distance_to_cover_z = ((self.averaging_vision_y_pixel - (
+                                self.param_image_height / 2)) / pixel_to_meter_height) / 100
                     rospy.loginfo('distance to cover z : %f' % self.distance_to_cover_z)
 
                 if not self.vision_is_reach_y:
-                    self.distance_to_cover_y = (self.averaging_vision_x_pixel - (
-                                self.param_image_width / 2)) / pixel_to_meter_width
+                    self.distance_to_cover_y = ((self.averaging_vision_x_pixel - (
+                                self.param_image_width / 2)) / pixel_to_meter_width) / 100
                     rospy.loginfo('distance to cover y : %f' % self.distance_to_cover_y)
 
                     if self.vision_is_reach_z:
@@ -169,6 +169,7 @@ class AlignToVisionTest(MissionState):
     def align_submarine(self):
 
         if self.ready_to_advance:
+            self.ready_to_advance = False
             if self.target_distance < 0.5:
                 distance_to_cover_x = self.target_distance
             else:

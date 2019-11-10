@@ -40,7 +40,7 @@ class AlignToVisionTest(MissionState):
 
         self.is_align_with_heading_active = False
         self.victory = False
-        self.need_to_advance = False
+        self.ready_to_advance = False
 
         self.vision_x_pixel = None
         self.vision_y_pixel = None
@@ -116,6 +116,9 @@ class AlignToVisionTest(MissionState):
             self.averaging_vision_x_pixel /= len(self.vision_x_pixel)
             self.averaging_vision_y_pixel /= len(self.vision_y_pixel)
 
+            rospy.loginfo('position x : %f' % self.averaging_vision_x_pixel)
+            rospy.loginfo('position y : %f' % self.averaging_vision_y_pixel)
+
             if abs(self.averaging_vision_x_pixel) <= self.param_bounding_box:
                 self.vision_is_reach_y = True
                 self.distance_to_cover_y = 0.0
@@ -132,25 +135,28 @@ class AlignToVisionTest(MissionState):
             rospy.loginfo('Target distance : %f' % self.target_distance)
 
             if self.vision_is_reach_y and self.vision_is_reach_z:
-
                 if self.target_width >= self.param_object_real_width and self.target_height >= self.param_object_real_height:
                     if self.target_distance <= self.param_distance_to_victory:
                         self.victory = True
+                        self.ready_to_advance = False
                     else:
-                        self.need_to_advance = True
+                        self.ready_to_advance = True
                 else:
-                    self.need_to_advance = True
+                    self.ready_to_advance = True
+            else:
+                self.ready_to_advance = False
 
             if self.target_reached and not self.victory:
-                pixel_to_meter = width / self.param_object_real_width
+                pixel_to_meter_width = width / self.param_object_real_width
+                pixel_to_meter_height = height / self.param_object_real_height
 
                 if not self.vision_is_reach_z:
                     self.distance_to_cover_z = (self.averaging_vision_y_pixel - (
-                                self.param_image_height / 2)) / pixel_to_meter
+                                self.param_image_height / 2)) / pixel_to_meter_height
 
                 if not self.vision_is_reach_y:
                     self.distance_to_cover_y = (self.averaging_vision_x_pixel - (
-                                self.param_image_width / 2)) / pixel_to_meter
+                                self.param_image_width / 2)) / pixel_to_meter_width
                     if self.vision_is_reach_z:
                         self.is_align_with_heading_active = True
                     else:
@@ -159,7 +165,7 @@ class AlignToVisionTest(MissionState):
 
     def align_submarine(self):
 
-        if self.need_to_advance:
+        if self.ready_to_advance:
             if self.target_distance < 0.5:
                 distance_to_cover_x = self.target_distance
             else:

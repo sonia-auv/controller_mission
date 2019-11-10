@@ -191,11 +191,6 @@ class AlignToVisionTest(MissionState):
         self.count += 1
 
     def set_target(self, position_x, position_y, position_z, position_yaw, keepX, keepY, keepZ, keepYaw):
-        try:
-            self.set_local_target(position_x, position_y, position_z, 0.0, 0.0, position_yaw,
-                                  keepX, keepY, keepZ, True, True, keepYaw)
-        except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
 
         rospy.loginfo('Set relative position x = %f' % position_x)
         rospy.loginfo('Set relative position y = %f' % position_y)

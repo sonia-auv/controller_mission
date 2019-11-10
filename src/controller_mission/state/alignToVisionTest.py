@@ -177,12 +177,13 @@ class AlignToVisionTest(MissionState):
             distance_to_cover_x = 0.0
 
         if self.is_align_with_heading_active and not self.vision_is_reach_y:
-            self.heading = self.param_heading * (self.distance_to_cover_y / abs(self.distance_to_cover_y))
+            if self.distance_to_cover_y != 0:
+                self.heading = self.param_heading * (self.distance_to_cover_y / abs(self.distance_to_cover_y))
             rospy.loginfo('set_target_mode : align_heading')
             self.set_target(0.0, self.distance_to_cover_y, 0.0, self.heading, True, True, True, False)
 
         elif not self.vision_is_reach:
-            rospy.loginfo('set_target : 2 - align_submarine')
+            rospy.loginfo('set_target_mode : align_submarine')
             self.set_target(distance_to_cover_x, self.distance_to_cover_y, self.distance_to_cover_z, 0.0, False, False, False, True)
 
         elif not self.victory:

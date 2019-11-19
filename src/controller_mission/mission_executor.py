@@ -19,7 +19,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
-    SendMissionResponse, ReceivedState, ReceivedStateResponse
+    SendMissionResponse, ReceivedState, ReceivedStateResponse, SucceedButton, SucceedButtonResponse
 from proc_control.srv import EnableControl, EnableControlRequest
 from proc_navigation.srv import SetWorldXYOffset
 from proc_mapping.srv import ObjectiveReset, ObjectiveResetRequest
@@ -76,6 +76,9 @@ class MissionExecutor:
         # Receive mission content
         rospy.Service('mission_executor/get_mission_content', SendMission, self._handle_send_mission)
 
+        # Succeed button
+        rospy.Service('mission_executor/succeed_button', SucceedButton, self._handle_succeed_button)
+
         rospy.spin()
 
     def _handle_state_received(self, req):
@@ -92,6 +95,17 @@ class MissionExecutor:
                 self._handle_start_mission(None)
             else:
                 self._handle_stop_mission(None)
+    def _handle_succeed_button(self, req):
+        try:
+            if self.smach_executor_thread and self.current_stateMachine.is_running():
+                self.sis.stop()
+                self.current_stateMachine.request_preempt()
+                self.smach_executor_thread.join()
+                self.smach_executor_thread = None
+                rospy.loginfo('Mission forced to succeed')
+                return 'succeeded'
+        except Exception:
+            return Exception('No missions running')
 
     def _handle_stop_mission(self, req):
         try:

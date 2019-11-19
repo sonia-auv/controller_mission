@@ -19,7 +19,7 @@ from controller_mission.srv import ListMissionsResponse, ListMissions, LoadMissi
     LoadMissionRequest, StartMission, \
     StartMissionResponse, CurrentMission, \
     CurrentMissionResponse, ReceivedMission, ReceivedMissionResponse, StopMission, StopMissionResponse, SendMission, \
-    SendMissionResponse, ReceivedState, ReceivedStateResponse
+    SendMissionResponse, ReceivedState, ReceivedStateResponse, SucceedButton
 from proc_control.srv import EnableControl, EnableControlRequest
 from proc_navigation.srv import SetWorldXYOffset
 from proc_mapping.srv import ObjectiveReset, ObjectiveResetRequest

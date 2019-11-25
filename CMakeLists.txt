@@ -25,6 +25,7 @@ add_service_files(DIRECTORY srv
   ReceivedMission.srv
   ReceivedState.srv
   SendMission.srv
+  SucceedButton.srv
 )
 
 catkin_python_setup()

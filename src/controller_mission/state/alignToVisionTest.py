@@ -45,6 +45,11 @@ class AlignToVisionTest(MissionState):
         self.vision_x_pixel = None
         self.vision_y_pixel = None
 
+        #Parameters to determine target distance.
+        self.focal_size = 12.5 #mm
+        self.sensor_height = 5.3 #mm
+        self.sensor_width = 7.1 #mm
+
         self.count = 0
 
     def define_parameters(self):
@@ -54,8 +59,8 @@ class AlignToVisionTest(MissionState):
         self.parameters.append(Parameter('param_distance_to_victory', 2, 'Minimal distance to ram (m)'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
-        self.parameters.append(Parameter('param_object_real_height', 10, 'Object height (m)'))
-        self.parameters.append(Parameter('param_object_real_width', 10, 'Object width (m)'))
+        self.parameters.append(Parameter('param_object_real_height', 100, 'Object height (mm)'))
+        self.parameters.append(Parameter('param_object_real_width', 100, 'Object width (mm)'))
         self.parameters.append(Parameter('param_image_height', 1544, 'Image height (px)'))
         self.parameters.append(Parameter('param_image_width', 2064, 'Image width (px)'))
         self.parameters.append(Parameter('param_offset_y', 0, 'Lateral offset'))
@@ -106,7 +111,6 @@ class AlignToVisionTest(MissionState):
             self.parse_vision_data(vision_data.width, vision_data.height)
 
     def parse_vision_data(self, width, height):
-
             for i in self.vision_x_pixel:
                 self.averaging_vision_x_pixel += i
 
@@ -130,8 +134,11 @@ class AlignToVisionTest(MissionState):
                 self.distance_to_cover_z = 0.0
             else:
                 self.vision_is_reach_z = False
+            rospy.loginfo("Object height into image (px): %f" % height)
+            rospy.loginfo("Object width into image (px): %f" % width)
+            #self.target_distance = 0.0136827 * ((self.param_object_real_width * self.param_image_height) / height)
+            self.target_distance = (self.focal_size * self.param_object_real_height * self.param_image_height) / (height * self.sensor_height)
 
-            self.target_distance = 0.0136827 * ((self.param_object_real_width * self.param_image_height) / height)
             rospy.loginfo('Target distance : %f' % self.target_distance)
 
             if self.vision_is_reach_y and self.vision_is_reach_z:

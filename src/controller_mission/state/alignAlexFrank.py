@@ -8,15 +8,7 @@ from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
 
 
-class VisionData:
-    def __init__(self, x=0.0, y=0.0, height=0.0, width=0.0):
-        self.x = x
-        self.y = y
-        self.height = height
-        self.width = width
-
-
-class AlignToVisionTest(MissionState):
+class AlignAlexFrank(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
@@ -83,7 +75,8 @@ class AlignToVisionTest(MissionState):
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget, persistent=True)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget,
+                                                   persistent=True)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
 
@@ -148,7 +141,12 @@ class AlignToVisionTest(MissionState):
         pass
 
     def get_target_distance(self):
-        return (self.focal_size * self.param_object_real_height * self.param_image_height) / (self.averaging_vision_height_pixel * self.sensor_height)
+        return (self.focal_size * self.param_object_real_height * self.param_image_height) / (
+                    self.averaging_vision_height_pixel * self.sensor_height)
+
+    def align_submarine(self):
+        rospy.loginfo('Align number %i' % self.count)
+        self.count += 1
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -156,3 +154,18 @@ class AlignToVisionTest(MissionState):
     def end(self):
         self.vision_subscriber.unregister()
         self.target_reach_sub.unregister()
+
+
+class VisionData:
+    # Vision data container
+    def __init__(self, x=0.0, y=0.0, height=0.0, width=0.0):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+
+
+class BoundingBox:
+    # Bounding box object
+    def __init__(self):
+        pass

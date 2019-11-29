@@ -1,4 +1,5 @@
 import rospy
+import math
 
 from Queue import deque
 from ..mission_state import MissionState, Parameter
@@ -79,6 +80,19 @@ class AlignAlexFrank(MissionState):
         self.y_bounding_box = None
         self.x_bounding_box = None
 
+        # Variable for allignment
+        self.z_adjustment = None
+        self.basic_z_ajustment = 0.5
+        self.minimum_z_adjustment = 0.1
+
+        self.minimum_y_adjustment = 0.2
+        self.y_adjustment = None
+        self.basic_y_adjustment = 1.0
+
+        self.yaw_adjustment = None
+        self.minimum_yaw_adjustment = 3.0
+        self.basic_y_adjustment = 10.0
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
@@ -121,7 +135,7 @@ class AlignAlexFrank(MissionState):
 
         # Setup odometry service
         self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
-        self.get_first_position(self)
+        self.get_first_position()
 
         #Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15)
@@ -134,6 +148,7 @@ class AlignAlexFrank(MissionState):
             rospy.loginfo('Vision is Reach : %s', str(self.vision_is_reach))
             rospy.loginfo('Pixel Vision in x : %f', self.averaging_vision_x_pixel)
             rospy.loginfo('Pixel Vision in y : %f', self.averaging_vision_y_pixel)
+            self.switch_control_mode(0)
             self.set_target(0.0, 0.0, 0.0, 0.0, False, False, False, False)
             return 'succeeded'
 
@@ -192,22 +207,36 @@ class AlignAlexFrank(MissionState):
 
     def forward_speed(self):
         try:
+            self.set_local_target(0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0)
+            self.switch_control_mode(2)
             self.set_local_target(self.param_speed_x,
                                   0.0,
                                   self.position.z,
                                   0.0,
                                   0.0,
-                                  self.param_orientation_yaw)
+                                  0.0)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
-    def get_first_position(selfs):
+    def get_first_position(self):
         while not self.first_position:
             pass
         return
 
-    def is_align(self):
-        pass
+    def is_align_y(self):
+        if self.y_bounding_box.is_inside(self.averaging_vision_x_pixel,self.averaging_vision_y_pixel):
+            return True
+        return False
+
+    def is_align_x(self):
+        if self.x_bounding_box.is_inside(self.averaging_vision_x_pixel,self.averaging_vision_y_pixel):
+            return True
+        return False
 
     def get_target_distance(self):
         return (self.focal_size * self.param_object_real_height * self.param_image_height) / (
@@ -216,6 +245,42 @@ class AlignAlexFrank(MissionState):
     def align_submarine(self):
         rospy.loginfo('Align number %i' % self.count)
         self.count += 1
+        if not self.is_align_y():
+            self.align_depth()
+        else:
+            self.forward_speed()
+            if not self.is_align_x():
+                self.align_yaw()
+
+    def align_depth(self):
+        self.switch_control_mode(0)
+        self.z_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height/2)) * self.basic_z_ajustment
+
+        #take the higest value between min and the calculated adjustment and keep the sign
+        self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (self.z_adjustment/abs(self.z_adjustment)) * \
+        self.minimum_z_adjustment else (self.z_adjustment/abs(self.z_adjustment)) * self.minimum_z_adjustment
+
+        self.set_local_target (0.0,
+                               0.0,
+                               self.z_adjustment,
+                               0.0,
+                               0.0,
+                               0.0)
+    def align_yaw(self):
+
+        self.yaw_adjustment = (self.averaging_vision_x_pixel / (self.param_object_real_width / 2)) * self.basic_yaw_ajustment
+
+        # take the higest value between min and the calculated adjustment and keep the sign
+        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= (self.yaw_adjustment / \
+        abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
+        * self.minimum_yaw_adjustment
+
+        self.set_local_target(0.0,
+                              0.0,
+                              self.position.z,
+                              0.0,
+                              0.0,
+                              self.yaw_adjustment)
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']

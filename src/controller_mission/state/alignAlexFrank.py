@@ -3,10 +3,17 @@ import rospy
 from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget, SetDecoupledTarget
+from proc_control.srv import SetPositionTarget, SetDecoupledTarget, SetControlMode, SetControlModeRequest
 from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
 
+"""
+The vision part of this code consider use the normal axis for image parsing. 
+(e.g X --> Horizontal
+     Y --> Vertical)
+
+The control part use the normal axis of the sub.
+"""
 
 class AlignAlexFrank(MissionState):
     def __init__(self):
@@ -18,7 +25,6 @@ class AlignAlexFrank(MissionState):
 
         self.vision_position_y = 0
         self.vision_position_z = 0
-
         self.heading = 0
 
         # Average variables
@@ -60,6 +66,19 @@ class AlignAlexFrank(MissionState):
 
         self.count = 0
 
+        # Control mode options.
+        self.mode = SetControlModeRequest()
+        self.mode_dic = {'0': self.mode.PositionModePID, '1': self.mode.PositionModePPI, '2': self.mode.VelocityModeB}
+
+        # Position parameters.
+        self.odom = None
+        self.first_position = None
+        self.position = None
+
+        # Bounding box
+        self.y_bounding_box = None
+        self.x_bounding_box = None
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
@@ -72,6 +91,7 @@ class AlignAlexFrank(MissionState):
         self.parameters.append(Parameter('param_image_width', 2064, 'Image width (px)'))
         self.parameters.append(Parameter('param_offset_y', 0, 'Lateral offset'))
         self.parameters.append(Parameter('param_offset_z', 0, 'Vertical offset'))
+        self.parameters.append(Parameter('param_speed_x',0.1,'Speed to travel'))
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
@@ -89,6 +109,23 @@ class AlignAlexFrank(MissionState):
         self.vision_is_reach_y = False
         self.vision_is_reach_z = False
         self.vision_is_reach = False
+
+        # Switch control mode service parameter
+        rospy.wait_for_service('/proc_control/set_control_mode')
+        self.set_mode = rospy.ServiceProxy('/proc_control/set_control_mode', SetControlMode)
+        try:
+            #Initialise to position mode to reach depth first
+            self.set_mode(self.mode_dic[str(int(0))])
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
+
+        # Setup odometry service
+        self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
+        self.get_first_position(self)
+
+        #Setup bounding boxes
+        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width)
 
     def run(self, ud):
         self.vision_is_reach = self.vision_is_reach_y and self.vision_is_reach_z
@@ -137,6 +174,38 @@ class AlignAlexFrank(MissionState):
         rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
         rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
 
+    def switch_control_mode(self,mode):
+        try:
+            self.set_mode(self.mode_dic[str(int(mode))])
+            if mode==0:
+                self.set_local_target(0.0,
+                                 0.0, 0.0, 0.0, 0.0, 0.0,
+                                 False, False, False, True, True, False)
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
+
+    def odom_cb(self, data):
+        if self.first_position is None:
+            self.first_position = data.pose.pose.position
+
+        self.position = data.pose.pose.position
+
+    def forward_speed(self):
+        try:
+            self.set_local_target(self.param_speed_x,
+                                  0.0,
+                                  self.position.z,
+                                  0.0,
+                                  0.0,
+                                  self.param_orientation_yaw)
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
+
+    def get_first_position(selfs):
+        while not self.first_position:
+            pass
+        return
+
     def is_align(self):
         pass
 
@@ -167,5 +236,18 @@ class VisionData:
 
 class BoundingBox:
     # Bounding box object
-    def __init__(self):
-        pass
+    def __init__(self, height, width):
+        self.set_width(width)
+        self.set_height(height)
+
+    def is_inside(self, x, y):
+        if x > -(width/2) and x < (width/2):
+            if y > -(height/2) and y < (height/2):
+                return true
+        return false
+
+    def set_width(self,new_width):
+        self.width = new_width
+
+    def set_height(self,new_height):
+        self.height = new_height

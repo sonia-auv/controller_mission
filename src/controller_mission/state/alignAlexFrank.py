@@ -191,11 +191,19 @@ class AlignAlexFrank(MissionState):
 
     def switch_control_mode(self,mode):
         try:
+            self.set_local_target(0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                  0.0,
+                                False,
+                                False,
+                                False,
+                                True,
+                                True,
+                                False)
             self.set_mode(self.mode_dic[str(int(mode))])
-            if mode == 0:
-                self.set_local_target(0.0,
-                                 0.0, 0.0, 0.0, 0.0, 0.0,
-                                 False, False, False, True, True, False)
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
@@ -207,12 +215,6 @@ class AlignAlexFrank(MissionState):
 
     def forward_speed(self):
         try:
-            self.set_local_target(0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0)
             self.switch_control_mode(2)
             self.set_local_target(self.param_speed_x,
                                   0.0,
@@ -254,7 +256,7 @@ class AlignAlexFrank(MissionState):
 
     def align_depth(self):
         self.switch_control_mode(0)
-        self.z_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height/2)) * self.basic_z_ajustment
+        self.z_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height/2)) * self.basic_z_ajustment /1000
 
         # Take the higest value between min and the calculated adjustment and keep the sign
         self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (self.z_adjustment/abs(self.z_adjustment)) * \

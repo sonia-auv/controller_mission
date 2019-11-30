@@ -21,6 +21,7 @@ class AlignAlexFrank(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
+        self.set_local_target_speed = None
         self.vision_subscriber = None
         self.target_reach_sub = None
         self.set_local_target_topic = None
@@ -80,9 +81,6 @@ class AlignAlexFrank(MissionState):
         self.basic_yaw_adjustment = 10.0
 
         self.alex_frank_magic = 1.0
-
-        # TO REMOVE
-        self.test = True
 
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
@@ -164,7 +162,7 @@ class AlignAlexFrank(MissionState):
             abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
             * self.minimum_yaw_adjustment
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
-        self.set_local_target_speed(self.param_speed_x,0.0,self.position.z,0.0,0.0,self.orientation.z + self.yaw_adjustment)
+        self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, self.orientation.z + self.yaw_adjustment)
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -215,8 +213,7 @@ class AlignAlexFrank(MissionState):
     def switch_control_mode(self,mode):
         self.is_moving = False
         try:
-            self.set_local_target(0.0,0.0,0.0,0.0,0.0,0.0,
-                                False,False,False,True,True,False)
+            self.set_local_target(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, False, True, True, False)
             self.set_mode(self.mode_dic[str(int(mode))])
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -224,7 +221,7 @@ class AlignAlexFrank(MissionState):
     def forward_speed(self):
         try:
             self.switch_control_mode(2)
-            self.set_local_target_speed(self.param_speed_x,0.0,self.position.z,0.0,0.0,0.0)
+            self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, 0.0)
             self.is_moving = True
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -250,9 +247,9 @@ class AlignAlexFrank(MissionState):
     def get_distance_error(self):
         self.moved_distance_from_vision = abs(self.target_distance['current'] - self.target_distance['last'])
         self.moved_distance_from_odom = abs(self.distance(self.first_position, self.position))
-        if self.moved_distance_from_odom == 0:
-            self.moved_distance_from_odom = self.moved_distance_from_vision
-        self.alex_frank_magic = self.alex_frank_magic * (self.moved_distance_from_vision/self.moved_distance_from_odom)
+        # if self.moved_distance_from_odom == 0:
+        #    self.moved_distance_from_odom = self.moved_distance_from_vision
+        # self.alex_frank_magic = self.alex_frank_magic * (self.moved_distance_from_vision/self.moved_distance_from_odom)
 
     def get_target_distance(self):
         return ((self.focal_size * self.param_object_real_height * self.param_image_height) / \

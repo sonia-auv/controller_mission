@@ -128,7 +128,7 @@ class AlignAlexFrank(MissionState):
         rospy.wait_for_service('/proc_control/set_control_mode')
         self.set_mode = rospy.ServiceProxy('/proc_control/set_control_mode', SetControlMode)
         try:
-            #Initialise to position mode to reach depth first
+            # Initialise to position mode to reach depth first
             self.set_mode(self.mode_dic[str(int(0))])
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -137,7 +137,7 @@ class AlignAlexFrank(MissionState):
         self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
         self.get_first_position()
 
-        #Setup bounding boxes
+        # Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15)
         self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width)
 
@@ -192,7 +192,7 @@ class AlignAlexFrank(MissionState):
     def switch_control_mode(self,mode):
         try:
             self.set_mode(self.mode_dic[str(int(mode))])
-            if mode==0:
+            if mode == 0:
                 self.set_local_target(0.0,
                                  0.0, 0.0, 0.0, 0.0, 0.0,
                                  False, False, False, True, True, False)
@@ -239,8 +239,8 @@ class AlignAlexFrank(MissionState):
         return False
 
     def get_target_distance(self):
-        return (self.focal_size * self.param_object_real_height * self.param_image_height) / (
-                    self.averaging_vision_height_pixel * self.sensor_height)
+        return (self.focal_size * self.param_object_real_height * self.param_image_height) / \
+               (self.averaging_vision_height_pixel * self.sensor_height)
 
     def align_submarine(self):
         rospy.loginfo('Align number %i' % self.count)
@@ -256,7 +256,7 @@ class AlignAlexFrank(MissionState):
         self.switch_control_mode(0)
         self.z_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height/2)) * self.basic_z_ajustment
 
-        #take the higest value between min and the calculated adjustment and keep the sign
+        # Take the higest value between min and the calculated adjustment and keep the sign
         self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (self.z_adjustment/abs(self.z_adjustment)) * \
         self.minimum_z_adjustment else (self.z_adjustment/abs(self.z_adjustment)) * self.minimum_z_adjustment
 
@@ -266,14 +266,14 @@ class AlignAlexFrank(MissionState):
                                0.0,
                                0.0,
                                0.0)
-    def align_yaw(self):
 
+    def align_yaw(self):
         self.yaw_adjustment = (self.averaging_vision_x_pixel / (self.param_object_real_width / 2)) * self.basic_yaw_ajustment
 
-        # take the higest value between min and the calculated adjustment and keep the sign
-        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= (self.yaw_adjustment / \
-        abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
-        * self.minimum_yaw_adjustment
+        # take the highest value between min and the calculated adjustment and keep the sign
+        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= (self.yaw_adjustment /
+            abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
+            * self.minimum_yaw_adjustment
 
         self.set_local_target(0.0,
                               0.0,
@@ -306,13 +306,13 @@ class BoundingBox:
         self.set_height(height)
 
     def is_inside(self, x, y):
-        if x > -(width/2) and x < (width/2):
-            if y > -(height/2) and y < (height/2):
-                return true
-        return false
+        if -(self.width / 2) < x < (self.width / 2):
+            if -(self.height / 2) < y < (self.height / 2):
+                return True
+        return False
 
-    def set_width(self,new_width):
+    def set_width(self, new_width):
         self.width = new_width
 
-    def set_height(self,new_height):
+    def set_height(self, new_height):
         self.height = new_height

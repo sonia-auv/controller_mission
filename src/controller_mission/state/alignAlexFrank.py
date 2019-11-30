@@ -21,6 +21,7 @@ class AlignAlexFrank(MissionState):
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
+        self.set_local_target_speed = None
         self.vision_subscriber = None
         self.target_reach_sub = None
         self.set_local_target_topic = None
@@ -81,9 +82,6 @@ class AlignAlexFrank(MissionState):
 
         self.alex_frank_magic = 1.0
 
-        # TO REMOVE
-        self.test = True
-
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
@@ -99,6 +97,9 @@ class AlignAlexFrank(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget, persistent=True)
+
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target_speed = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
 
         self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
@@ -161,8 +162,7 @@ class AlignAlexFrank(MissionState):
             abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
             * self.minimum_yaw_adjustment
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
-        self.set_local_target(0.0,0.0,self.position.z,0.0,0.0,self.orientation.z + self.yaw_adjustment,
-                              True,True,True,True,True,False)
+        self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, self.orientation.z + self.yaw_adjustment)
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -213,8 +213,7 @@ class AlignAlexFrank(MissionState):
     def switch_control_mode(self,mode):
         self.is_moving = False
         try:
-            self.set_local_target(0.0,0.0,0.0,0.0,0.0,0.0,
-                                False,False,False,True,True,False)
+            self.set_local_target(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, False, True, True, False)
             self.set_mode(self.mode_dic[str(int(mode))])
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -222,8 +221,7 @@ class AlignAlexFrank(MissionState):
     def forward_speed(self):
         try:
             self.switch_control_mode(2)
-            self.set_local_target(self.param_speed_x,0.0,self.position.z,0.0,0.0,0.0,
-                                  False,True,False,True,True,True)
+            self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, 0.0)
             self.is_moving = True
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -249,12 +247,12 @@ class AlignAlexFrank(MissionState):
     def get_distance_error(self):
         self.moved_distance_from_vision = abs(self.target_distance['current'] - self.target_distance['last'])
         self.moved_distance_from_odom = abs(self.distance(self.first_position, self.position))
-        if self.moved_distance_from_odom == 0:
-            self.moved_distance_from_odom = self.moved_distance_from_vision
-        self.alex_frank_magic = self.alex_frank_magic * (self.moved_distance_from_vision/self.moved_distance_from_odom)
+        # if self.moved_distance_from_odom == 0:
+        #    self.moved_distance_from_odom = self.moved_distance_from_vision
+        # self.alex_frank_magic = self.alex_frank_magic * (self.moved_distance_from_vision/self.moved_distance_from_odom)
 
     def get_target_distance(self):
-        return (self.alex_frank_magic * (self.focal_size * self.param_object_real_height * self.param_image_height) / \
+        return ((self.focal_size * self.param_object_real_height * self.param_image_height) / \
                (self.averaging_vision_height_pixel * self.sensor_height)) / 1000
 
     def get_outcomes(self):

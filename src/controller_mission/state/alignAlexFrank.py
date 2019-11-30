@@ -161,12 +161,8 @@ class AlignAlexFrank(MissionState):
             abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
             * self.minimum_yaw_adjustment
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
-        self.set_local_target(0.0,
-                              0.0,
-                              self.position.z,
-                              0.0,
-                              0.0,
-                              self.yaw_adjustment)
+        self.set_local_target(0.0,0.0,self.position.z,0.0,0.0,self.yaw_adjustment,
+                              True,True,True,True,True,False)
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -215,18 +211,8 @@ class AlignAlexFrank(MissionState):
     def switch_control_mode(self,mode):
         self.is_moving = False
         try:
-            self.set_local_target(0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                  0.0,
-                                False,
-                                False,
-                                False,
-                                True,
-                                True,
-                                False)
+            self.set_local_target(0.0,0.0,0.0,0.0,0.0,0.0,
+                                False,False,False,True,True,False)
             self.set_mode(self.mode_dic[str(int(mode))])
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
@@ -234,12 +220,8 @@ class AlignAlexFrank(MissionState):
     def forward_speed(self):
         try:
             self.switch_control_mode(2)
-            self.set_local_target(self.param_speed_x,
-                                  0.0,
-                                  self.position.z,
-                                  0.0,
-                                  0.0,
-                                  0.0)
+            self.set_local_target(self.param_speed_x,0.0,self.position.z,0.0,0.0,0.0,
+                                  False,True,False,True,True,True)
             self.is_moving = True
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))

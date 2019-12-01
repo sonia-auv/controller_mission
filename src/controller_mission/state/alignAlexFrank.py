@@ -24,6 +24,7 @@ class AlignAlexFrank(MissionState):
         self.set_local_target_speed = None
         self.vision_subscriber = None
         self.target_reach_sub = None
+        self.target_reached = None
         self.set_local_target_topic = None
 
         # Average variables
@@ -35,7 +36,6 @@ class AlignAlexFrank(MissionState):
 
         # List that contain last target distance and current target distance
         self.target_distance = {'last': 0.0, 'current': 0.0}
-        self.target_reached = False
         self.moved_distance_from_vision = 0.0
         self.moved_distance_from_odom = 0.0
 
@@ -136,6 +136,7 @@ class AlignAlexFrank(MissionState):
             rospy.loginfo('Depth alignment.')
             if self.target_reached:
                 self.align_depth()
+                self.target_reached = False
         else:
             if not self.is_moving:
                 rospy.loginfo('Move forward.')

@@ -24,7 +24,7 @@ class AlignAlexFrank(MissionState):
         self.set_local_target_speed = None
         self.vision_subscriber = None
         self.target_reach_sub = None
-        self.target_reached = None
+        self.target_reached = False
         self.set_local_target_topic = None
 
         # Average variables
@@ -120,8 +120,8 @@ class AlignAlexFrank(MissionState):
         self.get_first_position()
 
         # Setup bounding boxes
-        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width)
+        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width, -625, 0)
 
     def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
@@ -147,7 +147,7 @@ class AlignAlexFrank(MissionState):
 
     def align_depth(self):
         self.switch_control_mode(0)
-        self.z_adjustment = -(self.averaging_vision_y_pixel / (self.param_image_height/2)) * self.basic_z_adjustment
+        self.z_adjustment = -self.averaging_vision_y_pixel / self.y_bounding_box.center_y * self.basic_z_adjustment
         rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
         self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (self.z_adjustment/abs(self.z_adjustment)) * \
@@ -275,18 +275,20 @@ class VisionData:
 
 class BoundingBox:
     # Bounding box object
-    def __init__(self, height, width):
+    def __init__(self, height, width, center_x, center_y):
         self.set_width(width)
         self.set_height(height)
+        self.center_x = center_x
+        self.center_y = center_y
 
-    def is_inside(self, x, y):
-        if -(self.width / 2) < x < (self.width / 2):
-            if -(self.height / 2) < y < (self.height / 2):
-                return True
-        return False
+        def is_inside(self, x, y):
+            if -((self.width / 2) + self.center_x) < x < (self.width / 2) + self.center_x:
+                if -((self.height / 2) + self.center_y) < y < (self.height / 2) + self.center_y:
+                    return True
+            return False
 
-    def set_width(self, new_width):
-        self.width = new_width
+        def set_width(self, new_width):
+                self.width = new_width
 
-    def set_height(self, new_height):
-        self.height = new_height
+        def set_height(self, new_height):
+            self.height = new_height

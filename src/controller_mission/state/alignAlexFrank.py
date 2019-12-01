@@ -281,14 +281,14 @@ class BoundingBox:
         self.center_x = center_x
         self.center_y = center_y
 
-        def is_inside(self, x, y):
-            if -((self.width / 2) + self.center_x) < x < (self.width / 2) + self.center_x:
-                if -((self.height / 2) + self.center_y) < y < (self.height / 2) + self.center_y:
-                    return True
-            return False
+    def is_inside(self, x, y):
+        if -((self.width / 2) + self.center_x) < x < (self.width / 2) + self.center_x:
+            if -((self.height / 2) + self.center_y) < y < (self.height / 2) + self.center_y:
+                return True
+        return False
 
-        def set_width(self, new_width):
-                self.width = new_width
+    def set_width(self, new_width):
+        self.width = new_width
 
-        def set_height(self, new_height):
-            self.height = new_height
+    def set_height(self, new_height):
+        self.height = new_height

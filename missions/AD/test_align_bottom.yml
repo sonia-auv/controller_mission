@@ -77,23 +77,23 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic of  result'''
-          value: !!python/unicode 'simple_vampire_torpille'
+          value: !!python/unicode 'simple_bin_handle'
           variable_name: param_node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Filter chain name'''
-          value: !!python/unicode 'simple_vampire_torpille'
+          value: !!python/unicode 'simple_bin_handle'
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: /provider_vision/Front_GigE
+          value: !!python/unicode '/provider_vision/Bottom_GigE'
           variable_name: param_media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: 1.0
+          value: 2.0
           variable_name: param_start_front
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: 2.0
+          value: 1.0
           variable_name: param_start_bottom
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Times Out'''
@@ -102,19 +102,19 @@ statesui:
         transitions:
         - !!python/object:rqt_mission_planner.mission_model.state.Transition
           outcome: succeeded
-          state: AlignAlexFrank
+          state: AlignBottomAlexFrank
       transitions:
       - !!python/object:rqt_mission_planner.Renderer.TransitionUI
         name: succeeded
         state1: *id002
         state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
           position: !!python/tuple
-          - 546
-          - 401
-          radius: 112
+          - 493
+          - 360
+          radius: 160
           state: !!python/object:rqt_mission_planner.mission_model.state.State
-            _name: alignAlexFrank.AlignAlexFrank
-            base_file: /src/controller_mission/state/alignAlexFrank.py
+            _name: alignBottomAlexFrank.AlignBottomAlexFrank
+            base_file: /src/controller_mission/state/alignBottomAlexFrank.py
             outcome_states:
             - succeeded
             - aborted
@@ -122,7 +122,7 @@ statesui:
             parameters:
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: state_name
-              value: AlignAlexFrank
+              value: AlignBottomAlexFrank
               variable_name: state_name
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Yaw rotation to align vision'''
@@ -130,7 +130,7 @@ statesui:
               variable_name: param_heading
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Topic to listen'''
-              value: !!python/unicode '/proc_image_processing/simple_vampire_torpille_result'
+              value: !!python/unicode '/proc_image_processing/simple_bin_handle_result'
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Minimal distance to ram (m)'''
@@ -146,11 +146,11 @@ statesui:
               variable_name: param_max_queue_size
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Object height (mm)'''
-              value: 600.0
+              value: 100.0
               variable_name: param_object_real_height
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Object width (mm)'''
-              value: 300.0
+              value: 100.0
               variable_name: param_object_real_width
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Image height (px)'''
@@ -227,7 +227,7 @@ statesui:
                 state1: *id004
                 state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
                   position: !!python/tuple
-                  - 359
+                  - 360
                   - 737
                   radius: 100
                   state: !!python/object:rqt_mission_planner.mission_model.state.State
@@ -244,15 +244,15 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Topic of  result'''
-                      value: !!python/unicode 'simple_vampire_torpille'
+                      value: !!python/unicode 'simple_bin_handle'
                       variable_name: param_node_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Filter chain name'''
-                      value: !!python/unicode 'simple_vampire_torpille'
+                      value: !!python/unicode 'simple_bin_handle'
                       variable_name: param_filterchain_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Media name'''
-                      value: /provider_vision/Front_GigE
+                      value: !!python/unicode '/provider_vision/Bottom_GigE'
                       variable_name: param_media_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Media name'''

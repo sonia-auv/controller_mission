@@ -120,7 +120,7 @@ class AlignAlexFrank(MissionState):
         self.get_first_position()
 
         # Setup bounding boxes
-        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
+        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.40, 0, 0)
         self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width, 0, -625)
 
     def run(self, ud):

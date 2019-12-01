@@ -8,6 +8,7 @@ from proc_control.srv import SetPositionTarget, SetDecoupledTarget
 from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
 
+
 class AlignBottomAlexFrank(MissionState):
     def __init__(self):
         MissionState.__init__(self)
@@ -41,12 +42,6 @@ class AlignBottomAlexFrank(MissionState):
         self.sensor_width = 7.1  # mm
 
         self.count = 0
-
-        # Control mode options.
-        self.set_mode = None
-        self.mode = SetControlModeRequest()
-        self.mode_dic = {'0': self.mode.PositionModePID, '1': self.mode.PositionModePPI, '2': self.mode.VelocityModeB}
-        self.is_moving = False
 
         # Position parameters.
         self.odom = None
@@ -104,7 +99,7 @@ class AlignBottomAlexFrank(MissionState):
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.01)
         self.y_bounding_box = BoundingBox(self.param_image_height * 1, self.param_image_width)
 
-    def run(self):
+    def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
@@ -238,14 +233,14 @@ class BoundingBox:
         self.set_width(width)
         self.set_height(height)
 
-        def is_inside(self, x, y):
-            if -(self.width / 2) < x < (self.width / 2):
-                if -(self.height / 2) < y < (self.height / 2):
-                    return True
-            return False
+    def is_inside(self, x, y):
+        if -(self.width / 2) < x < (self.width / 2):
+            if -(self.height / 2) < y < (self.height / 2):
+                return True
+        return False
 
-        def set_width(self, new_width):
-                self.width = new_width
+    def set_width(self, new_width):
+            self.width = new_width
 
-        def set_height(self, new_height):
-            self.height = new_height
+    def set_height(self, new_height):
+        self.height = new_height

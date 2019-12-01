@@ -178,7 +178,15 @@ class AlignBottomAlexFrank(MissionState):
         self.x_adjustment = (self.averaging_vision_x_pixel / (self.param_image_width / 2)) * self.basic_x_adjustment
         rospy.loginfo('X adjustment: ' + str(self.x_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
-        self.x_adjustment = self.x_adjustment if abs(self.x_adjustment) >= (
+        self.
+  def
+
+
+
+
+
+
+      x_adjustment = self.x_adjustment if abs(self.x_adjustment) >= (
                     self.x_adjustment / abs(self.x_adjustment)) * self.minimum_x_adjustment else (self.x_adjustment/\
                     abs(self.x_adjustment)) * self.minimum_x_adjustment
         rospy.loginfo('New x adjustment: ' + str(self.x_adjustment))

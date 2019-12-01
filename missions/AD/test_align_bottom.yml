@@ -77,11 +77,11 @@ statesui:
           variable_name: state_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Topic of  result'''
-          value: !!python/unicode 'simple_body_baby'
+          value: !!python/unicode 'simple_bin_handle'
           variable_name: param_node_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Filter chain name'''
-          value: !!python/unicode 'simple_body_baby'
+          value: !!python/unicode 'simple_bin_handle'
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
@@ -130,11 +130,11 @@ statesui:
               variable_name: param_heading
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Topic to listen'''
-              value: !!python/unicode '/proc_image_processing/simple_body_baby_result'
+              value: !!python/unicode '/proc_image_processing/simple_bin_handle_result'
               variable_name: param_topic_to_listen
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Minimal distance to ram (m)'''
-              value: 0.1
+              value: 2.0
               variable_name: param_distance_to_victory
             - !!python/object:rqt_mission_planner.mission_model.state.Parameter
               description: ' ''Maximum number of alignment'''
@@ -244,11 +244,11 @@ statesui:
                       variable_name: state_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Topic of  result'''
-                      value: !!python/unicode 'simple_body_baby'
+                      value: !!python/unicode 'simple_bin_handle'
                       variable_name: param_node_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Filter chain name'''
-                      value: !!python/unicode 'simple_body_baby'
+                      value: !!python/unicode 'simple_bin_handle'
                       variable_name: param_filterchain_name
                     - !!python/object:rqt_mission_planner.mission_model.state.Parameter
                       description: ' ''Media name'''

@@ -1,0 +1,22 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 244
+  - 338
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: optimiste_sm.optimisteSM
+    base_file: /src/controller_mission/state/optimiste_sm.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: optimisteSM
+      variable_name: state_name
+    transitions: []
+  transitions: []

@@ -121,7 +121,7 @@ class AlignAlexFrank(MissionState):
 
         # Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.40, self.param_image_width, 0, -625)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.40, self.param_image_width, 0, -400)
 
     def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
@@ -203,15 +203,15 @@ class AlignAlexFrank(MissionState):
         rospy.loginfo('--------------------------------------------------')
         rospy.loginfo('Position x : %f' % self.averaging_vision_x_pixel)
         rospy.loginfo('Position y : %f' % self.averaging_vision_y_pixel)
-        rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
-        rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
-        rospy.loginfo('Target distance : %f' % self.target_distance['current'])
-        rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
-        rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
-        rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.x_bounding_box.width, self.x_bounding_box.height))
-        rospy.loginfo('Bounding Box Y -> width:{0} height:{1}'.format(self.y_bounding_box.width, self.y_bounding_box.height))
+        # rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
+        # rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
+        # rospy.loginfo('Target distance : %f' % self.target_distance['current'])
+        # rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
+        # rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
+        # rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.x_bounding_box.width, self.x_bounding_box.height))
+        # rospy.loginfo('Bounding Box Y -> width:{0} height:{1}'.format(self.y_bounding_box.width, self.y_bounding_box.height))
 
-    def switch_control_mode(self,mode):
+    def switch_control_mode(self, mode):
         self.is_moving = False
         try:
             self.set_local_target(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, False, True, True, False)
@@ -233,12 +233,12 @@ class AlignAlexFrank(MissionState):
         return
 
     def is_align_y(self):
-        if self.y_bounding_box.is_inside(self.averaging_vision_x_pixel,self.averaging_vision_y_pixel):
+        if self.y_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel):
             return True
         return False
 
     def is_align_x(self):
-        if self.x_bounding_box.is_inside(self.averaging_vision_x_pixel,self.averaging_vision_y_pixel):
+        if self.x_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel):
             return True
         return False
 
@@ -281,9 +281,17 @@ class BoundingBox:
         self.center_x = center_x
         self.center_y = center_y
 
+
     def is_inside(self, x, y):
-        if -((self.width / 2) + self.center_x) < x < (self.width / 2) + self.center_x:
-            if -((self.height / 2) + self.center_y) < y < (self.height / 2) + self.center_y:
+        # kx = x/abs(x)
+        # ky = y/abs(y)
+        rospy.loginfo('testing')
+        rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.width, self.height))
+        rospy.loginfo('Bounding Box center X :{0} center Y: {1}'.format(self.center_x, self.center_y))
+        if (self.center_x - (self.width / 2)) < x < (self.center_x + (self.width / 2)):
+            rospy.loginfo('inside x(capote pas c normal)')
+            if (self.center_y - (self.height / 2)) < y < (self.center_y + (self.height / 2)):
+                rospy.loginfo('is inside')
                 return True
         return False
 

@@ -96,7 +96,8 @@ class AlignAlexFrank(MissionState):
 
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
-        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget, persistent=True)
+        self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget,
+                                                   persistent=True)
 
         rospy.wait_for_service('/proc_control/set_local_target')
         self.set_local_target_speed = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
@@ -147,11 +148,14 @@ class AlignAlexFrank(MissionState):
 
     def align_depth(self):
         self.switch_control_mode(0)
-        self.z_adjustment = (-(self.averaging_vision_y_pixel + abs(self.y_bounding_box.center_y) / (self.param_image_height / 2) + abs(self.y_bounding_box.center_y)) * self.basic_z_adjustment)/1000
+        self.z_adjustment = (-(self.averaging_vision_y_pixel + abs(self.y_bounding_box.center_y) / (
+                    self.param_image_height / 2) + abs(self.y_bounding_box.center_y)) * self.basic_z_adjustment) / 1000
         rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
-        self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (self.z_adjustment/abs(self.z_adjustment)) * \
-        self.minimum_z_adjustment else (self.z_adjustment/abs(self.z_adjustment)) * self.minimum_z_adjustment
+        self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (
+                    self.z_adjustment / abs(self.z_adjustment)) * \
+                                                 self.minimum_z_adjustment else (self.z_adjustment / abs(
+            self.z_adjustment)) * self.minimum_z_adjustment
         rospy.loginfo('New z adjustment: ' + str(self.z_adjustment))
         self.set_local_target(0.0, 0.0, self.z_adjustment, 0.0, 0.0, 0.0, False, False, True, False, False, False)
 
@@ -160,10 +164,14 @@ class AlignAlexFrank(MissionState):
         rospy.loginfo('Yaw adjustment: ' + str(self.yaw_adjustment))
         # take the highest value between min and the calculated adjustment and keep the sign
         self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= (self.yaw_adjustment /
-            abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs(self.yaw_adjustment)) \
-            * self.minimum_yaw_adjustment
+                                                                                  abs(
+                                                                                      self.yaw_adjustment)) * self.minimum_yaw_adjustment else (
+                                                                                                                                                           self.yaw_adjustment / abs(
+                                                                                                                                                       self.yaw_adjustment)) \
+                                                                                                                                               * self.minimum_yaw_adjustment
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
-        self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, self.orientation.z + self.yaw_adjustment)
+        self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0,
+                                    self.orientation.z + self.yaw_adjustment)
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -217,7 +225,7 @@ class AlignAlexFrank(MissionState):
             self.set_local_target(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, False, True, True, False)
             self.set_mode(self.mode_dic[str(int(mode))])
         except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
+            rospy.loginfo('Service did not process mode request: ' + str(exc))
 
     def forward_speed(self):
         try:
@@ -225,7 +233,7 @@ class AlignAlexFrank(MissionState):
             self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0, 0.0)
             self.is_moving = True
         except rospy.ServiceException as exc:
-            rospy.loginfo('Service did not process request: ' + str(exc))
+            rospy.loginfo('Service did not process speed request: ' + str(exc))
 
     def get_first_position(self):
         while not self.first_position:
@@ -243,7 +251,7 @@ class AlignAlexFrank(MissionState):
         return False
 
     def distance(self, pos1, pos2):
-        return math.sqrt(math.pow(pos1.x - pos2.x, 2) + math.pow(pos1.y-pos2.y, 2))
+        return math.sqrt(math.pow(pos1.x - pos2.x, 2) + math.pow(pos1.y - pos2.y, 2))
 
     def get_distance_error(self):
         self.moved_distance_from_vision = abs(self.target_distance['current'] - self.target_distance['last'])
@@ -254,7 +262,7 @@ class AlignAlexFrank(MissionState):
 
     def get_target_distance(self):
         return ((self.focal_size * self.param_object_real_height * self.param_image_height) / \
-               (self.averaging_vision_height_pixel * self.sensor_height)) / 1000
+                (self.averaging_vision_height_pixel * self.sensor_height)) / 1000
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']
@@ -281,17 +289,14 @@ class BoundingBox:
         self.center_x = center_x
         self.center_y = center_y
 
-
     def is_inside(self, x, y):
-        # kx = x/abs(x)
-        # ky = y/abs(y)
         rospy.loginfo('testing')
         rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.width, self.height))
         rospy.loginfo('Bounding Box center X :{0} center Y: {1}'.format(self.center_x, self.center_y))
         if (self.center_x - (self.width / 2)) < x < (self.center_x + (self.width / 2)):
-            rospy.loginfo('inside x(capote pas c normal)')
+            rospy.loginfo('inside x')
             if (self.center_y - (self.height / 2)) < y < (self.center_y + (self.height / 2)):
-                rospy.loginfo('is inside')
+                rospy.loginfo('is inside xy')
                 return True
         return False
 

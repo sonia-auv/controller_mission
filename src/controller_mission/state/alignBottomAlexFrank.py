@@ -71,8 +71,6 @@ class AlignBottomAlexFrank(MissionState):
         self.minimum_yaw_adjustment = 3.0
         self.basic_yaw_adjustment = 10.0
 
-        self.alex_frank_magic = 1.0
-
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))

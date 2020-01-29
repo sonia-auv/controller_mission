@@ -163,12 +163,9 @@ class AlignAlexFrank(MissionState):
         self.yaw_adjustment = (self.averaging_vision_x_pixel / (self.param_image_width / 2)) * self.basic_yaw_adjustment
         rospy.loginfo('Yaw adjustment: ' + str(self.yaw_adjustment))
         # take the highest value between min and the calculated adjustment and keep the sign
-        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= (self.yaw_adjustment /
-                                                                                  abs(
-                                                                                      self.yaw_adjustment)) * self.minimum_yaw_adjustment else (
-                                                                                                                                                           self.yaw_adjustment / abs(
-                                                                                                                                                       self.yaw_adjustment)) \
-                                                                                                                                               * self.minimum_yaw_adjustment
+        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= \
+            (self.yaw_adjustment / abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs( \
+             self.yaw_adjustment)) * self.minimum_yaw_adjustment
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
         self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0,
                                     self.orientation.z + self.yaw_adjustment)

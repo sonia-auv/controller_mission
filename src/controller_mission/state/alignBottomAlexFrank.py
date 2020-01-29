@@ -4,9 +4,10 @@ import math as math
 from Queue import deque
 from ..mission_state import MissionState, Parameter
 from proc_control.msg import TargetReached
-from proc_control.srv import SetPositionTarget, SetDecoupledTarget
+from proc_control.srv import SetPositionTarget, SetDecoupledTarget, SetControlMode, SetControlModeRequest
 from proc_image_processing.msg import VisionTarget
 from nav_msgs.msg import Odometry
+
 
 class AlignBottomAlexFrank(MissionState):
     def __init__(self):
@@ -74,7 +75,7 @@ class AlignBottomAlexFrank(MissionState):
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
-        self.parameters.append(Parameter('param_distance_to_victory', 2, 'Minimal distance to ram (m)'))
+        self.parameters.append(Parameter('param_distance_to_victory', 1, 'Minimal distance to ram (m)'))
         self.parameters.append(Parameter('param_maximum_nb_alignment', 4, 'Maximum number of alignment'))
         self.parameters.append(Parameter('param_max_queue_size', 10, 'Maximum size of queue'))
         self.parameters.append(Parameter('param_object_real_height', 100, 'Object height (mm)'))
@@ -99,10 +100,19 @@ class AlignBottomAlexFrank(MissionState):
         self.get_first_position()
 
         # Setup bounding boxes
-        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.15, self.param_image_width)
+        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.40, self.param_image_width, 0, -400)
 
-    def run(self):
+        # Switch control mode service parameter
+        rospy.wait_for_service('/proc_control/set_control_mode')
+        self.set_mode = rospy.ServiceProxy('/proc_control/set_control_mode', SetControlMode)
+        try:
+            # Initialise to position mode to reach depth first
+            self.set_mode(self.mode_dic[str(int(0))])
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process request: ' + str(exc))
+
+    def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
@@ -175,7 +185,7 @@ class AlignBottomAlexFrank(MissionState):
                     self.y_adjustment / abs(self.y_adjustment)) * self.minimum_y_adjustment else (self.y_adjustment/\
                     abs(self.y_adjustment)) * self.minimum_y_adjustment
         rospy.loginfo('New y adjustment: ' + str(self.y_adjustment))
-        self.set_local_target(self.y_adjustment,0.0,0.0, 0.0, 0.0, 0.0, False, False, True, False, False, False)
+        self.set_local_target(self.y_adjustment, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, True, False, False, False)
 
     def align_y(self):
         self.x_adjustment = (self.averaging_vision_x_pixel / (self.param_image_width / 2)) * self.basic_x_adjustment
@@ -185,7 +195,7 @@ class AlignBottomAlexFrank(MissionState):
                     self.x_adjustment / abs(self.x_adjustment)) * self.minimum_x_adjustment else (self.x_adjustment/\
                     abs(self.x_adjustment)) * self.minimum_x_adjustment
         rospy.loginfo('New x adjustment: ' + str(self.x_adjustment))
-        self.set_local_target(0.0,self.x_adjustment,0.0, 0.0, 0.0, 0.0, False, False, True, False, False, False)
+        self.set_local_target(0.0, self.x_adjustment, 0.0, 0.0, 0.0, 0.0, False, False, True, False, False, False)
 
     def target_reach_cb(self, data):
         self.target_reached = data.target_is_reached
@@ -222,6 +232,15 @@ class AlignBottomAlexFrank(MissionState):
         self.vision_subscriber.unregister()
         self.target_reach_sub.unregister()
 
+    def switch_control_mode(self, mode):
+        self.is_moving = False
+        try:
+            self.set_local_target(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, False, False, False, True, True, False)
+            self.set_mode(self.mode_dic[str(int(mode))])
+        except rospy.ServiceException as exc:
+            rospy.loginfo('Service did not process mode request: ' + str(exc))
+
+
 class VisionData:
     # Vision data container
     def __init__(self, x=0.0, y=0.0, height=0.0, width=0.0):
@@ -230,20 +249,28 @@ class VisionData:
         self.height = height
         self.width = width
 
+
 class BoundingBox:
     # Bounding box object
-    def __init__(self, height, width):
+    def __init__(self, height, width, center_x, center_y):
         self.set_width(width)
         self.set_height(height)
+        self.center_x = center_x
+        self.center_y = center_y
 
-        def is_inside(self, x, y):
-            if -(self.width / 2) < x < (self.width / 2):
-                if -(self.height / 2) < y < (self.height / 2):
-                    return True
-            return False
+    def is_inside(self, x, y):
+        rospy.loginfo('testing')
+        rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.width, self.height))
+        rospy.loginfo('Bounding Box center X :{0} center Y: {1}'.format(self.center_x, self.center_y))
+        if (self.center_x - (self.width / 2)) < x < (self.center_x + (self.width / 2)):
+            rospy.loginfo('inside x')
+            if (self.center_y - (self.height / 2)) < y < (self.center_y + (self.height / 2)):
+                rospy.loginfo('is inside xy')
+                return True
+        return False
 
-        def set_width(self, new_width):
-                self.width = new_width
+    def set_width(self, new_width):
+        self.width = new_width
 
-        def set_height(self, new_height):
-            self.height = new_height
+    def set_height(self, new_height):
+        self.height = new_height

@@ -69,8 +69,8 @@ class AlignAlexFrank(MissionState):
 
         # Variable for alignment
         self.z_adjustment = None
-        self.basic_z_adjustment = 0.5
-        self.minimum_z_adjustment = 0.1
+        self.basic_z_adjustment = 1
+        self.minimum_z_adjustment = 0.3
 
         self.minimum_y_adjustment = 0.2
         self.y_adjustment = None
@@ -122,7 +122,7 @@ class AlignAlexFrank(MissionState):
 
         # Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.40, self.param_image_width, 0, -400)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, 0)
 
     def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
@@ -132,10 +132,10 @@ class AlignAlexFrank(MissionState):
 
     def align_submarine(self):
         rospy.loginfo('Align number %i' % self.count)
-        # self.count += 1
         if not self.is_align_y():
             rospy.loginfo('Depth alignment.')
             if self.target_reached:
+                self.count += 1
                 self.align_depth()
                 self.target_reached = False
         else:
@@ -152,9 +152,7 @@ class AlignAlexFrank(MissionState):
                     self.param_image_height / 2) + abs(self.y_bounding_box.center_y)) * self.basic_z_adjustment) / 1000
         rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
-        self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= (
-                    self.z_adjustment / abs(self.z_adjustment)) * \
-                                                 self.minimum_z_adjustment else (self.z_adjustment / abs(
+        self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= self.minimum_z_adjustment else (self.z_adjustment / abs(
             self.z_adjustment)) * self.minimum_z_adjustment
         rospy.loginfo('New z adjustment: ' + str(self.z_adjustment))
         self.set_local_target(0.0, 0.0, self.z_adjustment, 0.0, 0.0, 0.0, False, False, True, False, False, False)
@@ -163,9 +161,9 @@ class AlignAlexFrank(MissionState):
         self.yaw_adjustment = (self.averaging_vision_x_pixel / (self.param_image_width / 2)) * self.basic_yaw_adjustment
         rospy.loginfo('Yaw adjustment: ' + str(self.yaw_adjustment))
         # take the highest value between min and the calculated adjustment and keep the sign
-        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= \
-            (self.yaw_adjustment / abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment else (self.yaw_adjustment / abs( \
-             self.yaw_adjustment)) * self.minimum_yaw_adjustment
+        self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= self.minimum_yaw_adjustment else  \
+            (self.yaw_adjustment / abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment
+
         rospy.loginfo('New yaw adjustment: ' + str(self.yaw_adjustment))
         self.set_local_target_speed(self.param_speed_x, 0.0, self.position.z, 0.0, 0.0,
                                     self.orientation.z + self.yaw_adjustment)
@@ -208,13 +206,11 @@ class AlignAlexFrank(MissionState):
         rospy.loginfo('--------------------------------------------------')
         rospy.loginfo('Position x : %f' % self.averaging_vision_x_pixel)
         rospy.loginfo('Position y : %f' % self.averaging_vision_y_pixel)
-        # rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
-        # rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
-        # rospy.loginfo('Target distance : %f' % self.target_distance['current'])
-        # rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
-        # rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
-        # rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.x_bounding_box.width, self.x_bounding_box.height))
-        # rospy.loginfo('Bounding Box Y -> width:{0} height:{1}'.format(self.y_bounding_box.width, self.y_bounding_box.height))
+        rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
+        rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
+        rospy.loginfo('Target distance : %f' % self.target_distance['current'])
+        rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
+        rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
 
     def switch_control_mode(self, mode):
         self.is_moving = False
@@ -260,6 +256,9 @@ class AlignAlexFrank(MissionState):
     def get_target_distance(self):
         return ((self.focal_size * self.param_object_real_height * self.param_image_height) / \
                 (self.averaging_vision_height_pixel * self.sensor_height)) / 1000
+
+    def lost_vision(self):
+        pass
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']

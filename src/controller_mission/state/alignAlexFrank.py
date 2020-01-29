@@ -18,6 +18,7 @@ The control part use the normal axis of the sub.
 
 
 class AlignAlexFrank(MissionState):
+
     def __init__(self):
         MissionState.__init__(self)
         self.set_local_target = None
@@ -80,6 +81,10 @@ class AlignAlexFrank(MissionState):
         self.minimum_yaw_adjustment = 3.0
         self.basic_yaw_adjustment = 10.0
 
+        # Lost vision
+        self.last_detect = None
+        self.max_lost_time = rospy.Duration(100, 0)
+
         self.alex_frank_magic = 1.0
 
     def define_parameters(self):
@@ -128,10 +133,17 @@ class AlignAlexFrank(MissionState):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
+            rospy.loginfo('aborted cause: max alignment reached')
+            return 'aborted'
+        if self.check_vision():
+            rospy.loginfo('aborted cause: max time elapsed')
             return 'aborted'
 
     def align_submarine(self):
         rospy.loginfo('Align number %i' % self.count)
+
+        self.check_vision()  # check for lost vision
+
         if not self.is_align_y():
             rospy.loginfo('Depth alignment.')
             if self.target_reached:
@@ -199,6 +211,7 @@ class AlignAlexFrank(MissionState):
         self.target_distance['last'] = self.target_distance['current']
         self.target_distance['current'] = self.get_target_distance()
 
+        self.refresh_vision_timer()
         self.align_submarine()
         self.get_distance_error()
 
@@ -257,8 +270,17 @@ class AlignAlexFrank(MissionState):
         return ((self.focal_size * self.param_object_real_height * self.param_image_height) / \
                 (self.averaging_vision_height_pixel * self.sensor_height)) / 1000
 
-    def lost_vision(self):
-        pass
+    def refresh_vision_timer(self):
+        self.last_detect = rospy.Time.now()
+
+    def check_vision(self):
+        if self.last_detect is None:
+            self.last_detect = rospy.Time.now()
+
+        if (rospy.Time.now() - self.last_detect).__ge__(self.max_lost_time):
+            return True
+        else:
+            return False
 
     def get_outcomes(self):
         return ['succeeded', 'aborted', 'preempted']

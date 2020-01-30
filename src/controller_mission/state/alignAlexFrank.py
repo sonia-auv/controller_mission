@@ -73,10 +73,6 @@ class AlignAlexFrank(MissionState):
         self.basic_z_adjustment = 1
         self.minimum_z_adjustment = 0.3
 
-        self.minimum_y_adjustment = 0.2
-        self.y_adjustment = None
-        self.basic_y_adjustment = 1.0
-
         self.yaw_adjustment = None
         self.minimum_yaw_adjustment = 3.0
         self.basic_yaw_adjustment = 10.0

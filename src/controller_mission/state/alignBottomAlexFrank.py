@@ -72,6 +72,10 @@ class AlignBottomAlexFrank(MissionState):
         self.minimum_yaw_adjustment = 3.0
         self.basic_yaw_adjustment = 10.0
 
+        # Lost vision
+        self.last_detect = None
+        self.max_lost_time = rospy.Duration(100, 0)
+
     def define_parameters(self):
         self.parameters.append(Parameter('param_heading', 10, 'Yaw rotation to align vision'))
         self.parameters.append(Parameter('param_topic_to_listen', '/proc_image_processing/buoy_red', 'Topic to listen'))
@@ -87,21 +91,16 @@ class AlignBottomAlexFrank(MissionState):
     def initialize(self):
         rospy.wait_for_service('/proc_control/set_local_decoupled_target')
         self.set_local_target = rospy.ServiceProxy('/proc_control/set_local_decoupled_target', SetDecoupledTarget,
-                                                       persistent=True)
+                                                   persistent=True)
 
-        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached,
-                                                     self.target_reach_cb)
+        rospy.wait_for_service('/proc_control/set_local_target')
+        self.set_local_target_speed = rospy.ServiceProxy('/proc_control/set_local_target', SetPositionTarget)
+
+        self.target_reach_sub = rospy.Subscriber('/proc_control/target_reached', TargetReached, self.target_reach_cb)
         self.vision_subscriber = rospy.Subscriber(self.param_topic_to_listen, VisionTarget, self.vision_cb)
+
         self.vision_data = deque([], maxlen=self.param_max_queue_size)
         self.vision_data.clear()
-
-        # Setup odometry service
-        self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
-        self.get_first_position()
-
-        # Setup bounding boxes
-        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.40, self.param_image_width, 0, -400)
 
         # Switch control mode service parameter
         rospy.wait_for_service('/proc_control/set_control_mode')
@@ -112,11 +111,36 @@ class AlignBottomAlexFrank(MissionState):
         except rospy.ServiceException as exc:
             rospy.loginfo('Service did not process request: ' + str(exc))
 
+        # Setup odometry service
+        self.odom = rospy.Subscriber('/proc_navigation/odom', Odometry, self.odom_cb)
+        self.get_first_position()
+
+        # Setup bounding boxes
+        self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, 0)
+
     def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
+            rospy.loginfo('aborted cause: max alignment reached')
             return 'aborted'
+        if self.check_vision():
+            rospy.loginfo('aborted cause: max time elapsed')
+            return 'aborted'
+
+    def align_submarine(self):
+        # rospy.loginfo('Align number %i' % self.count)
+        # # self.count += 1
+        # if not self.is_align_y():
+        #     rospy.loginfo('Y alignment.')
+        #     if self.target_reached:
+        #         self.align_y()
+        # if not self.is_align_x():
+        #     rospy.loginfo('X alignment.')
+        #     if self.target_reached:
+        #         self.align_x()
+        pass
 
     def parse_vision_data(self):
         # Average position of the object (image)
@@ -134,6 +158,7 @@ class AlignBottomAlexFrank(MissionState):
         self.target_distance['last'] = self.target_distance['current']
         self.target_distance['current'] = self.get_target_distance()
 
+        self.refresh_vision_timer()
         self.align_submarine()
         self.get_distance_error()
 
@@ -146,8 +171,6 @@ class AlignBottomAlexFrank(MissionState):
         rospy.loginfo('Target distance : %f' % self.target_distance['current'])
         rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
         rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
-        rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.x_bounding_box.width, self.x_bounding_box.height))
-        rospy.loginfo('Bounding Box Y -> width:{0} height:{1}'.format(self.y_bounding_box.width, self.y_bounding_box.height))
 
     def vision_cb(self, data):
         self.vision_data.append(VisionData(data.x, data.y, data.height, data.width))
@@ -165,17 +188,10 @@ class AlignBottomAlexFrank(MissionState):
             return True
         return False
 
-    def align_submarine(self):
-        rospy.loginfo('Align number %i' % self.count)
-        # self.count += 1
-        if not self.is_align_y():
-            rospy.loginfo('Y alignment.')
-            if self.target_reached:
-                self.align_y()
-        if not self.is_align_x():
-            rospy.loginfo('X alignment.')
-            if self.target_reached:
-                self.align_x()
+    def align_x_y(self):
+        pass
+
+
 
     def align_x(self):
         self.y_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height / 2)) * self.basic_y_adjustment

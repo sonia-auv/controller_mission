@@ -156,8 +156,7 @@ class AlignAlexFrank(MissionState):
 
     def align_depth(self):
         self.switch_control_mode(0)
-        self.z_adjustment = (-(self.averaging_vision_y_pixel + abs(self.y_bounding_box.center_y) / (
-                    self.param_image_height / 2) + abs(self.y_bounding_box.center_y)) * self.basic_z_adjustment) / 1000
+        self.z_adjustment = -((self.averaging_vision_y_pixel - self.y_bounding_box.center_y) / (self.param_image_height / 2)) * self.basic_z_adjustment
         rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
         self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= self.minimum_z_adjustment else (self.z_adjustment / abs(

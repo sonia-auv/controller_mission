@@ -130,7 +130,7 @@ mission_params:
       max_time_find: 120
       threshold_width: 100
       pixel_to_victory: 600
-      hit_to_victory: 20
+      hit_to_victory: 5
       low_hit_to_victory: 10
       target_width: 0.7
       initial_bb: 600

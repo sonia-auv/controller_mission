@@ -126,7 +126,7 @@ class AlignAlexFrank(MissionState):
         self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, 0)
 
     def run(self, ud):
-        if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:
+        if self.target_distance['current'] != 0.0 and self.target_distance['current'] < self.param_distance_to_victory:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
             rospy.loginfo('aborted cause: max alignment reached')

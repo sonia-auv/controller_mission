@@ -36,7 +36,6 @@ class ForwardBottom(MissionState):
         self.position_in_z = position_data.pose.pose.position.z
 
     def vision_cb(self, vision_data):
-
         if vision_data.width >= self.param_nb_pixel_to_victory:
             self.victory = True
 

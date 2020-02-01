@@ -191,8 +191,6 @@ class AlignBottomAlexFrank(MissionState):
     def align_x_y(self):
         pass
 
-
-
     def align_x(self):
         self.y_adjustment = (self.averaging_vision_y_pixel / (self.param_image_height / 2)) * self.basic_y_adjustment
         rospy.loginfo('Y adjustment: ' + str(self.y_adjustment))

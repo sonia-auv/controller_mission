@@ -1,0 +1,280 @@
+!!python/object:rqt_mission_planner.Renderer.MissionContainer
+globalparams: []
+statesui:
+- &id001 !!python/object:rqt_mission_planner.Renderer.StateUI
+  position: !!python/tuple
+  - 166
+  - 96
+  radius: 100
+  state: !!python/object:rqt_mission_planner.mission_model.state.State
+    _name: setControlBoundingBox.SetControlBoundingBox
+    base_file: /src/controller_mission/state/setControlBoundingBox.py
+    is_root: true
+    outcome_states:
+    - succeeded
+    - aborted
+    - preempted
+    parameters:
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: state_name
+      value: !!python/unicode 'SetBox'
+      variable_name: state_name
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Set or reset bounding box'''
+      value: 1.0
+      variable_name: param_reset_set_bounding_box
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Set x bounding box'''
+      value: 0.3
+      variable_name: param_bounding_box_x
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Set y bounding box'''
+      value: 0.3
+      variable_name: param_bounding_box_y
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''Set z bounding box'''
+      value: 0.1
+      variable_name: param_bounding_box_z
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''set yaw bounding box'''
+      value: 5.0
+      variable_name: param_bounding_box_yaw
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''set yaw bounding box'''
+      value: 0.5
+      variable_name: param_bounding_box_roll
+    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+      description: ' ''set yaw bounding box'''
+      value: 0.5
+      variable_name: param_bounding_box_pitch
+    transitions:
+    - !!python/object:rqt_mission_planner.mission_model.state.Transition
+      outcome: succeeded
+      state: !!python/unicode 'StartVision'
+  transitions:
+  - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+    name: succeeded
+    state1: *id001
+    state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
+      position: !!python/tuple
+      - 428
+      - 163
+      radius: 100
+      state: !!python/object:rqt_mission_planner.mission_model.state.State
+        _name: launchVision.LaunchVision
+        base_file: /src/controller_mission/state/launchVision.py
+        is_root: false
+        outcome_states:
+        - succeeded
+        - aborted
+        - preempted
+        parameters:
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: state_name
+          value: !!python/unicode 'StartVision'
+          variable_name: state_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Topic of  result'''
+          value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_name'
+          variable_name: param_node_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Filter chain name'''
+          value: !!python/unicode '$/mission_params/05_bat_wolf/filterchain_name'
+          variable_name: param_filterchain_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: !!python/unicode '/provider_vision/Bottom_GigE'
+          variable_name: param_media_name
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 1.0
+          variable_name: param_start_front
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Media name'''
+          value: 2.0
+          variable_name: param_start_bottom
+        - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+          description: ' ''Times Out'''
+          value: 1.0
+          variable_name: param_cmd
+        transitions:
+        - !!python/object:rqt_mission_planner.mission_model.state.Transition
+          outcome: succeeded
+          state: !!python/unicode 'align'
+      transitions:
+      - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+        name: succeeded
+        state1: *id002
+        state2: &id003 !!python/object:rqt_mission_planner.Renderer.StateUI
+          position: !!python/tuple
+          - 255
+          - 344
+          radius: 100
+          state: !!python/object:rqt_mission_planner.mission_model.state.State
+            _name: alignRoulette.AlignRoulette
+            base_file: /src/controller_mission/state/alignRoulette.py
+            is_root: false
+            outcome_states:
+            - succeeded
+            - aborted
+            - forward
+            - preempted
+            parameters:
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: state_name
+              value: !!python/unicode 'align'
+              variable_name: state_name
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''bounding box in pixel'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/param_bb'
+              variable_name: param_bounding_box
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''transform pixel to meter'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/target_width'
+              variable_name: param_vision_target_width_in_meter
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''transform pixel to meter'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/target_height'
+              variable_name: param_vision_target_height_in_meter
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Name of topic to listen'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/topic_to_listen'
+              variable_name: param_topic_to_listen
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Maximum size of queue'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/max_queue_size'
+              variable_name: param_max_queue_size
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Control bounding box in y'''
+              value: 0.5
+              variable_name: param_control_bounding_box_in_y
+            - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+              description: ' ''Control bounding box in y'''
+              value: !!python/unicode '$/mission_params/05_bat_wolf/pixel_to_victory'
+              variable_name: param_nb_pixel_to_victory
+            transitions:
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: forward
+              state: ForwardBottomAlexFrank
+            - !!python/object:rqt_mission_planner.mission_model.state.Transition
+              outcome: succeeded
+              state: !!python/unicode 'ResetBox'
+          transitions:
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: forward
+            state1: *id003
+            state2: &id004 !!python/object:rqt_mission_planner.Renderer.StateUI
+              position: !!python/tuple
+              - 604
+              - 333
+              radius: 176
+              state: !!python/object:rqt_mission_planner.mission_model.state.State
+                _name: forwardBottomAlexFrank.ForwardBottomAlexFrank
+                base_file: /src/controller_mission/state/forwardBottomAlexFrank.py
+                outcome_states:
+                - succeeded
+                - aborted
+                - preempted
+                parameters:
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: state_name
+                  value: ForwardBottomAlexFrank
+                  variable_name: state_name
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Target distance (each iterations)'''
+                  value: 0.3
+                  variable_name: param_distance_z
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Target distance to reach the target'''
+                  value: 1.0
+                  variable_name: param_distance_from_target
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Bounding box size (side)'''
+                  value: 200.0
+                  variable_name: param_bounding_box
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Distance max allowed from surface.'''
+                  value: 4.0
+                  variable_name: param_distance_max_z
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''minimal nb of pixel to ram'''
+                  value: 200.0
+                  variable_name: param_nb_pixel_to_victory
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Maximum size of queue'''
+                  value: 4.0
+                  variable_name: param_max_queue_size
+                - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                  description: ' ''Name of topic to listen'''
+                  value: !!python/unicode '$/mission_params/05_bat_wolf/topic_to_listen'
+                  variable_name: param_topic_to_listen
+                transitions:
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: aborted
+                  state: !!python/unicode 'align'
+                - !!python/object:rqt_mission_planner.mission_model.state.Transition
+                  outcome: succeeded
+                  state: !!python/unicode 'ResetBox'
+              transitions:
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: aborted
+                state1: *id004
+                state2: *id003
+              - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+                name: succeeded
+                state1: *id004
+                state2: &id005 !!python/object:rqt_mission_planner.Renderer.StateUI
+                  position: !!python/tuple
+                  - 242
+                  - 565
+                  radius: 100
+                  state: !!python/object:rqt_mission_planner.mission_model.state.State
+                    _name: setControlBoundingBox.SetControlBoundingBox
+                    base_file: /src/controller_mission/state/setControlBoundingBox.py
+                    outcome_states:
+                    - succeeded
+                    - aborted
+                    - preempted
+                    parameters:
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: state_name
+                      value: !!python/unicode 'ResetBox'
+                      variable_name: state_name
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Set or reset bounding box'''
+                      value: 0.0
+                      variable_name: param_reset_set_bounding_box
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Set x bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_x
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Set y bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_y
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''Set z bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_z
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''set yaw bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_yaw
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''set yaw bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_roll
+                    - !!python/object:rqt_mission_planner.mission_model.state.Parameter
+                      description: ' ''set yaw bounding box'''
+                      value: 0.5
+                      variable_name: param_bounding_box_pitch
+                    transitions: []
+                  transitions: []
+          - !!python/object:rqt_mission_planner.Renderer.TransitionUI
+            name: succeeded
+            state1: *id003
+            state2: *id005
+- *id002
+- *id003
+- *id004
+- *id005

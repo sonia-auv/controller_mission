@@ -117,7 +117,7 @@ class ForwardBottomAlexFrank(MissionState):
         # if data.width >= self.param_nb_pixel_to_victory:
         #     self.victory = True
         # Check if the data is inside the bounding box.
-        if not self.bounding_box.isInside(data.x, data.y):
+        if not self.bounding_box.is_inside(data.x, data.y):
             self.vision_is_unreached = True
 
         # if abs(data.x) >= self.param_bounding_box or abs(data.y) >= self.param_bounding_box:

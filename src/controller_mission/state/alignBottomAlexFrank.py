@@ -117,7 +117,7 @@ class AlignBottomAlexFrank(MissionState):
 
         # Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, 0)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, -625)
 
     def run(self, ud):
         if self.target_distance['current'] != 0 and self.target_distance['current'] < self.param_distance_to_victory:

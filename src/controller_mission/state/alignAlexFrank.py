@@ -123,10 +123,11 @@ class AlignAlexFrank(MissionState):
 
         # Setup bounding boxes
         self.x_bounding_box = BoundingBox(self.param_image_height, self.param_image_width * 0.15, 0, 0)
-        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, 0)
+        self.y_bounding_box = BoundingBox(self.param_image_height * 0.20, self.param_image_width, 0, -625)
 
     def run(self, ud):
-        if self.target_distance['current'] != 0.0 and self.target_distance['current'] < self.param_distance_to_victory:
+        # if self.target_distance['current'] != 0.0 and self.target_distance['current'] < self.param_distance_to_victory:
+        if self.moved_distance_from_odom >= 10:
             return 'succeeded'
         if self.count >= self.param_maximum_nb_alignment:
             rospy.loginfo('aborted cause: max alignment reached')
@@ -136,17 +137,18 @@ class AlignAlexFrank(MissionState):
             return 'aborted'
 
     def align_submarine(self):
-        rospy.loginfo('Align number %i' % self.count)
+        # rospy.loginfo('Align number %i' % self.count)
 
         self.check_vision()  # check for lost vision
 
         if not self.is_align_y():
             rospy.loginfo('Depth alignment.')
+            #self.count += 1
             if self.target_reached:
-                self.count += 1
                 self.align_depth()
                 self.target_reached = False
         else:
+            rospy.loginfo('Dont need depth alignment.')
             if not self.is_moving:
                 rospy.loginfo('Move forward.')
                 self.forward_speed()
@@ -157,16 +159,16 @@ class AlignAlexFrank(MissionState):
     def align_depth(self):
         self.switch_control_mode(0)
         self.z_adjustment = -((self.averaging_vision_y_pixel - self.y_bounding_box.center_y) / (self.param_image_height / 2)) * self.basic_z_adjustment
-        rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
+        #rospy.loginfo('Z adjustment: ' + str(self.z_adjustment))
         # Take the highest value between min and the calculated adjustment and keep the sign
         self.z_adjustment = self.z_adjustment if abs(self.z_adjustment) >= self.minimum_z_adjustment else (self.z_adjustment / abs(
             self.z_adjustment)) * self.minimum_z_adjustment
-        rospy.loginfo('New z adjustment: ' + str(self.z_adjustment))
-        self.set_local_target(0.0, 0.0, self.z_adjustment, 0.0, 0.0, 0.0, False, False, True, False, False, False)
+        rospy.loginfo('New z adjustment: ' + str(self.position.z + self.z_adjustment))
+        self.set_local_target(0.0, 0.0, self.position.z + self.z_adjustment, 0.0, 0.0, 0.0, False, False, True, False, False, False)
 
     def align_yaw(self):
         self.yaw_adjustment = (self.averaging_vision_x_pixel / (self.param_image_width / 2)) * self.basic_yaw_adjustment
-        rospy.loginfo('Yaw adjustment: ' + str(self.yaw_adjustment))
+        #rospy.loginfo('Yaw adjustment: ' + str(self.yaw_adjustment))
         # take the highest value between min and the calculated adjustment and keep the sign
         self.yaw_adjustment = self.yaw_adjustment if abs(self.yaw_adjustment) >= self.minimum_yaw_adjustment else  \
             (self.yaw_adjustment / abs(self.yaw_adjustment)) * self.minimum_yaw_adjustment
@@ -183,6 +185,7 @@ class AlignAlexFrank(MissionState):
 
         if len(self.vision_data) == self.param_max_queue_size:
             self.parse_vision_data()
+            self.vision_data.clear()
 
     def odom_cb(self, data):
         if not self.first_position:
@@ -214,11 +217,11 @@ class AlignAlexFrank(MissionState):
         rospy.loginfo('--------------------------------------------------')
         rospy.loginfo('Position x : %f' % self.averaging_vision_x_pixel)
         rospy.loginfo('Position y : %f' % self.averaging_vision_y_pixel)
-        rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
-        rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
+        # rospy.loginfo('Height of the object : %f' % self.averaging_vision_width_pixel)
+        # rospy.loginfo('Width of the object : %f' % self.averaging_vision_height_pixel)
         rospy.loginfo('Target distance : %f' % self.target_distance['current'])
-        rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
-        rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
+        # rospy.loginfo('Moved distance (vision): %f' % self.moved_distance_from_vision)
+        # rospy.loginfo('Moved distance (odom): %f' % self.moved_distance_from_odom)
 
     def switch_control_mode(self, mode):
         self.is_moving = False
@@ -242,14 +245,10 @@ class AlignAlexFrank(MissionState):
         return
 
     def is_align_y(self):
-        if self.y_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel):
-            return True
-        return False
+        return self.y_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel)
 
     def is_align_x(self):
-        if self.x_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel):
-            return True
-        return False
+        return self.x_bounding_box.is_inside(self.averaging_vision_x_pixel, self.averaging_vision_y_pixel)
 
     def distance(self, pos1, pos2):
         return math.sqrt(math.pow(pos1.x - pos2.x, 2) + math.pow(pos1.y - pos2.y, 2))
@@ -303,8 +302,8 @@ class BoundingBox:
         self.center_y = center_y
 
     def is_inside(self, x, y):
-        rospy.loginfo('testing')
-        rospy.loginfo('Bounding Box X -> width:{0} height:{1}'.format(self.width, self.height))
+        rospy.loginfo('Object pos -> x:{0} y:{1}'.format(x, y))
+        rospy.loginfo('Bounding Box -> width:{0} height:{1}'.format(self.width, self.height))
         rospy.loginfo('Bounding Box center X :{0} center Y: {1}'.format(self.center_x, self.center_y))
         if (self.center_x - (self.width / 2)) < x < (self.center_x + (self.width / 2)):
             rospy.loginfo('inside x')

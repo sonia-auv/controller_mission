@@ -60,8 +60,8 @@ statesui:
     state1: *id001
     state2: &id002 !!python/object:rqt_mission_planner.Renderer.StateUI
       position: !!python/tuple
-      - 421
-      - 209
+      - 420
+      - 208
       radius: 100
       state: !!python/object:rqt_mission_planner.mission_model.state.State
         _name: launchVision.LaunchVision
@@ -85,7 +85,7 @@ statesui:
           variable_name: param_filterchain_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
-          value: /provider_vision/Front_GigE
+          value: !!python/unicode '/camera/rgb/image_rect_color'
           variable_name: param_media_name
         - !!python/object:rqt_mission_planner.mission_model.state.Parameter
           description: ' ''Media name'''
